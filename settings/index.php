@@ -211,7 +211,7 @@ if (!isset($_POST["Save"])) {
 
 </div>
 
-<script src="../src/js/jq.js" type="text/javascript"></script>
+<script src="../src/js/jquery-1.8.3.min.js" type="text/javascript"></script>
 <script src="../src/js/bootstrap.min.js" type="text/javascript"></script>
 
 </body>

@@ -180,7 +180,7 @@ if(isset($_GET['search'])) {
 
 </div>
 
-<script src="./src/js/jq.js" type="text/javascript"></script>
+<script src="src/js/jquery-1.8.3.min.js" type="text/javascript"></script>
 <script src="./src/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="./src/js/jquery.tablesorter.js" type="text/javascript"></script> 
 <script src="./src/js/jquery.pajinate.js" type="text/javascript"></script> 
