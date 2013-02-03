@@ -1,10 +1,11 @@
 <?php
 // TODO: make sure there are no players currently playing -> shut the server off! :D
+// TODO: complete new converter class -> progress bar: first output tpl with 0% then call script -> return after a certain amount of queries -> output percentage
+// if js is on do ajax calls -> no output, just percantage output -> recall ajax until 100%
 if(fSession::get('maxStep') > 5)
     fURL::redirect('?step=four');
 
-$tpl = new fTemplating($this->get('tplRoot'), 'converter.tpl');
-$this->set('tpl', $tpl);
+$tpl = Util::newTpl($this, 'converter');
 
 if(fRequest::isPost() && fRequest::get('converter_submit') && !fRequest::get('start')) {
     if($tpl->get('state') == null) {
@@ -27,7 +28,7 @@ if(fRequest::isPost() && fRequest::get('converter_submit') && !fRequest::get('st
                                           'pw',
                                           'database'
                                      ))
-                ->addCallbackRule('host', 'checkHost', 'Please enter an valid host.');
+                ->addCallbackRule('host', Util::checkHost, 'Please enter an valid host.');
 
 
             $vali->setMessageOrder('type', 'host', 'user', 'pw', 'database')

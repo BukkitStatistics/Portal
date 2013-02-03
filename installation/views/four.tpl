@@ -1,5 +1,5 @@
 <?php
-show_messages('*', 'install/four', 'alert alert-error');
+Util::showMessages('*', 'install/four', 'alert alert-error');
 ?>
 
 <?php echo $this->get('db_file'); ?>

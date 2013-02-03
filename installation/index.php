@@ -29,7 +29,7 @@ fCore::expose($_SESSION);
 
 ?>
 <?php
-show_messages();
+Util::showMessages();
 ?>
 <fieldset name="installation">
     <legend>Installation</legend>

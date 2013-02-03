@@ -2,8 +2,7 @@
 if(fSession::get('maxStep') < 4)
     fURL::redirect('?step=three');
 
-$tpl = new fTemplating($this->get('tplRoot'), 'four.tpl');
-$this->set('tpl', $tpl);
+$tpl = Util::newTpl($this, 'four');
 
 if(!fMessaging::check('*') && fRequest::isPost() && fRequest::get('convert_submit')) {
     fSession::set('maxStep', 5);

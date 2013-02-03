@@ -1,9 +1,9 @@
 <?php
-$tpl = new fTemplating($this->get('tplRoot'), 'one.tpl');
-$this->set('tpl', $tpl);
+$tpl = Util::newTpl($this, 'one');
 
 // resets the previous session if some one had to start from the beginning
-fSession::reset();
+if(!fRequest::isPost())
+    fSession::reset();
 
 /*
  * Gets the data from step one

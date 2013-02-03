@@ -2,8 +2,7 @@
 if(fSession::get('maxStep') < 2)
     fURL::redirect('?step=one');
 
-$tpl = new fTemplating($this->get('tplRoot'), 'two.tpl');
-$this->set('tpl', $tpl);
+$tpl = Util::newTpl($this, 'two');
 
 
 $tpl->set('db_type', array(
@@ -42,7 +41,7 @@ if(fRequest::isPost() && fRequest::get('db_submit')) {
                                           'pw',
                                           'database'
                                      ))
-                ->addCallbackRule('host', 'checkHost', 'Please enter an valid host.');
+                ->addCallbackRule('host', Util::checkHost, 'Please enter an valid host.');
         }
         else {
             $vali->addRequiredFields('dbfile');

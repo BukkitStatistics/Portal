@@ -1,8 +1,5 @@
 <?php
-/*
- * Shows the error messages.
- */
-fMessaging::show('*', 'install/converter');
+Util::showMessages('*', 'install/four', 'alert alert-error');
 ?>
 <fieldset id="converter">
     <?php if($this->get('state') == null): ?>

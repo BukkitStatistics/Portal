@@ -1,5 +1,5 @@
 <?php
-show_messages('*', 'install/two', 'alert alert-error');
+Util::showMessages('*', 'install/two', 'alert alert-error');
 ?>
 
 <fieldset>

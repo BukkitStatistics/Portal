@@ -29,13 +29,7 @@ if(defined('DB_TYPE')) {
        fORMDatabase::attach($db);
 
        // adds prefix
-       $db->registerHookCallback('unmodified', 'add_prefix');
-
-       // map classes to tables with prefix!
-       fORM::mapClassToTable('Player', DB_PREFIX . 'player');
-       fORM::mapClassToTable('Creature', DB_PREFIX . 'creature');
-       fORM::mapClassToTable('Block', DB_PREFIX . 'block');
-       fORM::mapClassToTable('Item', DB_PREFIX . 'item');
+       $db->registerHookCallback('unmodified', Util::addPrefix);
    } catch(fException $e) {
        fMessaging::create('errors', '{default}', $e->getMessage());
    }
@@ -44,10 +38,10 @@ if(defined('DB_TYPE')) {
 /**
  * Automatically includes classes
  *
- * @throws Exception
  *
  * @param  string $class_name  Name of the class to load
  *
+ * @throws fEnvironmentException
  * @return void
  */
 function __autoload($class_name) {

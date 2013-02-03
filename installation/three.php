@@ -2,8 +2,7 @@
 if(fSession::get('maxStep') < 3)
     fURL::redirect('?step=two');
 
-$tpl = new fTemplating($this->get('tplRoot'), 'three.tpl');
-$this->set('tpl', $tpl);
+$tpl = Util::newTpl($this, 'three');
 
 if(fRequest::isPost() && fRequest::get('general_submit')) {
     /*
