@@ -21,7 +21,7 @@ fText::registerComposeCallback('pre', array($lang, 'translate'));
 /*
  * Initializes ORM
  */
-if(defined('DB_TYPE')) {
+if(defined('DB_TYPE') && DB_TYPE != '') {
    try {
        if(DB_TYPE != 'sqlite')
            $db = new fDatabase(DB_TYPE, DB_DATABASE, DB_USER, DB_PW, DB_HOST);

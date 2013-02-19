@@ -137,6 +137,7 @@ class Converter {
 
     public function getOldStats() {
         if(fSession::get('converterStats') == NULL) {
+            fCore::debug('caculating old stats');
             $count = $this->oldDB->query('
                             SELECT COUNT(DISTINCT player_name)
                             FROM players

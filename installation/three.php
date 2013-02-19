@@ -22,13 +22,11 @@ if(fRequest::isPost() && fRequest::get('general_submit')) {
             ->validate();
 
 
-        // writing db
+        // writing general settings
         $db = fORMDatabase::retrieve();
 
-        // writing general settings
-        $sql = $db->translatedPrepare('INSERT INTO "prefix_settings" (`key`, `value`) VALUES(%s, %s)');
-        $db->execute($sql, 'adminpw', fCryptography::hashPassword(fRequest::get('adminpw', 'string')));
-        $db->execute($sql, 'title', fRequest::encode('title', 'string'));
+        Util::setOption('main.adminpw', $tpl->get('adminpw'));
+        Util::setOption('main.title', $tpl->get('title'));
 
     } catch(fValidationException $e) {
         fMessaging::create('validation', 'install/three', $e->getMessage());

@@ -49,6 +49,31 @@ class Util {
     }
 
     /**
+     * Sets the given option. If it exists, it will be updated. <br> Otherwise a new one will be inserted.
+     *
+     * @param $option
+     * @param $value
+     *
+     * @return bool
+     */public static function setOption($option, $value) {
+        if($option == '')
+            return false;
+
+        $db = fORMDatabase::retrieve();
+        try{
+            if(Util::getOption($option))
+                $db->translatedExecute('UPDATE %r SET "value"=%s WHERE "key"=%s', 'settings', $value, $option);
+            else
+                $db->translatedExecute('INSERT INTO %r ("key", "value") VALUES (%s, %s)', 'settings', $option, $value);
+
+            return true;
+        } catch(fSQLException $e) {
+            fCore::debug($e);
+            return false;
+        }
+    }
+
+    /**
      * An wrapper around the fMessaging::show function
      * This adds bootstrap flavour ;)
      *
@@ -91,12 +116,13 @@ class Util {
                                 $sql);
         else $sql = preg_replace("/prefix_(\S+?)([\s\.,]|$)/", DB_PREFIX . "\\1\\2", $sql);
 
-        fCore::debug($sql);
+        fCore::debug('addPrefix: ' . $sql);
     }
 
 
     /**
-     * Sets the tpl variable in the main design
+     * Sets the tpl variable in the main design.<br>
+     * Context is for the most times <b>$this</b>
      *
      * @param fTemplating $context
      * @param String      $tplName

@@ -61,7 +61,7 @@ if(fRequest::isPost() && fRequest::get('db_submit')) {
         }
         $db->connect();
         // TODO: make sure that this table is an YASP table.. e.g. dbversion written by the plugin?
-        $db->translatedQuery('SELECT * FROM "prefix_settings"');
+        $db->translatedQuery('SELECT * FROM "' . $tpl->get('prefix') . 'settings"');
         $db->close();
     } catch(fValidationException $e) {
         fMessaging::create('validation', 'install/two', $e->getMessage());
