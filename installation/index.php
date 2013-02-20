@@ -21,13 +21,14 @@
     <!--[if lt IE 9]>
     <script src="../media/js/html5.min.js"></script>
     <![endif]-->
+
+    <script src="media/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="media/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="media/js/jquery.tablesorter.js" type="text/javascript"></script>
+    <script src="media/js/jquery.pajinate.js" type="text/javascript"></script>
+    <script src="media/js/initialize.js" type="text/javascript"></script>
 </head>
 <body>
-<?php
-
-fCore::expose($_SESSION);
-
-?>
 <?php
 Util::showMessages();
 ?>
@@ -39,10 +40,10 @@ Util::showMessages();
         ?>
     </form>
 </fieldset>
-<script src="media/js/jquery-1.8.3.min.js" type="text/javascript"></script>
-<script src="media/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="media/js/jquery.tablesorter.js" type="text/javascript"></script>
-<script src="media/js/jquery.pajinate.js" type="text/javascript"></script>
-<script src="media/js/initialize.js" type="text/javascript"></script>
+<?php
+
+fCore::expose($_SESSION);
+
+?>
 </body>
 </html>

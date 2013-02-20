@@ -78,19 +78,19 @@ class Converter {
                         WHERE last_logout IS NOT NULL
                         AND last_login IS NOT NULL
                         LIMIT %i,%i
-                        ', $this->start, $this->start + $this->itemsPerRun);
+                        ', $this->start, $this->itemsPerRun);
 
         $player_stmt = $this->newDB->translatedPrepare('
                             INSERT INTO "prefix_players" ("name", "first_login", "logins")
                             VALUES (%s, %i, %i)
                             ');
         $login_stmt = $this->newDB->translatedPrepare('
-                            INSERT INTO "prefix_players_log" ("playerID", "logged_in", "logged_out")
+                            INSERT INTO "prefix_detailed_players_log" ("player_id", "logged_in", "logged_out")
                             VALUES (%i, %i, %i)
                             ');
         $dist_stmt = $this->newDB->translatedPrepare('
                             INSERT INTO "prefix_players_distance"
-                            ("playerID",
+                            ("player_id",
                             "foot",
                             "boat",
                             "minecart",
@@ -106,8 +106,8 @@ class Converter {
             $this->newDB->execute($dist_stmt, $last, $foot, $row['boat'], $row['minecart'], $row['pig']);
             $this->newDB->execute($login_stmt, $last, $row['last_login'], $row['last_logout']);
 
-            fSession::set('converter[last_start]', $i);
             $i++;
+            fSession::set('converter[last_start]', $i);
         }
     }
 
@@ -149,9 +149,11 @@ class Converter {
 
             // player killed player
             $count = $this->oldDB->query('
-                            SELECT COUNT(id) FROM kills
-                            WHERE killed = 999
-                            AND killed_by = 999
+                            SELECT COUNT(kills.id) FROM kills
+                            INNER JOIN players p1 ON kills.killed_by_uuid = p1.uuid
+                            INNER JOIN players p2 ON kills.killed_uuid = p2.uuid
+                            WHERE kills.killed = 999
+                            AND kills.killed_by = 999
                             ')
                 ->fetchScalar();
             fSession::set('converterStats[total_pvp_kills]', $count);
@@ -159,6 +161,7 @@ class Converter {
             // player killed creature
             $count = $this->oldDB->query('
                             SELECT COUNT(id) FROM kills
+                            INNER JOIN players p1 ON kills.killed_by_uuid = p1.uuid
                             WHERE killed != 18
                             AND killed != 0
                             AND killed != 999
@@ -170,6 +173,7 @@ class Converter {
             // creature killed player
             $count = $this->oldDB->query('
                             SELECT COUNT(id) FROM kills
+                            INNER JOIN players p1 ON kills.killed_uuid = p1.uuid
                             WHERE killed = 999
                             AND killed_by != 999
                             AND killed_by != 18
@@ -181,6 +185,7 @@ class Converter {
             // player death causes
             $count = $this->oldDB->query('
                             SELECT COUNT(id) FROM kills
+                            INNER JOIN players p1 ON kills.killed_uuid = p1.uuid
                             WHERE killed = 999
                             AND (killed_by = 18 OR killed_by = 0)
                             ')
@@ -191,6 +196,7 @@ class Converter {
             $count = $this->oldDB->query('
                             SELECT SUM(num_placed) AS placed, SUM(num_destroyed) AS destroyed
                             FROM blocks
+                            INNER JOIN players p1 ON blocks.uuid = p1.uuid
                             ')
                 ->fetchRow();
             fSession::set('converterStats[total_blocks_destroyed]', $count['destroyed']);
@@ -200,6 +206,7 @@ class Converter {
             $count = $this->oldDB->query('
                             SELECT SUM(num_pickedup) AS picked, SUM(num_dropped) AS dropped
                             FROM pickup_drop
+                            INNER JOIN players p1 ON pickup_drop.uuid = p1.uuid
                             ')
                 ->fetchRow();
             fSession::set('converterStats[total_items_dropped]', $count['dropped']);

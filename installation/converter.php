@@ -1,14 +1,23 @@
 <?php
 // TODO: make sure there are no players currently playing -> shut the server off! :D
-// TODO: complete new converter class -> progress bar: first output tpl with 0% then call script -> return after a certain amount of queries -> output percentage
-// if js is on do ajax calls -> no output, just percantage output -> recall ajax until 100%
 if(fSession::get('maxStep') < 5)
     fURL::redirect('?step=four');
 
 $tpl = Util::newTpl($this, 'converter');
 
+if(!is_null(fSession::get('convertDB')))
+    $tpl->set('state', 2);
+
 if(fRequest::isPost() && fRequest::get('converter_submit')) {
     if(fRequest::get('start', 'boolean')) {
+        $new_conv = array();
+
+        foreach(fRequest::get('convert') as $key => $value) {
+            if($value == 'on')
+                $new_conv[$key] = true;
+        }
+
+        fSession::set('convert', $new_conv);
         fSession::set('maxStep', 6);
         fURL::redirect('?step=process');
     }
@@ -69,8 +78,6 @@ if(fRequest::isPost() && fRequest::get('converter_submit')) {
     }
 
     if($tpl->get('state') == 2) {
-        // remove old messages from session
-        fMessaging::retrieve('*', 'install/converter');
 
         $conv = new Converter($db, fORMDatabase::retrieve());
         $values = $conv->getOldStats();

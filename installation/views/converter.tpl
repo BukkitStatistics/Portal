@@ -1,5 +1,5 @@
 <?php
-Util::showMessages('*', 'install/four', 'alert alert-error');
+Util::showMessages('*', 'install/converter', 'alert alert-error');
 ?>
 <fieldset id="converter">
     <?php if($this->get('state') == null): ?>
@@ -52,25 +52,25 @@ Util::showMessages('*', 'install/four', 'alert alert-error');
         <tr>
             <td>Total Blocks Destroyed:</td>
             <td><label for="convert_blocks_destroyed"><?php echo $this->get('total_blocks_destroyed'); ?></label></td>
-            <td><input type="checkbox" name="convert[blocks][destroyed]" id="convert_blocks_destroyed" checked="checked"></td>
+            <td><input type="checkbox" name="convert[blocks_destroyed]" id="convert_blocks_destroyed" checked="checked"></td>
         </tr>
         <tr>
             <td>Total Blocks Placed:</td>
             <td><label for="convert_blocks_placed"><?php echo $this->get('total_blocks_placed'); ?></label></td>
-            <td><input type="checkbox" name="convert[blocks][placed]" id="convert_blocks_placed" checked="checked"></td>
+            <td><input type="checkbox" name="convert[blocks_placed]" id="convert_blocks_placed" checked="checked"></td>
         </tr>
         <tr>
             <td>Total Items Dropped:</td>
             <td><label for="convert_items_dropped"><?php echo $this->get('total_items_dropped'); ?></label></td>
-            <td><input type="checkbox" name="convert[items][dropped]" id="convert_items_dropped" checked="checked"></td>
+            <td><input type="checkbox" name="convert[items_dropped]" id="convert_items_dropped" checked="checked"></td>
         </tr>
         <tr>
             <td>Total Items Picked Up:</td>
             <td><label for="convert_items_picked"><?php echo $this->get('total_items_picked'); ?></label></td>
-            <td><input type="checkbox" name="convert[items][picked]" id="convert_items_picked" checked="checked"></td>
+            <td><input type="checkbox" name="convert[items_picked]" id="convert_items_picked" checked="checked"></td>
         </tr>
     </table>
     <input type="hidden" name="start" value="true">
     <?php endif; ?>
     <input type="submit" name="converter_submit" value="<?php echo fText::compose('Next'); ?>">
-
+</fieldset>
