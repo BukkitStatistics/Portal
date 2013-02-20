@@ -85,11 +85,11 @@ class Converter {
                             VALUES (%s, %i, %i)
                             ');
         $login_stmt = $this->newDB->translatedPrepare('
-                            INSERT INTO "prefix_detailed_players_log" ("player_id", "logged_in", "logged_out")
+                            INSERT INTO "prefix_detailed_log_players" ("player_id", "logged_in", "logged_out")
                             VALUES (%i, %i, %i)
                             ');
         $dist_stmt = $this->newDB->translatedPrepare('
-                            INSERT INTO "prefix_players_distance"
+                            INSERT INTO "prefix_distance_players"
                             ("player_id",
                             "foot",
                             "boat",

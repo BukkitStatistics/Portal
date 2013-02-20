@@ -107,8 +107,11 @@ class Util {
         // if prefix is included skip this statement
         if(strpos($sql, DB_PREFIX) !== false)
             return;
-        if(strpos($sql, '%r'))
+        if(strpos($sql, '%r')) {
+            if(strpos($values[0], DB_PREFIX) !== false)
+                return;
             $values[0] = DB_PREFIX . $values[0];
+        }
         if(preg_match("/^UPDATE `?prefix_\S+`?\s+SET/is", $sql))
             $sql = preg_replace("/^UPDATE `?prefix_(\S+?)`?([\s\.,]|$)/i", "UPDATE `" . DB_PREFIX . "\\1`\\2", $sql);
         elseif(preg_match("/^INSERT INTO `?prefix_\S+`?\s+[a-z0-9\s,\)\(]*?VALUES/is", $sql))

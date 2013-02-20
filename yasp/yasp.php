@@ -27,6 +27,7 @@ if(defined('DB_TYPE') && DB_TYPE != '') {
            $db = new fDatabase(DB_TYPE, DB_DATABASE, DB_USER, DB_PW, DB_HOST);
        else $db = new fDatabase('sqlite', DB_HOST);
        fORMDatabase::attach($db);
+       fORM::mapClassToTable('Player', DB_PREFIX . 'players');
 
        // adds prefix
        $db->registerHookCallback('unmodified', Util::addPrefix);
@@ -53,5 +54,11 @@ function __autoload($class_name) {
     if(file_exists($file))
         return require $file;
 
-    throw new fEnvironmentException('The class ' . $class_name . ' could not be loaded');
+
+    try {
+        fORM::defineActiveRecordClass($class_name);
+    } catch(fProgrammerException $e) {
+        throw new fProgrammerException('The class ' . $class_name . ' could not be loaded');
+    }
+
 }
