@@ -21,13 +21,12 @@ fText::registerComposeCallback('pre', array($lang, 'translate'));
 /*
  * Initializes ORM
  */
-if(defined('DB_TYPE') && DB_TYPE != '') {
+if(defined('DB_DATABASE') && DB_DATABASE != '') {
    try {
-       if(DB_TYPE != 'sqlite')
-           $db = new fDatabase(DB_TYPE, DB_DATABASE, DB_USER, DB_PW, DB_HOST);
-       else $db = new fDatabase('sqlite', DB_HOST);
+       $db = new fDatabase('mysql', DB_DATABASE, DB_USER, DB_PW, DB_HOST);
+
        fORMDatabase::attach($db);
-       fORM::mapClassToTable('Player', DB_PREFIX . 'players');
+       fORM::mapClassToTable('Player', DB_PREFIX . '_players');
 
        // adds prefix
        $db->registerHookCallback('unmodified', Util::addPrefix);

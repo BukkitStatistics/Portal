@@ -113,11 +113,11 @@ class Util {
             $values[0] = DB_PREFIX . $values[0];
         }
         if(preg_match("/^UPDATE `?prefix_\S+`?\s+SET/is", $sql))
-            $sql = preg_replace("/^UPDATE `?prefix_(\S+?)`?([\s\.,]|$)/i", "UPDATE `" . DB_PREFIX . "\\1`\\2", $sql);
+            $sql = preg_replace("/^UPDATE `?prefix_(\S+?)`?([\s\.,]|$)/i", "UPDATE `" . DB_PREFIX . "_\\1`\\2", $sql);
         elseif(preg_match("/^INSERT INTO `?prefix_\S+`?\s+[a-z0-9\s,\)\(]*?VALUES/is", $sql))
-            $sql = preg_replace("/^INSERT INTO `?prefix_(\S+?)`?([\s\.,]|$)/i", "INSERT INTO `" . DB_PREFIX . "\\1`\\2",
+            $sql = preg_replace("/^INSERT INTO `?prefix_(\S+?)`?([\s\.,]|$)/i", "INSERT INTO `" . DB_PREFIX . "_\\1`\\2",
                                 $sql);
-        else $sql = preg_replace("/prefix_(\S+?)([\s\.,]|$)/", DB_PREFIX . "\\1\\2", $sql);
+        else $sql = preg_replace("/prefix_(\S+?)([\s\.,]|$)/", DB_PREFIX . "_\\1\\2", $sql);
 
         fCore::debug('addPrefix: ' . $sql);
     }

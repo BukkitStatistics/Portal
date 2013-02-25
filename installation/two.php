@@ -4,17 +4,6 @@ if(fSession::get('maxStep') < 2)
 
 $tpl = Util::newTpl($this, 'two');
 
-
-$tpl->set('db_type', array(
-                          'mysql'      => 'MySQL',
-                          'mssql'      => 'MSSQL',
-                          'oracle'     => 'Oracle',
-                          'postgresql' => 'PostgreSQL',
-                          'sqlite'     => 'SQLite',
-                          'db2'        => 'DB2'
-                     ));
-$tpl->set('active_type', 'mysql');
-
 /*
  * Validates the database data
  */
@@ -22,8 +11,6 @@ if(fRequest::isPost() && fRequest::get('db_submit')) {
     /*
      * Store input values
      */
-    $tpl->set('type', fRequest::encode('type'));
-    $tpl->set('active_type', fRequest::encode('type'));
     $tpl->set('host', fRequest::encode('host'));
     $tpl->set('user', fRequest::encode('user'));
     $tpl->set('pw', fRequest::encode('pw'));
@@ -33,35 +20,24 @@ if(fRequest::isPost() && fRequest::get('db_submit')) {
     try {
         $vali = new fValidation();
 
-        if($tpl->get('type') != 'sqlite') {
-            $vali->addRequiredFields(array(
-                                          'type',
-                                          'host',
-                                          'user',
-                                          'pw',
-                                          'database'
-                                     ))
-                ->addCallbackRule('host', Util::checkHost, 'Please enter an valid host.');
-        }
-        else {
-            $vali->addRequiredFields('dbfile');
-        }
+        $vali->addRequiredFields(array(
+                                      'host',
+                                      'user',
+                                      'pw',
+                                      'database'
+                                 ))
+            ->addCallbackRule('host', Util::checkHost, 'Please enter an valid host.');
 
-        $vali->setMessageOrder('type', 'host', 'user', 'pw', 'database', 'prefix')
+        $vali->setMessageOrder('host', 'user', 'pw', 'database', 'prefix')
             ->validate();
 
-        if($tpl->get('type') != 'sqlite') {
-            $db = new fDatabase($tpl->get('type'), fRequest::encode('database'),
-                fRequest::encode('user'),
-                fRequest::encode('pw'),
-                fRequest::encode('host'));
-        }
-        else {
-            $db = new fDatabase('sqlite', $tpl->get('dbfile'));
-        }
+        $db = new fDatabase('mysql', fRequest::encode('database'),
+                            fRequest::encode('user'),
+                            fRequest::encode('pw'),
+                            fRequest::encode('host'));
         $db->connect();
         // TODO: make sure that this table is an YASP table.. e.g. dbversion written by the plugin?
-        $db->translatedQuery('SELECT * FROM "' . $tpl->get('prefix') . 'settings"');
+        $db->translatedQuery('SELECT * FROM "' . $tpl->get('prefix') . '_settings"');
         $db->close();
     } catch(fValidationException $e) {
         fMessaging::create('validation', 'install/two', $e->getMessage());
@@ -92,7 +68,7 @@ if(fRequest::isPost() && fRequest::get('db_submit')) {
                 "<?php \n/*\n* Do not modify this unless you know what you are doing!\n*/\n\ndefine('DB_HOST', '" .
                 $host . "');\ndefine('DB_USER', '" . $tpl->get('user') . "');\ndefine('DB_PW', '" . $tpl->get('pw') .
                 "');\ndefine('DB_DATABASE', '" . $tpl->get('database') . "');\ndefine('DB_PREFIX', '" .
-                $tpl->get('prefix') . "');\ndefine('DB_TYPE', '" . $tpl->get('type') . "');";
+                $tpl->get('prefix') . "');\n";
             $db_file->write($contents);
         }
     } catch(fValidationException $e) {

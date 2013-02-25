@@ -42,19 +42,19 @@ class Converter {
                 $cur = $this->oldStats['total_deaths'];
                 break;
             case 'blocks_placed':
-                $this->convertBlocks();
+                $this->convertBlocks(false);
                 $cur = $this->oldStats['total_blocks_placed'];
                 break;
             case 'items_dropped':
-                $this->convertItems();
+                $this->convertItems(true);
                 $cur = $this->oldStats['total_items_dropped'];
                 break;
             case 'blocks_destroyed':
-                $this->convertBlocks();
+                $this->convertBlocks(true);
                 $cur = $this->oldStats['total_blocks_destroyed'];
                 break;
             case 'items_picked':
-                $this->convertItems();
+                $this->convertItems(false);
                 $cur = $this->oldStats['total_items_picked'];
                 break;
         }
@@ -111,27 +111,175 @@ class Converter {
         }
     }
 
-    private function convertPVE() {
+    private function convertPVP() {
+        $result = $this->oldDB->query('
+                        SELECT
+                            p1.player_name AS killer,
+                            p2.player_name AS victim ,
+                            kills.killed_using AS material,
+                            COUNT(kills.killed_by_uuid) AS times
+                        FROM kills
+                        INNER JOIN players p1 ON kills.killed_by_uuid = p1.uuid
+                        INNER JOIN players p2 ON kills.killed_uuid = p2.uuid
+                        WHERE kills.killed = 999
+                        AND kills.killed_by = 999
+                        GROUP BY kills.killed_by_uuid, kills.killed_uuid
+                        ORDER BY p1.player_name
+                        LIMIT %i,%i
+                        ', $this->start, $this->itemsPerRun);
+
+        $id_stmt = $this->newDB->translatedPrepare('
+                            SELECT player_id
+                            FROM "prefix_players"
+                            WHERE "name" = %s
+        ');
+        $pvp_stmt = $this->newDB->translatedPrepare('
+                            INSERT INTO "prefix_total_pvp_kills"
+                            ("material_id",
+                            "player_id",
+                            "victim_id",
+                            "times")
+                            VALUES (%i, %i, %i, %i)
+        ');
+
+        $i = $this->start;
+        foreach($result as $row) {
+            try {
+                $player_id = $this->newDB->query($id_stmt, $row['killer']);
+                $victim_id = $this->newDB->query($id_stmt, $row['victim']);
+                $this->newDB->execute($pvp_stmt, $row['material'],
+                                      $player_id->fetchScalar(),
+                                      $victim_id->fetchScalar(),
+                                      $row['times']);
+
+                $i++;
+                fSession::set('converter[last_start]', $i);
+            } catch(fSQLException $e) {
+                // if material/player/creature id does not exsist
+            }
+        }
 
     }
 
-    private function convertPVP() {
+    private function convertPVE() {
+        $result = $this->oldDB->query('
+                        SELECT
+                            p1.player_name AS killer,
+                            kills.killed AS creature,
+                            kills.killed_using AS material,
+                            COUNT(kills.killed) AS times
+                        FROM kills
+                        INNER JOIN players p1 ON kills.killed_by_uuid = p1.uuid
+                        WHERE killed != 18
+                        AND killed != 0
+                        AND killed != 999
+                        AND killed_by = 999
+                        GROUP BY kills.killed, kills.killed_by_uuid
+                        ORDER BY p1.player_name
+                        LIMIT %i,%i
+                        ', $this->start, $this->itemsPerRun);
+
+        $id_stmt = $this->newDB->translatedPrepare('
+                            SELECT player_id
+                            FROM "prefix_players"
+                            WHERE "name" = %s
+        ');
+        $pve_stmt = $this->newDB->translatedPrepare('
+                            INSERT INTO "prefix_total_pve_kills"
+                            ("material_id",
+                            "creature_type",
+                            "player_id",
+                            "creature_killed")
+                            VALUES (%i, %s, %i, %i)
+        ');
+
+        $i = $this->start;
+        foreach($result as $row) {
+            try {
+                $player_id = $this->newDB->query($id_stmt, $row['killer']);
+                $this->newDB->execute($pve_stmt, $row['material'],
+                                      $row['creature'],
+                                      $player_id->fetchScalar(),
+                                      $row['times']);
+
+                $i++;
+                fSession::set('converter[last_start]', $i);
+            } catch(fSQLException $e) {
+                // if material/player/creature id does not exsist
+            }
+        }
 
     }
 
     private function convertEVP() {
+        $result = $this->oldDB->query('
+                        SELECT
+                            kills.killed_by AS creature,
+                            p1.player_name AS victim ,
+                            kills.killed_using AS material,
+                            COUNT(kills.killed_uuid) AS times
+                        FROM kills
+                        INNER JOIN players p1 ON kills.killed_uuid = p1.uuid
+                        WHERE killed = 999
+                        AND killed_by != 999
+                        AND killed_by != 18
+                        AND killed_by != 0
+                        GROUP BY kills.killed_by, kills.killed_uuid
+                        LIMIT %i,%i
+                        ', $this->start, $this->itemsPerRun);
 
+
+        $id_stmt = $this->newDB->translatedPrepare('
+                            SELECT player_id
+                            FROM "prefix_players"
+                            WHERE "name" = %s
+        ');
+        $evp_stmt_new = $this->newDB->translatedPrepare('
+                                INSERT INTO "prefix_total_pve_kills"
+                                ("material_id",
+                                "creature_type",
+                                "player_id",
+                                "player_killed")
+                                VALUES (%i, %s, %i, %i)
+        ');
+        $evp_stmt_update = $this->newDB->translatedPrepare('
+                                UPDATE "prefix_total_pve_kills" SET
+                                "player_killed" = %i
+                                WHERE "player_id" = %i
+                                AND "creature_type" = %s
+                                AND "material_id" = %i
+         ');
+
+        $i = $this->start;
+        foreach($result as $row) {
+            try {
+                $player_id = $this->newDB->query($id_stmt, $row['killer']);
+                $count = $this->newDB->query($evp_stmt_update, $row['times'], $player_id, $row['creature'],
+                                             $row['material'])->countAffectedRows();
+
+                if($count <= 0) {
+                    $this->newDB->execute($evp_stmt_new, $row['material'], $row['creature'], $player_id->fetchScalar(),
+                                          $row['times']);
+                }
+
+
+                $i++;
+                fSession::set('converter[last_start]', $i);
+            } catch(fSQLException $e) {
+                // if material/player/creature id does not exsist
+            }
+        }
     }
 
     private function convertDeaths() {
 
     }
 
-    private function convertBlocks() {
+    private function convertBlocks($destroyed) {
 
     }
 
-    private function convertItems() {
+    private function convertItems($dropped) {
 
     }
 

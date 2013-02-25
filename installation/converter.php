@@ -45,7 +45,7 @@ if(fRequest::isPost() && fRequest::get('converter_submit')) {
                 ->addCallbackRule('host', Util::checkHost, 'Please enter an valid host.');
 
 
-            $vali->setMessageOrder('type', 'host', 'user', 'pw', 'database')
+            $vali->setMessageOrder('host', 'user', 'pw', 'database')
                 ->validate();
 
 
@@ -77,12 +77,17 @@ if(fRequest::isPost() && fRequest::get('converter_submit')) {
         }
     }
 
-    if($tpl->get('state') == 2) {
+}
+if($tpl->get('state') == 2) {
 
-        $conv = new Converter($db, fORMDatabase::retrieve());
-        $values = $conv->getOldStats();
+    $db = new fDatabase('mysql', fSession::get('convertDB[database]'),
+                        fSession::get('convertDB[user]'),
+                        fSession::get('convertDB[pw]'),
+                        fSession::get('convertDB[host]'));
 
-        foreach($values as $key => $value)
-            $tpl->set($key, $value);
-    }
+    $conv = new Converter($db, fORMDatabase::retrieve());
+    $values = $conv->getOldStats();
+
+    foreach($values as $key => $value)
+        $tpl->set($key, $value);
 }
