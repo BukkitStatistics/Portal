@@ -85,7 +85,7 @@ class Converter {
                             VALUES (%s, %i, %i)
                             ');
         $login_stmt = $this->newDB->translatedPrepare('
-                            INSERT INTO "prefix_detailed_log_players" ("player_id", "logged_in", "logged_out")
+                            INSERT INTO "prefix_detailed_log_players" ("player_id", "time", "is_login")
                             VALUES (%i, %i, %i)
                             ');
         $dist_stmt = $this->newDB->translatedPrepare('
@@ -105,6 +105,7 @@ class Converter {
             $foot = $row['total'] - ($row['minecart'] + $row['boat'] + $row['pig']);
             $this->newDB->execute($dist_stmt, $last, $foot, $row['boat'], $row['minecart'], $row['pig']);
             $this->newDB->execute($login_stmt, $last, $row['last_login'], $row['last_logout']);
+            $this->newDB->execute($login_stmt, $last, $row['last_logout'], 0);
 
             $i++;
             fSession::set('converter[last_start]', $i);
@@ -141,7 +142,6 @@ class Converter {
                             "times")
                             VALUES (%i, %i, %i, %i)
         ');
-
         $i = $this->start;
         foreach($result as $row) {
             try {
@@ -187,10 +187,10 @@ class Converter {
         $pve_stmt = $this->newDB->translatedPrepare('
                             INSERT INTO "prefix_total_pve_kills"
                             ("material_id",
-                            "creature_type",
+                            "creature_id",
                             "player_id",
                             "creature_killed")
-                            VALUES (%i, %s, %i, %i)
+                            VALUES (%i, %i, %i, %i)
         ');
 
         $i = $this->start;
@@ -237,23 +237,22 @@ class Converter {
         $evp_stmt_new = $this->newDB->translatedPrepare('
                                 INSERT INTO "prefix_total_pve_kills"
                                 ("material_id",
-                                "creature_type",
+                                "creature_id",
                                 "player_id",
                                 "player_killed")
-                                VALUES (%i, %s, %i, %i)
+                                VALUES (%i, %i, %i, %i)
         ');
         $evp_stmt_update = $this->newDB->translatedPrepare('
                                 UPDATE "prefix_total_pve_kills" SET
                                 "player_killed" = %i
                                 WHERE "player_id" = %i
-                                AND "creature_type" = %s
+                                AND "creature_id" = %i
                                 AND "material_id" = %i
          ');
-
         $i = $this->start;
         foreach($result as $row) {
             try {
-                $player_id = $this->newDB->query($id_stmt, $row['killer']);
+                $player_id = $this->newDB->query($id_stmt, $row['victim']);
                 $count = $this->newDB->query($evp_stmt_update, $row['times'], $player_id, $row['creature'],
                                              $row['material'])->countAffectedRows();
 
@@ -297,37 +296,40 @@ class Converter {
 
             // player killed player
             $count = $this->oldDB->query('
-                            SELECT COUNT(kills.id) FROM kills
+                            SELECT kills.id FROM kills
                             INNER JOIN players p1 ON kills.killed_by_uuid = p1.uuid
                             INNER JOIN players p2 ON kills.killed_uuid = p2.uuid
                             WHERE kills.killed = 999
                             AND kills.killed_by = 999
+                            GROUP BY kills.killed_by_uuid, kills.killed_uuid
                             ')
-                ->fetchScalar();
+                ->countReturnedRows();
             fSession::set('converterStats[total_pvp_kills]', $count);
 
             // player killed creature
             $count = $this->oldDB->query('
-                            SELECT COUNT(id) FROM kills
+                            SELECT id FROM kills
                             INNER JOIN players p1 ON kills.killed_by_uuid = p1.uuid
                             WHERE killed != 18
                             AND killed != 0
                             AND killed != 999
                             AND killed_by = 999
+                            GROUP BY kills.killed, kills.killed_by_uuid
                             ')
-                ->fetchScalar();
+                ->countReturnedRows();
             fSession::set('converterStats[total_pve_kills]', $count);
 
             // creature killed player
             $count = $this->oldDB->query('
-                            SELECT COUNT(id) FROM kills
+                            SELECT id FROM kills
                             INNER JOIN players p1 ON kills.killed_uuid = p1.uuid
                             WHERE killed = 999
                             AND killed_by != 999
                             AND killed_by != 18
                             AND killed_by != 0
+                            GROUP BY kills.killed_by, kills.killed_uuid
                             ')
-                ->fetchScalar();
+                ->countReturnedRows();
             fSession::set('converterStats[total_evp_kills]', $count);
 
             // player death causes

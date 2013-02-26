@@ -4,6 +4,8 @@ if(fSession::get('maxStep') < 4)
 
 $tpl = Util::newTpl($this, 'four');
 
+fSession::delete('converterStats');
+
 if(!fMessaging::check('*') && fRequest::isPost() && fRequest::get('convert_submit')) {
     fSession::set('maxStep', 5);
     if(fRequest::get('old_data', 'boolean'))

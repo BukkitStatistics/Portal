@@ -6,6 +6,8 @@
     <div class="progress progress-striped active">
         <div class="bar" style="width: <?php echo $this->get('perc'); ?>%;"></div>
     </div>
-    <a href="<?php echo $this->get('next_step') ?>"
+    <a href="?step=converter"
+       class="btn btn-primary">Stop</a>
+    <a href="?step=converter"
        class="btn btn-primary <?php echo ($this->get('next_step') != '' ? '' : 'disabled') ?>">Next Step</a>
 </fieldset>

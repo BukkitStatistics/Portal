@@ -5,6 +5,9 @@ if(fSession::get('maxStep') < 5)
 
 $tpl = Util::newTpl($this, 'converter');
 
+fSession::delete('convert');
+fSession::delete('converter');
+
 if(!is_null(fSession::get('convertDB')))
     $tpl->set('state', 2);
 

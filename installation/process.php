@@ -13,16 +13,7 @@ if(is_null($type)) {
     $this->add('header_additions',
                '<meta http-equiv="REFRESH" content="0;url=?step=process&type=players">');
 }
-elseif($type != 'players' && !array_key_exists($type, fSession::get('convert'))) {
-    fURL::redirect('?step=process&type=' . key(fSession::get('convert')));
-}
 else {
-    $convert = fSession::get('convert');
-    if($type != 'players' && array_key_exists($type, $convert)) {
-        $convert = array_splice($convert, 2);
-        fSession::set('convert', $convert);
-    }
-
     $perc = 0;
     $oldDb = new fDatabase('mysql', fSession::get('convertDB[database]'),
                            fSession::get('convertDB[user]'),
@@ -35,20 +26,19 @@ else {
     $perc = $conv->process($type);
     $tpl->set('perc', $perc);
     $tpl->set('next_step', '');
-
-    if($type == 'players')
-        $next = 'players';
-    else
-        $next = key($convert);
-
-    $tpl->set('current', fText::compose($next));
+    $tpl->set('current', fText::compose($type));
 
     if($perc >= 100) {
+        $convert = fSession::get('convert');
+
         $tpl->set('next_step', '?step=process&type=' . key($convert) . '');
+
+        $convert = array_splice($convert, 1);
+        fSession::set('convert', $convert);
         fSession::set('converter[last_start]', 0);
     }
     else {
         $this->add('header_additions',
-                   '<meta http-equiv="REFRESH" content="1;url=?step=process&type=' . $next . '">');
+                   '<meta http-equiv="REFRESH" content="1;url=?step=process&type=' . $type . '">');
     }
 }
