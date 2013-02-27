@@ -298,11 +298,65 @@ class Converter {
     }
 
     private function convertBlocks() {
+        $result = $this->oldDB->query('
+                            SELECT block_id, num_destroyed, num_placed, player_name AS player
+                            FROM blocks
+                            INNER JOIN players p1 ON blocks.uuid = p1.uuid
+                            GROUP BY player_name, block_id
+        ');
+        $id_stmt = $this->newDB->translatedPrepare('
+                            SELECT player_id
+                            FROM "prefix_players"
+                            WHERE "name" = %s
+        ');
+        $block_stmt = $this->newDB->translatedPrepare('
+                            INSERT INTO "prefix_total_blocks"
+                            ("player_id",
+                            "material_id",
+                            "destroyed",
+                            "placed")
+                            VALUES (%i, %i, %i, %i)
+        ');
 
+        $i = $this->start;
+        foreach($result as $row) {
+            $player_id = $this->newDB->query($id_stmt, $row['player'])->fetchScalar();
+            $this->newDB->query($block_stmt, $player_id, $row['block_id'], $row['num_destroyed'], $row['num_placed']);
+
+            $i++;
+            fSession::set('converter[last_start]', $i);
+        }
     }
 
     private function convertItems() {
+        $result = $this->oldDB->query('
+                            SELECT item, num_pickedup, num_dropped, player_name AS player
+                            FROM pickup_drop
+                            INNER JOIN players p1 ON pickup_drop . uuid = p1 . uuid
+                            GROUP BY player_name, item
+        ');
+        $id_stmt = $this->newDB->translatedPrepare('
+                            SELECT player_id
+                            FROM "prefix_players"
+                            WHERE "name" = %s
+        ');
+        $item_stmt = $this->newDB->translatedPrepare('
+                            INSERT INTO "prefix_total_items"
+                            ("player_id",
+                            "material_id",
+                            "dropped",
+                            "picked_up")
+                            VALUES (%i, %i, %i, %i)
+        ');
 
+        $i = $this->start;
+        foreach($result as $row) {
+            $player_id = $this->newDB->query($id_stmt, $row['player'])->fetchScalar();
+            $this->newDB->query($item_stmt, $player_id, $row['item'], $row['num_dropped'], $row['num_picked_up']);
+
+            $i++;
+            fSession::set('converter[last_start]', $i);
+        }
     }
 
     private function mapDeathType($oldId) {
@@ -427,19 +481,19 @@ class Converter {
                             SELECT COUNT(DISTINCT player_name)
                             FROM players
                             WHERE last_logout IS NOT NULL
-                            AND last_login IS NOT NULL
+                                                     AND last_login IS NOT NULL
                             ')
                 ->fetchScalar();
             fSession::set('converterStats[player_count]', $count);
 
             // player killed player
             $count = $this->oldDB->query('
-                            SELECT kills.id FROM kills
-                            INNER JOIN players p1 ON kills.killed_by_uuid = p1.uuid
-                            INNER JOIN players p2 ON kills.killed_uuid = p2.uuid
-                            WHERE kills.killed = 999
-                            AND kills.killed_by = 999
-                            GROUP BY kills.killed_by_uuid, kills.killed_uuid
+                            SELECT kills . id FROM kills
+                            INNER JOIN players p1 ON kills . killed_by_uuid = p1 . uuid
+                            INNER JOIN players p2 ON kills . killed_uuid = p2 . uuid
+                            WHERE kills . killed = 999
+                                  AND kills . killed_by = 999
+                            GROUP BY kills . killed_by_uuid, kills . killed_uuid
                             ')
                 ->countReturnedRows();
             fSession::set('converterStats[total_pvp_kills]', $count);
@@ -447,12 +501,12 @@ class Converter {
             // player killed creature
             $count = $this->oldDB->query('
                             SELECT id FROM kills
-                            INNER JOIN players p1 ON kills.killed_by_uuid = p1.uuid
+                            INNER JOIN players p1 ON kills . killed_by_uuid = p1 . uuid
                             WHERE killed != 18
-                            AND killed != 0
-                            AND killed != 999
-                            AND killed_by = 999
-                            GROUP BY kills.killed, kills.killed_by_uuid
+                                  AND killed != 0
+                                      AND killed != 999
+                                          AND killed_by = 999
+                            GROUP BY kills . killed, kills . killed_by_uuid
                             ')
                 ->countReturnedRows();
             fSession::set('converterStats[total_pve_kills]', $count);
@@ -460,12 +514,12 @@ class Converter {
             // creature killed player
             $count = $this->oldDB->query('
                             SELECT id FROM kills
-                            INNER JOIN players p1 ON kills.killed_uuid = p1.uuid
+                            INNER JOIN players p1 ON kills . killed_uuid = p1 . uuid
                             WHERE killed = 999
-                            AND killed_by != 999
-                            AND killed_by != 18
-                            AND killed_by != 0
-                            GROUP BY kills.killed_by, kills.killed_uuid
+                                  AND killed_by != 999
+                                      AND killed_by != 18
+                                          AND killed_by != 0
+                            GROUP BY kills . killed_by, kills . killed_uuid
                             ')
                 ->countReturnedRows();
             fSession::set('converterStats[total_evp_kills]', $count);
@@ -474,9 +528,9 @@ class Converter {
             $count = $this->oldDB->query('
                             SELECT id
                             FROM kills
-                            INNER JOIN players p1 ON kills.killed_uuid = p1.uuid
+                            INNER JOIN players p1 ON kills . killed_uuid = p1 . uuid
                             WHERE killed = 999
-                            AND (killed_by = 18 OR killed_by = 0)
+                                  AND (killed_by = 18 OR killed_by = 0)
                             GROUP BY player_name, kill_type
                             ')
                 ->countReturnedRows();
@@ -486,7 +540,7 @@ class Converter {
             $count = $this->oldDB->query('
                             SELECT block_id
                             FROM blocks
-                            INNER JOIN players p1 ON blocks.uuid = p1.uuid
+                            INNER JOIN players p1 ON blocks . uuid = p1 . uuid
                             GROUP BY player_name, block_id
                             ')
                 ->countReturnedRows();
@@ -496,7 +550,7 @@ class Converter {
             $count = $this->oldDB->query('
                             SELECT item
                             FROM pickup_drop
-                            INNER JOIN players p1 ON pickup_drop.uuid = p1.uuid
+                            INNER JOIN players p1 ON pickup_drop . uuid = p1 . uuid
                             GROUP BY player_name, item
                             ')
                 ->countReturnedRows();
