@@ -146,11 +146,11 @@ class Converter {
         $i = $this->start;
         foreach($result as $row) {
             try {
-                $player_id = $this->newDB->query($id_stmt, $row['killer']);
-                $victim_id = $this->newDB->query($id_stmt, $row['victim']);
+                $player_id = $this->newDB->query($id_stmt, $row['killer'])->fetchScalar();
+                $victim_id = $this->newDB->query($id_stmt, $row['victim'])->fetchScalar();
                 $this->newDB->execute($pvp_stmt, $row['material'],
-                                      $player_id->fetchScalar(),
-                                      $victim_id->fetchScalar(),
+                                      $player_id,
+                                      $victim_id,
                                       $row['times']);
 
                 $i++;
@@ -197,10 +197,10 @@ class Converter {
         $i = $this->start;
         foreach($result as $row) {
             try {
-                $player_id = $this->newDB->query($id_stmt, $row['killer']);
+                $player_id = $this->newDB->query($id_stmt, $row['killer'])->fetchScalar();
                 $this->newDB->execute($pve_stmt, $row['material'],
                                       $this->mapEntityIds($row['creature']),
-                                      $player_id->fetchScalar(),
+                                      $player_id,
                                       $row['times']);
 
                 $i++;
@@ -253,14 +253,14 @@ class Converter {
         $i = $this->start;
         foreach($result as $row) {
             try {
-                $player_id = $this->newDB->query($id_stmt, $row['victim']);
+                $player_id = $this->newDB->query($id_stmt, $row['victim'])->fetchScalar();
                 $count = $this->newDB->query($evp_stmt_update, $row['times'], $player_id,
                                              $this->mapEntityIds($row['creature']),
                                              $row['material'])->countAffectedRows();
 
                 if($count <= 0) {
                     $this->newDB->execute($evp_stmt_new, $row['material'], $this->mapEntityIds($row['creature']),
-                                          $player_id->fetchScalar(),
+                                          $player_id,
                                           $row['times']);
                 }
 
@@ -274,7 +274,35 @@ class Converter {
     }
 
     private function convertDeaths() {
+        $result = $this->oldDB->query('
+                            SELECT player_name AS player, kill_type AS cause, COUNT(kill_type) AS times
+                            FROM kills
+                            INNER JOIN players p1 ON kills.killed_uuid = p1.uuid
+                            WHERE killed = 999
+                            AND (killed_by = 18 OR killed_by = 0)
+                            GROUP BY player_name, kill_type
+        ');
+        $id_stmt = $this->newDB->translatedPrepare('
+                            SELECT player_id
+                            FROM "prefix_players"
+                            WHERE "name" = %s
+        ');
+        $death_stmt = $this->newDB->translatedPrepare('
+                            INSERT INTO "prefix_total_death_players"
+                            ("player_id",
+                            "cause",
+                            "times")
+                            VALUES (%i, %s, %i)
+        ');
 
+        $i = $this->start;
+        foreach($result as $row) {
+            $player_id = $this->newDB->query($id_stmt, $row['player'])->fetchScalar();
+            $this->newDB->execute($death_stmt, $player_id, $this->mapDeathType($row['cause']), $row['times']);
+
+            $i++;
+            fSession::set('converter[last_start]', $i);
+        }
     }
 
     private function convertBlocks($destroyed) {
@@ -283,6 +311,54 @@ class Converter {
 
     private function convertItems($dropped) {
 
+    }
+
+    private function mapDeathType($oldId) {
+        switch($oldId) {
+            case 1:
+                return "BLOCK_EXPLOSION";
+            case 2:
+                return "DROWNING";
+            case 3:
+                return "ENTITY_EXPLOSION";
+            case 4:
+                return "FALL";
+            case 5:
+                return "FIRE";
+            case 6:
+                return "FIRE_TICK";
+            case 7:
+                return "VOID";
+            case 8:
+                return "SUFFOCATION";
+            case 9:
+                return "LIGHTNING";
+            case 10:
+                return "LAVA";
+            case 11:
+                return "CONTACT";
+            case 12:
+                return "ENTITY_ATTACK";
+            case 13:
+                return "CUSTOM";
+            case 14:
+                return "SUICIDE";
+            case 15:
+                return "STARVATION";
+            case 16:
+                return "POISON";
+            case 17:
+                return "MAGIC";
+            case 18:
+                return "MELTING";
+            case 19:
+                return "WITHER";
+            case 20:
+                return "FALLING_BLOCK";
+
+            default:
+                return "CUSTOM";
+        }
     }
 
     private function mapEntityIds($oldId) {
@@ -404,12 +480,14 @@ class Converter {
 
             // player death causes
             $count = $this->oldDB->query('
-                            SELECT COUNT(id) FROM kills
+                            SELECT id
+                            FROM kills
                             INNER JOIN players p1 ON kills.killed_uuid = p1.uuid
                             WHERE killed = 999
                             AND (killed_by = 18 OR killed_by = 0)
+                            GROUP BY player_name, kill_type
                             ')
-                ->fetchScalar();
+                ->countReturnedRows();
             fSession::set('converterStats[total_deaths]', $count);
 
             // total blocks destroyed/placed
