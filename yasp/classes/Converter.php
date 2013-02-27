@@ -42,21 +42,13 @@ class Converter {
                 $this->convertDeaths();
                 $cur = $this->oldStats['total_deaths'];
                 break;
-            case 'blocks_placed':
-                $this->convertBlocks(false);
-                $cur = $this->oldStats['total_blocks_placed'];
+            case 'blocks':
+                $this->convertBlocks();
+                $cur = $this->oldStats['total_blocks'];
                 break;
-            case 'items_dropped':
-                $this->convertItems(true);
-                $cur = $this->oldStats['total_items_dropped'];
-                break;
-            case 'blocks_destroyed':
-                $this->convertBlocks(true);
-                $cur = $this->oldStats['total_blocks_destroyed'];
-                break;
-            case 'items_picked':
-                $this->convertItems(false);
-                $cur = $this->oldStats['total_items_picked'];
+            case 'items':
+                $this->convertItems();
+                $cur = $this->oldStats['total_items'];
                 break;
         }
 
@@ -305,11 +297,11 @@ class Converter {
         }
     }
 
-    private function convertBlocks($destroyed) {
+    private function convertBlocks() {
 
     }
 
-    private function convertItems($dropped) {
+    private function convertItems() {
 
     }
 
@@ -490,25 +482,25 @@ class Converter {
                 ->countReturnedRows();
             fSession::set('converterStats[total_deaths]', $count);
 
-            // total blocks destroyed/placed
+            // total blocks
             $count = $this->oldDB->query('
-                            SELECT SUM(num_placed) AS placed, SUM(num_destroyed) AS destroyed
+                            SELECT block_id
                             FROM blocks
                             INNER JOIN players p1 ON blocks.uuid = p1.uuid
+                            GROUP BY player_name, block_id
                             ')
-                ->fetchRow();
-            fSession::set('converterStats[total_blocks_destroyed]', $count['destroyed']);
-            fSession::set('converterStats[total_blocks_placed]', $count['placed']);
+                ->countReturnedRows();
+            fSession::set('converterStats[total_blocks]', $count);
 
-            // total items dropped/picked
+            // total items
             $count = $this->oldDB->query('
-                            SELECT SUM(num_pickedup) AS picked, SUM(num_dropped) AS dropped
+                            SELECT item
                             FROM pickup_drop
                             INNER JOIN players p1 ON pickup_drop.uuid = p1.uuid
+                            GROUP BY player_name, item
                             ')
-                ->fetchRow();
-            fSession::set('converterStats[total_items_dropped]', $count['dropped']);
-            fSession::set('converterStats[total_items_picked]', $count['picked']);
+                ->countReturnedRows();
+            fSession::set('converterStats[total_items]', $count);
         }
         $this->oldStats = fSession::get('converterStats');
 
