@@ -8,6 +8,6 @@
     </div>
     <a href="?step=converter"
        class="btn btn-primary">Stop</a>
-    <a href="?step=converter"
+    <a href="<?php echo $this->get('next_step') ?>"
        class="btn btn-primary <?php echo ($this->get('next_step') != '' ? '' : 'disabled') ?>">Next Step</a>
 </fieldset>

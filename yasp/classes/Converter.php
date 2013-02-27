@@ -10,6 +10,7 @@ class Converter {
 
 
     function __construct(fDatabase $oldDB, fDatabase $newDB, $start = 0, $itemsPerRun = 100) {
+        // TODO: reset db before performing update...
         $this->oldDB = $oldDB;
         $this->newDB = $newDB;
 
@@ -187,7 +188,7 @@ class Converter {
         $pve_stmt = $this->newDB->translatedPrepare('
                             INSERT INTO "prefix_total_pve_kills"
                             ("material_id",
-                            "creature_id",
+                            "entity_id",
                             "player_id",
                             "creature_killed")
                             VALUES (%i, %i, %i, %i)
@@ -198,7 +199,7 @@ class Converter {
             try {
                 $player_id = $this->newDB->query($id_stmt, $row['killer']);
                 $this->newDB->execute($pve_stmt, $row['material'],
-                                      $row['creature'],
+                                      $this->mapEntityIds($row['creature']),
                                       $player_id->fetchScalar(),
                                       $row['times']);
 
@@ -237,7 +238,7 @@ class Converter {
         $evp_stmt_new = $this->newDB->translatedPrepare('
                                 INSERT INTO "prefix_total_pve_kills"
                                 ("material_id",
-                                "creature_id",
+                                "entity_id",
                                 "player_id",
                                 "player_killed")
                                 VALUES (%i, %i, %i, %i)
@@ -246,18 +247,20 @@ class Converter {
                                 UPDATE "prefix_total_pve_kills" SET
                                 "player_killed" = %i
                                 WHERE "player_id" = %i
-                                AND "creature_id" = %i
+                                AND "entity_id" = %i
                                 AND "material_id" = %i
          ');
         $i = $this->start;
         foreach($result as $row) {
             try {
                 $player_id = $this->newDB->query($id_stmt, $row['victim']);
-                $count = $this->newDB->query($evp_stmt_update, $row['times'], $player_id, $row['creature'],
+                $count = $this->newDB->query($evp_stmt_update, $row['times'], $player_id,
+                                             $this->mapEntityIds($row['creature']),
                                              $row['material'])->countAffectedRows();
 
                 if($count <= 0) {
-                    $this->newDB->execute($evp_stmt_new, $row['material'], $row['creature'], $player_id->fetchScalar(),
+                    $this->newDB->execute($evp_stmt_new, $row['material'], $this->mapEntityIds($row['creature']),
+                                          $player_id->fetchScalar(),
                                           $row['times']);
                 }
 
@@ -280,6 +283,73 @@ class Converter {
 
     private function convertItems($dropped) {
 
+    }
+
+    private function mapEntityIds($oldId) {
+        switch($oldId) {
+            case 1:
+                return 93;
+            case 2:
+                return 92;
+            case 3:
+                return 50;
+            case 4:
+                return 50;
+            case 5:
+                return 56;
+            case 60:
+                return 53;
+            case 7:
+                return 49;
+            case 8:
+                return 90;
+            case 9:
+                return 57;
+            case 10:
+                return 91;
+            case 11:
+                return 51;
+            case 12:
+                return 55;
+            case 13:
+                return 52;
+            case 14:
+                return 94;
+            case 15:
+                return 95;
+            case 16:
+                return 95;
+            case 17:
+                return 51;
+            case 18:
+                return 21;
+            case 19:
+                return 54;
+            case 20:
+                return 61;
+            case 21:
+                return 59;
+            case 22:
+                return 63;
+            case 23:
+                return 58;
+            case 24:
+                return 62;
+            case 25:
+                return 96;
+            case 26:
+                return 60;
+            case 27:
+                return 97;
+            case 28:
+                return 120;
+            case 29:
+                return 98;
+            case 30:
+                return 99;
+            default:
+                return 1;
+        }
     }
 
     public function getOldStats() {
