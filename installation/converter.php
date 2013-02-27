@@ -56,6 +56,10 @@ if(fRequest::isPost() && fRequest::get('converter_submit')) {
                                 $tpl->get('user'),
                                 $tpl->get('pw'),
                                 $tpl->get('host'));
+
+            $db->connect();
+            $db->close();
+
             fSession::set('convertDB', array(
                                             'database' => $tpl->get('database'),
                                             'user'     => $tpl->get('user'),
@@ -64,8 +68,7 @@ if(fRequest::isPost() && fRequest::get('converter_submit')) {
                                        )
             );
 
-            $db->connect();
-            $db->close();
+
             $tpl->set('state', 2);
         } catch(fValidationException $e) {
             fMessaging::create('validation', 'install/converter', $e->getMessage());
