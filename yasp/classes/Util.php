@@ -39,7 +39,7 @@ class Util {
             return false;
 
         $db = fORMDatabase::retrieve();
-        $res = $db->translatedQuery('SELECT "value" FROM %r WHERE "key" = %s', 'settings', $option);
+        $res = $db->translatedQuery('SELECT `value` FROM %r WHERE `key` = %s', 'settings', $option);
         try {
             return $res->fetchScalar();
         } catch(fNoRowsException $e) {
@@ -104,13 +104,15 @@ class Util {
      * @return void
      */
     public static function addPrefix($db, &$sql, &$values) {
+        // TODO: detect prefix_ or prefix
         // if prefix is included skip this statement
         if(strpos($sql, DB_PREFIX) !== false)
             return;
         if(strpos($sql, '%r')) {
             if(strpos($values[0], DB_PREFIX) !== false)
                 return;
-            $values[0] = DB_PREFIX . $values[0];
+
+            $values[0] = DB_PREFIX . '_' . $values[0];
         }
         if(preg_match("/^UPDATE `?prefix_\S+`?\s+SET/is", $sql))
             $sql = preg_replace("/^UPDATE `?prefix_(\S+?)`?([\s\.,]|$)/i", "UPDATE `" . DB_PREFIX . "_\\1`\\2", $sql);

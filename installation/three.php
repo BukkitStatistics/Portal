@@ -21,10 +21,6 @@ if(fRequest::isPost() && fRequest::get('general_submit')) {
             ->overrideFieldName('adminpw', 'Admin Password')
             ->validate();
 
-
-        // writing general settings
-        $db = fORMDatabase::retrieve();
-
         Util::setOption('adminpw', $tpl->get('adminpw'));
         Util::setOption('portal_title', $tpl->get('title'));
 

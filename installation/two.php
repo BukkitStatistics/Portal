@@ -36,8 +36,10 @@ if(fRequest::isPost() && fRequest::get('db_submit')) {
                             fRequest::encode('pw'),
                             fRequest::encode('host'));
         $db->connect();
-        // TODO: make sure that this table is an YASP table.. e.g. dbversion written by the plugin?
-        $db->translatedQuery('SELECT * FROM "' . $tpl->get('prefix') . '_settings"');
+        $version = $db->translatedQuery(
+            'SELECT `value` FROM "' . $tpl->get('prefix') . '_settings" WHERE `key` = %s', 'version')->fetchScalar();
+        if($version <= 0)
+            throw new fSQLException();
         $db->close();
     } catch(fValidationException $e) {
         fMessaging::create('validation', 'install/two', $e->getMessage());
