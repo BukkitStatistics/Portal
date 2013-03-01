@@ -147,8 +147,6 @@ class Converter {
                 // if material/player/creature id does not exsist
             } catch(fNoRowsException $e) {
                 //skip -> player does not exist!
-                $i++;
-                fSession::set('converter[last_start]', $i);
             }
             $i++;
             fSession::set('converter[last_start]', $i);
