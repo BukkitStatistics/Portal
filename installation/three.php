@@ -25,8 +25,8 @@ if(fRequest::isPost() && fRequest::get('general_submit')) {
         // writing general settings
         $db = fORMDatabase::retrieve();
 
-        Util::setOption('main.adminpw', $tpl->get('adminpw'));
-        Util::setOption('main.title', $tpl->get('title'));
+        Util::setOption('adminpw', $tpl->get('adminpw'));
+        Util::setOption('portal_title', $tpl->get('title'));
 
     } catch(fValidationException $e) {
         fMessaging::create('validation', 'install/three', $e->getMessage());

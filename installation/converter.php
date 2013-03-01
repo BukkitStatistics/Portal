@@ -91,6 +91,8 @@ if($tpl->get('state') == 2) {
                         fSession::get('convertDB[pw]'),
                         fSession::get('convertDB[host]'));
 
+    // TODO: reset db before performing update...
+
     $conv = new Converter($db, fORMDatabase::retrieve());
     $values = $conv->getOldStats();
 

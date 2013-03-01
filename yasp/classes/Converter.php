@@ -9,8 +9,7 @@ class Converter {
     private $newDB;
 
 
-    function __construct(fDatabase $oldDB, fDatabase $newDB, $start = 0, $itemsPerRun = 100) {
-        // TODO: reset db before performing update...
+    function __construct(fDatabase $oldDB, fDatabase $newDB, $start = 0, $itemsPerRun = 200) {
         $this->oldDB = $oldDB;
         $this->newDB = $newDB;
 
@@ -144,12 +143,15 @@ class Converter {
                                       $player_id,
                                       $victim_id,
                                       $row['times']);
-
-                $i++;
-                fSession::set('converter[last_start]', $i);
             } catch(fSQLException $e) {
                 // if material/player/creature id does not exsist
+            } catch(fNoRowsException $e) {
+                //skip -> player does not exist!
+                $i++;
+                fSession::set('converter[last_start]', $i);
             }
+            $i++;
+            fSession::set('converter[last_start]', $i);
         }
 
     }
@@ -194,12 +196,13 @@ class Converter {
                                       $this->mapEntityIds($row['creature']),
                                       $player_id,
                                       $row['times']);
-
-                $i++;
-                fSession::set('converter[last_start]', $i);
             } catch(fSQLException $e) {
                 // if material/player/creature id does not exsist
+            } catch(fNoRowsException $e) {
+                //skip -> player does not exist!
             }
+            $i++;
+            fSession::set('converter[last_start]', $i);
         }
 
     }
@@ -255,13 +258,13 @@ class Converter {
                                           $player_id,
                                           $row['times']);
                 }
-
-
-                $i++;
-                fSession::set('converter[last_start]', $i);
             } catch(fSQLException $e) {
                 // if material/player/creature id does not exsist
+            } catch(fNoRowsException $e) {
+                //skip -> player does not exist!
             }
+            $i++;
+            fSession::set('converter[last_start]', $i);
         }
     }
 
@@ -273,7 +276,8 @@ class Converter {
                             WHERE killed = 999
                             AND (killed_by = 18 OR killed_by = 0)
                             GROUP BY player_name, kill_type
-        ');
+                            LIMIT %i,%i
+                            ', $this->start, $this->itemsPerRun);
         $id_stmt = $this->newDB->translatedPrepare('
                             SELECT player_id
                             FROM "prefix_players"
@@ -289,9 +293,12 @@ class Converter {
 
         $i = $this->start;
         foreach($result as $row) {
-            $player_id = $this->newDB->query($id_stmt, $row['player'])->fetchScalar();
-            $this->newDB->execute($death_stmt, $player_id, $this->mapDeathType($row['cause']), $row['times']);
-
+            try {
+                $player_id = $this->newDB->query($id_stmt, $row['player'])->fetchScalar();
+                $this->newDB->execute($death_stmt, $player_id, $this->mapDeathType($row['cause']), $row['times']);
+            } catch(fNoRowsException $e) {
+                //skip -> player does not exist!
+            }
             $i++;
             fSession::set('converter[last_start]', $i);
         }
@@ -303,7 +310,8 @@ class Converter {
                             FROM blocks
                             INNER JOIN players p1 ON blocks.uuid = p1.uuid
                             GROUP BY player_name, block_id
-        ');
+                            LIMIT %i,%i
+                            ', $this->start, $this->itemsPerRun);
         $id_stmt = $this->newDB->translatedPrepare('
                             SELECT player_id
                             FROM "prefix_players"
@@ -320,9 +328,13 @@ class Converter {
 
         $i = $this->start;
         foreach($result as $row) {
-            $player_id = $this->newDB->query($id_stmt, $row['player'])->fetchScalar();
-            $this->newDB->query($block_stmt, $player_id, $row['block_id'], $row['num_destroyed'], $row['num_placed']);
-
+            try {
+                $player_id = $this->newDB->query($id_stmt, $row['player'])->fetchScalar();
+                $this->newDB->query($block_stmt, $player_id, $row['block_id'], $row['num_destroyed'],
+                                    $row['num_placed']);
+            } catch(fNoRowsException $e) {
+                //skip -> player does not exist!
+            }
             $i++;
             fSession::set('converter[last_start]', $i);
         }
@@ -334,7 +346,8 @@ class Converter {
                             FROM pickup_drop
                             INNER JOIN players p1 ON pickup_drop . uuid = p1 . uuid
                             GROUP BY player_name, item
-        ');
+                            LIMIT %i,%i
+                            ', $this->start, $this->itemsPerRun);
         $id_stmt = $this->newDB->translatedPrepare('
                             SELECT player_id
                             FROM "prefix_players"
@@ -351,11 +364,26 @@ class Converter {
 
         $i = $this->start;
         foreach($result as $row) {
-            $player_id = $this->newDB->query($id_stmt, $row['player'])->fetchScalar();
-            $this->newDB->query($item_stmt, $player_id, $row['item'], $row['num_dropped'], $row['num_picked_up']);
-
+            try {
+                $player_id = $this->newDB->query($id_stmt, $row['player'])->fetchScalar();
+                $this->newDB->query($item_stmt, $player_id, $this->mapMaterialIds($row['item']), $row['num_dropped'],
+                                    $row['num_pickedup']);
+            } catch(fNoRowsException $e) {
+                //skip -> player does not exist!
+            }
             $i++;
             fSession::set('converter[last_start]', $i);
+        }
+    }
+
+    private function mapMaterialIds($oldId) {
+        switch($oldId) {
+            case 9000:
+                return -1;
+            case 9001:
+                return 0;
+            default:
+                return $oldId;
         }
     }
 
@@ -481,7 +509,7 @@ class Converter {
                             SELECT COUNT(DISTINCT player_name)
                             FROM players
                             WHERE last_logout IS NOT NULL
-                                                     AND last_login IS NOT NULL
+                                AND last_login IS NOT NULL
                             ')
                 ->fetchScalar();
             fSession::set('converterStats[player_count]', $count);
