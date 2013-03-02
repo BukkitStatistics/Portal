@@ -94,23 +94,22 @@ if($tpl->get('state') == 2) {
     $newDB = fORMDatabase::retrieve();
     try {
         $newDB->translatedQuery('
-            DELETE FROM yasp_players WHERE 1;
-            ALTER TABLE yasp_players AUTO_INCREMENT=1;
-            ALTER TABLE yasp_total_death_players AUTO_INCREMENT=1;
-            ALTER TABLE yasp_total_blocks AUTO_INCREMENT=1;
-            ALTER TABLE yasp_total_items AUTO_INCREMENT=1;
-            ALTER TABLE yasp_total_pvp_kills AUTO_INCREMENT=1;
-            ALTER TABLE yasp_total_pve_kills AUTO_INCREMENT=1;
-
-            ALTER TABLE yasp_detailed_log_players AUTO_INCREMENT=1;
-            ALTER TABLE yasp_detailed_death_players AUTO_INCREMENT=1;
-            ALTER TABLE yasp_detailed_destroyed_blocks AUTO_INCREMENT=1;
-            ALTER TABLE yasp_detailed_dropped_items AUTO_INCREMENT=1;
-            ALTER TABLE yasp_detailed_pickedup_items AUTO_INCREMENT=1;
-            ALTER TABLE yasp_detailed_placed_blocks AUTO_INCREMENT=1;
-            ALTER TABLE yasp_detailed_pve_kills AUTO_INCREMENT=1;
-            ALTER TABLE yasp_detailed_pvp_kills AUTO_INCREMENT=1;
-            ALTER TABLE yasp_detailed_used_items AUTO_INCREMENT=1;
+            DELETE FROM prefix_players WHERE 1;
+            ALTER TABLE prefix_players AUTO_INCREMENT=1;
+            ALTER TABLE prefix_total_death_players AUTO_INCREMENT=1;
+            ALTER TABLE prefix_total_blocks AUTO_INCREMENT=1;
+            ALTER TABLE prefix_total_items AUTO_INCREMENT=1;
+            ALTER TABLE prefix_total_pvp_kills AUTO_INCREMENT=1;
+            ALTER TABLE prefix_total_pve_kills AUTO_INCREMENT=1;
+            ALTER TABLE prefix_detailed_log_players AUTO_INCREMENT=1;
+            ALTER TABLE prefix_detailed_death_players AUTO_INCREMENT=1;
+            ALTER TABLE prefix_detailed_destroyed_blocks AUTO_INCREMENT=1;
+            ALTER TABLE prefix_detailed_dropped_items AUTO_INCREMENT=1;
+            ALTER TABLE prefix_detailed_pickedup_items AUTO_INCREMENT=1;
+            ALTER TABLE prefix_detailed_placed_blocks AUTO_INCREMENT=1;
+            ALTER TABLE prefix_detailed_pve_kills AUTO_INCREMENT=1;
+            ALTER TABLE prefix_detailed_pvp_kills AUTO_INCREMENT=1;
+            ALTER TABLE prefix_detailed_used_items AUTO_INCREMENT=1;
         ');
 
         $conv = new Converter($db, $newDB);
