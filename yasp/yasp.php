@@ -1,7 +1,7 @@
 <?php
 /*
- * Handles the conflict between xdbeug
- * and the flourish debugsystem
+ * Handles the conflict between xdebug
+ * and the flourish debug system
  */
 if(!extension_loaded('xdebug')) {
     fCore::enableErrorHandling('html');
@@ -12,7 +12,7 @@ fSession::setLength('1day');
 fSession::open();
 
 /*
- * Initializes the language modul
+ * Initializes the language module
  */
 $lang = new Language(fSession::get('lang', 'en')); // @TODO cookies?
 $lang->load('errors');
@@ -21,19 +21,7 @@ fText::registerComposeCallback('pre', array($lang, 'translate'));
 /*
  * Initializes ORM
  */
-if(defined('DB_DATABASE') && DB_DATABASE != '') {
-   try {
-       $db = new fDatabase('mysql', DB_DATABASE, DB_USER, DB_PW, DB_HOST);
-
-       fORMDatabase::attach($db);
-       fORM::mapClassToTable('Player', DB_PREFIX . '_players');
-
-       // adds prefix
-       $db->registerHookCallback('unmodified', Util::addPrefix);
-   } catch(fException $e) {
-       fMessaging::create('errors', '{default}', $e->getMessage());
-   }
-}
+include __INC__ . 'config/orm.php';
 
 /**
  * Automatically includes classes
@@ -57,9 +45,6 @@ function __autoload($class_name) {
     try {
         fORM::defineActiveRecordClass($class_name);
     } catch(fProgrammerException $e) {
-        fMessaging::create('errors', '{default}', $e->getMessage());
-        return;
+        fMessaging::create('errors', '{default}', 'The class ' . $class_name . ' could not be loaded');
     }
-
-    throw new fProgrammerException('The class ' . $class_name . ' could not be loaded');
 }
