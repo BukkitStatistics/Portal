@@ -57,7 +57,9 @@ function __autoload($class_name) {
     try {
         fORM::defineActiveRecordClass($class_name);
     } catch(fProgrammerException $e) {
-        throw new fProgrammerException('The class ' . $class_name . ' could not be loaded');
+        fMessaging::create('errors', '{default}', $e->getMessage());
+        return;
     }
 
+    throw new fProgrammerException('The class ' . $class_name . ' could not be loaded');
 }

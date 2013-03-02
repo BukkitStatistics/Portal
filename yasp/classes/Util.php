@@ -110,10 +110,10 @@ class Util {
             $prefix = DB_PREFIX;
 
         // if prefix is included skip this statement
-        if(strpos($sql, DB_PREFIX) !== false)
+        if(strpos($sql, $prefix) !== false)
             return;
         if(strpos($sql, '%r')) {
-            if(strpos($values[0], DB_PREFIX) !== false)
+            if(strpos($values[0], $prefix) !== false)
                 return;
 
             $values[0] = $prefix . $values[0];

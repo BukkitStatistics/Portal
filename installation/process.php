@@ -31,11 +31,18 @@ else {
     if($perc >= 100) {
         $convert = fSession::get('convert');
 
-        $tpl->set('next_step', '?step=process&type=' . key($convert) . '');
-
-        $convert = array_splice($convert, 1);
-        fSession::set('convert', $convert);
-        fSession::set('converter[last_start]', 0);
+        if(key($convert) != '') {
+            $tpl->set('next_step', '?step=process&type=' . key($convert) . '');
+            $convert = array_splice($convert, 1);
+            fSession::set('convert', $convert);
+            fSession::set('converter[last_start]', 0);
+        }
+        else {
+            $tpl->set('next_step', '?step=five');
+            fSession::set('maxStep', 7);
+            fSession::delete('convert');
+            fSession::delete('converter');
+        }
     }
     else {
         $this->add('header_additions',
