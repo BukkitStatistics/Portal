@@ -9,5 +9,5 @@
     <a href="?step=converter"
        class="btn btn-primary">Stop</a>
     <a href="<?php echo $this->get('next_step') ?>"
-       class="btn btn-primary <?php echo ($this->get('next_step') != '' ? '' : 'disabled') ?>">Next Step</a>
+       class="btn <?php echo ($this->get('next_step') != '' ? 'btn-success' : 'disabled') ?>">Next Step</a>
 </fieldset>

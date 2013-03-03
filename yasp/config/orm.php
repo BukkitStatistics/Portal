@@ -1,7 +1,7 @@
 <?php
 if(defined('DB_DATABASE') && DB_DATABASE != '') {
     try {
-        if(strpos(DB_PREFIX, '_') === false)
+        if(strrpos(DB_PREFIX, '_') === false)
             $prefix = DB_PREFIX . '_';
         else
             $prefix = DB_PREFIX;
@@ -11,8 +11,10 @@ if(defined('DB_DATABASE') && DB_DATABASE != '') {
         fORMDatabase::attach($db);
         $schema = new fSchema($db);
         foreach($schema->getTables() as $table) {
-            $class_name = fGrammar::singularize(fGrammar::camelize(str_replace($prefix, '', $table), true));
-            fORM::mapClassToTable($class_name, $table);
+            if(strpos($table, $prefix)) {
+                $class_name = fGrammar::singularize(fGrammar::camelize(str_replace($prefix, '', $table), true));
+                fORM::mapClassToTable($class_name, $table);
+            }
         }
 
         // adds prefix

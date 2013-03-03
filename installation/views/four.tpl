@@ -1,12 +1,9 @@
 <?php
+// TODO: sum up previous settings
 Util::showMessages('*', 'install/four', 'alert alert-error');
 ?>
 
-<?php echo $this->get('db_file'); ?>
-<br>
 <?php echo $this->get('cache_dir'); ?>
-<br>
-<?php echo $this->get('database'); ?>
 
 <fieldset>
     <legend>Old Data</legend>

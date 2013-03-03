@@ -104,7 +104,7 @@ class Util {
      * @return void
      */
     public static function addPrefix($db, &$sql, &$values) {
-        if(strpos(DB_PREFIX, '_') === false)
+        if(strrpos(DB_PREFIX, '_') === false)
             $prefix = DB_PREFIX . '_';
         else
             $prefix = DB_PREFIX;
