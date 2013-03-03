@@ -1,66 +1,80 @@
+<h2><i class="icon-laptop icon-large" style="color: #ccc"></i> Converter settings</h2>
 <?php
 Util::showMessages('*', 'install/converter', 'alert alert-error');
 ?>
-<fieldset id="converter">
-    <?php if($this->get('state') == null): ?>
-    <p>Enter the data where your old data is stored!</p>
-    <label for="host"><?php echo fText::compose('server'); ?>:</label>
-    <input type="text" name="host" id="host" placeholder="localhost" value="<?php echo $this->get('host') ?>"><br>
-    <label for="user"><?php echo fText::compose('user'); ?>:</label>
-    <input type="text" name="user" id="user" placeholder="user" value="<?php echo $this->get('user') ?>"><br>
-    <label for="pw"><?php echo fText::compose('pw'); ?>:</label>
-    <input type="text" name="pw" id="pw" placeholder="password" value="<?php echo $this->get('pw') ?>"><br>
-    <label for="database"><?php echo fText::compose('db'); ?>:</label>
-    <input type="text" name="database" id="database" placeholder="statistican"
-           value="<?php echo $this->get('database') ?>"><br>
-    <?php endif; ?>
 
-    <?php if($this->get('state') == 2): ?>
-    <p>This could last a long time! Go and drink an coffee or finish your dinner ;)</p>
-    <p>Do not reload the page even if your browser will take ages for the next page...</p>
+<?php if($this->get('state') == null): ?>
+<p>Enter the login credentials for your old statistician database.</p>
 
-    <p>Choose which entries do you want to convert:</p>
-    <table>
-        <tr>
-            <td>Players:</td>
-            <td><label for="convert_players"><?php echo $this->get('player_count'); ?></label></td>
-            <td><input type="checkbox" name="convert[players]" id="convert_players" disabled="disabled"
-                       checked="checked">
-            </td>
-            <!-- TODO add options to choose which players should be converted e.g. number of logins, last login time -->
-        </tr>
-        <tr>
-            <td>Player vs. Player Kills:</td>
-            <td><label for="convert_pvp"><?php echo $this->get('total_pvp_kills'); ?></label></td>
-            <td><input type="checkbox" name="convert[pvp]" id="convert_pvp" checked="checked"></td>
-        </tr>
-        <tr>
-            <td>Player vs. Environment Kills:</td>
-            <td><label for="convert_pve"><?php echo $this->get('total_pve_kills'); ?></label></td>
-            <td><input type="checkbox" name="convert[pve]" id="convert_pve" checked="checked"></td>
-        </tr>
-        <tr>
-            <td>Environment vs. Player Kills:</td>
-            <td><label for="convert_evp"><?php echo $this->get('total_evp_kills'); ?></label></td>
-            <td><input type="checkbox" name="convert[evp]" id="convert_evp" checked="checked"></td>
-        </tr>
-        <tr>
-            <td>Death Causes:</td>
-            <td><label for="convert_deaths"><?php echo $this->get('total_deaths'); ?></label></td>
-            <td><input type="checkbox" name="convert[deaths]" id="convert_deaths" checked="checked"></td>
-        </tr>
-        <tr>
-            <td>Total Blocks:</td>
-            <td><label for="convert_blocks"><?php echo $this->get('total_blocks'); ?></label></td>
-            <td><input type="checkbox" name="convert[blocks]" id="convert_blocks" checked="checked"></td>
-        </tr>
-        <tr>
-            <td>Total Items:</td>
-            <td><label for="convert_items"><?php echo $this->get('total_items'); ?></label></td>
-            <td><input type="checkbox" name="convert[items]" id="convert_items" checked="checked"></td>
-        </tr>
-    </table>
-    <input type="hidden" name="start" value="true">
-    <?php endif; ?>
-    <input type="submit" name="converter_submit" value="<?php echo fText::compose('Next'); ?>">
-</fieldset>
+<div class="control-group">
+    <label for="host" class="control-label"><?php echo fText::compose('server'); ?>:</label>
+
+    <div class="controls">
+        <input type="text" name="host" id="host" placeholder="localhost" value="<?php echo $this->get('host') ?>">
+    </div>
+</div>
+<div class="control-group">
+    <label for="user" class="control-label"><?php echo fText::compose('user'); ?>:</label>
+
+    <div class="controls">
+        <input type="text" name="user" id="user" placeholder="user" value="<?php echo $this->get('user') ?>">
+    </div>
+</div>
+<div class="control-group">
+    <label for="pw" class="control-label"><?php echo fText::compose('pw'); ?>:</label>
+
+    <div class="controls">
+        <input type="text" name="pw" id="pw" placeholder="password" value="<?php echo $this->get('pw') ?>">
+    </div>
+</div>
+<div class="control-group">
+    <label for="database" class="control-label"><?php echo fText::compose('db'); ?>:</label>
+
+    <div class="controls">
+        <input type="text" name="database" id="database" placeholder="statistican"
+               value="<?php echo $this->get('database') ?>">
+    </div>
+</div>
+<?php endif; ?>
+
+<?php if($this->get('state') == 2): ?>
+<p> This could last a long time! Go and drink an coffee or finish your dinner...</p>
+<p>Choose which entries do you want to convert:</p>
+
+<div class="row">
+    <div class="span6 offset2">
+
+        <label class="checkbox">
+            <input type="checkbox" name="convert[players]" id="convert_players" disabled="disabled"
+                   checked="checked">
+            Players (<?php echo $this->get('player_count'); ?>)
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" name="convert[pvp]" id="convert_pvp" checked="checked">
+            Player vs. Player Kills (<?php echo $this->get('total_pvp_kills'); ?>)
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" name="convert[evp]" id="convert_evp" checked="checked">
+            Environment vs. Player Kills (<?php echo $this->get('total_evp_kills'); ?>)
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" name="convert[deaths]" id="convert_deaths" checked="checked">
+            Death Causes (<?php echo $this->get('total_deaths'); ?>)
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" name="convert[blocks]" id="convert_blocks" checked="checked">
+            Total Blocks (<?php echo $this->get('total_blocks'); ?>)
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" name="convert[items]" id="convert_items" checked="checked">
+            Total Items (<?php echo $this->get('total_items'); ?>)
+        </label>
+    </div>
+</div>
+<input type="hidden" name="start" value="true">
+<?php endif; ?>
+<div class="form-actions">
+    <button type="submit" name="converter_submit" value="1"
+            class="btn btn-primary"><?php echo fText::compose('Next'); ?></button>
+</div>
+

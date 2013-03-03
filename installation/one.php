@@ -13,4 +13,5 @@ if(fRequest::isPost() && fRequest::get('lang_submit')) {
     fSession::set('maxStep', 2);
     fURL::redirect('?step=two');
 }
-else fSession::set('maxStep', 1);
+else
+    fSession::set('maxStep', 1);

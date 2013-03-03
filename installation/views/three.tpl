@@ -1,14 +1,25 @@
+<h2><i class="icon-cogs" style="color:#ccc;"></i> General Settings</h2>
+
 <?php
 Util::showMessages('*', 'install/three', 'alert alert-error');
 ?>
 
-<fieldset>
-    <legend>General Settings</legend>
-    <label for="adminpw"><?php echo fText::compose('Admin Password'); ?>:</label>
-    <input type="text" name="adminpw" id="adminpw" value="<?php echo $this->get('adminpw'); ?>"><br>
-    <label for="title"><?php echo fText::compose('Title'); ?>:</label>
-    <input type="text" name="title" id="title" value="<?php echo $this->get('title'); ?>"><br>
-    Some more settings ;)
-</fieldset>
-<br>
-<input type="submit" name="general_submit" value="<?php echo fText::compose('submit'); ?>" class="btn">
+<p>Some more settings ;)</p>
+
+<div class="control-group">
+    <label class="control-label" for="adminpw"><?php echo fText::compose('Admin Password'); ?>:</label>
+
+    <div class="controls">
+        <input type="text" name="adminpw" id="adminpw" value="<?php echo $this->get('adminpw'); ?>">
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label" for="title"><?php echo fText::compose('Title'); ?>:</label>
+
+    <div class="controls">
+        <input type="text" name="title" id="title" value="<?php echo $this->get('title'); ?>">
+    </div>
+</div>
+<div class="form-actions">
+    <button type="submit" name="general_submit" value="1" class="btn btn-primary"><?php echo fText::compose('submit'); ?></button>
+</div>

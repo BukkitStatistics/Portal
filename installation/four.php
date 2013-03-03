@@ -22,10 +22,11 @@ if(!fMessaging::check('*') && fRequest::isPost() && fRequest::get('convert_submi
     // checking cache dir
     try {
         $cache_dir = new fDirectory(__ROOT__ . 'cache');
+        $tpl->set('cache_dir', $cache_dir->getPath(true));
         if($cache_dir->isWritable())
-            $tpl->set('cache_dir', fText::compose('%s is writable', $cache_dir->getPath(true)));
-        else $tpl->set('cache_dir', fText::compose('%s is not writable. Check the permissions',
-                                                   $cache_dir->getPath(true)));
+            $tpl->set('cache_write', true);
+        else
+            $tpl->set('cache_write', false);
     } catch(fValidationException $e) {
         fMessaging::create('errors', $e->getMessage());
     }

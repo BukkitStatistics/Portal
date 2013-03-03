@@ -10,8 +10,8 @@ if(is_null($type)) {
     $tpl->set('next_step', '');
     $tpl->set('current', fText::compose('players'));
     // add <noscript></noscript> for later ajax use :)
-    $this->add('header_additions',
-               '<meta http-equiv="REFRESH" content="0;url=?step=process&type=players">');
+    //$this->add('header_additions',
+      //         '<meta http-equiv="REFRESH" content="0;url=?step=process&type=players">');
 }
 else {
     $perc = 0;

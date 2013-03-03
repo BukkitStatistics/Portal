@@ -9,8 +9,8 @@ if(fRequest::isPost() && fRequest::get('finish')) {
         $installDir = new fDirectory('installation');
         $installFile = new fFile('install.php');
 
-        //$installDir->delete();
-        //$installFile->delete();
+        $installDir->delete();
+        $installFile->delete();
 
         fURL::redirect('.');
     } catch(fValidationException $e) {

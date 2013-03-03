@@ -4,12 +4,14 @@ if(fSession::get('maxStep') < 3)
 
 $tpl = Util::newTpl($this, 'three');
 
+$tpl->set('adminpw', fRequest::encode('adminpw'));
+$tpl->set('title', fSession::get('settings[title]'));
+
 if(fRequest::isPost() && fRequest::get('general_submit')) {
     /*
     * store input values
     */
-    $tpl->set('adminpw', fRequest::encode('adminpw'));
-    $tpl->set('title', fRequest::encode('title'));
+    fSession::set('settings[title]', fRequest::encode('title'));
 
     try {
         $vali = new fValidation();
