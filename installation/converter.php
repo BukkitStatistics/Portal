@@ -1,5 +1,4 @@
 <?php
-// TODO: add server stats
 if(fSession::get('maxStep') < 5)
     fURL::redirect('?step=four');
 

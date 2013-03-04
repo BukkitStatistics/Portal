@@ -35,6 +35,7 @@ class Util {
      * @return string|boolean
      */
     public static function getOption($option) {
+        // TODO cache options
         if($option == '')
             return false;
 

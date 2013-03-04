@@ -38,6 +38,11 @@ Util::showMessages();
             ?>
         </form>
     </fieldset>
+    <div class="row">
+        <div class="pull-right">
+            <small>Execution time: <?php echo round(microtime() - STARTTIME, 8); ?> seconds.</small>
+        </div>
+    </div>
 </div>
 </body>
 </html>

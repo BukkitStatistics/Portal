@@ -11,6 +11,8 @@ if(!extension_loaded('xdebug')) {
 fSession::setLength('1day');
 fSession::open();
 
+define('STARTTIME', microtime());
+
 /*
  * Initializes the language module
  */
