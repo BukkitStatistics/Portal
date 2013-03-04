@@ -11,7 +11,7 @@ if(defined('DB_DATABASE') && DB_DATABASE != '') {
         if($remapped == NULL) {
             $s = '';
             foreach($schema->getTables() as $table) {
-                if(stripos($table, DB_PREFIX) !== false) {
+                if(DB_PREFIX != '' && stripos($table, DB_PREFIX) !== false) {
                     $class_name = fGrammar::singularize(fGrammar::camelize(str_replace(DB_PREFIX . '_', '', $table),
                                                                            true));
                     $s .= 'fORM::mapClassToTable("' . $class_name . '", "' . $table . '");';

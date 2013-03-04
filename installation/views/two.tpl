@@ -13,28 +13,28 @@ Util::showMessages('*', 'install/two', 'alert alert-error');
     <label class="control-label" for="host"><?php echo fText::compose('server'); ?>:</label>
 
     <div class="controls">
-        <input type="text" name="host" id="host" placeholder="localhost" value="<?php echo $this->get('host') ?>">
+        <input type="text" name="host" id="host" value="<?php echo $this->get('host', 'localhost') ?>">
     </div>
 </div>
 <div class="control-group">
     <label class="control-label" for="user"><?php echo fText::compose('user'); ?>:</label>
 
     <div class="controls">
-        <input type="text" name="user" id="user" placeholder="user" value="<?php echo $this->get('user') ?>">
+        <input type="text" name="user" id="user" value="<?php echo $this->get('user') ?>">
     </div>
 </div>
 <div class="control-group">
     <label class="control-label" for="pw"><?php echo fText::compose('pw'); ?>:</label>
 
     <div class="controls">
-        <input type="text" name="pw" id="pw" placeholder="password" value="<?php echo $this->get('pw') ?>">
+        <input type="password" name="pw" id="pw" autocomplete="off" value="<?php echo $this->get('pw') ?>">
     </div>
 </div>
 <div class="control-group">
     <label class="control-label" for="database"><?php echo fText::compose('db'); ?>:</label>
 
     <div class="controls">
-        <input type="text" name="database" id="database" placeholder="yasp"
+        <input type="text" name="database" id="database"
                value="<?php echo $this->get('database') ?>">
     </div>
 </div>
@@ -46,7 +46,7 @@ Util::showMessages('*', 'install/two', 'alert alert-error');
             <input type="text" name="prefix" id="prefix" value="<?php echo $this->get('prefix', 'yasp') ?>">
             <span class="add-on">_</span>
         </div>
-        <span class="help-inline">Tables will look like this: prefix_tablename</span>
+        <span class="help-inline">Optional. Tables will look like this: prefix_tablename</span>
     </div>
 </div>
 <div class="form-actions">

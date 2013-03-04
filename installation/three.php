@@ -174,4 +174,4 @@ $tpl->set('timezone_active', fSession::get('settings[timezone]', 'Europe/London'
 $tpl->set('time_format', fSession::get('settings[time_format]', 24));
 $tpl->set('welcome_msg', fSession::get('settings[welcome_msg]', 1));
 $tpl->set('welcome_first_msg', fSession::get('settings[welcome_first_msg]', 1));
-$tpl->set('ping', fSession::get('settings[ping]', 1));
+$tpl->set('ping', fSession::get('settings[ping]', 120));

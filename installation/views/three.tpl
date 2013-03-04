@@ -25,7 +25,7 @@ Util::showMessages('*', 'install/three', 'alert alert-error');
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label" for="title"><?php echo fText::compose('Title'); ?>:</label>
+            <label class="control-label" for="title"><?php echo fText::compose('Page Title'); ?>:</label>
 
             <div class="controls">
                 <input type="text" name="title" id="title" value="<?php echo $this->get('title'); ?>">

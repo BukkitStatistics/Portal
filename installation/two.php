@@ -28,10 +28,15 @@ if(fRequest::isPost() && fRequest::get('db_submit')) {
                                  ))
             ->addCallbackRule('host', Util::checkHost, 'Please enter an valid host.');
 
-        $vali->setMessageOrder('host', 'user', 'pw', 'database', 'prefix')
+        $vali->setMessageOrder('host', 'user', 'pw', 'database')
             ->validate();
 
         $tpl->set('prefix', preg_replace('/_$/', '', $tpl->get('prefix')));
+
+        if($tpl->get('prefix') != '')
+            $prefix = $tpl->get('prefix') . '_';
+        else
+            $prefix ='';
 
         $db = new fDatabase('mysql', fRequest::encode('database'),
                             fRequest::encode('user'),
@@ -39,7 +44,7 @@ if(fRequest::isPost() && fRequest::get('db_submit')) {
                             fRequest::encode('host'));
         $db->connect();
         $version = $db->translatedQuery(
-            'SELECT `value` FROM "' . $tpl->get('prefix') . '_settings" WHERE `key` = %s', 'version')->fetchScalar();
+            'SELECT `value` FROM "' . $prefix . 'settings" WHERE `key` = %s', 'version')->fetchScalar();
         if($version <= 0)
             throw new fSQLException();
         $db->close();
