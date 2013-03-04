@@ -9,9 +9,8 @@ if(is_null($type)) {
     $tpl->set('perc', 0);
     $tpl->set('next_step', '');
     $tpl->set('current', fText::compose('players'));
-    // add <noscript></noscript> for later ajax use :)
     $this->add('header_additions',
-               '<meta http-equiv="REFRESH" content="0;url=?step=process&type=players">');
+               '<noscript><meta http-equiv="REFRESH" content="0;url=?step=process&type=players"></noscript>');
 }
 else {
     $perc = 0;
@@ -30,9 +29,11 @@ else {
 
     if($perc >= 100) {
         $convert = fSession::get('convert');
+        $next = '';
 
         if(key($convert) != '') {
-            $tpl->set('next_step', '?step=process&type=' . key($convert) . '');
+            $next = key($convert);
+            $tpl->set('next_step', '?step=process&type=' . $next);
             $convert = array_splice($convert, 1);
             fSession::set('convert', $convert);
             fSession::set('converter[last_start]', 0);
@@ -43,8 +44,28 @@ else {
             fSession::delete('convert');
             fSession::delete('converter');
         }
+
+        if(fRequest::isAjax()) {
+            fJSON::sendHeader();
+            echo fJSON::encode(array(
+                               'perc' => $perc,
+                               'next' => $next
+                          ));
+
+            die();
+        }
     }
     else {
+
+        if(fRequest::isAjax()) {
+            fJSON::sendHeader();
+            echo fJSON::encode(array(
+                               'perc' => $perc,
+                               'next' => $type
+                          ));
+            die();
+        }
+
         $this->add('header_additions',
                    '<meta http-equiv="REFRESH" content="1;url=?step=process&type=' . $type . '">');
     }

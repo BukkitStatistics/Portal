@@ -135,7 +135,7 @@ class Util {
                                 $sql);
         else $sql = preg_replace("/prefix_(\S+?)([\s\.,]|$)/", $prefix . "\\1\\2", $sql);
 
-        fCore::debug('addPrefix: ' . $sql, true);
+        fCore::debug('addPrefix: ' . $sql);
     }
 
 

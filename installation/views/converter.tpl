@@ -13,29 +13,28 @@ Util::showMessages('*', 'install/converter', 'alert alert-error');
     <label for="host" class="control-label"><?php echo fText::compose('server'); ?>:</label>
 
     <div class="controls">
-        <input type="text" name="host" id="host" placeholder="localhost" value="<?php echo $this->get('host') ?>">
+        <input type="text" name="host" id="host" value="<?php echo $this->get('host', 'localhost') ?>">
     </div>
 </div>
 <div class="control-group">
     <label for="user" class="control-label"><?php echo fText::compose('user'); ?>:</label>
 
     <div class="controls">
-        <input type="text" name="user" id="user" placeholder="user" value="<?php echo $this->get('user') ?>">
+        <input type="text" name="user" id="user" value="<?php echo $this->get('user') ?>">
     </div>
 </div>
 <div class="control-group">
     <label for="pw" class="control-label"><?php echo fText::compose('pw'); ?>:</label>
 
     <div class="controls">
-        <input type="text" name="pw" id="pw" placeholder="password" value="<?php echo $this->get('pw') ?>">
+        <input type="password" name="pw" id="pw" autocomplete="off" value="<?php echo $this->get('pw') ?>">
     </div>
 </div>
 <div class="control-group">
     <label for="database" class="control-label"><?php echo fText::compose('db'); ?>:</label>
 
     <div class="controls">
-        <input type="text" name="database" id="database" placeholder="statistican"
-               value="<?php echo $this->get('database') ?>">
+        <input type="text" name="database" id="database" value="<?php echo $this->get('database') ?>">
     </div>
 </div>
 <?php endif; ?>

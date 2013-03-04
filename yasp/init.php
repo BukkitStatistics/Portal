@@ -1,5 +1,5 @@
 <?php
-define('STARTTIME', microtime());
+define('STARTTIME', (float)array_sum(explode(' ', microtime())));
 /*
  * Define some global constants for better path handling.
  */

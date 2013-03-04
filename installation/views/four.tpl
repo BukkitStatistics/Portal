@@ -23,7 +23,7 @@
         </p>
         <p><i class="icon-ok icon-large" style="color: #46a546"></i> Database</p>
         <p>
-            <strong>Title:</strong> <?php echo $this->get('title') ?>
+            <strong>Page Title:</strong> <?php echo $this->get('title') ?>
         </p>
         <p>
             <strong>Admin Email:</strong> <?php echo $this->get('adminemail') ?>
