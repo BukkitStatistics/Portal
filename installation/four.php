@@ -7,6 +7,14 @@ $tpl = Util::newTpl($this, 'four');
 fSession::delete('converterStats');
 fSession::delete('convertDB');
 
+$tpl->set('title', fSession::get('settings[title]'));
+$tpl->set('adminemail', fSession::get('settings[adminemail]'));
+$tpl->set('timezone', fSession::get('settings[timezone]'));
+$tpl->set('time_format', fText::compose('%s hour format', fSession::get('settings[time_format]')));
+$tpl->set('ping', fSession::get('settings[ping]'));
+$tpl->set('welcome_msg', fSession::get('settings[welcome_msg]'));
+$tpl->set('welcome_first_msg', fSession::get('settings[welcome_first_msg]'));
+
 if(!fMessaging::check('*') && fRequest::isPost() && fRequest::get('convert_submit')) {
 
     if(fRequest::get('old_data', 'boolean')) {

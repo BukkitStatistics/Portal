@@ -18,6 +18,8 @@ $lang = new Language(fSession::get('lang', 'en')); // @TODO cookies?
 $lang->load('errors');
 fText::registerComposeCallback('pre', array($lang, 'translate'));
 
+fTimestamp::setDefaultTimezone(Util::getOption('timezone', fTimestamp::getDefaultTimezone()));
+
 /*
  * Initializes ORM
  */
@@ -41,10 +43,5 @@ function __autoload($class_name) {
     if(file_exists($file))
         return require $file;
 
-    fORM::defineActiveRecordClass($class_name);
-    try {
-
-    } catch(fProgrammerException $e) {
-        fMessaging::create('errors', '{default}', 'The class ' . $class_name . ' could not be loaded');
-    }
+    throw new fEnvironmentException('The class ' . $class_name . ' could not be loaded');
 }

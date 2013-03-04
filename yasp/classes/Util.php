@@ -27,26 +27,32 @@ class Util {
 
 
     /**
-     * Returns the requested option out of the settings table
-     * If the option does not exist it returns false
+     * Returns the requested option out of the settings table.
+     * If the option does not exist it returns false or the default value.
      *
      * @param string $option
      *
      * @return string|boolean
      */
-    public static function getOption($option) {
+    public static function getOption($option, $default = null) {
         // TODO cache options
         if($option == '')
             return false;
 
-        $db = fORMDatabase::retrieve();
-        $res = $db->translatedQuery('SELECT `value` FROM %r WHERE `key` = %s', 'settings', $option);
         try {
+            $db = fORMDatabase::retrieve();
+            $res = $db->translatedQuery('SELECT `value` FROM %r WHERE `key` = %s', 'settings', $option);
             return $res->fetchScalar();
         } catch(fNoRowsException $e) {
             fCore::debug($e);
-            return false;
+        } catch(fProgrammerException $e) {
+            fCore::debug($e);
         }
+
+        if($default == null)
+            return false;
+
+        return $default;
     }
 
     /**
@@ -61,8 +67,8 @@ class Util {
         if($option == '')
             return false;
 
-        $db = fORMDatabase::retrieve();
         try {
+            $db = fORMDatabase::retrieve();
             $updated = $db->translatedQuery('UPDATE %r SET "value"=%s WHERE "key"=%s', 'settings', $value,
                                             $option)->countAffectedRows();
             if($updated <= 0)
@@ -71,8 +77,11 @@ class Util {
             return true;
         } catch(fSQLException $e) {
             fCore::debug($e);
-            return false;
+        } catch(fProgrammerException $e) {
+            fCore::debug($e);
         }
+
+        return false;
     }
 
     /**
