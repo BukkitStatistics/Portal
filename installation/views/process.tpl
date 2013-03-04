@@ -61,7 +61,7 @@ $this->get('next_step') == '' ? 'style="display: none;"' : '' ?>>
                             setTimeout(
                                     function () {
                                         process(data['next'])
-                                    }, 800);
+                                    }, 300);
                         }
                     }
             );
