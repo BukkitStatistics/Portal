@@ -31,6 +31,8 @@ if(fRequest::isPost() && fRequest::get('db_submit')) {
         $vali->setMessageOrder('host', 'user', 'pw', 'database', 'prefix')
             ->validate();
 
+        $tpl->set('prefix', preg_replace('/_$/', '', $tpl->get('prefix')));
+
         $db = new fDatabase('mysql', fRequest::encode('database'),
                             fRequest::encode('user'),
                             fRequest::encode('pw'),
@@ -62,15 +64,12 @@ if(fRequest::isPost() && fRequest::get('db_submit')) {
         $db_file = new fFile(__INC__ . 'config/db.php');
 
         if(!fMessaging::check('validation', 'install/two')) {
-            if($tpl->get('type') != 'sqlite')
-                $host = $tpl->get('host');
-            else $host = $tpl->get('dbfile');
-
             $contents =
                 "<?php \n/*\n* Do not modify this unless you know what you are doing!\n*/\n\ndefine('DB_HOST', '" .
-                $host . "');\ndefine('DB_USER', '" . $tpl->get('user') . "');\ndefine('DB_PW', '" . $tpl->get('pw') .
+                $tpl->get('host') . "');\ndefine('DB_USER', '" . $tpl->get('user') . "');\ndefine('DB_PW', '" . $tpl->get('pw') .
                 "');\ndefine('DB_DATABASE', '" . $tpl->get('database') . "');\ndefine('DB_PREFIX', '" .
                 $tpl->get('prefix') . "');\n";
+
             $db_file->write($contents);
         }
     } catch(fValidationException $e) {

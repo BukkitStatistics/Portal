@@ -25,6 +25,7 @@ if(fRequest::isPost() && fRequest::get('general_submit')) {
 
         Util::setOption('adminpw', $tpl->get('adminpw'));
         Util::setOption('portal_title', $tpl->get('title'));
+        Util::setOption('language', fSession::get('lang'));
 
     } catch(fValidationException $e) {
         fMessaging::create('validation', 'install/three', $e->getMessage());

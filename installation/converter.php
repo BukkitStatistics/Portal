@@ -1,5 +1,6 @@
 <?php
 // TODO: make sure there are no players currently playing -> shut the server off! :D
+// TODO: add server stats
 if(fSession::get('maxStep') < 5)
     fURL::redirect('?step=four');
 
