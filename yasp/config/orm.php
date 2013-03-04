@@ -7,7 +7,7 @@ if(defined('DB_DATABASE') && DB_DATABASE != '') {
         $schema = new fSchema($db);
         foreach($schema->getTables() as $table) {
             if(strpos($table, DB_PREFIX)) {
-                $class_name = fGrammar::singularize(fGrammar::camelize(str_replace(DB_PREFIX, '', $table), true));
+                $class_name = fGrammar::singularize(fGrammar::camelize(str_replace(DB_PREFIX . '_', '', $table), true));
                 fORM::mapClassToTable($class_name, $table);
             }
         }

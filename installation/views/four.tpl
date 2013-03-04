@@ -4,7 +4,7 @@
 Util::showMessages('*', 'install/four', 'alert alert-error');
 ?>
 
-<p>Review your settings you have made. If something is wrong, please go back and change it.</p>
+<p>Review the settings you have made. If something is wrong, please go back and change it.</p>
 
 <div class="row">
     <div class="span4">
@@ -15,6 +15,7 @@ Util::showMessages('*', 'install/four', 'alert alert-error');
             <i class="icon-remove icon-2x" style="color: #e9322d"></i> <?php echo $this->get('cache_dir'); ?>
             <?php endif; ?>
         </p>
+        <p><i class="icon-ok icon-2x" style="color: #46a546"></i> Database</p>
         <p>
             <strong>Title:</strong> <?php echo fSession::get('settings[title]'); ?>
         </p>
@@ -25,7 +26,7 @@ Util::showMessages('*', 'install/four', 'alert alert-error');
 <h2><i class="icon-book icon-large" style="color: #ccc;"></i> Old Data</h2>
 <p>Do you have an older installation of statistician and want to transfer the statistics?</p>
 <div class="alert alert-warning">
-    <span class="label label-warning">Warning</span> Every new data will be deleted!
+    <span class="label">Warning</span> Every new data will be deleted!
 </div>
 
 <label class="radio">
@@ -34,8 +35,7 @@ Util::showMessages('*', 'install/four', 'alert alert-error');
     Yes. Please transfer my old data!
 </label>
 <label class="radio">
-    <input type="radio" name="old_data" id="old_data_n" value="no"
-            checked="checked">
+    <input type="radio" name="old_data" id="old_data_n" value="no">
     No. I want to start with fresh statistics!
 </label>
 <div class="form-actions">

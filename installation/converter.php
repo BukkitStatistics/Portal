@@ -1,5 +1,4 @@
 <?php
-// TODO: make sure there are no players currently playing -> shut the server off! :D
 // TODO: add server stats
 if(fSession::get('maxStep') < 5)
     fURL::redirect('?step=four');
@@ -20,6 +19,8 @@ if(fRequest::isPost() && fRequest::get('converter_submit')) {
             if($value == 'on')
                 $new_conv[$key] = true;
         }
+
+        $new_conv['server'] = true;
 
         fSession::set('convert', $new_conv);
         fSession::set('maxStep', 6);
@@ -59,6 +60,7 @@ if(fRequest::isPost() && fRequest::get('converter_submit')) {
                                 $tpl->get('host'));
 
             $db->connect();
+            $db->query('SELECT dbVersion FROM config');
             $db->close();
 
             fSession::set('convertDB', array(
@@ -81,6 +83,8 @@ if(fRequest::isPost() && fRequest::get('converter_submit')) {
             fMessaging::create('notfound', 'install/converter', $e->getMessage());
         } catch(fEnvironmentException $e) {
             fMessaging::create('env', 'install/converter', $e->getMessage());
+        } catch(fSQLException $e) {
+            fMessaging::create('db', 'install/converter', $e->getMessage());
         }
     }
 

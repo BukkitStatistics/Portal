@@ -5,6 +5,9 @@ Util::showMessages('*', 'install/converter', 'alert alert-error');
 
 <?php if($this->get('state') == null): ?>
 <p>Enter the login credentials for your old statistician database.</p>
+<div class="alert">
+    <div class="label label-warning">Warning</div> Be sure you have shut off the minecraft server before you continue!
+</div>
 
 <div class="control-group">
     <label for="host" class="control-label"><?php echo fText::compose('server'); ?>:</label>

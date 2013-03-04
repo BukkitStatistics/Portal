@@ -55,15 +55,16 @@ class Util {
      * @param $value
      *
      * @return bool
-     */public static function setOption($option, $value) {
+     */
+    public static function setOption($option, $value) {
         if($option == '')
             return false;
 
         $db = fORMDatabase::retrieve();
-        try{
-            if(Util::getOption($option))
-                $db->translatedExecute('UPDATE %r SET "value"=%s WHERE "key"=%s', 'settings', $value, $option);
-            else
+        try {
+            $updated = $db->translatedQuery('UPDATE %r SET "value"=%s WHERE "key"=%s', 'settings', $value,
+                                            $option)->countAffectedRows();
+            if($updated <= 0)
                 $db->translatedExecute('INSERT INTO %r ("key", "value") VALUES (%s, %s)', 'settings', $option, $value);
 
             return true;
@@ -111,14 +112,14 @@ class Util {
             if(strpos($values[0], DB_PREFIX) !== false)
                 return;
 
-            $values[0] = DB_PREFIX . $values[0];
+            $values[0] = DB_PREFIX . '_' . $values[0];
         }
         if(preg_match("/^UPDATE `?prefix_\S+`?\s+SET/is", $sql))
-            $sql = preg_replace("/^UPDATE `?prefix_(\S+?)`?([\s\.,]|$)/i", "UPDATE `" . DB_PREFIX . "\\1`\\2", $sql);
+            $sql = preg_replace("/^UPDATE `?prefix_(\S+?)`?([\s\.,]|$)/i", "UPDATE `" . DB_PREFIX . "_\\1`\\2", $sql);
         elseif(preg_match("/^INSERT INTO `?prefix_\S+`?\s+[a-z0-9\s,\)\(]*?VALUES/is", $sql))
-            $sql = preg_replace("/^INSERT INTO `?prefix_(\S+?)`?([\s\.,]|$)/i", "INSERT INTO `" . DB_PREFIX . "\\1`\\2",
+            $sql = preg_replace("/^INSERT INTO `?prefix_(\S+?)`?([\s\.,]|$)/i", "INSERT INTO `" . DB_PREFIX . "_\\1`\\2",
                                 $sql);
-        else $sql = preg_replace("/prefix_(\S+?)([\s\.,]|$)/", DB_PREFIX . "\\1\\2", $sql);
+        else $sql = preg_replace("/prefix_(\S+?)([\s\.,]|$)/", DB_PREFIX . "_\\1\\2", $sql);
 
         fCore::debug('addPrefix: ' . $sql);
     }
@@ -130,6 +131,7 @@ class Util {
      *
      * @param fTemplating $context
      * @param String      $tplName
+     *
      * @return fTemplating
      */
     public static function newTpl(fTemplating $context, $tplName) {

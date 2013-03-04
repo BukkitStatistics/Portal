@@ -49,6 +49,10 @@ class Converter {
                 $this->convertItems();
                 $cur = $this->oldStats['total_items'];
                 break;
+            case 'server':
+                $this->convertServerStats();
+                $cur = 4;
+                break;
         }
 
         return round(fSession::get('converter[last_start]') / $cur * 100, 0);
@@ -371,6 +375,42 @@ class Converter {
             }
             $i++;
             fSession::set('converter[last_start]', $i);
+        }
+    }
+
+    private function convertServerStats() {
+        $row = $this->oldDB->query('
+                            SELECT * FROM server;
+        ')->fetchRow();
+
+        foreach($row as $key => $value) {
+            try {
+                switch($key) {
+                    case 'startup_time':
+                        $name = 'last_startup';
+                        break;
+                    case 'shutdown_time':
+                        $name = 'last_shutdown';
+                        break;
+                    case 'max_players_ever_online':
+                        $name = 'max_players_online';
+                        break;
+                    case 'max_players_ever_online_time':
+                        $name = 'max_players_online_time';
+                        break;
+                    default:
+                        $name = '';
+                }
+                if($name != '') {
+                    $this->newDB->execute('
+                            UPDATE "prefix_server_statistics" SET
+                            "value" = %i
+                            WHERE "key" = %s
+                            ', $value, $name);
+                }
+            } catch(fSQLException $e) {
+            }
+            fSession::set('converter[last_start]', 4);
         }
     }
 

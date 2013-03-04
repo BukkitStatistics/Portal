@@ -4,13 +4,13 @@
 Util::showMessages('*', 'install/three', 'alert alert-error');
 ?>
 
-<p>Some more settings ;)</p>
+<p>Set up your general settings. They can be changed later via the admin panel.</p>
 
 <div class="control-group">
     <label class="control-label" for="adminpw"><?php echo fText::compose('Admin Password'); ?>:</label>
 
     <div class="controls">
-        <input type="text" name="adminpw" id="adminpw" value="<?php echo $this->get('adminpw'); ?>">
+        <input type="password" name="adminpw" id="adminpw" value="<?php echo $this->get('adminpw'); ?>">
     </div>
 </div>
 <div class="control-group">

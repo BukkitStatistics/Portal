@@ -8,10 +8,10 @@
         </div>
     <?php else: ?>
         <div class="alert alert-success">
-            <strong>Step finished.</strong> Now press the <em>Next Step</em> Button.
+            <strong>Step (<?php echo $this->get('current'); ?>) finished.</strong> Now press the <em>Next Step</em> Button.
         </div>
     <?php endif; ?>
-<div class="progress progress-striped active">
+<div class="progress <?php echo ($this->get('next_step') != '' ? 'progress-success' : 'progress-striped active') ?>">
     <div class="bar" style="width: <?php echo $this->get('perc'); ?>%;"></div>
 </div>
 <a href="?step=converter"
