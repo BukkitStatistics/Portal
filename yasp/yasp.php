@@ -11,8 +11,6 @@ if(!extension_loaded('xdebug')) {
 fSession::setLength('1day');
 fSession::open();
 
-define('STARTTIME', microtime());
-
 /*
  * Initializes the language module
  */
@@ -43,9 +41,9 @@ function __autoload($class_name) {
     if(file_exists($file))
         return require $file;
 
-
+    fORM::defineActiveRecordClass($class_name);
     try {
-        fORM::defineActiveRecordClass($class_name);
+
     } catch(fProgrammerException $e) {
         fMessaging::create('errors', '{default}', 'The class ' . $class_name . ' could not be loaded');
     }
