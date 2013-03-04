@@ -9,7 +9,7 @@ class Converter {
     private $newDB;
 
 
-    function __construct(fDatabase $oldDB, fDatabase $newDB, $start = 0, $itemsPerRun = 200) {
+    function __construct(fDatabase $oldDB, fDatabase $newDB, $start = 0, $itemsPerRun = 120) {
         $this->oldDB = $oldDB;
         $this->newDB = $newDB;
 
