@@ -20,6 +20,11 @@ $cache = new fCache('directory', __ROOT__ . 'cache');
 $cacheSingle = new fCache('file', __ROOT__ . 'cache/singlecache');
 
 /*
+ * Initializes ORM
+ */
+include __INC__ . 'config/orm.php';
+
+/*
  * Initializes the language module
  */
 $lang = new Language(fSession::get('lang', 'en')); // @TODO cookies?
@@ -27,11 +32,6 @@ $lang->load('errors');
 fText::registerComposeCallback('pre', array($lang, 'translate'));
 
 fTimestamp::setDefaultTimezone(Util::getOption('timezone', fTimestamp::getDefaultTimezone()));
-
-/*
- * Initializes ORM
- */
-include __INC__ . 'config/orm.php';
 
 /**
  * Automatically includes classes
