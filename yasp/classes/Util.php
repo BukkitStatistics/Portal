@@ -74,6 +74,7 @@ class Util {
      * @return bool
      */
     public static function setOption($option, $value) {
+        global $cacheSingle;
         if($option == '')
             return false;
 
@@ -83,6 +84,9 @@ class Util {
                                             $option)->countAffectedRows();
             if($updated <= 0)
                 $db->translatedExecute('INSERT INTO %r ("key", "value") VALUES (%s, %s)', 'settings', $option, $value);
+
+            if(!DEVELOPMENT)
+                $cacheSingle->delete($option);
 
             return true;
         } catch(fSQLException $e) {
