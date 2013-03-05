@@ -2,12 +2,12 @@
 if(defined('DB_DATABASE') && DB_DATABASE != '') {
     try {
         $db = new fDatabase('mysql', DB_DATABASE, DB_USER, DB_PW, DB_HOST);
-        $remapCache = new fCache('file', __ROOT__ . 'cache/orm_remap');
 
         fORMDatabase::attach($db);
+        fORM::enableSchemaCaching($cacheSingle);
 
         $schema = new fSchema($db);
-        $remapped = $remapCache->get('remapped');
+        $remapped = $cache->get('remapped');
         if($remapped == NULL) {
             $s = '';
             foreach($schema->getTables() as $table) {
@@ -17,7 +17,7 @@ if(defined('DB_DATABASE') && DB_DATABASE != '') {
                     $s .= 'fORM::mapClassToTable("' . $class_name . '", "' . $table . '");';
                 }
             }
-            $remapCache->set('remapped', $s);
+            $cache->set('remapped', $s);
         }
         else
             eval($remapped);

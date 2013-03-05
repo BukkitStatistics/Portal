@@ -1,4 +1,4 @@
 <?php
-$tpl = new fTemplating($this->get('tplRoot'), 'overview.tpl');
-$this->set('tpl', $tpl);
+$tpl = Util::newTpl($design, 'overview');
+
 

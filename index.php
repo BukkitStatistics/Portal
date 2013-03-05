@@ -13,9 +13,19 @@ $content .= '.php';
 if(!file_exists(__ROOT__ . 'contents/default/' . $content))
     $content = 'error.php';
 
-$design = new fTemplating(__ROOT__ . 'contents/default', './templates/default/index.php');
+Util::getCachedContent($content, $cache);
+
+fBuffer::startCapture();
+$design = new fTemplating(__ROOT__ . 'contents/default', __ROOT__ . 'templates/default/index.php');
 $design->set('title', Util::getOption('portal_title'));
 $design->set('tplRoot', __ROOT__ . 'templates/default/views');
 $design->add('header_additions', '');
-$design->inject($content);
+include __ROOT__ . 'contents /default/' . $content;
 $design->place();
+$capture = fBuffer::stopCapture();
+
+echo $capture;
+
+// TODO: set cache time in settings
+if(DEVELOPMENT)
+    $cache->set($content . '.cache', $capture, 60);

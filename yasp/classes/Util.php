@@ -7,6 +7,7 @@ class Util {
     const showMessages = "Util::showMessages";
     const addPrefix = "Util::addPrefix";
     const newTpl = "Util::newTpl";
+    const getCachedContent = "Util::getCachedContent";
 
     /**
      * Checks if the given host is an valid IP or localhost
@@ -35,14 +36,23 @@ class Util {
      * @return string|boolean
      */
     public static function getOption($option, $default = null) {
-        // TODO cache options
+        global $cacheSingle;
         if($option == '')
             return false;
 
+        if(!DEVELOPMENT && $cacheSingle->get($option) != null)
+            return $cacheSingle->get($option);
+
         try {
             $db = fORMDatabase::retrieve();
-            $res = $db->translatedQuery('SELECT `value` FROM %r WHERE `key` = %s', 'settings', $option);
-            return $res->fetchScalar();
+            $res = $db->translatedQuery('SELECT `value` FROM %r WHERE `key` = %s', 'settings', $option)->fetchScalar();
+
+            // temporary: cache for 10 minutes
+            // TODO: set cache time in settings + reset on db change!
+            if(!DEVELOPMENT)
+                $cacheSingle->set($option, $res, 60 * 10);
+
+            return $res;
         } catch(fNoRowsException $e) {
             fCore::debug($e);
         } catch(fProgrammerException $e) {
@@ -153,6 +163,41 @@ class Util {
         $context->set('tpl', $tpl);
 
         return $tpl;
+    }
+
+
+    /**
+     * Gets the cached file.<br>
+     * If one exists it searches for an small tag with id="execution_time" <br>
+     * and replaces the contents with 'cached (filetime)'.
+     *
+     * @param        $content
+     * @param fCache $cache
+     */
+    public static function getCachedContent($content) {
+        global $cache;
+        if(DEVELOPMENT)
+            return;
+
+        $cached = $cache->get($content . '.cache');
+
+        if($cached == null)
+            return;
+
+        $file = new fFile(__ROOT__ . 'cache/' . $content . '.cache');
+        $time = $file->getMTime();
+        $text = '
+            <div class="row-fluid">
+                <div class="span4 offset8">
+                    <small>
+                        <em>cached (' . $time->format('H:i:s') . ')</em>
+                    </small>
+                </div>
+             </div>
+         </bod>';
+        $cached = preg_replace('%<small.*id="execution_time">(.*)</small>%si', $text, $cached);
+
+        die($cached);
     }
 
 }
