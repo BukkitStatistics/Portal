@@ -3,12 +3,25 @@ if(fSession::get('maxStep') < 6)
     fURL::redirect('?step=converter');
 
 $tpl = Util::newTpl($this, 'process');
+$tpl->set('title', $this->get('title'));
+
+function sendJson($perc, $next, $tpl) {
+    fJSON::sendHeader();
+    echo fJSON::encode(array(
+                            'perc'    => $perc,
+                            'next'    => $next,
+                            'current' => $tpl->get('current')
+                       ));
+
+    die();
+}
 
 $type = fRequest::get('type');
 if(is_null($type)) {
     $tpl->set('perc', 0);
     $tpl->set('next_step', '');
     $tpl->set('current', fText::compose('players'));
+    $tpl->set('type', 'players');
     $this->add('header_additions',
                '<noscript><meta http-equiv="REFRESH" content="0;url=?step=process&type=players"></noscript>');
 }
@@ -25,6 +38,7 @@ else {
     $perc = $conv->process($type);
     $tpl->set('perc', $perc);
     $tpl->set('next_step', '');
+    $tpl->set('type', $type);
     $tpl->set('current', fText::compose($type));
 
     if($perc >= 100) {
@@ -34,6 +48,7 @@ else {
         if(key($convert) != '') {
             $next = key($convert);
             $tpl->set('next_step', '?step=process&type=' . $next);
+            $tpl->set('current', fText::compose($next));
             $convert = array_splice($convert, 1);
             fSession::set('convert', $convert);
             fSession::set('converter[last_start]', 0);
@@ -46,27 +61,16 @@ else {
         }
 
         if(fRequest::isAjax()) {
-            fJSON::sendHeader();
-            echo fJSON::encode(array(
-                               'perc' => $perc,
-                               'next' => $next
-                          ));
-
-            die();
+            sendJson($perc, $next, $tpl);
         }
     }
     else {
 
         if(fRequest::isAjax()) {
-            fJSON::sendHeader();
-            echo fJSON::encode(array(
-                               'perc' => $perc,
-                               'next' => $type
-                          ));
-            die();
+            sendJson($perc, $type, $tpl);
         }
 
         $this->add('header_additions',
-                   '<meta http-equiv="REFRESH" content="1;url=?step=process&type=' . $type . '">');
+                   '<noscript><meta http-equiv="REFRESH" content="1;url=?step=process&type=' . $type . '"></noscript>');
     }
 }

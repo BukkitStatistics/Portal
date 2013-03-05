@@ -1,7 +1,8 @@
 <h2><i class="icon-magic icon-large" style="color: #ccc"></i> Processing</h2>
 <p>Database converting is in progress! Please be patient.</p>
 
-<div id="convertingAlert" class="alert alert-info" <?php echo $this->get('next_step') != '' ? 'style="display: none;"' : '' ?>>
+<div id="convertingAlert" class="alert alert-info" <?php echo
+$this->get('next_step') != '' ? 'style="display: none;"' : '' ?>>
     <i class="icon-refresh icon-spin"></i>
     <strong>Converting</strong> <span class="current"><?php echo $this->get('current'); ?></span>
 </div>
@@ -50,7 +51,14 @@ $this->get('next_step') == '' ? 'style="display: none;"' : '' ?>>
                                         function () {
                                             progresswrap.addClass('progress-striped active').removeClass('progress-success');
                                             progressbar.css('width', '0%');
-                                            current.html(data['next']);
+                                            current.html(data['current']);
+                                            history.pushState(
+                                                    {
+                                                        pageTitle: '<?php echo $this->get('title'); ?> -' + data['current']
+                                                    },
+                                                    '',
+                                                    '?step=process&type=' + data['next']);
+                                            document.title = '<?php echo $this->get('title'); ?> -' + data['current'];
                                             process(data['next'])
                                         }, 1500);
                             }
@@ -66,7 +74,6 @@ $this->get('next_step') == '' ? 'style="display: none;"' : '' ?>>
                     }
             );
         }
-
-        process('players');
+        process('<?php echo $this->get('type'); ?>');
     });
 </script>
