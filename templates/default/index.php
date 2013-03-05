@@ -40,7 +40,9 @@ $this->place('tpl');
                         2</a> technology</p></div>
                 <div class="span4 offset2" style="text-align: right;"><p>Running database
                     version DEV</p>
-                    <small>Execution time: <?php echo round(microtime() - STARTTIME, 8); ?> seconds.</small>
+                    <small>Execution time: <?php echo round(
+                        (float)array_sum(explode(' ', microtime())) - STARTTIME, 4); ?> seconds.
+                    </small>
                 </div>
             </div>
         </div>
