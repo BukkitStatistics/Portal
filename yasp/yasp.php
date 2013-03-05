@@ -5,6 +5,7 @@
  */
 if(!extension_loaded('xdebug')) {
     if(DEVELOPMENT) {
+        // TODO: nice looking error page
         fCore::enableErrorHandling('html');
         fCore::enableExceptionHandling('html');
     }

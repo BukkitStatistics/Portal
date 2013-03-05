@@ -28,4 +28,4 @@ echo $capture;
 
 // TODO: set cache time in settings
 if(!DEVELOPMENT)
-    $cache->set($content . '.cache', $capture, 60);
+    $cache->set($content . '.cache', $capture, 120);
