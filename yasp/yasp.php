@@ -4,12 +4,20 @@
  * and the flourish debug system
  */
 if(!extension_loaded('xdebug')) {
-    fCore::enableErrorHandling('html');
-    fCore::enableExceptionHandling('html');
+    if(DEVELOPMENT) {
+        fCore::enableErrorHandling('html');
+        fCore::enableExceptionHandling('html');
+    }
 }
 
 fSession::setLength('1day');
 fSession::open();
+
+/*
+ * Initialize cache
+ */
+$cache = new fCache('directory', __ROOT__ . 'cache');
+$cacheSingle = new fCache('file', __ROOT__ . 'cache/singlecache');
 
 /*
  * Initializes the language module
