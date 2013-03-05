@@ -14,7 +14,7 @@ if(fRequest::isPost() && fRequest::get('finish')) {
 
         fURL::redirect('.');
     } catch(fValidationException $e) {
-        fMessaging::create('dir/file', 'install/five', $e->getMessage());
+        // already deleted
     } catch(fEnvironmentException $e) {
         fMessaging::create('delete', 'install/five', $e->getMessage());
     }
