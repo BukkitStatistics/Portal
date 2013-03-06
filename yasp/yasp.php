@@ -52,5 +52,9 @@ function __autoload($class_name) {
     if(file_exists($file))
         return require $file;
 
+    $file = __INC__ . 'classes/orm/' . $class_name . '.php';
+    if(file_exists($file))
+        return require $file;
+
     throw new fEnvironmentException('The class ' . $class_name . ' could not be loaded');
 }
