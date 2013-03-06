@@ -98,7 +98,43 @@
 
                     </div>
                 </div>
-                <div class="span4"></div>
+                <div class="span4">
+                    <div class="well custom-well fixed-height" style="position: relative; padding: 10px; margin: 0px;">
+
+                        <h3 style="text-align:center;">Player Statistics</h3>
+                        <dl class="dl-horizontal">
+                            <dt style="width: 80px !important;">
+                                <span class="badge badge-info"><i
+                                    class="icon-user"></i> <?php echo $this->get('players[online]'); ?>
+                                </span>
+                            </dt>
+                            <dd style="margin-left: 100px !important;">Currently online</dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt style="width: 80px !important;">
+                                <span class="badge badge-warning"><i
+                                    class="icon-star"></i> <?php echo $this->get('players[tracked]') ?>
+                                </span></dt>
+                            <dd style="margin-left: 100px !important;">Tracked players</dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt style="width: 80px !important;">
+                                <span class="badge badge-success"><i
+                                    class="icon-signal"></i> <?php echo $this->get('serverstats[max_players]') ?>
+                                </span>
+                            </dt>
+                            <dd style="margin-left: 100px !important;">Maximum players</dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt style="width: 80px !important;">
+                                <span class="badge badge-info"><i
+                                    class="icon-fire"></i> <?php echo $this->get('serverstats[total_logins]'); ?>
+                                </span>
+                            </dt>
+                            <dd style="margin-left: 100px !important;">Number of logins</dd>
+                        </dl>
+
+                    </div></div>
                 <div class="span4"></div>
             </div>
 
