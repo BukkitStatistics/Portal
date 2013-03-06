@@ -1,79 +1,91 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <?php
-    foreach($this->get('header_additions') as $row)
-        echo $row . "\n";
-    ?>
-    <title><?php echo $this->get('title'); ?></title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-
-    <script src="media/js/jquery-1.8.3.min.js" type="text/javascript"></script>
-    <script src="media/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="media/js/jquery.tablesorter.js" type="text/javascript"></script>
-    <script src="media/js/jquery.pajinate.js" type="text/javascript"></script>
-    <script src="media/js/initialize.js" type="text/javascript"></script>
-
-    <link href="media/css/bootstrap.min.css" rel="stylesheet">
-    <link href="media/css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="media/css/font-awesome.min.css" rel="stylesheet">
-    <link href="media/css/tablesorter.css" rel="stylesheet">
-    <link href="media/css/yasp.css" rel="stylesheet">
-
-    <!--[if lt IE 9]>
-    <script src="../media/js/html5.min.js"></script>
-    <![endif]-->
-</head>
-<body data-spy="scroll" data-target="#menubar">
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container force-center">
-            <a class="brand" href="../">
-                LOGOURL
-            </a>
-
-
-            <ul class="nav pull-right">
-                <li>
-                    <a> <?php if($this->get('online')) {
-                        echo "Server status: <span class='label label-success'>Online</span>";
-                    }
-                    else {
-                        echo "Server status: <span class='label label-important'>Offline</span>";
-                    } ?> </a>
-                </li>
-                <?php if($this->get('login') == "Guest") {
-                echo '<li><a href="?page=login">Log in</a></li>';
-            }
-            else {
-                ?>
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdwn"
-                       data-target="#"><?php echo $this->get('login'); ?><b class="caret"></b></a>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                        <li role="menuitem"><a href="contents/default/settings/"><i class="icon-wrench"></i>
-                            Settings</a></li>
-                        <li role="menuitem"><a href="contents/default/logout/"><i class="icon-globe"></i> Log out</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <?php } ?>
-            </ul>
-        </div>
-    </div>
-</div>
-
+<?php $this->inject('header.php'); ?>
 <div class="container">
     <div class="row">
-        <div class="span2">
-            <div class="nav sidebar-nav well" style="position: fixed;" id="menubar">
+        <div id="content" class="span10 pull-right">
+            <section id="dashboard">
+                <div class="row-fluid">
+                    <div class="span3">
+                        <div class="well" style="padding: 10px; margin: 0px; background: #FFE0C2;">
+                            <h1 style="text-align:center;"><i class="icon-group icon-large"></i></h1>
+
+                            <h3 style="text-align:center;">online</h3>
+                        </div>
+                    </div>
+
+
+                    <div class="span3">
+                        <div class="well" style="padding: 10px; margin: 0px; background: #FFE0C2;">
+                            <h1 style="text-align:center;"><i class="icon-pencil icon-large"></i></h1>
+
+                            <h3 style="text-align:center;">tracked</h3>
+                        </div>
+                    </div>
+
+
+                    <div class="span3">
+                        <div class="well" style="padding: 10px; margin: 0px; background: #FFE0C2;">
+                            <h1 style="text-align:center;"><i class="icon-remove-sign icon-large"></i></h1>
+
+                            <h3 style="text-align:center;">killed</h3>
+                        </div>
+                    </div>
+
+
+                    <div class="span3">
+                        <div class="well" style="padding: 10px; margin: 0px; background: #FFE0C2;">
+                            <h1 style="text-align:center;"><i class="icon-tint icon-large"></i></h1>
+
+                            <h3 style="text-align:center;">died</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-split"></div>
+                <h1><i class="icon-tasks icon-large"></i> Dashboard</h1>
+
+                <div class="row-fluid dashboard">
+                    <div class="span4"></div>
+                    <div class="span4"></div>
+                    <div class="span4"></div>
+                </div>
+
+                <div class="row-fluid dashboard">
+                    <div class="span4"></div>
+                    <div class="span8"></div>
+                </div>
+
+                <div class="row-fluid dashboard">
+                    <div class="span8"></div>
+                    <div class="span4"></div>
+                </div>
+
+            </section>
+            <section id="players">
+                <h1><i class="icon-group icon-large"></i> Player Information</h1>
+            </section>
+            <section id="world">
+                <div class="row-fluid">
+                    <div class="span6">
+                        <h1><i class="icon-picture icon-large"></i> Blocks</h1>
+                    </div>
+                    <div class="span6">
+                        <h1><i class="icon-legal icon-large"></i> Items</h1>
+                    </div>
+                </div>
+            </section>
+            <section id="deaths">
+                <div class="row-fluid">
+                    <div class="span8">
+                        <h1><i class="icon-tint icon-large"></i> Death Log</h1>
+                    </div>
+                    <div class="span4">
+                        <h1> Death Statistics</h1>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="span2 pull-left">
+            <div class="nav nav-sidebar well">
                 <ul class="nav nav-list">
                     <li><a href="#dashboard"><i class="icon-tasks"></i> Dashboard</a></li>
                     <li class="divider"></li>
@@ -84,37 +96,7 @@
             </div>
         </div>
     </div>
-<?php
-$this->place('tpl');
-?>
+    <?php $this->inject('footer.php'); ?>
 </div>
-<hr>
-
-<footer>
-    <div class="row-fluid">
-        <div class="span10 offset2">
-            <div class="row-fluid">
-                <div class="span2">
-                    <p>
-                        <a href="https://github.com/bitWolfy/YetAnotherStatisticsPlugin"><img
-                                src="media/img/plugin_logo_small.png" alt="YASP"/>
-                        </a>
-                    </p>
-                </div>
-                <div class="span4">
-                    <p style="position:relative; top:5px;">&copy; <?php echo date('Y'); ?> Yet Another Statistics Plugin
-                </div>
-                <div class="span4" style="text-align: right;">
-                    <p>Running database version DEV
-                    </p>
-                    <small id="execution_time">
-                        Execution time: <?php echo round((float)array_sum(explode(' ', microtime())) - STARTTIME, 4); ?>
-                        seconds.
-                    </small>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
 </body>
 </html>

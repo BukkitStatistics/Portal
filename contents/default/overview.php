@@ -1,4 +1,4 @@
 <?php
-$tpl = Util::newTpl($design, 'overview');
+$tpl = Util::newTpl($this, 'overview');
 
 
