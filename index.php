@@ -20,7 +20,7 @@ $design = new fTemplating(__ROOT__ . 'contents/default', __ROOT__ . 'templates/d
 $design->set('title', Util::getOption('portal_title'));
 $design->set('tplRoot', __ROOT__ . 'templates/default/views');
 $design->add('header_additions', '');
-include __ROOT__ . 'contents /default/' . $content;
+$design->inject($content);
 $design->place();
 $capture = fBuffer::stopCapture();
 
