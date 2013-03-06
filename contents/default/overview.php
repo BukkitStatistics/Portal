@@ -23,5 +23,7 @@ $server_stats['startup'] = $server->getStartup();
 $server_stats['shutdown'] = $server->getShutdown();
 $server_stats['cur_uptime'] = $server->getCurrentUptime();
 $server_stats['total_uptime'] = $server->getTotalUptime();
+$server_stats['total_logins'] = Player::countAllLogins();
+$server_stats['max_players'] = $server->getMaxPlayersOnline();
 
 $tpl->set('serverstats', $server_stats);
