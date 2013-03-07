@@ -202,4 +202,25 @@ class Util {
         die($cached);
     }
 
+    public static function  formatSeconds($timestamp, $seconds = true, $minutes = true, $hours = true, $days = true) {
+        $s = $timestamp % 60;
+        $m = floor(($timestamp % 3600) / 60);
+        $h = floor(($timestamp % 86400) / 3600);
+        $d = floor($timestamp / 86400);
+
+        if(strlen($s) == 1)
+            $s .= 0;
+
+        if($days)
+            return $d . ' ' . $h . ':' . $m . ':' . $s;
+        elseif($hours)
+            return $h . ':' . $m . ':' . $s;
+        elseif($minutes)
+            return $m . ':' . $s;
+        elseif($seconds)
+            return $s;
+        else
+            return $d . ' ' . $h . ':' . $m . ':' . $s;
+    }
+
 }
