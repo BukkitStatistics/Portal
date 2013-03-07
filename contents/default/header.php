@@ -30,7 +30,7 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="">LOGO</a>
+            <a class="brand" href="./"><img class="logo-img" src="media/img/icon-default.png"> <?php echo $this->get('title'); ?></a>
 
             <div class="nav-collapse collapse">
                 <ul class="nav pull-right">

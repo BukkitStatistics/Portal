@@ -51,11 +51,16 @@
             </div>
 
             <div class="section-split"></div>
-            <h1><i class="icon-tasks icon-large"></i> Dashboard</h1>
+            <div class="page-header">
+                <h1>
+                    <i class="icon-tasks icon-large"></i> Dashboard
+                    <small>Some general statistics</small>
+                </h1>
+            </div>
 
             <div class="row-fluid dashboard">
                 <div class="span4">
-                    <div class="well custom-well fixed-height" style="padding: 10px; margin: 0px;">
+                    <div class="well custom-well fixed-height statbox">
 
                         <h3 style="text-align:center;">Server Statistics</h3>
 
@@ -99,13 +104,13 @@
                     </div>
                 </div>
                 <div class="span4">
-                    <div class="well custom-well fixed-height" style="position: relative; padding: 10px; margin: 0px;">
+                    <div class="well custom-well fixed-height statbox">
 
                         <h3 style="text-align:center;">Player Statistics</h3>
                         <dl class="dl-horizontal">
                             <dt style="width: 80px !important;">
                                 <span class="badge badge-info"><i
-                                    class="icon-user"></i> <?php echo $this->get('players[online]'); ?>
+                                        class="icon-user"></i> <?php echo $this->get('players[online]'); ?>
                                 </span>
                             </dt>
                             <dd style="margin-left: 100px !important;">Currently online</dd>
@@ -113,14 +118,14 @@
                         <dl class="dl-horizontal">
                             <dt style="width: 80px !important;">
                                 <span class="badge badge-warning"><i
-                                    class="icon-star"></i> <?php echo $this->get('players[tracked]') ?>
+                                        class="icon-star"></i> <?php echo $this->get('players[tracked]') ?>
                                 </span></dt>
                             <dd style="margin-left: 100px !important;">Tracked players</dd>
                         </dl>
                         <dl class="dl-horizontal">
                             <dt style="width: 80px !important;">
                                 <span class="badge badge-success"><i
-                                    class="icon-signal"></i> <?php echo $this->get('serverstats[max_players]') ?>
+                                        class="icon-signal"></i> <?php echo $this->get('serverstats[max_players]') ?>
                                 </span>
                             </dt>
                             <dd style="margin-left: 100px !important;">Maximum players</dd>
@@ -128,18 +133,25 @@
                         <dl class="dl-horizontal">
                             <dt style="width: 80px !important;">
                                 <span class="badge badge-info"><i
-                                    class="icon-fire"></i> <?php echo $this->get('serverstats[total_logins]'); ?>
+                                        class="icon-fire"></i> <?php echo $this->get('serverstats[total_logins]'); ?>
                                 </span>
                             </dt>
                             <dd style="margin-left: 100px !important;">Number of logins</dd>
                         </dl>
 
-                    </div></div>
-                <div class="span4"></div>
+                    </div>
+                </div>
+                <div class="span4">
+                    <div class="well custom-well fixed-height statbox">
+
+                        <h3 style="text-align:center;">Distances</h3>
+
+                    </div>
+                </div>
             </div>
 
             <div class="row-fluid dashboard">
-                <div class="span4"></div>
+                <div class="span4">Blocks</div>
                 <div class="span8"></div>
             </div>
 
