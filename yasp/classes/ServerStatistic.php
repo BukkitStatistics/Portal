@@ -41,7 +41,8 @@ class ServerStatistic {
      * @param $key
      *
      * @return string
-     */function getValue($key) {
+     */
+    function getValue($key) {
         if(isset($this->values[$key]))
             return $this->values[$key];
         else
@@ -52,7 +53,8 @@ class ServerStatistic {
      * Returns the formatted startup time
      *
      * @return string
-     */function getStartup() {
+     */
+    function getStartup() {
         $time = new fTimestamp($this->getValue('last_startup'));
 
         return $time->format('H:i:s - d.m.Y');
@@ -62,7 +64,8 @@ class ServerStatistic {
      * Returns the formatted shutdown time
      *
      * @return string
-     */function getShutdown() {
+     */
+    function getShutdown() {
         $time = new fTimestamp($this->getValue('last_shutdown'));
 
         return $time->format('H:i:s - d.m.Y');
@@ -72,27 +75,25 @@ class ServerStatistic {
      * Returns the formatted current up time. If empty it will return 00:00:00
      *
      * @return string
-     */function getCurrentUptime() {
+     */
+    function getCurrentUptime() {
         if($this->getValue('current_uptime') == 0)
             return '00:00:00';
 
-        $time = new fTimestamp($this->getValue('current_uptime'));
-
-        return $time->format('d H:i:s');
-}
+        return Util::formatSeconds($this->getValue('current_uptime'));
+    }
 
     /**
      * Returns the formatted total up time. If empty it will return 00:00:00
      *
      * @return string
-     */function getTotalUptime() {
+     */
+    function getTotalUptime() {
         if($this->getValue('total_uptime') == 0)
             return '00:00:00';
 
-        $time = new fTimestamp($this->getValue('total_uptime'));
-
-        return $time->format('d H:i:s');
-}
+        return Util::formatSeconds($this->getValue('total_uptime'));
+    }
 
     /**
      * Returns the number of maximal online players.<br>
@@ -100,7 +101,8 @@ class ServerStatistic {
      *
      * @param bool $get_time
      * @return array|int|string
-     */function getMaxPlayersOnline($get_time = false) {
+     */
+    function getMaxPlayersOnline($get_time = false) {
         if($this->getValue('max_players_online') == 0)
             return 0;
 
