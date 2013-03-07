@@ -1,4 +1,5 @@
-/* <GeneralStyles> */
+/* =Layout */
+
 body {
     padding-top: 60px;
 }
@@ -6,28 +7,6 @@ body {
 .logo-img {
 	height: 25px;
 	margin-right: 15px;
-}
-
-.nav-sidebar {
-    position: fixed;
-	padding: 9px 0;
-	width: 155px;
-}
-
-@media (max-width: 976px) {
-    .nav-sidebar {
-        position: static;
-        margin-left: -32px;
-        width: 150px;
-    }
-}
-
-@media (max-width: 767px) {
-    .nav-sidebar {
-        position: static;
-        width: auto;
-        margin-left: 0;
-    }
 }
 
 section {
@@ -42,6 +21,26 @@ section {
 	padding-bottom: 25px;
 }
 
+.statbox {
+    padding: 10px;
+}
+
+.fixed-height {
+    min-height: 250px;
+    overflow: hidden;
+}
+
+.fixed-height500 {
+    min-height: 480px;
+    overflow: hidden;
+}
+
+.section-split {
+    height: 50px;
+}
+
+/* =Format */
+
 .table.th {
 	text-align: center !important;
 }
@@ -50,23 +49,6 @@ section {
 	background: #faffff;
 }
 
-/* </GeneralStyles> */
-
-/* <FormattingStyles> */
-
-dl.dl-stats { }
-
-dl.dl-stats dt {
-	width: 60px !important;
-}
-
-dl.dl-stats dt span {
-	padding: 10px 15px;
-}
-
-dl.dl-stats dd {
-	margin-left: 80px !important;
-}
 
 .player-search {
 	position: relative;
@@ -77,9 +59,8 @@ dl.dl-stats dd {
 	margin: 1px;
 }
 
-/* </FormattingStyles> */
 
-/* <PaginationStyles> */
+/* Pagination */
 
 .paginate {
 	font-family: Arial, Helvetica, sans-serif;
@@ -91,9 +72,8 @@ a.paginate {
 	text-decoration: none;
 }
 
-/* </PaginationStyles> */
 
-/* <MiscStyles> */
+/* =Misc */
 
 .page-width {
 	width: 90%;
@@ -119,20 +99,29 @@ a.paginate {
 	padding: 15px !important;
 }
 
-.fixed-height {
-	height: 250px;
-	overflow:auto;
+
+/* =Sidebar */
+.nav-sidebar {
+    position: fixed;
+    padding: 9px 0;
+    width: 155px;
 }
 
-.fixed-height500 {
-	height: 480px;
-	overflow:auto;
-}
-.section-split {
-	height: 50px;
+@media (max-width: 976px) {
+    .nav-sidebar {
+        position: static;
+        margin-left: -32px;
+        width: 150px;
+    }
 }
 
-/* </MiscStyles> */
+@media (max-width: 767px) {
+    .nav-sidebar {
+        position: static;
+        width: auto;
+        margin-left: 0;
+    }
+}
 
 /* =Bootstrap */
 

@@ -148,8 +148,6 @@ class Util {
             $sql = preg_replace("/^INSERT INTO `?prefix_(\S+?)`?([\s\.,]|$)/i", "INSERT INTO `" . $prefix . "\\1`\\2",
                                 $sql);
         else $sql = preg_replace("/prefix_(\S+?)([\s\.,]|$)/", $prefix . "\\1\\2", $sql);
-
-        fCore::debug('addPrefix: ' . $sql);
     }
 
 

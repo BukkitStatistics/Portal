@@ -1,6 +1,7 @@
 <?php
 /**
- *
+ * This class is for the general statistics of the server.<br>
+ * The values can be found in the "server_statistics" table.
  */
 class ServerStatistic {
 
@@ -10,12 +11,12 @@ class ServerStatistic {
     private $db;
 
     /**
-     * @var
+     * @var array
      */
     private $values;
 
     /**
-     *
+     * Get the database and fill $values.
      */
     function __construct() {
         $this->db = fORMDatabase::retrieve();
@@ -23,7 +24,7 @@ class ServerStatistic {
     }
 
     /**
-     *
+     * Fills values with database values.
      */
     private function calcValues() {
         $res = $this->db->translatedQuery('
@@ -35,6 +36,8 @@ class ServerStatistic {
     }
 
     /**
+     * Returns the given value. If empty it will return an empty string.
+     *
      * @param $key
      *
      * @return string
@@ -46,6 +49,8 @@ class ServerStatistic {
 }
 
     /**
+     * Returns the formatted startup time
+     *
      * @return string
      */function getStartup() {
         $time = new fTimestamp($this->getValue('last_startup'));
@@ -54,6 +59,8 @@ class ServerStatistic {
 }
 
     /**
+     * Returns the formatted shutdown time
+     *
      * @return string
      */function getShutdown() {
         $time = new fTimestamp($this->getValue('last_shutdown'));
@@ -62,6 +69,8 @@ class ServerStatistic {
 }
 
     /**
+     * Returns the formatted current up time. If empty it will return 00:00:00
+     *
      * @return string
      */function getCurrentUptime() {
         if($this->getValue('current_uptime') == 0)
@@ -73,6 +82,8 @@ class ServerStatistic {
 }
 
     /**
+     * Returns the formatted total up time. If empty it will return 00:00:00
+     *
      * @return string
      */function getTotalUptime() {
         if($this->getValue('total_uptime') == 0)
@@ -84,6 +95,9 @@ class ServerStatistic {
 }
 
     /**
+     * Returns the number of maximal online players.<br>
+     * If $get_time is true it will also return the formatted time.
+     *
      * @param bool $get_time
      * @return array|int|string
      */function getMaxPlayersOnline($get_time = false) {
