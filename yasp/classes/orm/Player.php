@@ -12,7 +12,7 @@ class Player extends fActiveRecord {
      */
     public static function countAllDeaths() {
         $res = fORMDatabase::retrieve()->translatedQuery('
-                        SELECT COUNT(times)
+                        SELECT SUM(times)
                         FROM "prefix_total_death_players"
         ');
 
@@ -64,7 +64,7 @@ class Player extends fActiveRecord {
      */
     public static function countAllLogins() {
         $res = fORMDatabase::retrieve()->translatedQuery('
-                        SELECT COUNT(logins)
+                        SELECT SUM(logins)
                         FROM "prefix_players"
         ');
 

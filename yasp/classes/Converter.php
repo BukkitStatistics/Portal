@@ -66,6 +66,7 @@ class Converter {
                         last_login,
                         num_logins,
                         last_logout,
+                        num_secs_loggedon,
                         distance_traveled AS total,
                         distance_traveled_in_minecart AS minecart,
                         distance_traveled_in_boat AS boat,
@@ -77,8 +78,8 @@ class Converter {
                         ', $this->start, $this->itemsPerRun);
 
         $player_stmt = $this->newDB->translatedPrepare('
-                            INSERT INTO "prefix_players" ("name", "first_login", "logins")
-                            VALUES (%s, %i, %i)
+                            INSERT INTO "prefix_players" ("name", "first_login", "logins", "login_time")
+                            VALUES (%s, %i, %i, %i)
                             ');
         $login_stmt = $this->newDB->translatedPrepare('
                             INSERT INTO "prefix_detailed_log_players" ("player_id", "time", "is_login")
@@ -97,7 +98,7 @@ class Converter {
         $i = $this->start;
         foreach($result as $row) {
             $last = $this->newDB->query($player_stmt, $row['player_name'], $row['firstever_login'],
-                                        $row['num_logins'])->getAutoIncrementedValue();
+                                        $row['num_logins'], $row['num_secs_loggedon'])->getAutoIncrementedValue();
             $foot = $row['total'] - ($row['minecart'] + $row['boat'] + $row['pig']);
             $this->newDB->execute($dist_stmt, $last, $foot, $row['boat'], $row['minecart'], $row['pig']);
             $this->newDB->execute($login_stmt, $last, $row['last_login'], $row['last_logout']);

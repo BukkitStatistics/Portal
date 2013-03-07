@@ -45,5 +45,3 @@ if(defined('DB_DATABASE') && DB_DATABASE != '') {
         fMessaging::create('errors', '{default}', $e->getMessage());
     }
 }
-else
-    die('db.php config file not setup properly...');
