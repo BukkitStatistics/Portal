@@ -4,6 +4,8 @@ $tpl = Util::newTpl($this, 'overview');
 $all_players = $players = fRecordSet::build(
     'Player'
 );
+$test = new Material();
+fCore::expose($test->reflect());
 
 // player stats in dashboard
 $num = new fNumber($players->count());
