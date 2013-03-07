@@ -39,8 +39,8 @@ $distance_stats['pig'] = 0;
 $tpl->set('distance', $distance_stats);
 
 // block stats
-$block_stats['destroyed'] = Material::countAllDestroyedBlocks()->format();
-$block_stats['placed'] = Material::countAllPlacedBlocks()->format();
+$block_stats['destroyed'] = Material::countAllBlocks('destroyed')->format();
+$block_stats['placed'] = Material::countAllBlocks('placed')->format();
 $block_stats['most_placed'] = Material::getMostPlacedBlock();
 $block_stats['most_destroyed'] = Material::getMostDestroyedBlock();
 
@@ -48,3 +48,11 @@ $tpl->set('blocks', $block_stats);
 
 // player stats
 $tpl->set('online_players', $players);
+
+// items
+$item_stats['dropped'] = Material::countAllItems('dropped')->format();
+$item_stats['picked'] = Material::countAllItems('picked_up')->format();
+$item_stats['most_dropped'] = 0;
+$item_stats['most_picked'] = 0;
+
+$tpl->set('items', $item_stats);
