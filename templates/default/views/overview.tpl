@@ -1,199 +1,341 @@
 <div class="row">
-    <div id="content" class="span10 pull-right">
-        <section id="dashboard">
-            <div class="row-fluid">
-                <div class="span3">
-                    <div class="well" style="padding: 10px; margin: 0px; background: #FFE0C2;">
-                        <h1 style="text-align:center;"><i class="icon-group icon-large"></i></h1>
+<div id="content" class="span10 pull-right">
+<section id="dashboard">
+<div class="row-fluid">
+    <div class="span3">
+        <div class="well" style="padding: 10px; margin: 0px; background: #FFE0C2;">
+            <h1 style="text-align:center;"><i class="icon-group icon-large"></i></h1>
 
-                        <h3 style="text-align:center;">
-                            <?php echo $this->get('players[online]'); ?>
-                            online
-                        </h3>
-                    </div>
-                </div>
-
-
-                <div class="span3">
-                    <div class="well" style="padding: 10px; margin: 0px; background: #FFE0C2;">
-                        <h1 style="text-align:center;"><i class="icon-pencil icon-large"></i></h1>
-
-                        <h3 style="text-align:center;">
-                            <?php echo $this->get('players[tracked]'); ?>
-                            tracked
-                        </h3>
-                    </div>
-                </div>
-
-
-                <div class="span3">
-                    <div class="well" style="padding: 10px; margin: 0px; background: #FFE0C2;">
-                        <h1 style="text-align:center;"><i class="icon-remove-sign icon-large"></i></h1>
-
-                        <h3 style="text-align:center;">
-                            <?php echo $this->get('players[killed]'); ?>
-                            killed
-                        </h3>
-                    </div>
-                </div>
-
-
-                <div class="span3">
-                    <div class="well" style="padding: 10px; margin: 0px; background: #FFE0C2;">
-                        <h1 style="text-align:center;"><i class="icon-tint icon-large"></i></h1>
-
-                        <h3 style="text-align:center;">
-                            <?php echo $this->get('players[died]'); ?>
-                            died
-                        </h3>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section-split"></div>
-            <div class="page-header">
-                <h1>
-                    <i class="icon-tasks icon-large"></i> Dashboard
-                    <small>Some general statistics</small>
-                </h1>
-            </div>
-
-            <div class="row-fluid dashboard">
-                <div class="span4">
-                    <div class="well custom-well fixed-height statbox">
-
-                        <h3 style="text-align:center;">Server Statistics</h3>
-
-                        <dl class="dl-horizontal">
-                            <dt>
-                                <span class="label label-success">
-                                    <i class="icon-bell"></i>
-                                    <?php echo $this->get('serverstats[startup]') ?>
-                                </span>
-                            </dt>
-                            <dd>Startup</dd>
-                        </dl>
-                        <dl class="dl-horizontal">
-                            <dt>
-                                <span class="label label-warning">
-                                    <i class="icon-lock"></i>
-                                    <?php echo $this->get('serverstats[shutdown]') ?>
-                                </span>
-                            </dt>
-                            <dd>Shutdown</dd>
-                        </dl>
-                        <dl class="dl-horizontal">
-                            <dt>
-                                <span class="label label-important">
-                                    <i class="icon-calendar"></i>
-                                    <?php echo $this->get('serverstats[cur_uptime]') ?>
-                                </span>
-                            </dt>
-                            <dd>Uptime</dd>
-                        </dl>
-                        <dl class="dl-horizontal">
-                            <dt>
-                                <span class="label label-info">
-                                <i class="icon-bullhorn"></i>
-                                    <?php echo $this->get('serverstats[total_uptime]') ?>
-                                </span>
-                            </dt>
-                            <dd>Gameplay</dd>
-                        </dl>
-
-                    </div>
-                </div>
-                <div class="span4">
-                    <div class="well custom-well fixed-height statbox">
-
-                        <h3 style="text-align:center;">Player Statistics</h3>
-                        <dl class="dl-horizontal">
-                            <dt style="width: 80px !important;">
-                                <span class="badge badge-info"><i
-                                        class="icon-user"></i> <?php echo $this->get('players[online]'); ?>
-                                </span>
-                            </dt>
-                            <dd style="margin-left: 100px !important;">Currently online</dd>
-                        </dl>
-                        <dl class="dl-horizontal">
-                            <dt style="width: 80px !important;">
-                                <span class="badge badge-warning"><i
-                                        class="icon-star"></i> <?php echo $this->get('players[tracked]') ?>
-                                </span></dt>
-                            <dd style="margin-left: 100px !important;">Tracked players</dd>
-                        </dl>
-                        <dl class="dl-horizontal">
-                            <dt style="width: 80px !important;">
-                                <span class="badge badge-success"><i
-                                        class="icon-signal"></i> <?php echo $this->get('serverstats[max_players]') ?>
-                                </span>
-                            </dt>
-                            <dd style="margin-left: 100px !important;">Maximum players</dd>
-                        </dl>
-                        <dl class="dl-horizontal">
-                            <dt style="width: 80px !important;">
-                                <span class="badge badge-info"><i
-                                        class="icon-fire"></i> <?php echo $this->get('serverstats[total_logins]'); ?>
-                                </span>
-                            </dt>
-                            <dd style="margin-left: 100px !important;">Number of logins</dd>
-                        </dl>
-
-                    </div>
-                </div>
-                <div class="span4">
-                    <div class="well custom-well fixed-height statbox">
-
-                        <h3 style="text-align:center;">Distances</h3>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="row-fluid dashboard">
-                <div class="span4">Blocks</div>
-                <div class="span8"></div>
-            </div>
-
-            <div class="row-fluid dashboard">
-                <div class="span8"></div>
-                <div class="span4"></div>
-            </div>
-
-        </section>
-        <section id="players">
-            <h1><i class="icon-group icon-large"></i> Player Information</h1>
-        </section>
-        <section id="world">
-            <div class="row-fluid">
-                <div class="span6">
-                    <h1><i class="icon-picture icon-large"></i> Blocks</h1>
-                </div>
-                <div class="span6">
-                    <h1><i class="icon-legal icon-large"></i> Items</h1>
-                </div>
-            </div>
-        </section>
-        <section id="deaths">
-            <div class="row-fluid">
-                <div class="span8">
-                    <h1><i class="icon-tint icon-large"></i> Death Log</h1>
-                </div>
-                <div class="span4">
-                    <h1> Death Statistics</h1>
-                </div>
-            </div>
-        </section>
-    </div>
-    <div class="span2 pull-left">
-        <div class="nav nav-sidebar well">
-            <ul class="nav nav-list">
-                <li><a href="#dashboard"><i class="icon-tasks"></i> Dashboard</a></li>
-                <li class="divider"></li>
-                <li><a href="#players"><i class="icon-group"></i> Players</a></li>
-                <li><a href="#world"><i class="icon-picture"></i> World</a></li>
-                <li><a href="#deaths"><i class="icon-tint"></i> Death Log</a></li>
-            </ul>
+            <h3 style="text-align:center;">
+                <?php echo $this->get('players[online]'); ?>
+                online
+            </h3>
         </div>
     </div>
+
+
+    <div class="span3">
+        <div class="well" style="padding: 10px; margin: 0px; background: #FFE0C2;">
+            <h1 style="text-align:center;"><i class="icon-pencil icon-large"></i></h1>
+
+            <h3 style="text-align:center;">
+                <?php echo $this->get('players[tracked]'); ?>
+                tracked
+            </h3>
+        </div>
+    </div>
+
+
+    <div class="span3">
+        <div class="well" style="padding: 10px; margin: 0px; background: #FFE0C2;">
+            <h1 style="text-align:center;"><i class="icon-remove-sign icon-large"></i></h1>
+
+            <h3 style="text-align:center;">
+                <?php echo $this->get('players[killed]'); ?>
+                killed
+            </h3>
+        </div>
+    </div>
+
+
+    <div class="span3">
+        <div class="well" style="padding: 10px; margin: 0px; background: #FFE0C2;">
+            <h1 style="text-align:center;"><i class="icon-tint icon-large"></i></h1>
+
+            <h3 style="text-align:center;">
+                <?php echo $this->get('players[died]'); ?>
+                died
+            </h3>
+        </div>
+    </div>
+</div>
+
+<div class="section-split"></div>
+<div class="page-header">
+    <h1>
+        <i class="icon-tasks icon-large"></i> Dashboard
+        <small>Some general statistics</small>
+    </h1>
+</div>
+
+<div class="row-fluid dashboard">
+    <div class="span8">
+        <div class="well custom-well">
+            <h3>Server Statistics</h3>
+
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- TODO: find a fluid solution -.-' -->
+                    <table class="table no-border statbox-table">
+                        <tr>
+                            <td>
+                                <span class="label label-info">
+                                    <i class="icon-bell"></i> <?php echo $this->get('serverstats[startup]'); ?>
+                                </span>
+                            </td>
+                            <td>
+                                Startup
+                            </td>
+                            <td>
+                                <span class="label label-info">
+                                    <i class="icon-group"></i> <?php echo $this->get('players[online]'); ?>
+                                </span>
+                            </td>
+                            <td>
+                                Currently online
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="label label-warning">
+                                    <i class="icon-lock"></i> <?php echo $this->get('serverstats[shutdown]'); ?>
+                                </span>
+                            </td>
+                            <td>
+                                Shutdown
+                            </td>
+                            <td>
+                                <span class="label label-important">
+                                    <i class="icon-star"></i> <?php echo $this->get('players[tracked]'); ?>
+                                </span>
+                            </td>
+                            <td>
+                                Tracked players
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                            <span class="label label-important">
+                                                <i class="icon-calendar"></i> <?php echo $this->get('serverstats[cur_uptime]'); ?>
+                                            </span>
+                            </td>
+                            <td>
+                                Uptime
+                            </td>
+                            <td>
+                                <span class="label label-success">
+                                    <i class="icon-signal"></i>
+                                         <?php echo $this->get('serverstats[max_players][0]'); ?> -
+                                         <?php echo $this->get('serverstats[max_players][1]'); ?>
+                                </span>
+                            </td>
+                            <td>
+                                Maximum players
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="label label-info">
+                                    <i class="icon-bullhorn"></i> <?php echo $this->get('serverstats[total_uptime]'); ?>
+                                </span>
+                            </td>
+                            <td>
+                                Gameplay
+                            </td>
+                            <td>
+                                <span class="label label-info">
+                                    <i class="icon-fire"></i> <?php echo $this->get('serverstats[total_logins]'); ?>
+                                </span>
+                            </td>
+                            <td>
+                                Number of logins
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="span4">
+        <div class="well custom-well fixed-height">
+
+            <h3 style="text-align:center;">Distances</h3>
+
+            <div class="row-fluid">
+                <div class="span11 offset1">
+                    <table class="table no-border statbox-table">
+                        <tr>
+                            <td>
+                                <span class="label label-info">
+                                    <i class="icon-globe"></i> <?php echo $this->get('distance[total]'); ?>
+                                </span>
+                            </td>
+                            <td>
+                                Total distance
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="label label-info">
+                                    <i class="icon-exchange"></i> <?php echo $this->get('distance[foot]'); ?>
+                                </span>
+                            </td>
+                            <td>
+                                By foot
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="label label-info">
+                                    <i class="icon-shopping-cart"></i> <?php echo $this->get('distance[minecart]'); ?>
+                                </span>
+                            </td>
+                            <td>
+                                By minecart
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="label label-info">
+                                    <i class="icon-tablet"></i> <?php echo $this->get('distance[boat]'); ?>
+                                </span>
+                            </td>
+                            <td>
+                                By boat
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row-fluid dashboard">
+    <div class="span4">
+        <div class="well custom-well">
+            <h3 style="text-align: center">Blocks</h3>
+
+            <div class="row-fluid">
+                <div class="span11 offset1">
+                    <table class="table no-border statbox-table">
+                        <tr>
+                            <td>
+                                <span class="label label-info">
+                                    <i class="icon-plus"></i> <?php echo $this->get('blocks[placed]'); ?>
+                                </span>
+                            </td>
+                            <td>
+                                Total placed
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="label label-info">
+                                    <?php echo $this->get('blocks[most_placed][0]'); ?>
+                                </span>
+                            </td>
+                            <td>
+                                Most placed
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="label label-info">
+                                    <i class="icon-minus"></i> <?php echo $this->get('blocks[destroyed]'); ?>
+                                </span>
+                            </td>
+                            <td>
+                                Total destroyed
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="label label-info">
+                                    <?php echo $this->get('blocks[most_destroyed][0]'); ?>
+                                </span>
+                            </td>
+                            <td>
+                                Most destroyed
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="span8">
+        <div class="well custom-well fixed-height">
+            <h3>Online Players</h3>
+            <?php if($this->get('players[online]') == 0): ?>
+            <div class='force-center'><em>No players online</em></div>
+            <?php
+                else: ?>
+                    <table class="table table-striped table-hover tablesorter">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Logged in since</th>
+                            <th>Play time</th>
+                        </tr>
+                        </thead>
+                        <tbody class="content">
+                            <?php foreach($this->get('online_players') as $player): ?>
+                            <tr>
+                                <td>
+                                    <a href="?page=player&name=<?php echo $player->getUrlName(); ?>">
+                                        <?php echo $player->getName(); ?>
+                                    </a>
+                                </td>
+                                <td>
+                                    <?php
+                                        $time = new fTimestamp($player->getLoginTime());
+                                        echo $time->format('H:i:s - d.m.Y');
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php echo $time->getFuzzyDifference(null, true); ?>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+
+                    <div class="pagination force-center"></div>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+
+<div class="row-fluid dashboard">
+    <div class="span8"></div>
+    <div class="span4"></div>
+</div>
+
+</section>
+<section id="players">
+    <h1><i class="icon-group icon-large"></i> Player Information</h1>
+</section>
+<section id="world">
+    <div class="row-fluid">
+        <div class="span6">
+            <h1><i class="icon-picture icon-large"></i> Blocks</h1>
+        </div>
+        <div class="span6">
+            <h1><i class="icon-legal icon-large"></i> Items</h1>
+        </div>
+    </div>
+</section>
+<section id="deaths">
+    <div class="row-fluid">
+        <div class="span8">
+            <h1><i class="icon-tint icon-large"></i> Death Log</h1>
+        </div>
+        <div class="span4">
+            <h1> Death Statistics</h1>
+        </div>
+    </div>
+</section>
+</div>
+<div class="span2 pull-left">
+    <div class="nav nav-sidebar well">
+        <ul class="nav nav-list">
+            <li><a href="#dashboard"><i class="icon-tasks"></i> Dashboard</a></li>
+            <li class="divider"></li>
+            <li><a href="#players"><i class="icon-group"></i> Players</a></li>
+            <li><a href="#world"><i class="icon-picture"></i> World</a></li>
+            <li><a href="#deaths"><i class="icon-tint"></i> Death Log</a></li>
+        </ul>
+    </div>
+</div>
 </div>

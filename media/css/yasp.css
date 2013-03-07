@@ -21,12 +21,19 @@ section {
 	padding-bottom: 25px;
 }
 
-.statbox {
-    padding: 10px;
+.statbox-table {
+    width: 100%;
+}
+
+.statbox-table td, .statbox-table th {
+    width: 25%;
+}
+.statbox-table td:nth-child(even), .statbox-table th:nth-child(even) {
+    width: 25%;
 }
 
 .fixed-height {
-    min-height: 250px;
+    min-height: 224px;
     overflow: hidden;
 }
 
@@ -40,6 +47,10 @@ section {
 }
 
 /* =Format */
+
+.table.no-border td, .table.no-border th {
+    border: 0;
+}
 
 .table.th {
 	text-align: center !important;
