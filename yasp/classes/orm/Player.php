@@ -78,4 +78,8 @@ class Player extends fActiveRecord {
 
         return 0;
     }
+
+    public function getUrlName() {
+        return fURL::makeFriendly($this->getName());
+    }
 }
