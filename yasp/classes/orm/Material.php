@@ -13,7 +13,8 @@ class Material extends fActiveRecord {
      * @param $tp_name
      *
      * @return string
-     */public static function getImg($tp_name) {
+     */
+    public static function getMaterialImg($tp_name) {
         $path = __ROOT__ . 'img/materials/';
         $img = $path . $tp_name . '.png';
 
@@ -21,40 +22,47 @@ class Material extends fActiveRecord {
             return $img;
         else
             return $path . 'default.png';
-}
+    }
 
     /**
-     * Counts all placed blocks
+     * Returns the count of the specified block type.
+     *
+     * @param $type
      *
      * @return fNumber
-     */public static function countAllPlacedBlocks() {
+     */
+    public static function countAllBlocks($type) {
         $res = fORMDatabase::retrieve()->translatedQuery('
-                        SELECT COUNT(placed)
+                        SELECT SUM(' . $type . ')
                         FROM "prefix_total_blocks"
         ');
 
         return new fNumber($res->fetchScalar());
-}
+    }
 
     /**
-     * Counts all destroyed blocks
+     * Returns the count of the specified item type.
+     *
+     * @param $type
      *
      * @return fNumber
-     */public static function countAllDestroyedBlocks() {
+     */
+    public static function countAllItems($type) {
         $res = fORMDatabase::retrieve()->translatedQuery('
-                        SELECT COUNT(destroyed)
-                        FROM "prefix_total_blocks"
+                        SELECT SUM(' . $type . ')
+                        FROM "prefix_total_items"
         ');
 
         return new fNumber($res->fetchScalar());
-}
+    }
 
     /**
      * Gets the most placed block.<br>
      * The first array value is an fNumber which is the count. The second one is the block name.
      *
      * @return array
-     */public static function getMostPlacedBlock() {
+     */
+    public static function getMostPlacedBlock() {
         $res = fORMDatabase::retrieve()->translatedQuery('
                         SELECT MAX(b.placed) AS placed, m.tp_name AS tp_name
                         FROM "prefix_total_blocks" b, "prefix_materials" m
@@ -68,14 +76,15 @@ class Material extends fActiveRecord {
         $num = new fNumber($row['placed']);
 
         return array($num->format(), $row['tp_name']);
-}
+    }
 
     /**
      * Gets the most destroyed block.<br>
      * The first array value is an fNumber which is the count. The second one is the block name.
      *
      * @return array
-     */public static function getMostDestroyedBlock() {
+     */
+    public static function getMostDestroyedBlock() {
         $res = fORMDatabase::retrieve()->translatedQuery('
                         SELECT MAX(b.destroyed) AS destroyed, m.tp_name AS tp_name
                         FROM "prefix_total_blocks" b, "prefix_materials" m

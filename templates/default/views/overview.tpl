@@ -299,7 +299,56 @@
 
 <div class="row-fluid dashboard">
     <div class="span8"></div>
-    <div class="span4"></div>
+    <div class="span4">
+        <h3 style="text-align: center">Items</h3>
+
+        <div class="row-fluid">
+            <div class="span11 offset1">
+                <table class="table no-border statbox-table">
+                    <tr>
+                        <td>
+                                <span class="label label-info">
+                                    <i class="icon-plus"></i> <?php echo $this->get('items[picked]'); ?>
+                                </span>
+                        </td>
+                        <td>
+                            Total picked up
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <span class="label label-info">
+                                    <?php echo $this->get('items[most_picked][0]'); ?>
+                                </span>
+                        </td>
+                        <td>
+                            Most picked up
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <span class="label label-info">
+                                    <i class="icon-minus"></i> <?php echo $this->get('items[dropped]'); ?>
+                                </span>
+                        </td>
+                        <td>
+                            Total dropped
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                <span class="label label-info">
+                                    <?php echo $this->get('items[most_dropped][0]'); ?>
+                                </span>
+                        </td>
+                        <td>
+                            Most dropped
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
 </section>
