@@ -222,6 +222,7 @@
                         <tr>
                             <td>
                                 <span class="label label-info">
+                                    <?php echo Material::getMaterialImg($this->get('blocks[most_placed][1]'), 15); ?>
                                     <?php echo $this->get('blocks[most_placed][0]'); ?>
                                 </span>
                             </td>
@@ -242,6 +243,7 @@
                         <tr>
                             <td>
                                 <span class="label label-info">
+                                    <?php echo Material::getMaterialImg($this->get('blocks[most_destroyed][1]'), 15); ?>
                                     <?php echo $this->get('blocks[most_destroyed][0]'); ?>
                                 </span>
                             </td>
@@ -318,6 +320,7 @@
                     <tr>
                         <td>
                                 <span class="label label-info">
+                                    <?php echo Material::getMaterialImg($this->get('items[most_picked][1]'), 15); ?>
                                     <?php echo $this->get('items[most_picked][0]'); ?>
                                 </span>
                         </td>
@@ -338,6 +341,7 @@
                     <tr>
                         <td>
                                 <span class="label label-info">
+                                    <?php echo Material::getMaterialImg($this->get('items[most_dropped][1]'), 15); ?>
                                     <?php echo $this->get('items[most_dropped][0]'); ?>
                                 </span>
                         </td>
