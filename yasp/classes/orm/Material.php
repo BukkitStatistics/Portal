@@ -22,10 +22,24 @@ class Material extends fActiveRecord {
         if(!file_exists($img))
             $img = $path . 'none.png';
 
-        return '<img src="' . fFilesystem::translateToWebPath($img) . '" title="' . fText::compose($tp_name) . '" alt="' .
-               fText::compose($tp_name) . '" style="width: ' . $size . 'px; height: ' . $size . 'px">';
+        return
+            '<img src="' . fFilesystem::translateToWebPath($img) . '" title="' . fText::compose($tp_name) . '" alt="' .
+            fText::compose($tp_name) . '" style="width: ' . $size . 'px; height: ' . $size . 'px">';
     }
 
+    public static function getMostDangerous() {
+        $res = fORMDatabase::retrieve()->translatedQuery('
+
+        ');
+    }
+
+    /**
+     * Returns the image of this material.
+     *
+     * @param int $size
+     *
+     * @return string
+     */
     public function getImage($size = 25) {
         return Material::getMaterialImg($this->getTpName(), $size);
     }

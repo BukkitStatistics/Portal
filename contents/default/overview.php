@@ -49,6 +49,18 @@ $tpl->set('blocks', $block_stats);
 // player stats
 $tpl->set('online_players', $players);
 
+// deaths
+$death_stats['total'] = 0;
+$death_stats['pve'] = 0;
+$death_stats['pvp'] = 0;
+$death_stats['evp'] = 0;
+$death_stats['deaths'] = 0;
+$death_stats['dangerous_mob'] = 0;
+$death_stats['top_kill'] = 0;
+$death_stats['top_weapon'] = 0;
+$death_stats['most_kiled_mob'] = 0;
+$death_stats['most_kiled_player'] = 0;
+
 // items
 $item_stats['dropped'] = TotalItem::countAllOfType('dropped')->format();
 $item_stats['picked'] = TotalItem::countAllOfType('picked_up')->format();
