@@ -309,7 +309,7 @@
                     <dl class="dl-horizontal dl-stats">
                         <dt>
                         <span class="badge badge-success no-img">
-
+                            <?php echo $this->get('deaths[total]') ?>
                         </span>
                         </dt>
                         <dd>Total Kills</dd>
@@ -317,7 +317,7 @@
                     <dl class="dl-horizontal dl-stats">
                         <dt>
                         <span class="badge badge-success no-img">
-
+                            <?php echo $this->get('deaths[deaths]') ?>
                         </span>
                         </dt>
                         <dd>Total Deaths</dd>
@@ -325,7 +325,7 @@
                     <dl class="dl-horizontal dl-stats">
                         <dt>
                         <span class="badge badge-important">
-
+                            <?php echo Material::getMaterialImg($this->get('deaths[top_weapon][1]')) ?>
 			            </span>
                         </dt>
                         <dd>Best Weapon</dd>
@@ -336,7 +336,7 @@
                     <dl class="dl-horizontal dl-stats">
                         <dt>
                         <span class="badge badge-success no-img">
-
+                            <?php echo $this->get('deaths[pve]') ?>
                         </span>
                         </dt>
                         <dd>PvE Kills</dd>
@@ -344,15 +344,15 @@
                     <dl class="dl-horizontal dl-stats">
                         <dt>
                         <span class="badge badge-important">
-
+                            <?php echo Entity::getEntityImg($this->get('deaths[most_dangerous][1]')) ?>
 			            </span>
                         </dt>
-                        <dd>Most Dangrous</dd>
+                        <dd>Most Dangerous</dd>
                     </dl>
                     <dl class="dl-horizontal dl-stats">
                         <dt>
                         <span class="badge badge-important">
-
+                            <?php echo Entity::getEntityImg($this->get('deaths[most_killed_mob][1]')) ?>
 			            </span>
                         </dt>
                         <dd>Most Killed</dd>
@@ -363,7 +363,7 @@
                     <dl class="dl-horizontal dl-stats">
                         <dt>
                         <span class="badge badge-success no-img">
-
+                            <?php echo $this->get('deaths[pvp]') ?>
                         </span>
                         </dt>
                         <dd>PvP Kills</dd>

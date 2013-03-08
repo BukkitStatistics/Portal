@@ -27,10 +27,34 @@ class Material extends fActiveRecord {
             fText::compose($tp_name) . '" style="width: ' . $size . 'px; height: ' . $size . 'px">';
     }
 
+    /**
+     * Gets the most dangerous material.<br>
+     * The first array value is an fNumber which is the count. The second one is the block name.
+     *
+     * @return array
+     */
     public static function getMostDangerous() {
         $res = fORMDatabase::retrieve()->translatedQuery('
-
+                    SELECT SUM(pve.creature_killed) + COALESCE(SUM(pvp.times), 0) AS total,
+                        m.tp_name
+                    FROM "prefix_total_pve_kills" pve
+                            LEFT JOIN "prefix_total_pvp_kills" pvp ON pve.material_id = pvp.material_id,
+                        "prefix_materials" m
+                    WHERE pve.material_id != -1
+                    AND (pve.material_id = m.material_id AND pve.material_data = m.data)
+                    GROUP BY pve.material_id
+                    ORDER BY SUM(pve.creature_killed) + COALESCE(SUM(pvp.times), 0) DESC
+                    LIMIT 0,1
         ');
+
+        try {
+            $row = $res->fetchRow();
+            $num = new fNumber($row['total']);
+
+            return array($num->format(), $row['tp_name']);
+        } catch(fNoRowsException $e) {
+            return array(0, 'none');
+        }
     }
 
     /**

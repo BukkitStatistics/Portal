@@ -11,7 +11,7 @@ fCore::expose($test->reflect());
 $num = new fNumber($players->count());
 $player_stats['tracked'] = $num->format();
 $player_stats['died'] = Player::countAllDeaths()->format();
-$player_stats['killed'] = Player::countAllKills()->format();
+$player_stats['killed'] = Player::countAllKillsOfType()->format();
 
 $players = $players->filter(array('getOnline=' => true));
 $player_stats['online'] = $players->count();
@@ -50,17 +50,19 @@ $tpl->set('blocks', $block_stats);
 // player stats
 $tpl->set('online_players', $players);
 
-// deaths
-$death_stats['total'] = 0;
-$death_stats['pve'] = 0;
-$death_stats['pvp'] = 0;
-$death_stats['evp'] = 0;
-$death_stats['deaths'] = 0;
-$death_stats['dangerous_mob'] = 0;
+// deaths stats
+$death_stats['total'] = $player_stats['killed'];
+$death_stats['pve'] = Player::countAllKillsOfType('pve')->format();
+$death_stats['pvp'] = Player::countAllKillsOfType('pvp')->format();
+$death_stats['evp'] = Player::countAllKillsOfType('evp')->format();
+$death_stats['deaths'] = $player_stats['died'];
+$death_stats['most_dangerous'] = Entity::getMostDangerous();
 $death_stats['top_kill'] = 0;
-$death_stats['top_weapon'] = 0;
-$death_stats['most_kiled_mob'] = 0;
-$death_stats['most_kiled_player'] = 0;
+$death_stats['top_weapon'] = Material::getMostDangerous();
+$death_stats['most_killed_mob'] = Entity::getMostKilled();
+$death_stats['most_killed_player'] = 0;
+
+$tpl->set('deaths', $death_stats);
 
 // items
 $item_stats['dropped'] = TotalItem::countAllOfType('dropped')->format();

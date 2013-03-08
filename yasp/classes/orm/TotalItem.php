@@ -27,7 +27,7 @@ class TotalItem extends fActiveRecord {
      *
      * @param $type
      *
-     * @return array|bool
+     * @return array
      */
     public static function getMostOfType($type) {
         try {
