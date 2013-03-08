@@ -105,9 +105,9 @@
                         </tr>
                         <tr>
                             <td>
-                                            <span class="label label-important">
-                                                <i class="icon-calendar"></i> <?php echo $this->get('serverstats[cur_uptime]'); ?>
-                                            </span>
+                                <span class="label label-important">
+                                    <i class="icon-calendar"></i> <?php echo $this->get('serverstats[cur_uptime]'); ?>
+                                </span>
                             </td>
                             <td>
                                 Uptime
@@ -222,7 +222,7 @@
                         <tr>
                             <td>
                                 <span class="label label-info">
-                                    <?php echo Material::getMaterialImg($this->get('blocks[most_placed][1]'), 15); ?>
+                                    <?php echo Material::getMaterialImg($this->get('blocks[most_placed][1]'), 16); ?>
                                     <?php echo $this->get('blocks[most_placed][0]'); ?>
                                 </span>
                             </td>
@@ -243,7 +243,7 @@
                         <tr>
                             <td>
                                 <span class="label label-info">
-                                    <?php echo Material::getMaterialImg($this->get('blocks[most_destroyed][1]'), 15); ?>
+                                    <?php echo Material::getMaterialImg($this->get('blocks[most_destroyed][1]'), 16); ?>
                                     <?php echo $this->get('blocks[most_destroyed][0]'); ?>
                                 </span>
                             </td>
@@ -276,6 +276,7 @@
                             <tr>
                                 <td>
                                     <a href="?page=player&name=<?php echo $player->getUrlName(); ?>">
+                                        <?php echo $player->getPlayerHead(); ?>
                                         <?php echo $player->getName(); ?>
                                     </a>
                                 </td>
@@ -371,7 +372,9 @@
                     <dl class="dl-horizontal dl-stats">
                         <dt>
                         <span class="badge badge-important">
-
+                            <a href="?page=player&name=<?php echo $this->get('deaths[top_killer][1]')->getUrlName(); ?>">
+                                <?php echo $this->get('deaths[top_killer][1]')->getPlayerHead(); ?>
+                            </a>
 			            </span>
                         </dt>
                         <dd>Most Kills</dd>
@@ -379,7 +382,9 @@
                     <dl class="dl-horizontal dl-stats">
                         <dt>
                         <span class="badge badge-important">
-
+                            <a href="?page=player&name=<?php echo $this->get('deaths[most_killed_player][1]')->getUrlName(); ?>">
+                                <?php echo $this->get('deaths[most_killed_player][1]')->getPlayerHead(); ?>
+                            </a>
 			            </span>
                         </dt>
                         <dd>Most Deaths</dd>
@@ -408,7 +413,7 @@
                         <tr>
                             <td>
                                 <span class="label label-info">
-                                    <?php echo Material::getMaterialImg($this->get('items[most_picked][1]'), 15); ?>
+                                    <?php echo Material::getMaterialImg($this->get('items[most_picked][1]'), 16); ?>
                                     <?php echo $this->get('items[most_picked][0]'); ?>
                                 </span>
                             </td>
@@ -429,7 +434,7 @@
                         <tr>
                             <td>
                                 <span class="label label-info">
-                                    <?php echo Material::getMaterialImg($this->get('items[most_dropped][1]'), 15); ?>
+                                    <?php echo Material::getMaterialImg($this->get('items[most_dropped][1]'), 16); ?>
                                     <?php echo $this->get('items[most_dropped][0]'); ?>
                                 </span>
                             </td>

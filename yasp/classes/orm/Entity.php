@@ -13,7 +13,7 @@ class Entity extends fActiveRecord {
      *
      * @return string
      */
-    public static function getEntityImg($tp_name, $size = 25) {
+    public static function getEntityImg($tp_name, $size = 32) {
         $path = __ROOT__ . 'media/img/entities/';
         $img = $path . $tp_name . '.png';
 

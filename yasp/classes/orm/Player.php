@@ -33,7 +33,8 @@ class Player extends fActiveRecord {
      * @param string $type
      *
      * @return fNumber
-     */public static function countAllKillsOfType($type = 'all') {
+     */
+    public static function countAllKillsOfType($type = 'all') {
         if($type == 'pvp')
             $sql = '
                     SELECT SUM(times)
@@ -156,7 +157,8 @@ class Player extends fActiveRecord {
 
             return array($num->format(), new Player($row['player_id']));
         } catch(fNoRowsException $e) {
-            return array(0, 'none');
+            $p = new Player();
+            return array(0, $p->setName('none'));
         }
     }
 
@@ -181,7 +183,8 @@ class Player extends fActiveRecord {
 
             return array($num->format(), new Player($row['victim_id']));
         } catch(fNoRowsException $e) {
-            return array(0, 'none');
+            $p = new Player();
+            return array(0, $p->setName('none'));
         }
     }
 
@@ -197,7 +200,9 @@ class Player extends fActiveRecord {
 
     private function getSkin() {
         $headers = get_headers('http://s3.amazonaws.com/MinecraftSkins/' . $this->getName() . '.png');
-        if($headers[7] == 'Content-Type: image/png' || $headers[7] == 'Content-Type: application/octet-stream') {
+        if(isset($headers[7]) &&
+           ($headers[7] == 'Content-Type: image/png' || $headers[7] == 'Content-Type: application/octet-stream')
+        ) {
             $path = 'http://s3.amazonaws.com/MinecraftSkins/' . $this->getName() . '.png';
         }
         else {
@@ -212,20 +217,32 @@ class Player extends fActiveRecord {
      *
      * @return mixed
      */
-    public function getPlayerHead($size = 25) {
-        global $cache;
+    public function getPlayerHead($size = 32) {
+        $name = __ROOT__ . 'cache/skins/head-' . $size . '_' . $this->getUrlName() . '.png';
+        $removed = false;
 
-        $name = 'head_' . $this->getUrlName() . '.png';
+        if(file_exists($name)) {
+            $file = new fImage($name);
 
-        if(!$cache->get($name)) {
+            if($file->getMTime()->gte('+1 week')) {
+                $removed = true;
+                $file->delete();
+
+                echo 'a';
+            }
+        }
+
+        if(!$removed) {
             $canvas = imagecreatetruecolor($size, $size);
             $image = imagecreatefromstring(file_get_contents($this->getSkin()));
             imagecopyresampled($canvas, $image, 0, 0, 8, 8, $size, $size, 8, 8);
 
-            $cache->set($name, imagepng($canvas));
+            imagepng($canvas, $name);
         }
 
-        return $cache->get($name);
+
+        return '<img src="' . fFilesystem::translateToWebPath($name) . '" alt="' . $this->getName() . '" title="' .
+               $this->getName() . '">';
     }
 
 }
