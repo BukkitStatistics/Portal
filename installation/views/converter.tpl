@@ -56,6 +56,10 @@ Util::showMessages('*', 'install/converter', 'alert alert-error');
             Player vs. Player Kills (<?php echo $this->get('total_pvp_kills'); ?>)
         </label>
         <label class="checkbox">
+            <input type="checkbox" name="convert[pve]" id="convert_pve" checked="checked">
+            Player vs. Environment Kills (<?php echo $this->get('total_pve_kills'); ?>)
+        </label>
+        <label class="checkbox">
             <input type="checkbox" name="convert[evp]" id="convert_evp" checked="checked">
             Environment vs. Player Kills (<?php echo $this->get('total_evp_kills'); ?>)
         </label>
