@@ -300,56 +300,145 @@
 </div>
 
 <div class="row-fluid dashboard">
-    <div class="span8"></div>
-    <div class="span4">
-        <h3 style="text-align: center">Items</h3>
+    <div class="span8">
+        <div class="well custom-well fixed-height">
+            <h3>Death Statistics</h3>
 
-        <div class="row-fluid">
-            <div class="span11 offset1">
-                <table class="table no-border statbox-table">
-                    <tr>
-                        <td>
+            <div class="fluid-row">
+                <div class="span4">
+                    <dl class="dl-horizontal dl-stats">
+                        <dt>
+                        <span class="badge badge-success no-img">
+
+                        </span>
+                        </dt>
+                        <dd>Total Kills</dd>
+                    </dl>
+                    <dl class="dl-horizontal dl-stats">
+                        <dt>
+                        <span class="badge badge-success no-img">
+
+                        </span>
+                        </dt>
+                        <dd>Total Deaths</dd>
+                    </dl>
+                    <dl class="dl-horizontal dl-stats">
+                        <dt>
+                        <span class="badge badge-important">
+
+			            </span>
+                        </dt>
+                        <dd>Best Weapon</dd>
+                    </dl>
+                </div>
+
+                <div class="span4">
+                    <dl class="dl-horizontal dl-stats">
+                        <dt>
+                        <span class="badge badge-success no-img">
+
+                        </span>
+                        </dt>
+                        <dd>PvE Kills</dd>
+                    </dl>
+                    <dl class="dl-horizontal dl-stats">
+                        <dt>
+                        <span class="badge badge-important">
+
+			            </span>
+                        </dt>
+                        <dd>Most Dangrous</dd>
+                    </dl>
+                    <dl class="dl-horizontal dl-stats">
+                        <dt>
+                        <span class="badge badge-important">
+
+			            </span>
+                        </dt>
+                        <dd>Most Killed</dd>
+                    </dl>
+                </div>
+
+                <div class="span4">
+                    <dl class="dl-horizontal dl-stats">
+                        <dt>
+                        <span class="badge badge-success no-img">
+
+                        </span>
+                        </dt>
+                        <dd>PvP Kills</dd>
+                    </dl>
+                    <dl class="dl-horizontal dl-stats">
+                        <dt>
+                        <span class="badge badge-important">
+
+			            </span>
+                        </dt>
+                        <dd>Most Kills</dd>
+                    </dl>
+                    <dl class="dl-horizontal dl-stats">
+                        <dt>
+                        <span class="badge badge-important">
+
+			            </span>
+                        </dt>
+                        <dd>Most Deaths</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="span4">
+        <div class="well custom-well fixed-height">
+            <h3 style="text-align: center">Items</h3>
+
+            <div class="row-fluid">
+                <div class="span11 offset1">
+                    <table class="table no-border statbox-table">
+                        <tr>
+                            <td>
                                 <span class="label label-info">
                                     <i class="icon-plus"></i> <?php echo $this->get('items[picked]'); ?>
                                 </span>
-                        </td>
-                        <td>
-                            Total picked up
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
+                            </td>
+                            <td>
+                                Total picked up
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 <span class="label label-info">
                                     <?php echo Material::getMaterialImg($this->get('items[most_picked][1]'), 15); ?>
                                     <?php echo $this->get('items[most_picked][0]'); ?>
                                 </span>
-                        </td>
-                        <td>
-                            Most picked up
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
+                            </td>
+                            <td>
+                                Most picked up
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 <span class="label label-info">
                                     <i class="icon-minus"></i> <?php echo $this->get('items[dropped]'); ?>
                                 </span>
-                        </td>
-                        <td>
-                            Total dropped
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
+                            </td>
+                            <td>
+                                Total dropped
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 <span class="label label-info">
                                     <?php echo Material::getMaterialImg($this->get('items[most_dropped][1]'), 15); ?>
                                     <?php echo $this->get('items[most_dropped][0]'); ?>
                                 </span>
-                        </td>
-                        <td>
-                            Most dropped
-                        </td>
-                    </tr>
-                </table>
+                            </td>
+                            <td>
+                                Most dropped
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

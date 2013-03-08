@@ -42,6 +42,21 @@ section {
     overflow: hidden;
 }
 
+dl.dl-stats {
+}
+
+dl.dl-stats dt {
+    width: 60px !important;
+}
+
+dl.dl-stats dt span {
+    padding: 10px 15px;
+}
+
+dl.dl-stats dd {
+    margin-left: 80px !important;
+}
+
 .section-split {
     height: 50px;
 }
