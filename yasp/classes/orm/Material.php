@@ -5,27 +5,28 @@
 class Material extends fActiveRecord {
 
     /**
-     * TODO: return html img?
      *
      * Will return the path to the material image.<br>
      * If no images was found it will return the default image.
      *
-     * @param $tp_name
+     * @param     $tp_name
+     *
+     * @param int $size
      *
      * @return string
      */
-    public static function getMaterialImg($tp_name) {
-        $path = __ROOT__ . 'img/materials/';
+    public static function getMaterialImg($tp_name, $size = 25) {
+        $path = __ROOT__ . 'media/img/materials/';
         $img = $path . $tp_name . '.png';
 
-        if(file_exists($img))
-            return $img;
-        else
-            return $path . 'default.png';
+        if(!file_exists($img))
+            $img = $path . 'none.png';
+
+        return '<img src="' . fFilesystem::translateToWebPath($img) . '" title="' . fText::compose($tp_name) . '" alt="' .
+               fText::compose($tp_name) . '" style="width: ' . $size . 'px; height: ' . $size . 'px">';
     }
 
     public function getImage($size = 25) {
-        return '<img src="' . Material::getMaterialImg($this->getTpName()) . '" alt="' .
-               fText::compose($this->getTpName()) . '" style="width: ' . $size . 'px; height: ' . $size . 'px"';
+        return Material::getMaterialImg($this->getTpName(), $size);
     }
 }
