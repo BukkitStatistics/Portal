@@ -32,12 +32,14 @@ class TotalBlock extends fActiveRecord {
     public static function getMostOfType($type) {
         try {
             $res = fORMDatabase::retrieve()->translatedQuery('
-                        SELECT MAX(b.' . $type . ') AS total, m.tp_name AS tp_name
+                        SELECT SUM(b.' . $type . ') AS total, m.tp_name
                         FROM "prefix_total_blocks" b, "prefix_materials" m
                         WHERE (
                             b.material_id = m.material_id
                             AND b.material_data = m.data
                             )
+                        GROUP BY b.material_id, b.material_data
+                        ORDER BY SUM(b.' . $type . ') DESC LIMIT 0,1
         ');
 
             $row = $res->fetchRow();
