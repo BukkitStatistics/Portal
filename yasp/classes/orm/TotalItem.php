@@ -1,8 +1,8 @@
 <?php
-class TotalBlock extends fActiveRecord {
+class TotalItem extends fActiveRecord {
 
     /**
-     * Returns the count of the specified block type.
+     * Returns the count of the specified item type.
      *
      * @param $type
      *
@@ -12,7 +12,7 @@ class TotalBlock extends fActiveRecord {
         try {
             $res = fORMDatabase::retrieve()->translatedQuery('
                         SELECT SUM(' . $type . ')
-                        FROM "prefix_total_blocks"
+                        FROM "prefix_total_items"
         ');
 
             return new fNumber($res->fetchScalar());
@@ -22,7 +22,7 @@ class TotalBlock extends fActiveRecord {
     }
 
     /**
-     * Gets the most block of the specified type.<br>
+     * Gets the most item of the specified type.<br>
      * The first array value is an fNumber which is the count. The second one is the block name.
      *
      * @param $type
@@ -32,11 +32,11 @@ class TotalBlock extends fActiveRecord {
     public static function getMostOfType($type) {
         try {
             $res = fORMDatabase::retrieve()->translatedQuery('
-                        SELECT MAX(b.' . $type . ') AS total, m.tp_name AS tp_name
-                        FROM "prefix_total_blocks" b, "prefix_materials" m
+                        SELECT MAX(i.' . $type . ') AS total, m.tp_name AS tp_name
+                        FROM "prefix_total_items" i, "prefix_materials" m
                         WHERE (
-                            b.material_id = m.material_id
-                            AND b.material_data = m.data
+                            i.material_id = m.material_id
+                            AND i.material_data = m.data
                             )
         ');
 
@@ -48,5 +48,4 @@ class TotalBlock extends fActiveRecord {
             return array(0, 'none');
         }
     }
-
 }
