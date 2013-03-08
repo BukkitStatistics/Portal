@@ -24,18 +24,35 @@ class Player extends fActiveRecord {
             fCore::debug($e->getMessage());
         }
 
-        return 0;
+        return new fNumber(0);
     }
 
 
     /**
-     * Counts all PVP+EVP kills
+     * Counts all the kills of the specified type.
+     *
+     * @param string $type
      *
      * @return fNumber
-     */
-    public static function countAllKills() {
-        $res = fORMDatabase::retrieve()->translatedQuery('
-                      SELECT
+     */public static function countAllKillsOfType($type = 'all') {
+        if($type == 'pvp')
+            $sql = '
+                    SELECT SUM(times)
+                    FROM "prefix_total_pvp_kills"
+            ';
+        elseif($type == 'evp')
+            $sql = '
+                    SELECT SUM(player_killed)
+                    FROM "prefix_total_pve_kills"
+            ';
+        elseif($type == 'pve')
+            $sql = '
+                    SELECT SUM(creature_killed)
+                    FROM "prefix_total_pve_kills"
+            ';
+        else
+            $sql = '
+                    SELECT
                       (
                         SELECT SUM(times)
                         FROM "prefix_total_pvp_kills"
@@ -43,8 +60,14 @@ class Player extends fActiveRecord {
                       (
                         SELECT SUM(player_killed)
                         FROM "prefix_total_pve_kills"
+                      ) +
+                      (
+                        SELECT SUM(creature_killed)
+                        FROM "prefix_total_pve_kills"
                       )
-        ');
+            ';
+
+        $res = fORMDatabase::retrieve()->translatedQuery($sql);
 
         try {
             return new fNumber($res->fetchScalar());
@@ -54,7 +77,7 @@ class Player extends fActiveRecord {
             fCore::debug($e->getMessage());
         }
 
-        return 0;
+        return new fNumber(0);
     }
 
     /**
@@ -76,9 +99,17 @@ class Player extends fActiveRecord {
             fCore::debug($e->getMessage());
         }
 
-        return 0;
+        return new fNumber(0);
     }
 
+    /**
+     * Gets the total distance of the specified type.<br>
+     * To get the real total set $type to 'total'.
+     *
+     * @param $type
+     *
+     * @return fNumber
+     */
     public static function getDistanceOfType($type) {
         try {
             if($type == 'total') {
@@ -102,8 +133,15 @@ class Player extends fActiveRecord {
         } catch(fSQLException $e) {
             fCore::debug($e->getMessage());
         }
+
+        return new fNumber(0);
     }
 
+    /**
+     * Returns the url friendly name
+     *
+     * @return string
+     */
     public function getUrlName() {
         return fURL::makeFriendly($this->getName());
     }
