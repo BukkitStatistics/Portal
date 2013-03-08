@@ -101,7 +101,7 @@ class Converter {
                                         $row['num_logins'], $row['num_secs_loggedon'])->getAutoIncrementedValue();
             $foot = $row['total'] - ($row['minecart'] + $row['boat'] + $row['pig']);
             $this->newDB->execute($dist_stmt, $last, $foot, $row['boat'], $row['minecart'], $row['pig']);
-            $this->newDB->execute($login_stmt, $last, $row['last_login'], $row['last_logout']);
+            $this->newDB->execute($login_stmt, $last, $row['last_login'], 1);
             $this->newDB->execute($login_stmt, $last, $row['last_logout'], 0);
 
             $i++;

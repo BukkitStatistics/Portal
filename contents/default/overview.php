@@ -1,9 +1,11 @@
 <?php
 $tpl = Util::newTpl($this, 'overview');
 
-$all_players = $players = fRecordSet::build(
+$players = fRecordSet::build(
     'Player'
 );
+
+$tpl->set('all_players', $players);
 
 // player stats in dashboard
 $num = new fNumber($players->count());

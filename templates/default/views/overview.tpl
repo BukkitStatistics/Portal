@@ -115,8 +115,8 @@
                             <td>
                                 <span class="label label-success">
                                     <i class="icon-signal"></i>
-                                         <?php echo $this->get('serverstats[max_players][0]'); ?> -
-                                         <?php echo $this->get('serverstats[max_players][1]'); ?>
+                                    <?php echo $this->get('serverstats[max_players][0]'); ?> -
+                                    <?php echo $this->get('serverstats[max_players][1]'); ?>
                                 </span>
                             </td>
                             <td>
@@ -262,39 +262,39 @@
             <?php if($this->get('players[online]') == 0): ?>
             <div class='force-center'><em>No players online</em></div>
             <?php
-                else: ?>
-                    <table class="table table-striped table-hover tablesorter">
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Logged in since</th>
-                            <th>Play time</th>
-                        </tr>
-                        </thead>
-                        <tbody class="content">
-                            <?php foreach($this->get('online_players') as $player): ?>
-                            <tr>
-                                <td>
-                                    <a href="?page=player&name=<?php echo $player->getUrlName(); ?>">
-                                        <?php echo $player->getPlayerHead(); ?>
-                                        <?php echo $player->getName(); ?>
-                                    </a>
-                                </td>
-                                <td>
-                                    <?php
-                                        $time = new fTimestamp($player->getLoginTime());
-                                        echo $time->format('H:i:s - d.m.Y');
-                                    ?>
-                                </td>
-                                <td>
-                                    <?php echo $time->getFuzzyDifference(null, true); ?>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+        else: ?>
+            <table class="table table-striped table-hover tablesorter">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Logged in since</th>
+                    <th>Play time</th>
+                </tr>
+                </thead>
+                <tbody class="content">
+                    <?php foreach($this->get('online_players') as $player): ?>
+                <tr>
+                    <td>
+                        <a href="?page=player&name=<?php echo $player->getUrlName(); ?>">
+                            <?php echo $player->getPlayerHead(); ?>
+                            <?php echo $player->getName(); ?>
+                        </a>
+                    </td>
+                    <td>
+                        <?php
+                        $time = new fTimestamp($player->getLoginTime());
+                        echo $time->format('H:i:s - d.m.Y');
+                        ?>
+                    </td>
+                    <td>
+                        <?php echo $time->getFuzzyDifference(null, true); ?>
+                    </td>
+                </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
 
-                    <div class="pagination force-center"></div>
+            <div class="pagination force-center"></div>
             <?php endif; ?>
         </div>
     </div>
@@ -452,6 +452,62 @@
 </section>
 <section id="players">
     <h1><i class="icon-group icon-large"></i> Player Information</h1>
+
+    <div class="well custom-well" id="playersBlock">
+
+        <?php if($this->get('all_players')->count() == 0): ?>
+        <div class='force-center'><em>No players online</em></div>
+        <?php else: ?>
+        <table class="table table-striped table-bordered table-hover tablesorter" id="playersTable">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Last Seen</th>
+                <th>Date Joined</th>
+            </tr>
+            </thead>
+            <tbody class="content">
+
+                <?php foreach($this->get('all_players') as $player): ?>
+            <tr>
+                <td>
+                    <a href="?page=player&name=<?php echo $player->getUrlName(); ?>">
+                        <?php echo $player->getPlayerHead(); ?>
+                        <?php echo $player->getName(); ?>
+                    </a>
+                </td>
+                <td>
+                    <?php
+                    try {
+                        $logins = $player->buildDetailedLogPlayers();
+
+                        $logins->filter(array('getIsLogin=' => true))
+                            ->sort('getTime', 'desc')
+                            ->slice(0, 1);
+
+                        $time = new fTimestamp($logins->getRecord(0)->getTime());
+                        echo $time->format('D d.m.Y');
+                        } catch(fEmptySetException $e) {
+                            echo fText::compose('never');
+                        }
+                    ?>
+
+                </td>
+                <td>
+                    <?php
+                    $time = new fTimestamp($player->getFirstLogin());
+                    echo $time->format('D d.m.Y');
+                    ?>
+                </td>
+            </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <?php endif; ?>
+
+        <div class="pagination force-center"></div>
+
+    </div>
 </section>
 <section id="world">
     <div class="row-fluid">
