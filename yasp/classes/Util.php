@@ -59,6 +59,8 @@ class Util {
             fCore::debug($e);
         } catch(fProgrammerException $e) {
             fCore::debug($e);
+        } catch(fNotFoundException $e) {
+            fCore::debug($e);
         }
 
         if($default == null)

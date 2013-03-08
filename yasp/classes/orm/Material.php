@@ -15,7 +15,7 @@ class Material extends fActiveRecord {
      *
      * @return string
      */
-    public static function getMaterialImg($tp_name, $size = 25) {
+    public static function getMaterialImg($tp_name, $size = 32) {
         $path = __ROOT__ . 'media/img/materials/';
         $img = $path . $tp_name . '.png';
 
@@ -64,7 +64,7 @@ class Material extends fActiveRecord {
      *
      * @return string
      */
-    public function getImage($size = 25) {
+    public function getImage($size = 32) {
         return Material::getMaterialImg($this->getTpName(), $size);
     }
 }
