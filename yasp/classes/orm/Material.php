@@ -6,7 +6,7 @@ class Material extends fActiveRecord {
 
     /**
      *
-     * Will return the path to the material image.<br>
+     * Returns the html code to the material image.<br>
      * If no images was found it will return the default image.
      *
      * @param     $tp_name

@@ -33,6 +33,8 @@ class Util {
      *
      * @param string $option
      *
+     * @param null   $default
+     *
      * @return string|boolean
      */
     public static function getOption($option, $default = null) {
@@ -176,10 +178,12 @@ class Util {
      * and replaces the contents with 'cached (filetime)'.
      *
      * @param        $content
-     * @param fCache $cache
+     *
+     * @internal param \fCache $cache
      */
     public static function getCachedContent($content) {
         global $cache;
+
         if(DEVELOPMENT)
             return;
 
@@ -204,6 +208,17 @@ class Util {
         die($cached);
     }
 
+    /**
+     * Returns an nice formatted string of the seconds in this format: dd:hh:mm:ss
+     *
+     * @param      $timestamp
+     * @param bool $seconds
+     * @param bool $minutes
+     * @param bool $hours
+     * @param bool $days
+     *
+     * @return int|string
+     */
     public static function  formatSeconds($timestamp, $seconds = true, $minutes = true, $hours = true, $days = true) {
         $s = $timestamp % 60;
         $m = floor(($timestamp % 3600) / 60);
@@ -224,5 +239,4 @@ class Util {
         else
             return $d . ' ' . $h . ':' . $m . ':' . $s;
     }
-
 }
