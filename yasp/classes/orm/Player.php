@@ -213,6 +213,9 @@ class Player extends fActiveRecord {
     }
 
     /**
+     * Returns the html code to the player head image.<br>
+     * If no image was found it will return the default image.
+     *
      * @param int $size
      *
      * @return mixed
@@ -227,12 +230,9 @@ class Player extends fActiveRecord {
             if($file->getMTime()->gte('+1 week')) {
                 $removed = true;
                 $file->delete();
-
-                echo 'a';
             }
         }
-
-        if(!$removed) {
+        elseif(!file_exists($name) || $removed) {
             $canvas = imagecreatetruecolor($size, $size);
             $image = imagecreatefromstring(file_get_contents($this->getSkin()));
             imagecopyresampled($canvas, $image, 0, 0, 8, 8, $size, $size, 8, 8);
@@ -243,6 +243,10 @@ class Player extends fActiveRecord {
 
         return '<img src="' . fFilesystem::translateToWebPath($name) . '" alt="' . $this->getName() . '" title="' .
                $this->getName() . '">';
+    }
+
+    public function getLastLogin() {
+
     }
 
 }

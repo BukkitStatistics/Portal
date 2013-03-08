@@ -19,18 +19,18 @@ if(defined('DB_DATABASE') && DB_DATABASE != '') {
         $schema = new fSchema($db);
         $remapped = $cache->get('remapped');
         if($remapped == NULL) {
-            $s = '';
+            $remapped = '';
             foreach($schema->getTables() as $table) {
                 if(DB_PREFIX != '' && stripos($table, DB_PREFIX) !== false) {
                     $class_name = fGrammar::singularize(fGrammar::camelize(str_replace(DB_PREFIX . '_', '', $table),
                                                                            true));
-                    $s .= 'fORM::mapClassToTable("' . $class_name . '", "' . $table . '");';
+                    $remapped .= 'fORM::mapClassToTable("' . $class_name . '", "' . $table . '");';
                 }
             }
-            $cache->set('remapped', $s);
+            $cache->set('remapped', $remapped);
         }
-        else
-            eval($remapped);
+
+        eval($remapped);
 
         // adds prefix
         $db->registerHookCallback('unmodified', Util::addPrefix);
