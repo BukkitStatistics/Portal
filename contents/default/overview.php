@@ -32,11 +32,10 @@ $server_stats['max_players'] = $server->getMaxPlayersOnline(true);
 $tpl->set('serverstats', $server_stats);
 
 // distance
-$distance_stats['total'] = 0;
-$distance_stats['foot'] = 0;
-$distance_stats['minecart'] = 0;
-$distance_stats['boat'] = 0;
-$distance_stats['pig'] = 0;
+$distance_stats['total'] = Player::getDistanceOfType('total')->format();
+$distance_stats['foot'] = Player::getDistanceOfType('foot')->format();
+$distance_stats['minecart'] = Player::getDistanceOfType('minecart')->format();
+$distance_stats['boat'] = Player::getDistanceOfType('boat')->format();
 
 $tpl->set('distance', $distance_stats);
 
