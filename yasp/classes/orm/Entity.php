@@ -4,7 +4,7 @@ class Entity extends fActiveRecord {
 
     /**
      *
-     * Will return the path to the entity image.<br>
+     * Returns the html code to the entity image.<br>
      * If no images was found it will return the default image.
      *
      * @param     $tp_name
@@ -27,7 +27,7 @@ class Entity extends fActiveRecord {
 
     /**
      * Gets the most dangerous entity.<br>
-     * The first array value is an fNumber which is the count. The second one is the block name.
+     * The first array value is an fNumber which is the count. The second one is the entity name.
      *
      * @return array
      */
@@ -53,7 +53,7 @@ class Entity extends fActiveRecord {
 
     /**
      * Gets the most killed entity.<br>
-     * The first array value is an fNumber which is the count. The second one is the block name.
+     * The first array value is an fNumber which is the count. The second one is the entity name.
      *
      * @return array
      */

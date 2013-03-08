@@ -4,7 +4,6 @@
  */
 class Player extends fActiveRecord {
 
-
     /**
      * Counts all player deaths
      *
@@ -138,6 +137,55 @@ class Player extends fActiveRecord {
     }
 
     /**
+     * Gets the most dangerous player.<br>
+     * The first array value is an fNumber which is the count. The second one is the player.
+     *
+     * @return array
+     */
+    public static function getMostDangerous() {
+        $res = fORMDatabase::retrieve()->translatedQuery('
+                    SELECT SUM(pvp.times) AS total, pvp.player_id FROM "prefix_total_pvp_kills" pvp
+                    GROUP BY pvp.player_id
+                    ORDER BY SUM(pvp.times) DESC
+                    LIMIT 0,1
+        ');
+
+        try {
+            $row = $res->fetchRow();
+            $num = new fNumber($row['total']);
+
+            return array($num->format(), new Player($row['player_id']));
+        } catch(fNoRowsException $e) {
+            return array(0, 'none');
+        }
+    }
+
+
+    /**
+     * Gets the most killed player.<br>
+     * The first array value is an fNumber which is the count. The second one is the player.
+     *
+     * @return array
+     */
+    public static function getMostKilled() {
+        $res = fORMDatabase::retrieve()->translatedQuery('
+                    SELECT SUM(pvp.times) AS total, pvp.victim_id FROM "prefix_total_pvp_kills" pvp
+                    GROUP BY pvp.victim_id
+                    ORDER BY SUM(pvp.times) DESC
+                    LIMIT 0,1
+        ');
+
+        try {
+            $row = $res->fetchRow();
+            $num = new fNumber($row['total']);
+
+            return array($num->format(), new Player($row['victim_id']));
+        } catch(fNoRowsException $e) {
+            return array(0, 'none');
+        }
+    }
+
+    /**
      * Returns the url friendly name
      *
      * @return string
@@ -145,4 +193,39 @@ class Player extends fActiveRecord {
     public function getUrlName() {
         return fURL::makeFriendly($this->getName());
     }
+
+
+    private function getSkin() {
+        $headers = get_headers('http://s3.amazonaws.com/MinecraftSkins/' . $this->getName() . '.png');
+        if($headers[7] == 'Content-Type: image/png' || $headers[7] == 'Content-Type: application/octet-stream') {
+            $path = 'http://s3.amazonaws.com/MinecraftSkins/' . $this->getName() . '.png';
+        }
+        else {
+            $path = 'http://s3.amazonaws.com/MinecraftSkins/char.png';
+        }
+
+        return $path;
+    }
+
+    /**
+     * @param int $size
+     *
+     * @return mixed
+     */
+    public function getPlayerHead($size = 25) {
+        global $cache;
+
+        $name = 'head_' . $this->getUrlName() . '.png';
+
+        if(!$cache->get($name)) {
+            $canvas = imagecreatetruecolor($size, $size);
+            $image = imagecreatefromstring(file_get_contents($this->getSkin()));
+            imagecopyresampled($canvas, $image, 0, 0, 8, 8, $size, $size, 8, 8);
+
+            $cache->set($name, imagepng($canvas));
+        }
+
+        return $cache->get($name);
+    }
+
 }

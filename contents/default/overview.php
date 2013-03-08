@@ -55,10 +55,10 @@ $death_stats['pvp'] = Player::countAllKillsOfType('pvp')->format();
 $death_stats['evp'] = Player::countAllKillsOfType('evp')->format();
 $death_stats['deaths'] = $player_stats['died'];
 $death_stats['most_dangerous'] = Entity::getMostDangerous();
-$death_stats['top_kill'] = 0;
+$death_stats['top_killer'] = Player::getMostDangerous();
 $death_stats['top_weapon'] = Material::getMostDangerous();
 $death_stats['most_killed_mob'] = Entity::getMostKilled();
-$death_stats['most_killed_player'] = 0;
+$death_stats['most_killed_player'] = Player::getMostKilled();
 
 $tpl->set('deaths', $death_stats);
 
