@@ -4,8 +4,6 @@ $tpl = Util::newTpl($this, 'overview');
 $all_players = $players = fRecordSet::build(
     'Player'
 );
-$test = new Material();
-fCore::expose($test->reflect());
 
 // player stats in dashboard
 $num = new fNumber($players->count());
@@ -41,10 +39,10 @@ $distance_stats['pig'] = 0;
 $tpl->set('distance', $distance_stats);
 
 // block stats
-$block_stats['destroyed'] = Material::countAllBlocks('destroyed')->format();
-$block_stats['placed'] = Material::countAllBlocks('placed')->format();
-$block_stats['most_placed'] = Material::getMostPlacedBlock();
-$block_stats['most_destroyed'] = Material::getMostDestroyedBlock();
+$block_stats['destroyed'] = TotalBlock::countAllOfType('destroyed')->format();
+$block_stats['placed'] = TotalBlock::countAllOfType('placed')->format();
+$block_stats['most_placed'] = TotalBlock::getMostOfType('placed');
+$block_stats['most_destroyed'] = TotalBlock::getMostOfType('destroyed');
 
 $tpl->set('blocks', $block_stats);
 
@@ -52,9 +50,9 @@ $tpl->set('blocks', $block_stats);
 $tpl->set('online_players', $players);
 
 // items
-$item_stats['dropped'] = Material::countAllItems('dropped')->format();
-$item_stats['picked'] = Material::countAllItems('picked_up')->format();
-$item_stats['most_dropped'] = 0;
-$item_stats['most_picked'] = 0;
+$item_stats['dropped'] = TotalItem::countAllOfType('dropped')->format();
+$item_stats['picked'] = TotalItem::countAllOfType('picked_up')->format();
+$item_stats['most_dropped'] = TotalItem::getMostOfType('dropped');
+$item_stats['most_picked'] = TotalItem::getMostOfType('picked_up');
 
 $tpl->set('items', $item_stats);
