@@ -66,10 +66,24 @@ $death_stats['most_killed_player'] = Player::getMostKilled();
 
 $tpl->set('deaths', $death_stats);
 
-// items
+// items stats
 $item_stats['dropped'] = TotalItem::countAllOfType('dropped')->format();
 $item_stats['picked'] = TotalItem::countAllOfType('picked_up')->format();
 $item_stats['most_dropped'] = TotalItem::getMostOfType('dropped');
 $item_stats['most_picked'] = TotalItem::getMostOfType('picked_up');
 
 $tpl->set('items', $item_stats);
+
+// blocks
+$blocks = fRecordSet::build(
+    'Material'
+)->filter('{record}::hasTotalBlocks');
+
+$tpl->set('block_list', $blocks);
+
+// items
+$items = fRecordSet::build(
+    'Material'
+)->filter('{record}::hasTotalItems');
+
+$tpl->set('item_list', $items);

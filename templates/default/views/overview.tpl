@@ -257,7 +257,7 @@
         </div>
     </div>
     <div class="span8">
-        <div class="well custom-well fixed-height paginate">
+        <div class="well custom-well fixed-height paginator">
             <h3>Online Players</h3>
             <?php if($this->get('players[online]') == 0): ?>
             <div class='force-center'><em>No players online</em></div>
@@ -453,7 +453,7 @@
 <section id="players">
     <h1><i class="icon-group icon-large"></i> Player Information</h1>
 
-    <div class="well custom-wel paginate" id="playersBlock">
+    <div class="well custom-wel paginator" id="playersBlock">
 
         <?php if($this->get('all_players')->count() == 0): ?>
         <div class='force-center'><em>No players online</em></div>
@@ -511,9 +511,79 @@
     <div class="row-fluid">
         <div class="span6">
             <h1><i class="icon-picture icon-large"></i> Blocks</h1>
+
+            <div class="well custom-well paginator" id="worldBlocks">
+
+                <table class="table table-striped table-bordered tablesorter" id="worldBlocksTable">
+                    <thead>
+                    <tr>
+                        <th style="text-align: center;">Block Type</th>
+                        <th style="text-align: center;">Destroyed</th>
+                        <th style="text-align: center;">Placed</th>
+                    </tr>
+                    </thead>
+                    <tbody class="content">
+                    <?php
+                        foreach($this->get('block_list') as $block):
+                            $total = $block->countTotalBlockAmount();
+                    ?>
+                        <tr>
+                            <td>
+                                <?php echo $block->getImage(); ?>
+                                <?php echo $block->getName(); ?>
+                            </td>
+                            <td>
+                                <?php echo $total['destroyed']->format(); ?>
+                            </td>
+                            <td>
+                                <?php echo $total['placed']->format(); ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+
+                <div class="page_navigation pagination force-center"></div>
+
+            </div>
         </div>
         <div class="span6">
             <h1><i class="icon-legal icon-large"></i> Items</h1>
+
+            <div class="well custom-well paginator" id="worldBlocks">
+
+                <table class="table table-striped table-bordered tablesorter" id="worldBlocksTable">
+                    <thead>
+                    <tr>
+                        <th style="text-align: center;">Block Type</th>
+                        <th style="text-align: center;">Picked Up</th>
+                        <th style="text-align: center;">Dropped</th>
+                    </tr>
+                    </thead>
+                    <tbody class="content">
+                    <?php
+                    foreach($this->get('item_list') as $item):
+                        $total = $item->countTotalItemAmount();
+                        ?>
+                    <tr>
+                        <td>
+                            <?php echo $item->getImage(); ?>
+                            <?php echo $item->getName(); ?>
+                        </td>
+                        <td>
+                            <?php echo $total['picked']->format(); ?>
+                        </td>
+                        <td>
+                            <?php echo $total['dropped']->format(); ?>
+                        </td>
+                    </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+
+                <div class="page_navigation pagination force-center"></div>
+
+            </div>
         </div>
     </div>
 </section>

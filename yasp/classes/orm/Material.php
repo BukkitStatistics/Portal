@@ -67,4 +67,72 @@ class Material extends fActiveRecord {
     public function getImage($size = 32) {
         return Material::getMaterialImg($this->getTpName(), $size);
     }
+
+    /**
+     * Returns the translated material name.
+     *
+     * @return string
+     */
+    public function getName() {
+        return fText::compose($this->getTpName());
+    }
+
+    public function countTotalBlockAmount() {
+        $set = fRecordSet::build(
+            'TotalBlock',
+            array(
+                 'material_id='       => $this->getMaterialId(),
+                 'material_data='     => $this->getData(),
+                 'placed!|destroyed!' => array(0, 0)
+            )
+        );
+
+        $destroyed = 0;
+        $placed = 0;
+
+        try {
+            $set->tossIfEmpty();
+
+            foreach($set as $total) {
+                $destroyed += $total->getDestroyed();
+                $placed += $total->getPlaced();
+            }
+        } catch(fEmptySetException $e) {
+        }
+
+        return array(
+            'destroyed'  => new fNumber($destroyed),
+            'placed' => new fNumber($placed)
+        );
+    }
+
+    public function countTotalItemAmount() {
+        $set = fRecordSet::build(
+            'TotalItem',
+            array(
+                 'material_id='       => $this->getMaterialId(),
+                 'material_data='     => $this->getData(),
+                 'picked_up!|dropped!' => array(0, 0)
+            )
+        );
+
+        $picked = 0;
+        $dropped = 0;
+
+        try {
+            $set->tossIfEmpty();
+
+            foreach($set as $total) {
+                $picked += $total->getPickedUp();
+                $dropped += $total->getDropped();
+            }
+
+        } catch(fEmptySetException $e) {
+        }
+
+        return array(
+            'picked'  => new fNumber($picked),
+            'dropped' => new fNumber($dropped)
+        );
+    }
 }

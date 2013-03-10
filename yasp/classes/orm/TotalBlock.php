@@ -51,4 +51,18 @@ class TotalBlock extends fActiveRecord {
         }
     }
 
+    /**
+     * Overrides the original create function because of the strange behaviour of flourish with two or more primary keys.
+     *
+     * @return Material
+     */
+    public function createMaterial() {
+        return new Material(
+            array(
+                 'material_id' => $this->getMaterialId(),
+                 'data'        => $this->getMaterialData()
+            )
+        );
+    }
+
 }
