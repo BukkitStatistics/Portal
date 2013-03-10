@@ -257,7 +257,7 @@
         </div>
     </div>
     <div class="span8">
-        <div class="well custom-well fixed-height">
+        <div class="well custom-well fixed-height paginate">
             <h3>Online Players</h3>
             <?php if($this->get('players[online]') == 0): ?>
             <div class='force-center'><em>No players online</em></div>
@@ -453,7 +453,7 @@
 <section id="players">
     <h1><i class="icon-group icon-large"></i> Player Information</h1>
 
-    <div class="well custom-well" id="playersBlock">
+    <div class="well custom-wel paginate" id="playersBlock">
 
         <?php if($this->get('all_players')->count() == 0): ?>
         <div class='force-center'><em>No players online</em></div>
@@ -503,10 +503,8 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
+        <div class="pagination pagination-centered"></div>
         <?php endif; ?>
-
-        <div class="pagination force-center"></div>
-
     </div>
 </section>
 <section id="world">

@@ -8,6 +8,7 @@ class Util {
     const addPrefix = "Util::addPrefix";
     const newTpl = "Util::newTpl";
     const getCachedContent = "Util::getCachedContent";
+    const newDesign = "Util:newDesign";
 
     /**
      * Checks if the given host is an valid IP or localhost
@@ -175,6 +176,12 @@ class Util {
         return $tpl;
     }
 
+
+    /**
+     * This will output the main content! If the $content is cached the cached content will be echoed.
+     *
+     * @param $content
+     */
     public static function newDesign($content) {
         global $cache;
 
