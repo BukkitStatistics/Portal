@@ -21,6 +21,8 @@ class Player extends fActiveRecord {
             fCore::debug($e->getMessage());
         } catch(fNoRemainingException $e) {
             fCore::debug($e->getMessage());
+        } catch(fValidationException $e) {
+            fCore::debug($e->getMessage());
         }
 
         return new fNumber(0);
@@ -75,6 +77,8 @@ class Player extends fActiveRecord {
             fCore::debug($e->getMessage());
         } catch(fNoRemainingException $e) {
             fCore::debug($e->getMessage());
+        } catch(fValidationException $e) {
+            fCore::debug($e->getMessage());
         }
 
         return new fNumber(0);
@@ -96,6 +100,8 @@ class Player extends fActiveRecord {
         } catch(fNoRowsException $e) {
             fCore::debug($e->getMessage());
         } catch(fNoRemainingException $e) {
+            fCore::debug($e->getMessage());
+        } catch(fValidationException $e) {
             fCore::debug($e->getMessage());
         }
 
@@ -131,6 +137,8 @@ class Player extends fActiveRecord {
         } catch(fNoRemainingException $e) {
             fCore::debug($e->getMessage());
         } catch(fSQLException $e) {
+            fCore::debug($e->getMessage());
+        } catch(fValidationException $e) {
             fCore::debug($e->getMessage());
         }
 

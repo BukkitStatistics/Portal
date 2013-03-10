@@ -36,12 +36,16 @@ if(defined('DB_DATABASE') && DB_DATABASE != '') {
         $db->registerHookCallback('unmodified', Util::addPrefix);
     } catch(fNotFoundException $e) {
         $cacheSingle->set('dbOffline', true, 60 * 2);
-        fMessaging::create('errors', '{default}', $e->getMessage());
+        fMessaging::create('error', '{errors}', $e);
     } catch(fAuthorizationException $e) {
         $cacheSingle->set('dbOffline', true, 60 * 2);
-        fMessaging::create('errors', '{default}', $e->getMessage());
+        fMessaging::create('error', '{errors}', $e);
     } catch(fConnectivityException $e) {
         $cacheSingle->set('dbOffline', true, 60 * 2);
-        fMessaging::create('errors', '{default}', $e->getMessage());
+        fMessaging::create('error', '{errors}', $e);
     }
 }
+else
+    if(!file_exists(__ROOT__ . 'index.php'))
+        fMessaging::create('critical', '{errors}',
+                           new fConnectivityException('The database file is filled incorrectly.'));

@@ -61,6 +61,10 @@ class Util {
             fCore::debug($e);
         } catch(fNotFoundException $e) {
             fCore::debug($e);
+        } catch(fSQLException $e) {
+            fMessaging::create('critical', '{errors}', $e);
+        } catch(fAuthorizationException $e) {
+            fMessaging::create('critical', '{errors}', $e);
         }
 
         if($default == null)
@@ -136,7 +140,7 @@ class Util {
         if(DB_PREFIX != '')
             $prefix = DB_PREFIX . '_';
         else
-            $prefix = '';
+            return;
         // if prefix is included skip this statement
         if(strpos($sql, DB_PREFIX) !== false)
             return;
@@ -169,6 +173,30 @@ class Util {
         $context->set('tpl', $tpl);
 
         return $tpl;
+    }
+
+    public static function newDesign($content) {
+        global $cache;
+
+        fBuffer::startCapture();
+        $design = new fTemplating(__ROOT__ . 'contents/default', __ROOT__ . 'templates/default/index.php');
+        $design->set('title', Util::getOption('portal_title'));
+        $design->set('tplRoot', __ROOT__ . 'templates/default/views');
+        $design->add('header_additions', '');
+        try {
+            $design->inject($content);
+        } catch(fException $e) {
+            fMessaging::create('critical', '{errors}', $e);
+            $design->inject('error.php');
+        }
+        $design->place();
+        $capture = fBuffer::stopCapture();
+
+        echo $capture;
+
+        // TODO: set cache time in settings
+        if(!DEVELOPMENT && !is_null($cache))
+            $cache->set($content . '.cache', $capture, 120);
     }
 
 

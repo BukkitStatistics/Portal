@@ -5,7 +5,6 @@
  */
 if(!extension_loaded('xdebug')) {
     if(DEVELOPMENT) {
-        // TODO: nice looking error page
         fCore::enableErrorHandling('html');
         fCore::enableExceptionHandling('html');
     }
@@ -17,8 +16,14 @@ fSession::open();
 /*
  * Initialize cache
  */
-$cache = new fCache('directory', __ROOT__ . 'cache');
-$cacheSingle = new fCache('file', __ROOT__ . 'cache/singlecache');
+try {
+    $cache = new fCache('directory', __ROOT__ . 'cache');
+    $cacheSingle = new fCache('file', __ROOT__ . 'cache/singlecache');
+} catch(fEnvironmentException $e) {
+    fMessaging::create('critical', '{errors}', $e);
+    Util::newDesign('error.php');
+    die();
+}
 
 /*
  * Initializes ORM

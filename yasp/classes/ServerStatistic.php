@@ -31,6 +31,8 @@ class ServerStatistic {
                         SELECT * FROM "prefix_server_statistics"
         ');
 
+        $res->tossIfNoRows();
+
         foreach($res as $row)
             $this->values[$row['key']] = $row['value'];
     }
