@@ -13,15 +13,16 @@ class TotalBlock extends fActiveRecord {
     public static function countAllOfType($type, $material = null) {
         try {
             if($material == null)
-                $where = '';
-            else
-                $where = 'WHERE material_id = ' . $material->getMaterialId();
-
-            $res = fORMDatabase::retrieve()->translatedQuery('
+                $res = fORMDatabase::retrieve()->translatedQuery('
                         SELECT SUM(' . $type . ')
                         FROM "prefix_total_blocks"
-                        ' . $where . '
-            ');
+                ');
+            else
+                $res = fORMDatabase::retrieve()->translatedQuery('
+                        SELECT SUM(' . $type . ')
+                        FROM "prefix_total_blocks"
+                        WHERE material_id = %s
+                ', $material->getMaterialId());
 
             $count = $res->fetchScalar();
             if(is_null($count))
