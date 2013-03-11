@@ -455,56 +455,8 @@
 
     <div class="well custom-wel paginator" id="playersBlock">
 
-        <?php if($this->get('all_players')->count() == 0): ?>
-        <div class='force-center'><em>No players online</em></div>
-        <?php else: ?>
-        <table class="table table-striped table-bordered table-hover tablesorter" id="playersTable">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Last Seen</th>
-                <th>Date Joined</th>
-            </tr>
-            </thead>
-            <tbody class="content">
+        <?php $this->inject('mod/players.tpl'); ?>
 
-                <?php foreach($this->get('all_players') as $player): ?>
-            <tr>
-                <td>
-                    <a href="?page=player&name=<?php echo $player->getUrlName(); ?>">
-                        <?php echo $player->getPlayerHead(); ?>
-                        <?php echo $player->getName(); ?>
-                    </a>
-                </td>
-                <td>
-                    <?php
-                    try {
-                        $logins = $player->buildDetailedLogPlayers();
-
-                        $logins->filter(array('getIsLogin=' => true))
-                            ->sort('getTime', 'desc')
-                            ->slice(0, 1);
-
-                        $time = new fTimestamp($logins->getRecord(0)->getTime());
-                        echo $time->format('D d.m.Y');
-                        } catch(fEmptySetException $e) {
-                            echo fText::compose('never');
-                        }
-                    ?>
-
-                </td>
-                <td>
-                    <?php
-                    $time = new fTimestamp($player->getFirstLogin());
-                    echo $time->format('D d.m.Y');
-                    ?>
-                </td>
-            </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        <div class="pagination pagination-centered"></div>
-        <?php endif; ?>
     </div>
 </section>
 <section id="world">
@@ -514,34 +466,7 @@
 
             <div class="well custom-well paginator" id="worldBlocks">
 
-                <table class="table table-striped table-bordered tablesorter" id="worldBlocksTable">
-                    <thead>
-                    <tr>
-                        <th style="text-align: center;">Block Type</th>
-                        <th style="text-align: center;">Destroyed</th>
-                        <th style="text-align: center;">Placed</th>
-                    </tr>
-                    </thead>
-                    <tbody class="content">
-                    <?php
-                        foreach($this->get('block_list') as $block): ?>
-                        <tr>
-                            <td>
-                                <?php echo $block->getImage(); ?>
-                                <?php echo $block->getName(); ?>
-                            </td>
-                            <td>
-                                <?php echo TotalBlock::countAllOfType('destroyed', $block)->format(); ?>
-                            </td>
-                            <td>
-                                <?php echo TotalBlock::countAllOfType('placed', $block)->format(); ?>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
-
-                <div class="page_navigation pagination force-center"></div>
+                <?php $this->inject('mod/total_blocks.tpl') ?>
 
             </div>
         </div>
@@ -550,34 +475,7 @@
 
             <div class="well custom-well paginator" id="worldBlocks">
 
-                <table class="table table-striped table-bordered tablesorter" id="worldBlocksTable">
-                    <thead>
-                    <tr>
-                        <th style="text-align: center;">Item Type</th>
-                        <th style="text-align: center;">Picked Up</th>
-                        <th style="text-align: center;">Dropped</th>
-                    </tr>
-                    </thead>
-                    <tbody class="content">
-                    <?php
-                    foreach($this->get('item_list') as $item): ?>
-                    <tr>
-                        <td>
-                            <?php echo $item->getImage(); ?>
-                            <?php echo $item->getName(); ?>
-                        </td>
-                        <td>
-                            <?php echo TotalItem::countAllOfType('picked_up', $item)->format(); ?>
-                        </td>
-                        <td>
-                            <?php echo TotalItem::countAllOfType('dropped', $item)->format(); ?>
-                        </td>
-                    </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-
-                <div class="page_navigation pagination force-center"></div>
+                <?php $this->inject('mod/total_items.tpl') ?>
 
             </div>
         </div>
@@ -585,11 +483,14 @@
 </section>
 <section id="deaths">
     <div class="row-fluid">
-        <div class="span8">
+        <div class="span12">
             <h1><i class="icon-tint icon-large"></i> Death Log</h1>
-        </div>
-        <div class="span4">
-            <h1> Death Statistics</h1>
+
+            <div class="well custom-well" style="padding: 10px;" id="deathsBlock">
+
+                <?php $this->inject('mod/death_log.tpl'); ?>
+
+            </div>
         </div>
     </div>
 </section>
