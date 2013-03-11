@@ -230,15 +230,11 @@ class Util {
         $file = new fFile(__ROOT__ . 'cache/' . $content . '.cache');
         $time = $file->getMTime();
         $text = '
-            <div class="row-fluid">
-                <div class="span4 offset8">
-                    <small>
-                        <em>cached (' . $time->format('H:i:s') . ')</em>
-                    </small>
-                </div>
-             </div>
-         </bod>';
-        $cached = preg_replace('%<small.*id="execution_time">(.*)</small>%si', $text, $cached);
+            <small>
+                <em>cached (' . $time->format('H:i:s') . ')</em>
+            </small>
+         ';
+        $cached = preg_replace('%<small .*id="execution_time".*>(.*)</small>%si', $text, $cached);
 
         die($cached);
     }

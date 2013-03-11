@@ -4,21 +4,35 @@ class TotalItem extends fActiveRecord {
     /**
      * Returns the count of the specified item type.
      *
-     * @param $type
+     * @param string   $type
+     *
+     * @param Material $material
      *
      * @return fNumber
      */
-    public static function countAllOfType($type) {
+    public static function countAllOfType($type, $material = null) {
         try {
+            if($material == null)
+                $where = '';
+            else
+                $where = 'WHERE material_id = ' . $material->getMaterialId();
+
             $res = fORMDatabase::retrieve()->translatedQuery('
                         SELECT SUM(' . $type . ')
                         FROM "prefix_total_items"
-        ');
+                        ' . $where . '
+            ');
 
-            return new fNumber($res->fetchScalar());
+            $count = $res->fetchScalar();
+            if(is_null($count))
+                return new fNumber(0);
+
+            return new fNumber($count);
         } catch(fSQLException $e) {
-            return new fNumber(0);
+            fCore::debug($e->getMessage());
         }
+
+        return new fNumber(0);
     }
 
     /**
@@ -34,11 +48,9 @@ class TotalItem extends fActiveRecord {
             $res = fORMDatabase::retrieve()->translatedQuery('
                         SELECT SUM(i.' . $type . ') AS total, m.tp_name
                         FROM "prefix_total_items" i, "prefix_materials" m
-                        WHERE (
-                            i.material_id = m.material_id
-                            AND i.material_data = m.data
-                            )
-                        GROUP BY i.material_id, i.material_data
+                        WHERE i.material_id = m.material_id
+
+                        GROUP BY i.material_id
                         ORDER BY SUM(i.' . $type . ') DESC LIMIT 0,1
         ');
 
@@ -49,19 +61,5 @@ class TotalItem extends fActiveRecord {
         } catch(fSQLException $e) {
             return array(0, 'none');
         }
-    }
-
-    /**
-     * Overrides the original create function because of the strange behaviour of flourish with two or more primary keys.
-     *
-     * @return Material
-     */
-    public function createMaterial() {
-        return new Material(
-            array(
-                 'material_id' => $this->getMaterialId(),
-                 'data'        => $this->getMaterialData()
-            )
-        );
     }
 }

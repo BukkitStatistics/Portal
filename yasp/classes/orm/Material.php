@@ -41,7 +41,7 @@ class Material extends fActiveRecord {
                             LEFT JOIN "prefix_total_pvp_kills" pvp ON pve.material_id = pvp.material_id,
                         "prefix_materials" m
                     WHERE pve.material_id != -1
-                    AND (pve.material_id = m.material_id AND pve.material_data = m.data)
+                    AND pve.material_id = m.material_id
                     GROUP BY pve.material_id
                     ORDER BY SUM(pve.creature_killed) + COALESCE(SUM(pvp.times), 0) DESC
                     LIMIT 0,1
@@ -75,64 +75,5 @@ class Material extends fActiveRecord {
      */
     public function getName() {
         return fText::compose($this->getTpName());
-    }
-
-    public function countTotalBlockAmount() {
-        $set = fRecordSet::build(
-            'TotalBlock',
-            array(
-                 'material_id='       => $this->getMaterialId(),
-                 'material_data='     => $this->getData(),
-                 'placed!|destroyed!' => array(0, 0)
-            )
-        );
-
-        $destroyed = 0;
-        $placed = 0;
-
-        try {
-            $set->tossIfEmpty();
-
-            foreach($set as $total) {
-                $destroyed += $total->getDestroyed();
-                $placed += $total->getPlaced();
-            }
-        } catch(fEmptySetException $e) {
-        }
-
-        return array(
-            'destroyed'  => new fNumber($destroyed),
-            'placed' => new fNumber($placed)
-        );
-    }
-
-    public function countTotalItemAmount() {
-        $set = fRecordSet::build(
-            'TotalItem',
-            array(
-                 'material_id='       => $this->getMaterialId(),
-                 'material_data='     => $this->getData(),
-                 'picked_up!|dropped!' => array(0, 0)
-            )
-        );
-
-        $picked = 0;
-        $dropped = 0;
-
-        try {
-            $set->tossIfEmpty();
-
-            foreach($set as $total) {
-                $picked += $total->getPickedUp();
-                $dropped += $total->getDropped();
-            }
-
-        } catch(fEmptySetException $e) {
-        }
-
-        return array(
-            'picked'  => new fNumber($picked),
-            'dropped' => new fNumber($dropped)
-        );
     }
 }
