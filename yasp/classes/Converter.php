@@ -136,14 +136,14 @@ class Converter {
                             "player_id",
                             "victim_id",
                             "times")
-                            VALUES (%i, %i, %i, %i)
+                            VALUES (%s, %i, %i, %i)
         ');
         $i = $this->start;
         foreach($result as $row) {
             try {
                 $player_id = $this->newDB->query($id_stmt, $row['killer'])->fetchScalar();
                 $victim_id = $this->newDB->query($id_stmt, $row['victim'])->fetchScalar();
-                $this->newDB->execute($pvp_stmt, $row['material'],
+                $this->newDB->execute($pvp_stmt, $row['material'] . ':0',
                                       $player_id,
                                       $victim_id,
                                       $row['times']);
@@ -187,14 +187,14 @@ class Converter {
                             "entity_id",
                             "player_id",
                             "creature_killed")
-                            VALUES (%i, %i, %i, %i)
+                            VALUES (%s, %i, %i, %i)
         ');
 
         $i = $this->start;
         foreach($result as $row) {
             try {
                 $player_id = $this->newDB->query($id_stmt, $row['killer'])->fetchScalar();
-                $this->newDB->execute($pve_stmt, $row['material'],
+                $this->newDB->execute($pve_stmt, $row['material'] . ':0',
                                       $this->mapEntityIds($row['creature']),
                                       $player_id,
                                       $row['times']);
@@ -238,14 +238,14 @@ class Converter {
                                 "entity_id",
                                 "player_id",
                                 "player_killed")
-                                VALUES (%i, %i, %i, %i)
+                                VALUES (%s, %i, %i, %i)
         ');
         $evp_stmt_update = $this->newDB->translatedPrepare('
                                 UPDATE "prefix_total_pve_kills" SET
                                 "player_killed" = %i
                                 WHERE "player_id" = %i
                                 AND "entity_id" = %i
-                                AND "material_id" = %i
+                                AND "material_id" = %s
          ');
         $i = $this->start;
         foreach($result as $row) {
@@ -253,10 +253,10 @@ class Converter {
                 $player_id = $this->newDB->query($id_stmt, $row['victim'])->fetchScalar();
                 $count = $this->newDB->query($evp_stmt_update, $row['times'], $player_id,
                                              $this->mapEntityIds($row['creature']),
-                                             $row['material'])->countAffectedRows();
+                                             $row['material'] . ':0')->countAffectedRows();
 
                 if($count <= 0) {
-                    $this->newDB->execute($evp_stmt_new, $row['material'], $this->mapEntityIds($row['creature']),
+                    $this->newDB->execute($evp_stmt_new, $row['material'] . ':0', $this->mapEntityIds($row['creature']),
                                           $player_id,
                                           $row['times']);
                 }
@@ -325,14 +325,14 @@ class Converter {
                             "material_id",
                             "destroyed",
                             "placed")
-                            VALUES (%i, %i, %i, %i)
+                            VALUES (%i, %s, %i, %i)
         ');
 
         $i = $this->start;
         foreach($result as $row) {
             try {
                 $player_id = $this->newDB->query($id_stmt, $row['player'])->fetchScalar();
-                $this->newDB->query($block_stmt, $player_id, $row['block_id'], $row['num_destroyed'],
+                $this->newDB->query($block_stmt, $player_id, $row['block_id'] . ':0', $row['num_destroyed'],
                                     $row['num_placed']);
             } catch(fNoRowsException $e) {
                 //skip -> player does not exist!
@@ -361,14 +361,14 @@ class Converter {
                             "material_id",
                             "dropped",
                             "picked_up")
-                            VALUES (%i, %i, %i, %i)
+                            VALUES (%i, %s, %i, %i)
         ');
 
         $i = $this->start;
         foreach($result as $row) {
             try {
                 $player_id = $this->newDB->query($id_stmt, $row['player'])->fetchScalar();
-                $this->newDB->query($item_stmt, $player_id, $this->mapMaterialIds($row['item']), $row['num_dropped'],
+                $this->newDB->query($item_stmt, $player_id, $this->mapMaterialIds($row['item']) . ':0', $row['num_dropped'],
                                     $row['num_pickedup']);
             } catch(fNoRowsException $e) {
                 //skip -> player does not exist!
