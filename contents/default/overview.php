@@ -5,8 +5,18 @@ $this->add('css', fFilesystem::translateToWebPath(__ROOT__ . 'media/css/tablesor
 
 // players
 $players = fRecordSet::build(
-    'Player'
+    'Player',
+    array(),
+    array(fRequest::get('order_by', 'string', 'name') => fRequest::get('order_sort', 'string', 'asc'))
 );
+
+$tpl->set('all_players', $players);
+
+if(fRequest::isAjax() && fRequest::get('mod') == 'players') {
+    $tpl->inject('mod/players.tpl');
+    die();
+}
+
 
 $tpl->set('all_players', $players);
 

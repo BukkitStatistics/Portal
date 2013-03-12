@@ -1,10 +1,10 @@
 <?php if($this->get('all_players')->count() == 0): ?>
 <div class='force-center'><em>No players online</em></div>
 <?php else: ?>
-<table class="table table-striped table-bordered table-hover tablesorter" id="playersTable">
+<table class="table table-striped table-bordered table-hover sortable" id="playersTable">
     <thead>
     <tr>
-        <th>Name</th>
+        <th class="sort-button" data-type="name" data-sort="desc">Name</th>
         <th>Last Seen</th>
         <th>Date Joined</th>
     </tr>
