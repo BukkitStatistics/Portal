@@ -1,12 +1,25 @@
 <?php
 $tpl = Util::newTpl($this, 'overview');
-$this->add('js', fFilesystem::translateToWebPath(__ROOT__ . 'media/js/jquery.tablesorter.min.js'));
-$this->add('css', fFilesystem::translateToWebPath(__ROOT__ . 'media/css/tablesorter.css'));
 
 // players
 $players = fRecordSet::build(
-    'Player'
+    'Player',
+    array(),
+    array(
+         str_ireplace('prefix_', DB_PREFIX . '_',
+                      fRequest::get('order_by', 'string', 'name')) => fRequest::get('order_sort', 'string', 'asc')
+    ),
+    10,
+    1
 );
+
+$tpl->set('all_players', $players);
+
+if(fRequest::isAjax() && fRequest::get('mod') == 'players') {
+    $tpl->inject('mod/players.tpl');
+    die();
+}
+
 
 $tpl->set('all_players', $players);
 
@@ -70,7 +83,7 @@ $death_log_pve = fRecordSet::build(
     1
 );
 
-$death_log = $death_log_pvp->merge($death_log_pve);
+$death_log = $death_log_pvp->merge($death_log_pve)->sort('getTime', 'desc');
 
 $tpl->set('death_log', $death_log);
 // player stats in dashboard

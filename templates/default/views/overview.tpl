@@ -453,7 +453,7 @@
 <section id="players">
     <h1><i class="icon-group icon-large"></i> Player Information</h1>
 
-    <div class="well custom-wel paginator" id="playersBlock">
+    <div class="well custom-wel" data-mod="players" id="playersBlock">
 
         <?php $this->inject('mod/players.tpl'); ?>
 
