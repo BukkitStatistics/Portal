@@ -2,12 +2,16 @@
 $tpl = Util::newTpl($this, 'overview');
 
 // players
+if(fRequest::get('mod') == 'players')
+    $order = fRequest::get('order_by', 'string', 'name') == 'tp_name' ? 'name' : fRequest::get('order_by', 'string',
+                                                                                               'name');
+else
+    $order = 'name';
 $players = fRecordSet::build(
     'Player',
     array(),
     array(
-         str_ireplace('prefix_', DB_PREFIX . '_',
-                      fRequest::get('order_by', 'string', 'name')) => fRequest::get('order_sort', 'string', 'asc')
+         str_ireplace('prefix_', DB_PREFIX . '_', $order) => fRequest::get('order_sort', 'string', 'asc')
     ),
     10,
     1
@@ -24,13 +28,20 @@ if(fRequest::isAjax() && fRequest::get('mod') == 'players') {
 $tpl->set('all_players', $players);
 
 // blocks
+if(fRequest::get('mod') == 'blocks') {
+    $order = fRequest::get('order_by', 'string', 'tp_name');
+    if($order != 'tp_name')
+        $order = 'SUM(' . $order . ')';
+}
+else
+    $order = 'SUM(destroyed)';
 $blocks = fRecordSet::buildFromSQL(
     'Material',
     '
     SELECT m.* FROM "prefix_materials" m
-    LEFT JOIN "prefix_total_blocks" b ON m.material_id = b.material_id
+    RIGHT JOIN "prefix_total_blocks" b ON m.material_id = b.material_id
     GROUP BY b.material_id
-    ORDER BY ' . fRequest::get('order_by', 'string', 'tp_name') . ' ' . fRequest::get('order_sort', 'string', 'ASC') . '
+    ORDER BY ' . $order . ' ' . fRequest::get('order_sort', 'string', 'desc') . '
     LIMIT 0,20
     ',
     'SELECT COUNT(material_id) FROM "prefix_materials"',
@@ -46,13 +57,20 @@ if(fRequest::isAjax() && fRequest::get('mod') == 'blocks') {
 }
 
 // items
+if(fRequest::get('mod') == 'items') {
+    $order = fRequest::get('order_by', 'string', 'tp_name');
+    if($order != 'tp_name')
+        $order = 'SUM(' . $order . ')';
+}
+else
+    $order = 'SUM(picked_up)';
 $items = fRecordSet::buildFromSQL(
     'Material',
     '
     SELECT m.* FROM "prefix_materials" m
     LEFT JOIN "prefix_total_items" b ON m.material_id = b.material_id
     GROUP BY b.material_id
-    ORDER BY ' . fRequest::get('order_by', 'string', 'tp_name') . ' ' . fRequest::get('order_sort', 'string', 'ASC') . '
+    ORDER BY ' . $order . ' ' . fRequest::get('order_sort', 'string', 'desc') . '
     LIMIT 0,20
     ',
     'SELECT COUNT(material_id) FROM "prefix_materials"',
@@ -87,13 +105,18 @@ $death_log = $death_log_pvp->merge($death_log_pve)->sort('getTime', 'desc');
 
 $tpl->set('death_log', $death_log);
 // player stats in dashboard
-$num = new fNumber($players->count());
+$num = new fNumber($players->count(true));
 $player_stats['tracked'] = $num->format();
 $player_stats['died'] = Player::countAllDeaths()->format();
 $player_stats['killed'] = Player::countAllKillsOfType()->format();
 
-$players = $players->filter(array('getOnline=' => true));
-$player_stats['online'] = $players->count();
+$players = fRecordSet::build(
+    'Player',
+    array(
+         'online=' => true
+    )
+);
+$player_stats['online'] = $players->count(true);
 
 
 $tpl->set('players', $player_stats);
