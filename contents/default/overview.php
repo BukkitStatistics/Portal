@@ -105,13 +105,18 @@ $death_log = $death_log_pvp->merge($death_log_pve)->sort('getTime', 'desc');
 
 $tpl->set('death_log', $death_log);
 // player stats in dashboard
-$num = new fNumber($players->count());
+$num = new fNumber($players->count(true));
 $player_stats['tracked'] = $num->format();
 $player_stats['died'] = Player::countAllDeaths()->format();
 $player_stats['killed'] = Player::countAllKillsOfType()->format();
 
-$players = $players->filter(array('getOnline=' => true));
-$player_stats['online'] = $players->count();
+$players = fRecordSet::build(
+    'Player',
+    array(
+         'online=' => true
+    )
+);
+$player_stats['online'] = $players->count(true);
 
 
 $tpl->set('players', $player_stats);
