@@ -85,6 +85,10 @@ dl.dl-stats dd {
 	margin: 1px;
 }
 
+.sort-button {
+    cursor: pointer;
+}
+
 
 /* Pagination */
 

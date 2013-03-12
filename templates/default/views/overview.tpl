@@ -464,7 +464,7 @@
         <div class="span6">
             <h1><i class="icon-picture icon-large"></i> Blocks</h1>
 
-            <div class="well custom-well paginator" id="worldBlocks">
+            <div class="well custom-well paginator" data-mod="blocks" id="worldBlocks">
 
                 <?php $this->inject('mod/total_blocks.tpl') ?>
 
@@ -473,7 +473,7 @@
         <div class="span6">
             <h1><i class="icon-legal icon-large"></i> Items</h1>
 
-            <div class="well custom-well paginator" id="worldBlocks">
+            <div class="well custom-well" data-mod="items" id="worldBlocks">
 
                 <?php $this->inject('mod/total_items.tpl') ?>
 

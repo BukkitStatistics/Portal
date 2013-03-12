@@ -13,7 +13,7 @@
     <meta name="author" content="">
 
 
-    <script src="media/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="media/js/jquery-1.9.1.min.js" type="text/javascript"></script>
     <script src="media/js/jquery.metadata.js" type="text/javascript"></script>
     <script src="media/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="media/js/initialize.js" type="text/javascript"></script>
@@ -28,7 +28,7 @@
     <?php $this->place('css'); ?>
 
     <!--[if lt IE 9]>
-    <script src="../media/js/html5.min.js"></script>
+    <script src="media/js/html5.min.js"></script>
     <![endif]-->
 </head>
 <body>

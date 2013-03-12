@@ -1,9 +1,9 @@
-<table class="table table-striped table-bordered tablesorter" id="worldBlocksTable">
+<table class="table table-striped table-bordered sortable">
     <thead>
     <tr>
-        <th style="text-align: center;">Item Type</th>
-        <th style="text-align: center;">Picked Up</th>
-        <th style="text-align: center;">Dropped</th>
+        <th style="text-align: center;" class="sort-button" data-type="tp_name" data-sort="desc">Item Type</th>
+        <th style="text-align: center;" class="sort-button" data-type="picked_up" data-sort="desc">Picked Up</th>
+        <th style="text-align: center;" class="sort-button" data-type="dropped" data-sort="desc">Dropped</th>
     </tr>
     </thead>
     <tbody class="content">
@@ -24,4 +24,3 @@
         <?php endforeach; ?>
     </tbody>
 </table>
-<div class="page_navigation pagination force-center"></div>
