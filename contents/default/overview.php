@@ -3,12 +3,76 @@ $tpl = Util::newTpl($this, 'overview');
 $this->add('js', fFilesystem::translateToWebPath(__ROOT__ . 'media/js/jquery.tablesorter.min.js'));
 $this->add('css', fFilesystem::translateToWebPath(__ROOT__ . 'media/css/tablesorter.css'));
 
+// players
 $players = fRecordSet::build(
     'Player'
 );
 
 $tpl->set('all_players', $players);
 
+// blocks
+$blocks = fRecordSet::buildFromSQL(
+    'Material',
+    '
+    SELECT m.* FROM "prefix_materials" m
+    LEFT JOIN "prefix_total_blocks" b ON m.material_id = b.material_id
+    GROUP BY b.material_id
+    ORDER BY ' . fRequest::get('order_by', 'string', 'tp_name') . ' ' . fRequest::get('order_sort', 'string', 'ASC') . '
+    LIMIT 0,20
+    ',
+    'SELECT COUNT(material_id) FROM "prefix_materials"',
+    20,
+    1
+);
+
+$tpl->set('block_list', $blocks);
+
+if(fRequest::isAjax() && fRequest::get('mod') == 'blocks') {
+    $tpl->inject('mod/total_blocks.tpl');
+    die();
+}
+
+// items
+$items = fRecordSet::buildFromSQL(
+    'Material',
+    '
+    SELECT m.* FROM "prefix_materials" m
+    LEFT JOIN "prefix_total_items" b ON m.material_id = b.material_id
+    GROUP BY b.material_id
+    ORDER BY ' . fRequest::get('order_by', 'string', 'tp_name') . ' ' . fRequest::get('order_sort', 'string', 'ASC') . '
+    LIMIT 0,20
+    ',
+    'SELECT COUNT(material_id) FROM "prefix_materials"',
+    20,
+    1
+);
+
+$tpl->set('item_list', $items);
+
+if(fRequest::isAjax() && fRequest::get('mod') == 'items') {
+    $tpl->inject('mod/total_items.tpl');
+    die();
+}
+
+// death log
+$death_log_pvp = fRecordSet::build(
+    'DetailedPvpKill',
+    array(),
+    array('time' => 'asc'),
+    10,
+    1
+);
+$death_log_pve = fRecordSet::build(
+    'DetailedPveKill',
+    array(),
+    array('time' => 'asc'),
+    10,
+    1
+);
+
+$death_log = $death_log_pvp->merge($death_log_pve);
+
+$tpl->set('death_log', $death_log);
 // player stats in dashboard
 $num = new fNumber($players->count());
 $player_stats['tracked'] = $num->format();
@@ -73,57 +137,3 @@ $item_stats['most_dropped'] = TotalItem::getMostOfType('dropped');
 $item_stats['most_picked'] = TotalItem::getMostOfType('picked_up');
 
 $tpl->set('items', $item_stats);
-
-// blocks
-$blocks = fRecordSet::buildFromSQL(
-    'Material',
-    '
-    SELECT m.* FROM "prefix_materials" m
-    LEFT JOIN "prefix_total_blocks" b ON m.material_id = b.material_id
-    GROUP BY b.material_id
-    ORDER BY m.tp_name
-    LIMIT 0,20
-    ',
-    'SELECT COUNT(material_id) FROM "prefix_materials"',
-    20,
-    1
-);
-
-$tpl->set('block_list', $blocks);
-
-// items
-$items = fRecordSet::buildFromSQL(
-    'Material',
-    '
-    SELECT m.* FROM "prefix_materials" m
-    LEFT JOIN "prefix_total_items" b ON m.material_id = b.material_id
-    GROUP BY b.material_id
-    ORDER BY m.tp_name
-    LIMIT 0,20
-    ',
-    'SELECT COUNT(material_id) FROM "prefix_materials"',
-    20,
-    1
-);
-
-$tpl->set('item_list', $items);
-
-// death log
-$death_log_pvp = fRecordSet::build(
-    'DetailedPvpKill',
-    array(),
-    array('time' => 'asc'),
-    10,
-    1
-);
-$death_log_pve = fRecordSet::build(
-    'DetailedPveKill',
-    array(),
-    array('time' => 'asc'),
-    10,
-    1
-);
-
-$death_log = $death_log_pvp->merge($death_log_pve);
-
-$tpl->set('death_log', $death_log);
