@@ -14,7 +14,6 @@
 
 
     <script src="media/js/jquery-1.9.1.min.js" type="text/javascript"></script>
-    <script src="media/js/jquery.metadata.js" type="text/javascript"></script>
     <script src="media/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="media/js/initialize.js" type="text/javascript"></script>
 

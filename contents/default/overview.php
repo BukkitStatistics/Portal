@@ -1,7 +1,5 @@
 <?php
 $tpl = Util::newTpl($this, 'overview');
-$this->add('js', fFilesystem::translateToWebPath(__ROOT__ . 'media/js/jquery.tablesorter.min.js'));
-$this->add('css', fFilesystem::translateToWebPath(__ROOT__ . 'media/css/tablesorter.css'));
 
 // players
 $players = fRecordSet::build(
