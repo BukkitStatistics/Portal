@@ -257,7 +257,7 @@
         </div>
     </div>
     <div class="span8">
-        <div class="well custom-well fixed-height">
+        <div class="well custom-well fixed-height paginator">
             <h3>Online Players</h3>
             <?php if($this->get('players[online]') == 0): ?>
             <div class='force-center'><em>No players online</em></div>
@@ -453,59 +453,9 @@
 <section id="players">
     <h1><i class="icon-group icon-large"></i> Player Information</h1>
 
-    <div class="well custom-well" id="playersBlock">
+    <div class="well custom-wel paginator" id="playersBlock">
 
-        <?php if($this->get('all_players')->count() == 0): ?>
-        <div class='force-center'><em>No players online</em></div>
-        <?php else: ?>
-        <table class="table table-striped table-bordered table-hover tablesorter" id="playersTable">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Last Seen</th>
-                <th>Date Joined</th>
-            </tr>
-            </thead>
-            <tbody class="content">
-
-                <?php foreach($this->get('all_players') as $player): ?>
-            <tr>
-                <td>
-                    <a href="?page=player&name=<?php echo $player->getUrlName(); ?>">
-                        <?php echo $player->getPlayerHead(); ?>
-                        <?php echo $player->getName(); ?>
-                    </a>
-                </td>
-                <td>
-                    <?php
-                    try {
-                        $logins = $player->buildDetailedLogPlayers();
-
-                        $logins->filter(array('getIsLogin=' => true))
-                            ->sort('getTime', 'desc')
-                            ->slice(0, 1);
-
-                        $time = new fTimestamp($logins->getRecord(0)->getTime());
-                        echo $time->format('D d.m.Y');
-                        } catch(fEmptySetException $e) {
-                            echo fText::compose('never');
-                        }
-                    ?>
-
-                </td>
-                <td>
-                    <?php
-                    $time = new fTimestamp($player->getFirstLogin());
-                    echo $time->format('D d.m.Y');
-                    ?>
-                </td>
-            </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        <?php endif; ?>
-
-        <div class="pagination force-center"></div>
+        <?php $this->inject('mod/players.tpl'); ?>
 
     </div>
 </section>
@@ -513,19 +463,34 @@
     <div class="row-fluid">
         <div class="span6">
             <h1><i class="icon-picture icon-large"></i> Blocks</h1>
+
+            <div class="well custom-well paginator" id="worldBlocks">
+
+                <?php $this->inject('mod/total_blocks.tpl') ?>
+
+            </div>
         </div>
         <div class="span6">
             <h1><i class="icon-legal icon-large"></i> Items</h1>
+
+            <div class="well custom-well paginator" id="worldBlocks">
+
+                <?php $this->inject('mod/total_items.tpl') ?>
+
+            </div>
         </div>
     </div>
 </section>
 <section id="deaths">
     <div class="row-fluid">
-        <div class="span8">
+        <div class="span12">
             <h1><i class="icon-tint icon-large"></i> Death Log</h1>
-        </div>
-        <div class="span4">
-            <h1> Death Statistics</h1>
+
+            <div class="well custom-well" style="padding: 10px;" id="deathsBlock">
+
+                <?php $this->inject('mod/death_log.tpl'); ?>
+
+            </div>
         </div>
     </div>
 </section>

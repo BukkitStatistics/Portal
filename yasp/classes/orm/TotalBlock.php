@@ -4,28 +4,43 @@ class TotalBlock extends fActiveRecord {
     /**
      * Returns the count of the specified block type.
      *
-     * @param $type
+     * @param string   $type
+     *
+     * @param Material $material
      *
      * @return fNumber
      */
-    public static function countAllOfType($type) {
+    public static function countAllOfType($type, $material = null) {
         try {
-            $res = fORMDatabase::retrieve()->translatedQuery('
+            if($material == null)
+                $res = fORMDatabase::retrieve()->translatedQuery('
                         SELECT SUM(' . $type . ')
                         FROM "prefix_total_blocks"
-        ');
+                ');
+            else
+                $res = fORMDatabase::retrieve()->translatedQuery('
+                        SELECT SUM(' . $type . ')
+                        FROM "prefix_total_blocks"
+                        WHERE material_id = %s
+                ', $material->getMaterialId());
 
-            return new fNumber($res->fetchScalar());
+            $count = $res->fetchScalar();
+            if(is_null($count))
+                return new fNumber(0);
+
+            return new fNumber($count);
         } catch(fSQLException $e) {
-            return new fNumber(0);
+            fCore::debug($e->getMessage());
         }
+
+        return new fNumber(0);
     }
 
     /**
      * Gets the most block of the specified type.<br>
      * The first array value is an fNumber which is the count. The second one is the block name.
      *
-     * @param $type
+     * @param string   $type
      *
      * @return array|bool
      */
@@ -34,11 +49,8 @@ class TotalBlock extends fActiveRecord {
             $res = fORMDatabase::retrieve()->translatedQuery('
                         SELECT SUM(b.' . $type . ') AS total, m.tp_name
                         FROM "prefix_total_blocks" b, "prefix_materials" m
-                        WHERE (
-                            b.material_id = m.material_id
-                            AND b.material_data = m.data
-                            )
-                        GROUP BY b.material_id, b.material_data
+                        WHERE b.material_id = m.material_id
+                        GROUP BY b.material_id
                         ORDER BY SUM(b.' . $type . ') DESC LIMIT 0,1
         ');
 
@@ -50,5 +62,4 @@ class TotalBlock extends fActiveRecord {
             return array(0, 'none');
         }
     }
-
 }

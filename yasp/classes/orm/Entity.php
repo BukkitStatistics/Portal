@@ -77,4 +77,12 @@ class Entity extends fActiveRecord {
         }
     }
 
+    public function getImage($size = 32) {
+        return Entity::getEntityImg($this->getTpName(), $size);
+    }
+
+    public function getName() {
+        return fText::compose($this->getTpName());
+    }
+
 }

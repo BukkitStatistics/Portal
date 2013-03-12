@@ -8,6 +8,7 @@ class Util {
     const addPrefix = "Util::addPrefix";
     const newTpl = "Util::newTpl";
     const getCachedContent = "Util::getCachedContent";
+    const newDesign = "Util:newDesign";
 
     /**
      * Checks if the given host is an valid IP or localhost
@@ -175,6 +176,12 @@ class Util {
         return $tpl;
     }
 
+
+    /**
+     * This will output the main content! If the $content is cached the cached content will be echoed.
+     *
+     * @param $content
+     */
     public static function newDesign($content) {
         global $cache;
 
@@ -223,15 +230,11 @@ class Util {
         $file = new fFile(__ROOT__ . 'cache/' . $content . '.cache');
         $time = $file->getMTime();
         $text = '
-            <div class="row-fluid">
-                <div class="span4 offset8">
-                    <small>
-                        <em>cached (' . $time->format('H:i:s') . ')</em>
-                    </small>
-                </div>
-             </div>
-         </bod>';
-        $cached = preg_replace('%<small.*id="execution_time">(.*)</small>%si', $text, $cached);
+            <small>
+                <em>cached (' . $time->format('H:i:s') . ')</em>
+            </small>
+         ';
+        $cached = preg_replace('%<small .*id="execution_time".*>(.*)</small>%si', $text, $cached);
 
         die($cached);
     }

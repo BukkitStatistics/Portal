@@ -1,11 +1,11 @@
 <?php
 $tpl = Util::newTpl($this, 'overview');
+$this->add('js', fFilesystem::translateToWebPath(__ROOT__ . 'media/js/jquery.tablesorter.min.js'));
+$this->add('css', fFilesystem::translateToWebPath(__ROOT__ . 'media/css/tablesorter.css'));
 
 $players = fRecordSet::build(
     'Player'
 );
-$test = new Material();
-fCore::expose($test->reflect());
 
 $tpl->set('all_players', $players);
 
@@ -66,10 +66,64 @@ $death_stats['most_killed_player'] = Player::getMostKilled();
 
 $tpl->set('deaths', $death_stats);
 
-// items
+// items stats
 $item_stats['dropped'] = TotalItem::countAllOfType('dropped')->format();
 $item_stats['picked'] = TotalItem::countAllOfType('picked_up')->format();
 $item_stats['most_dropped'] = TotalItem::getMostOfType('dropped');
 $item_stats['most_picked'] = TotalItem::getMostOfType('picked_up');
 
 $tpl->set('items', $item_stats);
+
+// blocks
+$blocks = fRecordSet::buildFromSQL(
+    'Material',
+    '
+    SELECT m.* FROM "prefix_materials" m
+    LEFT JOIN "prefix_total_blocks" b ON m.material_id = b.material_id
+    GROUP BY b.material_id
+    ORDER BY m.tp_name
+    LIMIT 0,20
+    ',
+    'SELECT COUNT(material_id) FROM "prefix_materials"',
+    20,
+    1
+);
+
+$tpl->set('block_list', $blocks);
+
+// items
+$items = fRecordSet::buildFromSQL(
+    'Material',
+    '
+    SELECT m.* FROM "prefix_materials" m
+    LEFT JOIN "prefix_total_items" b ON m.material_id = b.material_id
+    GROUP BY b.material_id
+    ORDER BY m.tp_name
+    LIMIT 0,20
+    ',
+    'SELECT COUNT(material_id) FROM "prefix_materials"',
+    20,
+    1
+);
+
+$tpl->set('item_list', $items);
+
+// death log
+$death_log_pvp = fRecordSet::build(
+    'DetailedPvpKill',
+    array(),
+    array('time' => 'asc'),
+    10,
+    1
+);
+$death_log_pve = fRecordSet::build(
+    'DetailedPveKill',
+    array(),
+    array('time' => 'asc'),
+    10,
+    1
+);
+
+$death_log = $death_log_pvp->merge($death_log_pve);
+
+$tpl->set('death_log', $death_log);

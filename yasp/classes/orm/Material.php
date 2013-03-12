@@ -41,7 +41,7 @@ class Material extends fActiveRecord {
                             LEFT JOIN "prefix_total_pvp_kills" pvp ON pve.material_id = pvp.material_id,
                         "prefix_materials" m
                     WHERE pve.material_id != -1
-                    AND (pve.material_id = m.material_id AND pve.material_data = m.data)
+                    AND pve.material_id = m.material_id
                     GROUP BY pve.material_id
                     ORDER BY SUM(pve.creature_killed) + COALESCE(SUM(pvp.times), 0) DESC
                     LIMIT 0,1
@@ -66,5 +66,14 @@ class Material extends fActiveRecord {
      */
     public function getImage($size = 32) {
         return Material::getMaterialImg($this->getTpName(), $size);
+    }
+
+    /**
+     * Returns the translated material name.
+     *
+     * @return string
+     */
+    public function getName() {
+        return fText::compose($this->getTpName());
     }
 }

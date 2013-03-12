@@ -254,9 +254,4 @@ class Player extends fActiveRecord {
         return '<img src="' . fFilesystem::translateToWebPath($name) . '" alt="' . $this->getName() . '" title="' .
                $this->getName() . '">';
     }
-
-    public function getLastLogin() {
-
-    }
-
 }
