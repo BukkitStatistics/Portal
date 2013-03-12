@@ -5,8 +5,8 @@
     <thead>
     <tr>
         <th class="sort-button" data-type="name" data-sort="desc">Name</th>
-        <th>Last Seen</th>
-        <th>Date Joined</th>
+        <th class="sort-button" data-type="prefix_detailed_log_players.time" data-sort="desc">Last Seen</th>
+        <th class="sort-button" data-type="first_login" data-sort="desc">Date Joined</th>
     </tr>
     </thead>
     <tbody class="content">

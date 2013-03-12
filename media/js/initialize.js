@@ -7,7 +7,8 @@ $(document).ready(function() {
         });
     }, 100);
 
-    $(document).on('click', '.sort-button', function () {
+    // sortable tables
+    $(document).on('click', 'div[data-mod] .sort-button', function () {
         var sort = 'desc';
         var button = $(this);
         var bdata = button.data();

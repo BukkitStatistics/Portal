@@ -7,7 +7,12 @@ $this->add('css', fFilesystem::translateToWebPath(__ROOT__ . 'media/css/tablesor
 $players = fRecordSet::build(
     'Player',
     array(),
-    array(fRequest::get('order_by', 'string', 'name') => fRequest::get('order_sort', 'string', 'asc'))
+    array(
+         str_ireplace('prefix_', DB_PREFIX . '_',
+                      fRequest::get('order_by', 'string', 'name')) => fRequest::get('order_sort', 'string', 'asc')
+    ),
+    10,
+    1
 );
 
 $tpl->set('all_players', $players);
@@ -80,7 +85,7 @@ $death_log_pve = fRecordSet::build(
     1
 );
 
-$death_log = $death_log_pvp->merge($death_log_pve);
+$death_log = $death_log_pvp->merge($death_log_pve)->sort('getTime', 'desc');
 
 $tpl->set('death_log', $death_log);
 // player stats in dashboard
