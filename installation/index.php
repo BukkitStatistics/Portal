@@ -21,7 +21,7 @@
     <script src="media/js/html5.min.js"></script>
     <![endif]-->
 
-    <script src="media/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="media/js/jquery-1.9.1.min.js" type="text/javascript"></script>
     <script src="media/js/bootstrap.min.js" type="text/javascript"></script>
 </head>
 <body>
