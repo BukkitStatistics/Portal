@@ -2,11 +2,24 @@
 $tpl = Util::newTpl($this, 'overview');
 
 // players
-if(fRequest::get('mod') == 'players')
+if(fRequest::get('mod') == 'players') {
     $order = fRequest::get('order_by', 'string', 'name') == 'tp_name' ? 'name' : fRequest::get('order_by', 'string',
                                                                                                'name');
-else
+
+    $tpl->set('sort[]', null);
+
+    if(fRequest::get('order_by', 'string') == 'prefix_detailed_log_players.time')
+        $tpl->set('sort[time]', fRequest::get('order_sort', 'string', 'asc'));
+    elseif(fRequest::get('order_by', 'string') == 'first_login')
+        $tpl->set('sort[first_login]', fRequest::get('order_sort', 'string', 'asc'));
+    else
+        $tpl->set('sort[name]', fRequest::get('order_sort', 'string', 'asc'));
+}
+else {
+    $tpl->set('sort[name]', fRequest::get('order_sort', 'string', 'asc'));
     $order = 'name';
+}
+
 $players = fRecordSet::build(
     'Player',
     array(),
