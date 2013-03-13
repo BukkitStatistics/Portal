@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content" data-mod="death_log">
     <?php if($this->get('death_log')->count() != 0): ?>
         <?php
             foreach($this->get('death_log') as $log):
@@ -40,10 +40,19 @@
                 </div>
             </div>
         <?php endforeach; ?>
+        <div id="death_logPagination" class="pagination-centered"></div>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                callModulePage(
+                    'death_log',
+                    <?php echo $this->get('death_log')->getPages(); ?>,
+                    <?php echo $this->get('death_log')->getPage(); ?>
+                );
+            });
+        </script>
     <?php else: ?>
-    <div class='force-center'><em>No players online</em></div>
+    <div class='force-center'><em>No death log.</em></div>
     <?php endif; ?>
 
 </div>
-
-<div class="pagination force-center"></div>

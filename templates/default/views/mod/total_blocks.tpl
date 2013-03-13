@@ -24,3 +24,14 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+<div id="block_listPagination" class="pagination-centered"></div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        callModulePage(
+            'block_list',
+            <?php echo $this->get('block_list')->getPages(); ?>,
+            <?php echo $this->get('block_list')->getPage(); ?>
+        );
+    });
+</script>

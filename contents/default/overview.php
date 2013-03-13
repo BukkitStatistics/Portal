@@ -1,5 +1,6 @@
 <?php
 $tpl = Util::newTpl($this, 'overview');
+$this->add('js', 'media/js/jquery.bootpag.js');
 
 // players
 $this->inject('mod/players.php');

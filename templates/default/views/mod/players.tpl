@@ -51,5 +51,15 @@
         <?php endforeach; ?>
     </tbody>
 </table>
-<div class="pagination pagination-centered"></div>
+<div id="playersPagination" class="pagination-centered"></div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        callModulePage(
+            'players',
+            <?php echo $this->get('players')->getPages(); ?>,
+            <?php echo $this->get('players')->getPage(); ?>
+        );
+    });
+</script>
 <?php endif; ?>
