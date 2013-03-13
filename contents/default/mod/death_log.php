@@ -1,6 +1,7 @@
 <?php
 $tpl_death = Util::newTpl($this, 'mod/death_log', 'death_log');
 
+// TODO: limit total amount by time
 $death_log_pvp = fRecordSet::build(
     'DetailedPvpKill',
     array(),
