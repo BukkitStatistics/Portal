@@ -15,6 +15,7 @@ switch(fRequest::get('order_by', 'int')) {
 }
 
 $page = fRequest::get('page', 'int', 1);
+$limit = 10;
 
 $items = fRecordSet::buildFromSQL(
     'Material',
@@ -24,15 +25,15 @@ $items = fRecordSet::buildFromSQL(
         LEFT JOIN "prefix_total_items" b ON m.material_id = b.material_id
         GROUP BY b.material_id
         ORDER BY ' . $type . ' ' . fRequest::get('order_sort', 'string', 'desc') . '
-        LIMIT %i,20
-    ', ($page - 1) * 20
+        LIMIT %i,' . $limit . '
+    ', ($page - 1) * $limit
     ),
     '
     SELECT COUNT(*) FROM (SELECT m.* FROM "prefix_materials" m
     RIGHT JOIN "prefix_total_items" b ON m.material_id = b.material_id
     GROUP BY b.material_id) c
     ',
-    20,
+    $limit,
     $page
 );
 

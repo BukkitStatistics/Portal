@@ -46,8 +46,6 @@ function callModule(type, sort, content, page) {
                 loader.removeClass('alert-info').addClass('alert-success').delay(500).fadeOut();
                 content.data('last-call', {'type': type, 'sort': sort});
                 content.html(data);
-                var pos = content.position();
-                $(window).scrollTop(pos.top - 60);
 
                 if (sort != undefined) {
                     if (sort.toLowerCase() == 'desc')
