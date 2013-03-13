@@ -455,7 +455,7 @@
 
     <div class="well custom-wel" data-mod="players" id="playersBlock">
 
-        <?php $this->inject('mod/players.tpl'); ?>
+        <?php $this->place('total_players'); ?>
 
     </div>
 </section>
@@ -464,18 +464,18 @@
         <div class="span6">
             <h1><i class="icon-picture icon-large"></i> Blocks</h1>
 
-            <div class="well custom-well paginator" data-mod="blocks" id="worldBlocks">
+            <div class="well custom-well paginator" data-mod="total_blocks" id="worldBlocks">
 
-                <?php $this->inject('mod/total_blocks.tpl') ?>
+                <?php $this->place('total_blocks'); ?>
 
             </div>
         </div>
         <div class="span6">
             <h1><i class="icon-legal icon-large"></i> Items</h1>
 
-            <div class="well custom-well" data-mod="items" id="worldBlocks">
+            <div class="well custom-well" data-mod="total_items" id="worldBlocks">
 
-                <?php $this->inject('mod/total_items.tpl') ?>
+                <?php $this->place('total_items'); ?>
 
             </div>
         </div>
@@ -488,7 +488,7 @@
 
             <div class="well custom-well" style="padding: 10px;" id="deathsBlock">
 
-                <?php $this->inject('mod/death_log.tpl'); ?>
+                <?php $this->place('death_log'); ?>
 
             </div>
         </div>
