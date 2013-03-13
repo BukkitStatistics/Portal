@@ -1,7 +1,7 @@
 <?php
 $tpl_players = Util::newTpl($this, 'mod/players', 'total_players');
 
-switch(fRequest::get('order_by', 'int', 0)) {
+switch(fRequest::get('order_by', 'int')) {
     default:
     case 1:
         $type = 'name';
@@ -21,7 +21,7 @@ $players = fRecordSet::build(
          $type => fRequest::get('order_sort', 'string', 'asc')
     ),
     10,
-    1
+    fRequest::get('page', 'int', 1)
 );
 
 $tpl_players->set('players', $players);

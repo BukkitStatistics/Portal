@@ -11,7 +11,7 @@
     foreach($this->get('block_list') as $block): ?>
     <tr>
         <td>
-            <?php echo $block->getImage(); ?>
+            <?php echo $block->getImage(32, 'img-polaroid'); ?>
             <?php echo $block->getName(); ?>
         </td>
         <td>
@@ -24,3 +24,14 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+<div id="block_listPagination" class="pagination-centered"></div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        callModulePage(
+            'block_list',
+            <?php echo $this->get('block_list')->getPages(); ?>,
+            <?php echo $this->get('block_list')->getPage(); ?>
+        );
+    });
+</script>

@@ -90,18 +90,14 @@ dl.dl-stats dd {
 }
 
 
-/* Pagination */
-
-.paginate {
-	font-family: Arial, Helvetica, sans-serif;
+/* =ajax-loader */
+.ajax-loader {
+    position: absolute;
+    top: 60px;
+    left: 10px;
+    z-index: 99;
+    padding: 10px 20px;
 }
-
-a.paginate {
-	border: 1px solid #000080;
-	padding: 2px 6px 2px 6px;
-	text-decoration: none;
-}
-
 
 /* =Misc */
 

@@ -147,7 +147,7 @@ class Util {
      * @return void
      */
     public static function addPrefix($db, &$sql, &$values) {
-        if(Util::getPrefix() == '')
+        if(DB_PREFIX == '')
             return;
 
         // if prefix is included skip this statement

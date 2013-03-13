@@ -224,11 +224,12 @@ class Player extends fActiveRecord {
      * Returns the html code to the player head image.<br>
      * If no image was found it will return the default image.
      *
-     * @param int $size
+     * @param int    $size
+     * @param String $classes
      *
      * @return mixed
      */
-    public function getPlayerHead($size = 32) {
+    public function getPlayerHead($size = 32, $classes = null) {
         $name = __ROOT__ . 'cache/skins/head-' . $size . '_' . $this->getUrlName() . '.png';
         $removed = false;
 
@@ -251,7 +252,12 @@ class Player extends fActiveRecord {
         }
 
 
-        return '<img src="' . fFilesystem::translateToWebPath($name) . '" alt="' . $this->getName() . '" title="' .
+        if(!is_null($classes))
+            $class = 'class="' . $classes . '"';
+        else
+            $class = '';
+
+        return '<img ' . $class . ' src="' . fFilesystem::translateToWebPath($name) . '" alt="' . $this->getName() . '" title="' .
                $this->getName() . '">';
     }
 }

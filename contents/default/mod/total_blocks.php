@@ -1,7 +1,7 @@
 <?php
 $tpl_blocks = Util::newTpl($this, 'mod/total_blocks', 'total_blocks');
 
-switch(fRequest::get('order_by', 'int', 0)) {
+switch(fRequest::get('order_by', 'int')) {
     case 1:
         $type = 'tp_name';
         break;
@@ -14,18 +14,28 @@ switch(fRequest::get('order_by', 'int', 0)) {
         break;
 }
 
+$page = fRequest::get('page', 'int', 1);
+$limit = 10;
+
 $blocks = fRecordSet::buildFromSQL(
     'Material',
-    '
-    SELECT m.* FROM "prefix_materials" m
-    RIGHT JOIN "prefix_total_blocks" b ON m.material_id = b.material_id
-    GROUP BY b.material_id
-    ORDER BY ' . $type . ' ' . fRequest::get('order_sort', 'string', 'desc') . '
-    LIMIT 0,20
+    array(
+         '
+        SELECT m.* FROM "prefix_materials" m
+        LEFT JOIN "prefix_total_blocks" b ON m.material_id = b.material_id
+        GROUP BY b.material_id
+        ORDER BY ' . $type . ' ' . fRequest::get('order_sort', 'string', 'desc') . '
+        LIMIT %i,' . $limit . '
     ',
-    'SELECT COUNT(material_id) FROM "prefix_materials"',
-    20,
-    1
+         ($page - 1) * $limit
+    ),
+    '
+    SELECT COUNT(*) FROM (SELECT m.* FROM "prefix_materials" m
+    RIGHT JOIN "prefix_total_blocks" b ON m.material_id = b.material_id
+    GROUP BY b.material_id) c
+    ',
+    $limit,
+    $page
 );
 
 $tpl_blocks->set('block_list', $blocks);

@@ -1,9 +1,14 @@
 <?php
 $tpl = Util::newTpl($this, 'overview');
+$this->add('js', 'media/js/jquery.bootpag.js');
 
 // players
 $this->inject('mod/players.php');
 $tpl->set('total_players', $this->get('total_players'));
+
+// online players
+$this->inject('mod/players_online.php');
+$tpl->set('players_online', $this->get('players_online'));
 
 // total_blocks
 $this->inject('mod/total_blocks.php');
@@ -17,20 +22,6 @@ $tpl->set('total_items', $this->get('total_items'));
 $this->inject('mod/death_log.php');
 $tpl->set('death_log', $this->get('death_log'));
 
-$players = fRecordSet::build(
-    'Player',
-    array(
-         'online=' => true
-    )
-);
-// player stats in dashboard
-$player_stats['tracked'] = fRecordSet::tally('Player');
-$player_stats['died'] = Player::countAllDeaths()->format();
-$player_stats['killed'] = Player::countAllKillsOfType()->format();
-$player_stats['online'] = $players->count(true);
-
-$tpl->set('players', $player_stats);
-
 // server stats in dashboard
 $server = new ServerStatistic();
 
@@ -42,6 +33,14 @@ $server_stats['total_logins'] = Player::countAllLogins()->format();
 $server_stats['max_players'] = $server->getMaxPlayersOnline(true);
 
 $tpl->set('serverstats', $server_stats);
+
+// player stats in dashboard
+$player_stats['tracked'] = fRecordSet::tally('Player');
+$player_stats['died'] = Player::countAllDeaths()->format();
+$player_stats['killed'] = Player::countAllKillsOfType()->format();
+$player_stats['online'] = $server->getPlayersOnline()->format();
+
+$tpl->set('players', $player_stats);
 
 // distance
 $distance_stats['total'] = Player::getDistanceOfType('total')->format();
@@ -58,9 +57,6 @@ $block_stats['most_placed'] = TotalBlock::getMostOfType('placed');
 $block_stats['most_destroyed'] = TotalBlock::getMostOfType('destroyed');
 
 $tpl->set('blocks', $block_stats);
-
-// player stats
-$tpl->set('online_players', $players);
 
 // deaths stats
 $death_stats['total'] = $player_stats['killed'];
