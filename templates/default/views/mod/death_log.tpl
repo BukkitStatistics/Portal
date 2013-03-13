@@ -3,17 +3,26 @@
         <?php
             foreach($this->get('death_log') as $log):
                 if($log instanceof DetailedPvpKill) {
-                    $killer = $log->createPlayer('player_id')->getPlayerHead();
-                    $victim = $log->createPlayer('victim_id')->getPlayerHead();
+                    $killer = $log->createPlayer('player_id');
+                    $victim = $log->createPlayer('victim_id');
+
+                    $killer_img = $killer->getPlayerHead(16, 'img-thumb img-polaroid');
+                    $victim_img = $victim->getPlayerHead(16, 'img-thumb img-polaroid');
                 }
                 else {
                     if($log->getPlayerKilled()) {
-                        $killer = $log->createEntity()->getImage();
-                        $victim = $log->createPlayer()->getPlayerHead();
+                        $killer = $log->createEntity();
+                        $victim = $log->createPlayer();
+
+                        $killer_img = $killer->getImage(16, 'img-thumb img-polaroid');
+                        $victim_img = $victim->getPlayerHead(16, 'img-thumb img-polaroid');
                     }
                     else {
-                        $victim = $log->createEntity()->getImage();
-                        $killer = $log->createPlayer()->getPlayerHead();
+                        $victim = $log->createEntity();
+                        $killer = $log->createPlayer();
+
+                        $victim_img = $victim->getImage(16, 'img-thumb img-polaroid');
+                        $killer_img = $killer->getPlayerHead(16, 'img-thumb img-polaroid');
                     }
                 }
                 $material= $log->createMaterial();
@@ -26,7 +35,8 @@
                     </div>
                     <div class="span3">
                         <span class="label label-success">
-                            <?php echo $killer; ?>
+                            <?php echo $killer_img; ?>
+                            <?php echo $killer->getName(); ?>
                         </span>
                     </div>
                     <div class="span2">
@@ -34,7 +44,8 @@
                     </div>
                     <div class="span4">
                         <span class="label label-important">
-                            <?php echo $victim; ?>
+                            <?php echo $victim_img; ?>
+                            <?php echo $victim->getName(); ?>
                         </span>
                     </div>
                 </div>

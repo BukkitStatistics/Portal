@@ -7,21 +7,28 @@ class Entity extends fActiveRecord {
      * Returns the html code to the entity image.<br>
      * If no images was found it will return the default image.
      *
-     * @param     $tp_name
+     * @param String $tp_name
      *
-     * @param int $size
+     * @param int    $size
+     *
+     * @param String $classes
      *
      * @return string
      */
-    public static function getEntityImg($tp_name, $size = 32) {
+    public static function getEntityImg($tp_name, $size = 32, $classes = null) {
         $path = __ROOT__ . 'media/img/entities/';
         $img = $path . $tp_name . '.png';
 
         if(!file_exists($img))
             $img = $path . 'none.png';
 
+        if(!is_null($classes))
+            $class = 'class="' . $classes . '"';
+        else
+            $class = '';
+
         return
-            '<img src="' . fFilesystem::translateToWebPath($img) . '" title="' . fText::compose($tp_name) . '" alt="' .
+            '<img ' . $class . ' src="' . fFilesystem::translateToWebPath($img) . '" title="' . fText::compose($tp_name) . '" alt="' .
             fText::compose($tp_name) . '" style="width: ' . $size . 'px; height: ' . $size . 'px">';
     }
 
@@ -77,11 +84,23 @@ class Entity extends fActiveRecord {
         }
     }
 
-    public function getImage($size = 32) {
-        return Entity::getEntityImg($this->getTpName(), $size);
-    }
+    /**
+     * Returns the html code to the entity.<br>
+     * If no image was found it will return the default image.
+     *
+     * @param int    $size
+     * @param String $classes
+     *
+     * @return string
+     */public function getImage($size = 32, $classes = null) {
+        return Entity::getEntityImg($this->getTpName(), $size, $classes);
+}
 
-    public function getName() {
+    /**
+     * Returns the translated entity name.
+     *
+     * @return string
+     */public function getName() {
         return fText::compose($this->getTpName());
     }
 
