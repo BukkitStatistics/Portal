@@ -11,7 +11,7 @@
     foreach($this->get('block_list') as $block): ?>
     <tr>
         <td>
-            <?php echo $block->getImage(); ?>
+            <?php echo $block->getImage(32, 'img-polaroid'); ?>
             <?php echo $block->getName(); ?>
         </td>
         <td>

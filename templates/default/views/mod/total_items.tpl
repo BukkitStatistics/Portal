@@ -11,7 +11,7 @@
     foreach($this->get('item_list') as $item): ?>
     <tr>
         <td>
-            <?php echo $item->getImage(); ?>
+            <?php echo $item->getImage(32, 'img-polaroid'); ?>
             <?php echo $item->getName(); ?>
         </td>
         <td>

@@ -9,21 +9,27 @@ class Material extends fActiveRecord {
      * Returns the html code to the material image.<br>
      * If no images was found it will return the default image.
      *
-     * @param     $tp_name
-     *
-     * @param int $size
+     * @param String $tp_name
+     * @param int    $size
+     * @param String $classes
      *
      * @return string
      */
-    public static function getMaterialImg($tp_name, $size = 32) {
+    public static function getMaterialImg($tp_name, $size = 32, $classes = null) {
         $path = __ROOT__ . 'media/img/materials/';
         $img = $path . $tp_name . '.png';
 
         if(!file_exists($img))
             $img = $path . 'none.png';
 
+        if(!is_null($classes))
+            $class = 'class="' . $classes . '"';
+        else
+            $class = '';
+
         return
-            '<img src="' . fFilesystem::translateToWebPath($img) . '" title="' . fText::compose($tp_name) . '" alt="' .
+            '<img ' . $class . ' src="' . fFilesystem::translateToWebPath($img) . '" title="' .
+            fText::compose($tp_name) . '" alt="' .
             fText::compose($tp_name) . '" style="width: ' . $size . 'px; height: ' . $size . 'px">';
     }
 
@@ -60,12 +66,13 @@ class Material extends fActiveRecord {
     /**
      * Returns the image of this material.
      *
-     * @param int $size
+     * @param int    $size
+     * @param String $classes
      *
      * @return string
      */
-    public function getImage($size = 32) {
-        return Material::getMaterialImg($this->getTpName(), $size);
+    public function getImage($size = 32, $classes = null) {
+        return Material::getMaterialImg($this->getTpName(), $size, $classes);
     }
 
     /**

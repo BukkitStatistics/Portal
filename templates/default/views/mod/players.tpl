@@ -21,7 +21,7 @@
     <tr>
         <td>
             <a href="?page=player&name=<?php echo $player->getUrlName(); ?>">
-                <?php echo $player->getPlayerHead(); ?>
+                <?php echo $player->getPlayerHead(32, 'img-polaroid'); ?>
                 <?php echo $player->getName(); ?>
             </a>
         </td>
