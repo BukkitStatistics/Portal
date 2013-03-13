@@ -1,7 +1,7 @@
 <?php
 $tpl_items = Util::newTpl($this, 'mod/total_items', 'total_items');
 
-switch(fRequest::get('order_by', 'int', 0)) {
+switch(fRequest::get('order_by', 'int')) {
     case 1:
         $type = 'tp_name';
         break;

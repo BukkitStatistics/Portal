@@ -98,6 +98,18 @@ class ServerStatistic {
     }
 
     /**
+     * Returns all online players.
+     *
+     * @return fNumber
+     */
+    function getPlayersOnline() {
+        if($this->getValue('players_online') == 0)
+            return new fNumber(0);
+
+        return new fNumber($this->getValue('players_online'));
+    }
+
+    /**
      * Returns the number of maximal online players.<br>
      * If $get_time is true it will also return the formatted time.
      *

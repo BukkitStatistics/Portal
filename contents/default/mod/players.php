@@ -1,7 +1,7 @@
 <?php
 $tpl_players = Util::newTpl($this, 'mod/players', 'total_players');
 
-switch(fRequest::get('order_by', 'int', 0)) {
+switch(fRequest::get('order_by', 'int')) {
     default:
     case 1:
         $type = 'name';
