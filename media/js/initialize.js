@@ -27,8 +27,10 @@ $(document).ready(function() {
                 'mod': content.data('mod')
             },
             success: function (data) {
-                content.html(data);
-                content.find('.sort-button[data-type="' + bdata['type'] + '"]').data('sort', sort);
+                if(data != 'ajax_error') {
+                    content.html(data);
+                    content.find('.sort-button[data-type="' + bdata['type'] + '"]').data('sort', sort);
+                }
             }
         });
     });

@@ -128,6 +128,15 @@ class Util {
     }
 
     /**
+     * If DB_PREFIX is defined and not empty it will return the prefix with an _
+     *
+     * @return string
+     */
+    public static function getPrefix() {
+        return DB_PREFIX != '' ? DB_PREFIX . '_' : '';
+    }
+
+    /**
      * Add to the sql query the defined prefix
      * SQL string must contain 'prefix_' or the placeholder %r!
      *
@@ -138,10 +147,9 @@ class Util {
      * @return void
      */
     public static function addPrefix($db, &$sql, &$values) {
-        if(DB_PREFIX != '')
-            $prefix = DB_PREFIX . '_';
-        else
+        if(Util::getPrefix() == '')
             return;
+
         // if prefix is included skip this statement
         if(strpos($sql, DB_PREFIX) !== false)
             return;
@@ -149,14 +157,14 @@ class Util {
             if(strpos($values[0], DB_PREFIX) !== false)
                 return;
 
-            $values[0] = $prefix . $values[0];
+            $values[0] = Util::getPrefix() . $values[0];
         }
         if(preg_match("/^UPDATE `?prefix_\S+`?\s+SET/is", $sql))
-            $sql = preg_replace("/^UPDATE `?prefix_(\S+?)`?([\s\.,]|$)/i", "UPDATE `" . $prefix . "\\1`\\2", $sql);
+            $sql = preg_replace("/^UPDATE `?prefix_(\S+?)`?([\s\.,]|$)/i", "UPDATE `" . Util::getPrefix() . "\\1`\\2", $sql);
         elseif(preg_match("/^INSERT INTO `?prefix_\S+`?\s+[a-z0-9\s,\)\(]*?VALUES/is", $sql))
-            $sql = preg_replace("/^INSERT INTO `?prefix_(\S+?)`?([\s\.,]|$)/i", "INSERT INTO `" . $prefix . "\\1`\\2",
+            $sql = preg_replace("/^INSERT INTO `?prefix_(\S+?)`?([\s\.,]|$)/i", "INSERT INTO `" . Util::getPrefix() . "\\1`\\2",
                                 $sql);
-        else $sql = preg_replace("/prefix_(\S+?)([\s\.,]|$)/", $prefix . "\\1\\2", $sql);
+        else $sql = preg_replace("/prefix_(\S+?)([\s\.,]|$)/", Util::getPrefix() . "\\1\\2", $sql);
     }
 
 
@@ -166,12 +174,13 @@ class Util {
      *
      * @param fTemplating $context
      * @param String      $tplName
+     * @param string      $tplKey
      *
      * @return fTemplating
      */
-    public static function newTpl(fTemplating $context, $tplName) {
+    public static function newTpl(fTemplating $context, $tplName, $tplKey = 'tpl') {
         $tpl = new fTemplating($context->get('tplRoot'), $tplName . '.tpl');
-        $context->set('tpl', $tpl);
+        $context->set($tplKey, $tpl);
 
         return $tpl;
     }
@@ -193,6 +202,9 @@ class Util {
         try {
             $design->inject($content);
         } catch(fException $e) {
+            if(fRequest::isAjax())
+                die('ajax_error');
+
             fMessaging::create('critical', '{errors}', $e);
             $design->inject('error.php');
         }
@@ -202,7 +214,7 @@ class Util {
         echo $capture;
 
         // TODO: set cache time in settings
-        if(!DEVELOPMENT && !is_null($cache))
+        if(!DEVELOPMENT && !is_null($cache) && !fRequest::isAjax())
             $cache->set($content . '.cache', $capture, 120);
     }
 

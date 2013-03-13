@@ -1,46 +1,23 @@
-<?php if($this->get('all_players')->count() == 0): ?>
+<?php if($this->get('players')->count() == 0): ?>
 <div class='force-center'><em>No players tracked</em></div>
 <?php else: ?>
 <table class="table table-striped table-bordered table-hover sortable" id="playersTable">
     <thead>
     <tr>
-        <th class="sort-button" data-type="name" data-sort="desc">
+        <th class="sort-button" data-type="1" data-sort="desc">
             Name
-            <?php if($this->get('sort[name]') == 'desc'): ?>
-                <i class="icon-sort-down"></i>
-            <?php elseif($this->get('sort[name]') == 'asc'):  ?>
-                <i class="icon-sort-up"></i>
-            <?php else:  ?>
-                <i class="icon-sort"></i>
-            <?php endif; ?>
         </th>
-        <th class="sort-button" data-type="prefix_detailed_log_players.time" data-sort="desc">
+        <th class="sort-button" data-type="2" data-sort="desc">
             Last Seen
-            <?php if($this->get('sort[time]') == 'desc'): ?>
-                <i class="icon-sort-down"></i>
-            <?php elseif($this->get('sort[time]') == 'asc'): ?>
-                <i class="icon-sort-up"></i>
-            <?php
-            else: ?>
-                <i class="icon-sort"></i>
-            <?php endif; ?>
         </th>
-        <th class="sort-button" data-type="first_login" data-sort="desc">
+        <th class="sort-button" data-type="3" data-sort="desc">
             Date Joined
-            <?php if($this->get('sort[first_login]') == 'desc'): ?>
-                <i class="icon-sort-down"></i>
-            <?php elseif($this->get('sort[first_login]') == 'asc'): ?>
-                <i class="icon-sort-up"></i>
-            <?php
-            else: ?>
-                <i class="icon-sort"></i>
-            <?php endif; ?>
         </th>
     </tr>
     </thead>
     <tbody class="content">
 
-        <?php foreach($this->get('all_players') as $player): ?>
+        <?php foreach($this->get('players') as $player): ?>
     <tr>
         <td>
             <a href="?page=player&name=<?php echo $player->getUrlName(); ?>">

@@ -1,9 +1,9 @@
 <table class="table table-striped table-bordered sortable">
     <thead>
     <tr>
-        <th style="text-align: center;" class="sort-button" data-type="tp_name" data-sort="asc">Block Type</th>
-        <th style="text-align: center;" class="sort-button" data-type="destroyed" data-sort="asc">Destroyed</th>
-        <th style="text-align: center;" class="sort-button" data-type="placed" data-sort="asc">Placed</th>
+        <th style="text-align: center;" class="sort-button" data-type="1" data-sort="asc">Block Type</th>
+        <th style="text-align: center;" class="sort-button" data-type="2" data-sort="asc">Destroyed</th>
+        <th style="text-align: center;" class="sort-button" data-type="3" data-sort="asc">Placed</th>
     </tr>
     </thead>
     <tbody class="content">

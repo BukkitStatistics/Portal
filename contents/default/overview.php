@@ -2,126 +2,20 @@
 $tpl = Util::newTpl($this, 'overview');
 
 // players
-if(fRequest::get('mod') == 'players') {
-    $order = fRequest::get('order_by', 'string', 'name') == 'tp_name' ? 'name' : fRequest::get('order_by', 'string',
-                                                                                               'name');
+$this->inject('mod/players.php');
+$tpl->set('total_players', $this->get('total_players'));
 
-    $tpl->set('sort[]', null);
+// total_blocks
+$this->inject('mod/total_blocks.php');
+$tpl->set('total_blocks', $this->get('total_blocks'));
 
-    if(fRequest::get('order_by', 'string') == 'prefix_detailed_log_players.time')
-        $tpl->set('sort[time]', fRequest::get('order_sort', 'string', 'asc'));
-    elseif(fRequest::get('order_by', 'string') == 'first_login')
-        $tpl->set('sort[first_login]', fRequest::get('order_sort', 'string', 'asc'));
-    else
-        $tpl->set('sort[name]', fRequest::get('order_sort', 'string', 'asc'));
-}
-else {
-    $tpl->set('sort[name]', fRequest::get('order_sort', 'string', 'asc'));
-    $order = 'name';
-}
-
-$players = fRecordSet::build(
-    'Player',
-    array(),
-    array(
-         str_ireplace('prefix_', DB_PREFIX . '_', $order) => fRequest::get('order_sort', 'string', 'asc')
-    ),
-    10,
-    1
-);
-
-$tpl->set('all_players', $players);
-
-if(fRequest::isAjax() && fRequest::get('mod') == 'players') {
-    $tpl->inject('mod/players.tpl');
-    die();
-}
-
-
-$tpl->set('all_players', $players);
-
-// blocks
-if(fRequest::get('mod') == 'blocks') {
-    $order = fRequest::get('order_by', 'string', 'tp_name');
-    if($order != 'tp_name')
-        $order = 'SUM(' . $order . ')';
-}
-else
-    $order = 'SUM(destroyed)';
-$blocks = fRecordSet::buildFromSQL(
-    'Material',
-    '
-    SELECT m.* FROM "prefix_materials" m
-    RIGHT JOIN "prefix_total_blocks" b ON m.material_id = b.material_id
-    GROUP BY b.material_id
-    ORDER BY ' . $order . ' ' . fRequest::get('order_sort', 'string', 'desc') . '
-    LIMIT 0,20
-    ',
-    'SELECT COUNT(material_id) FROM "prefix_materials"',
-    20,
-    1
-);
-
-$tpl->set('block_list', $blocks);
-
-if(fRequest::isAjax() && fRequest::get('mod') == 'blocks') {
-    $tpl->inject('mod/total_blocks.tpl');
-    die();
-}
-
-// items
-if(fRequest::get('mod') == 'items') {
-    $order = fRequest::get('order_by', 'string', 'tp_name');
-    if($order != 'tp_name')
-        $order = 'SUM(' . $order . ')';
-}
-else
-    $order = 'SUM(picked_up)';
-$items = fRecordSet::buildFromSQL(
-    'Material',
-    '
-    SELECT m.* FROM "prefix_materials" m
-    LEFT JOIN "prefix_total_items" b ON m.material_id = b.material_id
-    GROUP BY b.material_id
-    ORDER BY ' . $order . ' ' . fRequest::get('order_sort', 'string', 'desc') . '
-    LIMIT 0,20
-    ',
-    'SELECT COUNT(material_id) FROM "prefix_materials"',
-    20,
-    1
-);
-
-$tpl->set('item_list', $items);
-
-if(fRequest::isAjax() && fRequest::get('mod') == 'items') {
-    $tpl->inject('mod/total_items.tpl');
-    die();
-}
+// total_items
+$this->inject('mod/total_items.php');
+$tpl->set('total_items', $this->get('total_items'));
 
 // death log
-$death_log_pvp = fRecordSet::build(
-    'DetailedPvpKill',
-    array(),
-    array('time' => 'asc'),
-    10,
-    1
-);
-$death_log_pve = fRecordSet::build(
-    'DetailedPveKill',
-    array(),
-    array('time' => 'asc'),
-    10,
-    1
-);
-
-$death_log = $death_log_pvp->merge($death_log_pve)->sort('getTime', 'desc');
-
-$tpl->set('death_log', $death_log);
-// player stats in dashboard
-$num = new fNumber($players->count(true));
-$player_stats['tracked'] = $num->format();
-$player_stats['died'] = Player::countAllDeaths()->format();
-$player_stats['killed'] = Player::countAllKillsOfType()->format();
+$this->inject('mod/death_log.php');
+$tpl->set('death_log', $this->get('death_log'));
 
 $players = fRecordSet::build(
     'Player',
@@ -129,8 +23,11 @@ $players = fRecordSet::build(
          'online=' => true
     )
 );
+// player stats in dashboard
+$player_stats['tracked'] = fRecordSet::tally('Player');
+$player_stats['died'] = Player::countAllDeaths()->format();
+$player_stats['killed'] = Player::countAllKillsOfType()->format();
 $player_stats['online'] = $players->count(true);
-
 
 $tpl->set('players', $player_stats);
 

@@ -10,7 +10,10 @@ if(file_exists('install.php'))
 $content = fRequest::get('page', NULL, 'overview');
 $content .= '.php';
 
-if(!file_exists(__ROOT__ . 'contents/default/' . $content)) {
+if(!is_null(fRequest::get('mod')))
+    $content = 'mod/' . fRequest::get('mod') . '.php';
+
+if(!file_exists(__ROOT__ . 'contents/default/' . $content) && is_null(fRequest::get('mod'))) {
     fRequest::set('type', 404);
     $content = 'error.php';
 }
