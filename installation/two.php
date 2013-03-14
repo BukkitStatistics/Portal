@@ -45,7 +45,7 @@ if(fRequest::isPost() && fRequest::get('db_submit')) {
         $db->connect();
         $version = $db->translatedQuery(
             'SELECT `value` FROM "' . $prefix . 'settings" WHERE `key` = %s', 'version')->fetchScalar();
-        if($version <= 0)
+        if($version < 2)
             throw new fSQLException();
         $db->close();
     } catch(fValidationException $e) {
