@@ -26,7 +26,7 @@ else: ?>
                     ?>
                 </td>
                 <td>
-                    <?php echo $time->getFuzzyDifference(null, true); ?>
+                    <?php echo Util::formatSeconds($time); ?>
                 </td>
             </tr>
         <?php endforeach; ?>

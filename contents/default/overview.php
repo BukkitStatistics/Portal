@@ -36,17 +36,17 @@ $tpl->set('serverstats', $server_stats);
 
 // player stats in dashboard
 $player_stats['tracked'] = fRecordSet::tally('Player');
-$player_stats['died'] = Player::countAllDeaths()->format();
+$player_stats['died'] = TotalDeath::countAllDeaths()->format();
 $player_stats['killed'] = Player::countAllKillsOfType()->format();
 $player_stats['online'] = $server->getPlayersOnline()->format();
 
 $tpl->set('players', $player_stats);
 
 // distance
-$distance_stats['total'] = Player::getDistanceOfType('total')->format();
-$distance_stats['foot'] = Player::getDistanceOfType('foot')->format();
-$distance_stats['minecart'] = Player::getDistanceOfType('minecart')->format();
-$distance_stats['boat'] = Player::getDistanceOfType('boat')->format();
+$distance_stats['total'] = Distance::getDistanceOfType('total')->format();
+$distance_stats['foot'] = Distance::getDistanceOfType('foot')->format();
+$distance_stats['minecart'] = Distance::getDistanceOfType('minecart')->format();
+$distance_stats['boat'] = Distance::getDistanceOfType('boat')->format();
 
 $tpl->set('distance', $distance_stats);
 

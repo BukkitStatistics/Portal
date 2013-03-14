@@ -27,19 +27,13 @@
         </td>
         <td>
             <?php
-            try {
-                $logins = $player->buildDetailedLogPlayers();
-
-                $logins = $logins->filter(array('getIsLogin=' => true))
-                    ->sort('getTime', 'desc')->slice(0, 1);
-
-                $time = new fTimestamp($logins->getRecord(0)->getTime());
-                echo $time->format('D d.m.Y');
-            } catch(fNoRemainingException $e) {
-                echo fText::compose('never');
-            }
-            ?>
-
+            if(!is_null($player->getLoginTime())):
+                $time = new fTimestamp($player->getLoginTime());
+                echo $time->format('d.m.Y - H:i');
+                ?>
+            <?php else: ?>
+                <em>never</em>
+            <?php endif; ?>
         </td>
         <td>
             <?php
