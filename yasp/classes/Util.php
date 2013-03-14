@@ -9,6 +9,7 @@ class Util {
     const newTpl = "Util::newTpl";
     const getCachedContent = "Util::getCachedContent";
     const newDesign = "Util:newDesign";
+    const formatSeconds = "Util:formatSeconds";
 
     /**
      * Checks if the given host is an valid IP or localhost
@@ -198,6 +199,8 @@ class Util {
     public static function newDesign($content) {
         global $cache;
 
+        $error = false;
+
         fBuffer::startCapture();
         $design = new fTemplating(__ROOT__ . 'contents/default', __ROOT__ . 'templates/default/index.php');
         $design->set('title', Util::getOption('portal_title'));
@@ -211,20 +214,31 @@ class Util {
 
             if(!fMessaging::check('*', '{errors}'))
                 fMessaging::create('critical', '{errors}', $e);
-
+        }
+        if(fMessaging::check('*', '{errors}')) {
+            $error = true;
             $design->inject('error.php');
         }
+
         $design->place();
         $capture = fBuffer::stopCapture();
 
         echo $capture;
 
-        if(fRequest::get('id', 'string') != '')
+        if(fRequest::get('id', 'string') != '' && $content != 'error.php')
             $content = $content . '_' . fRequest::get('id', 'string');
 
         // TODO: set cache time in settings
-        if(!DEVELOPMENT && !is_null($cache) && !fRequest::isAjax())
+        if(!DEVELOPMENT
+           && !is_null($cache)
+           && !$error
+           && !fRequest::isAjax()
+           && !fMessaging::check('*', '{errors}')
+           && !fMessaging::check('no-cache', '{cache}')
+           && $content != 'error.php')
             $cache->set($content . '.cache', $capture, 120);
+
+        fMessaging::retrieve('no-cache', '{cache}');
     }
 
 
@@ -240,22 +254,28 @@ class Util {
     public static function getCachedContent($content) {
         global $cache;
 
-        if(DEVELOPMENT)
+        if(DEVELOPMENT || fMessaging::check('*', '{errors}'))
             return;
+
+        if(fRequest::get('id', 'string') != '' && $content != 'error.php')
+            $content = $content . '_' . fRequest::get('id', 'string');
 
         $cached = $cache->get($content . '.cache');
 
         if($cached == null)
             return;
 
-        $file = new fFile(__ROOT__ . 'cache/' . $content . '.cache');
-        $time = $file->getMTime();
-        $text = '
-            <small>
-                <em>cached (' . $time->format('H:i:s') . ')</em>
-            </small>
-         ';
-        $cached = preg_replace('%<small .*id="execution_time".*>(.*)</small>%si', $text, $cached);
+        try {
+            $file = new fFile(__ROOT__ . 'cache/files/' . $content . '.cache');
+            $time = $file->getMTime();
+            $text = '
+                <small>
+                    <em>cached (' . $time->format('H:i:s') . ')</em>
+                </small>
+             ';
+            $cached = preg_replace('%<small .*id="execution_time".*>(.*)</small>%si', $text, $cached);
+        } catch(fValidationException $e) {
+        }
 
         die($cached);
     }
@@ -283,9 +303,10 @@ class Util {
 
         if(strlen($s) == 1)
             $s .= 0;
-
         if(strlen($m) == 1)
             $m = 0 . $m;
+        if(strlen($h) == 1)
+            $h = 0 . $h;
 
         if($days)
             return $d . ' ' . $h . ':' . $m . ':' . $s;

@@ -34,7 +34,7 @@ include __INC__ . 'config/orm.php';
 /*
  * Initializes the language module
  */
-$lang = new Language(Util::getOption('lang', fSession::get('lang', 'en')));
+$lang = new Language(Util::getOption('language', fSession::get('lang', 'en')));
 $lang->load('errors');
 fText::registerComposeCallback('pre', array($lang, 'translate'));
 

@@ -7,10 +7,10 @@ switch(fRequest::get('order_by', 'int')) {
         $type = 'name';
         break;
     case 2:
-        $type = Util::getPrefix() . 'detailed_log_players.time';
+        $type = 'login_time';
         break;
     case 3:
-        $type = 'login_time';
+        $type = 'first_login';
         break;
 }
 

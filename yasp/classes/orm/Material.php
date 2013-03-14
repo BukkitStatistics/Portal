@@ -40,16 +40,17 @@ class Material extends fActiveRecord {
      * @return array
      */
     public static function getMostDangerous() {
+        // need to be optimized
         $res = fORMDatabase::retrieve()->translatedQuery('
-                    SELECT SUM(pve.creature_killed) + COALESCE(SUM(pvp.times), 0) AS total,
+                    SELECT SUM(pve.creature_killed) + SUM(pvp.times) AS total,
                         m.tp_name
                     FROM "prefix_total_pve_kills" pve
-                            LEFT JOIN "prefix_total_pvp_kills" pvp ON pve.material_id = pvp.material_id,
+                            INNER JOIN "prefix_total_pvp_kills" pvp ON pve.material_id = pvp.material_id,
                         "prefix_materials" m
                     WHERE pve.material_id != -1
                     AND pve.material_id = m.material_id
                     GROUP BY pve.material_id
-                    ORDER BY SUM(pve.creature_killed) + COALESCE(SUM(pvp.times), 0) DESC
+                    ORDER BY SUM(pve.creature_killed) + SUM(pvp.times) DESC
                     LIMIT 0,1
         ');
 

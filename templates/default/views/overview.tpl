@@ -338,7 +338,7 @@
                     <dl class="dl-horizontal dl-stats">
                         <dt>
                         <span class="badge badge-important">
-                            <a href="?page=player&name=<?php echo $this->get('deaths[top_killer][1]')->getUrlName(); ?>">
+                            <a href="?page=player&id=<?php echo $this->get('deaths[top_killer][1]')->getPlayerId(); ?>">
                                 <?php echo $this->get('deaths[top_killer][1]')->getPlayerHead(); ?>
                             </a>
 			            </span>
@@ -348,7 +348,7 @@
                     <dl class="dl-horizontal dl-stats">
                         <dt>
                         <span class="badge badge-important">
-                            <a href="?page=player&name=<?php echo $this->get('deaths[most_killed_player][1]')->getUrlName(); ?>">
+                            <a href="?page=player&id=<?php echo $this->get('deaths[most_killed_player][1]')->getPlayerId(); ?>">
                                 <?php echo $this->get('deaths[most_killed_player][1]')->getPlayerHead(); ?>
                             </a>
 			            </span>
