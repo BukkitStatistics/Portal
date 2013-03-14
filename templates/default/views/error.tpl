@@ -3,6 +3,7 @@
     <h3><?php echo fText::compose('Sorry. An unexpected error occurred.') ?></h3>
 
     <p><?php echo $this->get('e_message'); ?></p>
+    <p><strong>Type:</strong> <?php echo $this->get('e_name'); ?></p>
     <strong>File:</strong> <?php echo $this->get('e_file'); ?>:<?php echo $this->get('e_line'); ?>
     <br><br>
     <pre><?php echo $this->get('e_backtrace');  ?></pre>

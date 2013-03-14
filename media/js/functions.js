@@ -43,7 +43,12 @@ function callModule(type, sort, content, page) {
         },
         success: function (data) {
             if (data != 'ajax_error') {
-                loader.removeClass('alert-info').addClass('alert-success').delay(500).fadeOut();
+                loader.removeClass('alert-info')
+                    .addClass('alert-success')
+                    .delay(500)
+                    .fadeOut('slow', function() {
+                        $(this).remove();
+                    });
                 content.data('last-call', {'type': type, 'sort': sort});
                 content.html(data);
 
@@ -56,7 +61,13 @@ function callModule(type, sort, content, page) {
                     content.find('.sort-button[data-type="' + type + '"]').data('sort', sort);
                 }
             } else {
-                loader.removeClass('alert-info').addClass('alert-error').html('<h3><i class="icon-exclamation-sign"></i> Error.</h3>').delay(1000).fadeOut();
+                loader.removeClass('alert-info')
+                    .addClass('alert-error')
+                    .html('<h3><i class="icon-exclamation-sign"></i> Error.</h3>')
+                    .delay(1000)
+                    .fadeOut('slow', function () {
+                        $(this).remove();
+                    });
             }
         }
     });

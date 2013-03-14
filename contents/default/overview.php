@@ -28,7 +28,7 @@ $server = new ServerStatistic();
 $server_stats['startup'] = $server->getStartup();
 $server_stats['shutdown'] = $server->getShutdown();
 $server_stats['cur_uptime'] = $server->getCurrentUptime();
-$server_stats['total_uptime'] = $server->getTotalUptime();
+$server_stats['playtime'] = Player::countTotalPlaytime();
 $server_stats['total_logins'] = Player::countAllLogins()->format();
 $server_stats['max_players'] = $server->getMaxPlayersOnline(true);
 
@@ -36,17 +36,17 @@ $tpl->set('serverstats', $server_stats);
 
 // player stats in dashboard
 $player_stats['tracked'] = fRecordSet::tally('Player');
-$player_stats['died'] = Player::countAllDeaths()->format();
+$player_stats['died'] = TotalDeath::countAllDeaths()->format();
 $player_stats['killed'] = Player::countAllKillsOfType()->format();
 $player_stats['online'] = $server->getPlayersOnline()->format();
 
 $tpl->set('players', $player_stats);
 
 // distance
-$distance_stats['total'] = Player::getDistanceOfType('total')->format();
-$distance_stats['foot'] = Player::getDistanceOfType('foot')->format();
-$distance_stats['minecart'] = Player::getDistanceOfType('minecart')->format();
-$distance_stats['boat'] = Player::getDistanceOfType('boat')->format();
+$distance_stats['total'] = Distance::getDistanceOfType('total')->format();
+$distance_stats['foot'] = Distance::getDistanceOfType('foot')->format();
+$distance_stats['minecart'] = Distance::getDistanceOfType('minecart')->format();
+$distance_stats['boat'] = Distance::getDistanceOfType('boat')->format();
 
 $tpl->set('distance', $distance_stats);
 

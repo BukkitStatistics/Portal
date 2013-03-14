@@ -36,7 +36,7 @@
                     <div class="span3">
                         <span class="label label-success">
                             <?php echo $killer_img; ?>
-                            <?php echo $killer->getName(); ?>
+                            <?php echo $killer->encodeName(); ?>
                         </span>
                     </div>
                     <div class="span2">
@@ -45,7 +45,7 @@
                     <div class="span4">
                         <span class="label label-important">
                             <?php echo $victim_img; ?>
-                            <?php echo $victim->getName(); ?>
+                            <?php echo $victim->encodeName(); ?>
                         </span>
                     </div>
                 </div>
