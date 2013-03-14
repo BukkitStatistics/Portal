@@ -126,7 +126,7 @@
                         <tr>
                             <td>
                                 <span class="label label-info">
-                                    <i class="icon-bullhorn"></i> <?php echo $this->get('serverstats[total_uptime]'); ?>
+                                    <i class="icon-bullhorn"></i> <?php echo $this->get('serverstats[playtime]'); ?>
                                 </span>
                             </td>
                             <td>

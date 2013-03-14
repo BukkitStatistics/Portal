@@ -28,7 +28,7 @@ $server = new ServerStatistic();
 $server_stats['startup'] = $server->getStartup();
 $server_stats['shutdown'] = $server->getShutdown();
 $server_stats['cur_uptime'] = $server->getCurrentUptime();
-$server_stats['total_uptime'] = $server->getTotalUptime();
+$server_stats['playtime'] = Player::countTotalPlaytime();
 $server_stats['total_logins'] = Player::countAllLogins()->format();
 $server_stats['max_players'] = $server->getMaxPlayersOnline(true);
 

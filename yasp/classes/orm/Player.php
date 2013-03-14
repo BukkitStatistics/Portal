@@ -4,6 +4,25 @@
  */
 class Player extends fActiveRecord {
 
+    public static function countTotalPlaytime() {
+        $res = fORMDatabase::retrieve()->translatedQuery('
+                        SELECT SUM(playtime)
+                        FROM "prefix_players"
+        ');
+
+        try {
+            return Util::formatSeconds(new fTimestamp($res->fetchScalar()));
+        } catch(fNoRowsException $e) {
+            fCore::debug($e->getMessage());
+        } catch(fNoRemainingException $e) {
+            fCore::debug($e->getMessage());
+        } catch(fValidationException $e) {
+            fCore::debug($e->getMessage());
+        }
+
+        return Util::formatSeconds(new fTimestamp(0));
+    }
+
     /**
      * Counts all the kills of the specified type.
      *
