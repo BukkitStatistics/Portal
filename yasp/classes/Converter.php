@@ -66,6 +66,7 @@ class Converter {
                         last_login,
                         num_logins,
                         last_logout,
+                        num_secs_loggedon,
                         distance_traveled AS total,
                         distance_traveled_in_minecart AS minecart,
                         distance_traveled_in_boat AS boat,
