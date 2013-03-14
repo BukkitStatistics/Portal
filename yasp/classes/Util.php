@@ -9,6 +9,7 @@ class Util {
     const newTpl = "Util::newTpl";
     const getCachedContent = "Util::getCachedContent";
     const newDesign = "Util:newDesign";
+    const formatSeconds = "Util:formatSeconds";
 
     /**
      * Checks if the given host is an valid IP or localhost
@@ -283,9 +284,10 @@ class Util {
 
         if(strlen($s) == 1)
             $s .= 0;
-
         if(strlen($m) == 1)
             $m = 0 . $m;
+        if(strlen($h) == 1)
+            $h = 0 . $h;
 
         if($days)
             return $d . ' ' . $h . ':' . $m . ':' . $s;

@@ -3,7 +3,7 @@ $tpl = Util::newTpl($this, 'player');
 
 try {
     $player = new Player(fRequest::get('id', 'int'));
-    $distance = $player->buildDistances()->getRecord(0);
+    $distance = $player->createDistance();
     $blocks = $player->buildTotalBlocks();
     $items = $player->buildTotalItems();
     $pvp_killer = $player->buildTotalPvpKills('player_id');

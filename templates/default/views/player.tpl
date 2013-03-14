@@ -88,11 +88,16 @@
             <p>
                 <strong>Most Popular Block Placed:</strong>
                 <?php
-                $block = $this->get('blocks[most_placed]')->createMaterial();
-                echo $block->getImage();
+                if($this->get('blocks[most_placed]')):
+                    $block = $this->get('blocks[most_placed]')->createMaterial();
+                    echo $block->getImage();
                 ?>
-
-                <?php echo $this->get('blocks[most_placed]')->getPlaced()->format(); ?>
+                <?php
+                    echo $this->get('blocks[most_placed]')->getPlaced()->format();
+                    else:
+                ?>
+                    <em>none</em>
+                <?php endif; ?>
             </p>
 
             <p>
@@ -103,11 +108,17 @@
             <p>
                 <strong>Most Popular Block Destroyed:</strong>
                 <?php
+                if($this->get('blocks[most_destroyed]')):
                 $block = $this->get('blocks[most_destroyed]')->createMaterial();
                 echo $block->getImage();
                 ?>
 
-                <?php echo $this->get('blocks[most_destroyed]')->getDestroyed()->format(); ?>
+                <?php
+                    echo $this->get('blocks[most_destroyed]')->getDestroyed()->format();
+                    else:
+                ?>
+                    <em>none</em>
+                <?php endif; ?>
             </p>
         </div>
 
@@ -122,11 +133,17 @@
             <p>
                 <strong>Most Popular Item Picked Up:</strong>
                 <?php
+                if($this->get('items[most_picked]')):
                 $item = $this->get('items[most_picked]')->createMaterial();
                 echo $item->getImage();
                 ?>
 
-                <?php echo $this->get('items[most_picked]')->getPickedUp()->format(); ?>
+                <?php
+                    echo $this->get('items[most_picked]')->getPickedUp()->format();
+                    else:
+                ?>
+                    <em>none</em>
+                <?php endif; ?>
             </p>
 
             <p>
@@ -137,11 +154,17 @@
             <p>
                 <strong>Most Popular Item Dropped:</strong>
                 <?php
+                if($this->get('items[most_dropped]')):
                 $item = $this->get('items[most_dropped]')->createMaterial();
                 echo $item->getImage();
                 ?>
 
-                <?php echo $this->get('items[most_dropped]')->getDropped()->format(); ?>
+                <?php
+                    echo $this->get('items[most_dropped]')->getDropped()->format();
+                    else:
+                ?>
+                    <em>none</em>
+                <?php endif; ?>
             </p>
         </div>
 
@@ -276,7 +299,7 @@
         <div class="span4" style="width: 30% !important;">
             <h3>Other deaths</h3>
 
-            <?php if($this->get('deaths')): ?>
+            <?php if($this->get('deaths') == null): ?>
                 <?php foreach($this->get('deaths') as $death): ?>
                 <p>
                     <strong><?php echo $death->getName(); ?></strong>
