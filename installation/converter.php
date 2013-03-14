@@ -100,7 +100,7 @@ if($tpl->get('state') == 2) {
         $newDB->translatedQuery('
             DELETE FROM prefix_players WHERE 1;
             ALTER TABLE prefix_players AUTO_INCREMENT=1;
-            ALTER TABLE prefix_total_death_players AUTO_INCREMENT=1;
+            ALTER TABLE prefix_total_deaths AUTO_INCREMENT=1;
             ALTER TABLE prefix_total_blocks AUTO_INCREMENT=1;
             ALTER TABLE prefix_total_items AUTO_INCREMENT=1;
             ALTER TABLE prefix_total_pvp_kills AUTO_INCREMENT=1;
