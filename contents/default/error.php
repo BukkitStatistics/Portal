@@ -11,10 +11,11 @@ elseif(fMessaging::check('error', '{errors}'))
 
 $tpl->set('type', $type);
 
-if($type == '' || $type != '404') {
+if($type != '' && $type != '404') {
     $e = fMessaging::retrieve($type, '{errors}');
 
     $tpl->set('e_message', $e->getMessage());
+    $tpl->set('e_name', get_class($e));
     $tpl->set('e_backtrace', $e->getTraceAsString());
     $tpl->set('e_file', $e->getFile());
     $tpl->set('e_line', $e->getLine());

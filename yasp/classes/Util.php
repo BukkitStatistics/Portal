@@ -162,9 +162,11 @@ class Util {
             $values[0] = Util::getPrefix() . $values[0];
         }
         if(preg_match("/^UPDATE `?prefix_\S+`?\s+SET/is", $sql))
-            $sql = preg_replace("/^UPDATE `?prefix_(\S+?)`?([\s\.,]|$)/i", "UPDATE `" . Util::getPrefix() . "\\1`\\2", $sql);
+            $sql = preg_replace("/^UPDATE `?prefix_(\S+?)`?([\s\.,]|$)/i", "UPDATE `" . Util::getPrefix() . "\\1`\\2",
+                                $sql);
         elseif(preg_match("/^INSERT INTO `?prefix_\S+`?\s+[a-z0-9\s,\)\(]*?VALUES/is", $sql))
-            $sql = preg_replace("/^INSERT INTO `?prefix_(\S+?)`?([\s\.,]|$)/i", "INSERT INTO `" . Util::getPrefix() . "\\1`\\2",
+            $sql = preg_replace("/^INSERT INTO `?prefix_(\S+?)`?([\s\.,]|$)/i",
+                                "INSERT INTO `" . Util::getPrefix() . "\\1`\\2",
                                 $sql);
         else $sql = preg_replace("/prefix_(\S+?)([\s\.,]|$)/", Util::getPrefix() . "\\1\\2", $sql);
     }
@@ -217,6 +219,9 @@ class Util {
 
         echo $capture;
 
+        if(fRequest::get('id', 'string') != '')
+            $content = $content . '_' . fRequest::get('id', 'string');
+
         // TODO: set cache time in settings
         if(!DEVELOPMENT && !is_null($cache) && !fRequest::isAjax())
             $cache->set($content . '.cache', $capture, 120);
@@ -258,15 +263,19 @@ class Util {
     /**
      * Returns an nice formatted string of the seconds in this format: dd:hh:mm:ss
      *
-     * @param      $timestamp
-     * @param bool $seconds
-     * @param bool $minutes
-     * @param bool $hours
-     * @param bool $days
+     * @param fTimestamp $timestamp
+     * @param bool       $seconds
+     * @param bool       $minutes
+     * @param bool       $hours
+     * @param bool       $days
      *
      * @return int|string
      */
-    public static function  formatSeconds($timestamp, $seconds = true, $minutes = true, $hours = true, $days = true) {
+    public static function  formatSeconds(fTimestamp $timestamp, $seconds = true, $minutes = true, $hours = true,
+                                          $days = true) {
+
+        $timestamp = strtotime($timestamp->__toString());
+
         $s = $timestamp % 60;
         $m = floor(($timestamp % 3600) / 60);
         $h = floor(($timestamp % 86400) / 3600);
@@ -274,6 +283,9 @@ class Util {
 
         if(strlen($s) == 1)
             $s .= 0;
+
+        if(strlen($m) == 1)
+            $m = 0 . $m;
 
         if($days)
             return $d . ' ' . $h . ':' . $m . ':' . $s;

@@ -1,6 +1,12 @@
 <?php
 class TotalBlock extends fActiveRecord {
 
+    protected function configure() {
+        fORMColumn::configureNumberColumn($this, 'placed');
+        fORMColumn::configureNumberColumn($this, 'destroyed');
+    }
+
+
     /**
      * Returns the count of the specified block type.
      *

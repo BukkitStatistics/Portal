@@ -1,6 +1,16 @@
 <?php
 class TotalItem extends fActiveRecord {
 
+    protected function configure() {
+        fORMColumn::configureNumberColumn($this, 'picked_up');
+        fORMColumn::configureNumberColumn($this, 'dropped');
+        fORMColumn::configureNumberColumn($this, 'used');
+        fORMColumn::configureNumberColumn($this, 'crafted');
+        fORMColumn::configureNumberColumn($this, 'smelted');
+        fORMColumn::configureNumberColumn($this, 'broken');
+        fORMColumn::configureNumberColumn($this, 'enchanted');
+    }
+
     /**
      * Returns the count of the specified item type.
      *

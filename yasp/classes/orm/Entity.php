@@ -28,7 +28,8 @@ class Entity extends fActiveRecord {
             $class = '';
 
         return
-            '<img ' . $class . ' src="' . fFilesystem::translateToWebPath($img) . '" title="' . fText::compose($tp_name) . '" alt="' .
+            '<img ' . $class . ' src="' . fFilesystem::translateToWebPath($img) . '" title="' .
+            fText::compose($tp_name) . '" alt="' .
             fText::compose($tp_name) . '" style="width: ' . $size . 'px; height: ' . $size . 'px">';
     }
 
@@ -92,16 +93,36 @@ class Entity extends fActiveRecord {
      * @param String $classes
      *
      * @return string
-     */public function getImage($size = 32, $classes = null) {
+     */
+    public function getImage($size = 32, $classes = null) {
         return Entity::getEntityImg($this->getTpName(), $size, $classes);
-}
+    }
 
     /**
      * Returns the translated entity name.
      *
      * @return string
-     */public function getName() {
+     */
+    public function getName() {
         return fText::compose($this->getTpName());
+    }
+
+    /**
+     * Returns the translated encoded entity name.
+     *
+     * @return string
+     */
+    public function encodeName() {
+        return fHTML::encode($this->getName());
+    }
+
+    /**
+     * Returns the translated prepared entity name.
+     *
+     * @return string
+     */
+    public function prepareName() {
+        return fHTML::encode($this->getName());
     }
 
 }

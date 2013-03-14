@@ -20,9 +20,9 @@
         <?php foreach($this->get('players') as $player): ?>
     <tr>
         <td>
-            <a href="?page=player&name=<?php echo $player->getUrlName(); ?>">
+            <a href="?page=player&id=<?php echo $player->getPlayerId(); ?>">
                 <?php echo $player->getPlayerHead(32, 'img-polaroid'); ?>
-                <?php echo $player->getName(); ?>
+                <?php echo $player->encodeName(); ?>
             </a>
         </td>
         <td>
