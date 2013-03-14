@@ -65,7 +65,9 @@ class Util {
         } catch(fSQLException $e) {
             fMessaging::create('critical', '{errors}', $e);
         } catch(fAuthorizationException $e) {
-            fMessaging::create('critical', '{errors}', $e);
+            fMessaging::create('error', '{errors}', $e);
+        } catch(fConnectivityException $e) {
+            fMessaging::create('error', '{errors}', $e);
         }
 
         if($default == null)
@@ -205,7 +207,9 @@ class Util {
             if(fRequest::isAjax())
                 die('ajax_error');
 
-            fMessaging::create('critical', '{errors}', $e);
+            if(!fMessaging::check('*', '{errors}'))
+                fMessaging::create('critical', '{errors}', $e);
+
             $design->inject('error.php');
         }
         $design->place();
