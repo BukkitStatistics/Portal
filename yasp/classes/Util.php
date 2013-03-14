@@ -199,6 +199,8 @@ class Util {
     public static function newDesign($content) {
         global $cache;
 
+        $error = false;
+
         fBuffer::startCapture();
         $design = new fTemplating(__ROOT__ . 'contents/default', __ROOT__ . 'templates/default/index.php');
         $design->set('title', Util::getOption('portal_title'));
@@ -212,9 +214,12 @@ class Util {
 
             if(!fMessaging::check('*', '{errors}'))
                 fMessaging::create('critical', '{errors}', $e);
-
+        }
+        if(fMessaging::check('*', '{errors}')) {
+            $error = true;
             $design->inject('error.php');
         }
+
         $design->place();
         $capture = fBuffer::stopCapture();
 
@@ -226,6 +231,7 @@ class Util {
         // TODO: set cache time in settings
         if(!DEVELOPMENT
            && !is_null($cache)
+           && !$error
            && !fRequest::isAjax()
            && !fMessaging::check('*', '{errors}')
            && !fMessaging::check('no-cache', '{cache}')
@@ -248,7 +254,7 @@ class Util {
     public static function getCachedContent($content) {
         global $cache;
 
-        if(DEVELOPMENT)
+        if(DEVELOPMENT || fMessaging::check('*', '{errors}'))
             return;
 
         if(fRequest::get('id', 'string') != '' && $content != 'error.php')
