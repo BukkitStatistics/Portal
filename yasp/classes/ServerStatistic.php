@@ -74,27 +74,21 @@ class ServerStatistic {
 }
 
     /**
-     * Returns the formatted current up time. If empty it will return 00:00:00
+     * Returns the formatted current up time.
      *
      * @return string
      */
     function getCurrentUptime() {
-        if($this->getValue('current_uptime') == 0)
-            return '00:00:00';
-
-        return Util::formatSeconds($this->getValue('current_uptime'));
+        return Util::formatSeconds(new fTimestamp($this->getValue('current_uptime')));
     }
 
     /**
-     * Returns the formatted total up time. If empty it will return 00:00:00
+     * Returns the formatted total up time.
      *
      * @return string
      */
     function getTotalUptime() {
-        if($this->getValue('total_uptime') == 0)
-            return '00:00:00';
-
-        return Util::formatSeconds($this->getValue('total_uptime'));
+        return Util::formatSeconds(new fTimestamp($this->getValue('total_uptime')));
     }
 
     /**
