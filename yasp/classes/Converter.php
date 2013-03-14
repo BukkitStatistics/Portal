@@ -85,7 +85,7 @@ class Converter {
                             VALUES (%i, %i, %i)
                             ');
         $dist_stmt = $this->newDB->translatedPrepare('
-                            INSERT INTO "prefix_distance_players"
+                            INSERT INTO "prefix_distances"
                             ("player_id",
                             "foot",
                             "boat",
@@ -292,7 +292,7 @@ class Converter {
                             WHERE "name" = %s
         ');
         $death_stmt = $this->newDB->translatedPrepare('
-                            INSERT INTO "prefix_total_death_players"
+                            INSERT INTO "prefix_total_deaths"
                             ("player_id",
                             "cause",
                             "times")
