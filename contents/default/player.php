@@ -87,4 +87,5 @@ try {
     $tpl->set('deaths', $deaths);
 
 } catch (fNotFoundException $e) {
+    fMessaging::create('no-cache', '{cache}', 1);
 }

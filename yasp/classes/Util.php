@@ -220,12 +220,19 @@ class Util {
 
         echo $capture;
 
-        if(fRequest::get('id', 'string') != '')
+        if(fRequest::get('id', 'string') != '' && $content != 'error.php')
             $content = $content . '_' . fRequest::get('id', 'string');
 
         // TODO: set cache time in settings
-        if(!DEVELOPMENT && !is_null($cache) && !fRequest::isAjax())
+        if(!DEVELOPMENT
+           && !is_null($cache)
+           && !fRequest::isAjax()
+           && !fMessaging::check('*', '{errors}')
+           && !fMessaging::check('no-cache', '{cache}')
+           && $content != 'error.php')
             $cache->set($content . '.cache', $capture, 120);
+
+        fMessaging::retrieve('no-cache', '{cache}');
     }
 
 
@@ -244,19 +251,25 @@ class Util {
         if(DEVELOPMENT)
             return;
 
+        if(fRequest::get('id', 'string') != '' && $content != 'error.php')
+            $content = $content . '_' . fRequest::get('id', 'string');
+
         $cached = $cache->get($content . '.cache');
 
         if($cached == null)
             return;
 
-        $file = new fFile(__ROOT__ . 'cache/' . $content . '.cache');
-        $time = $file->getMTime();
-        $text = '
-            <small>
-                <em>cached (' . $time->format('H:i:s') . ')</em>
-            </small>
-         ';
-        $cached = preg_replace('%<small .*id="execution_time".*>(.*)</small>%si', $text, $cached);
+        try {
+            $file = new fFile(__ROOT__ . 'cache/files/' . $content . '.cache');
+            $time = $file->getMTime();
+            $text = '
+                <small>
+                    <em>cached (' . $time->format('H:i:s') . ')</em>
+                </small>
+             ';
+            $cached = preg_replace('%<small .*id="execution_time".*>(.*)</small>%si', $text, $cached);
+        } catch(fValidationException $e) {
+        }
 
         die($cached);
     }
