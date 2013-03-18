@@ -4,13 +4,13 @@
 
 
             <div style="width: 450px" class="hidden-phone well">
-                <h1>
+                <h1 style="position: relative">
                     <?php echo $this->get('player')->getPlayerHead(64, 'img-polaroid'); ?>
                     <?php echo $this->get('player')->encodeName(); ?>
                     <?php if($this->get('player')->getOnline()): ?>
-                        <span class='label label-success'>In-Game</span>"
+                        <span class='label label-success player-status'>In-Game</span>
                     <?php else: ?>
-                        <span class='label label-important'>Offline</span>
+                        <span class='label label-important player-status'>Offline</span>
                     <?php endif; ?>
                 </h1>
                 <div style="float: left;">

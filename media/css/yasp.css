@@ -192,6 +192,12 @@ dl.dl-stats dd {
     background-position: top left;
 }
 
+.player-status {
+    position: absolute;
+    top: -10px;
+    left: 40px;
+}
+
 /* =Bootstrap */
 
 .alert p {
