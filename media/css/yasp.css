@@ -33,7 +33,7 @@ section {
 }
 
 .fixed-height {
-    min-height: 224px;
+    min-height: 260px;
     overflow: hidden;
 }
 
@@ -125,6 +125,10 @@ dl.dl-stats dd {
 	padding: 15px !important;
 }
 
+.grid-img {
+    padding: 8px;
+}
+
 
 /* =Sidebar */
 .nav-sidebar {
@@ -153,4 +157,14 @@ dl.dl-stats dd {
 
 .alert p {
     margin: 0;
+}
+
+.force-right {
+    text-align: right;
+}
+
+.grid {
+    min-height: 30px;
+    margin-top: 10px;
+    margin-bottom: 15px;
 }
