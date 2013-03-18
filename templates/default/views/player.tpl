@@ -314,7 +314,7 @@
         <div class="span4" style="width: 30% !important;">
             <h3>Other deaths</h3>
 
-            <?php if($this->get('deaths') == null): ?>
+            <?php if($this->get('deaths')): ?>
                 <?php foreach($this->get('deaths') as $death): ?>
                     <p>
                         <strong><?php echo $death->getName(); ?></strong>
