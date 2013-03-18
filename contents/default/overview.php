@@ -23,14 +23,14 @@ $this->inject('mod/death_log.php');
 $tpl->set('death_log', $this->get('death_log'));
 
 // server stats in dashboard
-$server = new ServerStatistic();
+ServerStatistic::init();
 
-$server_stats['startup'] = $server->getStartup()->format('H:i - d.m.Y');
-$server_stats['shutdown'] = $server->getShutdown()->format('H:i - d.m.Y');
-$server_stats['cur_uptime'] = $server->getCurrentUptime();
+$server_stats['startup'] = ServerStatistic::getStartup()->format('H:i - d.m.Y');
+$server_stats['shutdown'] = ServerStatistic::getShutdown()->format('H:i - d.m.Y');
+$server_stats['cur_uptime'] = ServerStatistic::getCurrentUptime();
 $server_stats['playtime'] = Player::countTotalPlaytime();
 $server_stats['total_logins'] = Player::countAllLogins()->format();
-$server_stats['max_players'] = $server->getMaxPlayersOnline(true);
+$server_stats['max_players'] = ServerStatistic::getMaxPlayersOnline(true);
 
 $tpl->set('serverstats', $server_stats);
 
@@ -38,7 +38,7 @@ $tpl->set('serverstats', $server_stats);
 $player_stats['tracked'] = fRecordSet::tally('Player');
 $player_stats['died'] = TotalDeath::countAllDeaths()->format();
 $player_stats['killed'] = Player::countAllKillsOfType()->format();
-$player_stats['online'] = $server->getPlayersOnline()->format();
+$player_stats['online'] = ServerStatistic::getPlayersOnline()->format();
 
 $tpl->set('players', $player_stats);
 

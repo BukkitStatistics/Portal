@@ -42,7 +42,10 @@
                     <li>
                         <p class="navbar-text">
                             Server status:
-                            <?php if(true): ?>
+                            <?php
+                                ServerStatistic::init();
+                                if(ServerStatistic::getStatus()):
+                            ?>
                             <span class='label label-success'>Online</span>
                             <?php else: ?>
                             <span class='label label-important'>Offline</span>
