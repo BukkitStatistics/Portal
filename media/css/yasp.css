@@ -166,6 +166,32 @@ dl.dl-stats dd {
     vertical-align: top;
 }
 
+.xpbar-container {
+    position: relative;
+    height: 10px;
+    width: 364px;
+    background-image: url("../img/misc/xpbar-bg.png");
+    background-position: top left;
+    background-repeat: no-repeat;
+}
+
+.xpbar-cur {
+    position: absolute;
+    left: 0;
+    top: -25px;
+    width: 364px;
+    text-align: center;
+    font-size: 9px;
+    color: #51a351;
+}
+
+.xpbar {
+    height: 10px;
+    background-image: url("../img/misc/xpbar-full.png");
+    background-repeat: no-repeat;
+    background-position: top left;
+}
+
 /* =Bootstrap */
 
 .alert p {

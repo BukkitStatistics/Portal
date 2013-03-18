@@ -1,26 +1,27 @@
 <?php if(!is_null($this->get('player'))): ?>
     <div class="row">
         <div class="span12">
-            <h1>
-                <?php echo $this->get('player')->getPlayerHead(64, 'img-polaroid'); ?>
-                <?php echo $this->get('player')->encodeName(); ?>
-                <?php if($this->get('player')->getOnline()): ?>
-                    <span class='label label-success'>In-Game</span>"
-                <?php else: ?>
-                    <span class='label label-important'>Offline</span>
-                <?php endif; ?>
-            </h1>
 
-            <p>
-                <div class="clearfix">
+
+            <div style="width: 450px" class="hidden-phone well">
+                <h1>
+                    <?php echo $this->get('player')->getPlayerHead(64, 'img-polaroid'); ?>
+                    <?php echo $this->get('player')->encodeName(); ?>
+                    <?php if($this->get('player')->getOnline()): ?>
+                        <span class='label label-success'>In-Game</span>"
+                    <?php else: ?>
+                        <span class='label label-important'>Offline</span>
+                    <?php endif; ?>
+                </h1>
+                <div style="float: left;">
                     <?php echo $this->get('misc')->getHealthBar(); ?>
                 </div>
-            </p>
-            <p>
-                <div class="clearfix">
+                <div style="float: right">
                     <?php echo $this->get('misc')->getFoodBar(); ?>
                 </div>
-            </p>
+                <p class="clearfix"></p>
+                    <?php echo $this->get('misc')->getXPBar(); ?>
+            </div>
 
             <p>
                 <strong>Joined on:</strong>
@@ -101,11 +102,11 @@
                 if($this->get('blocks[most_placed]')):
                     $block = $this->get('blocks[most_placed]')->createMaterial();
                     echo $block->getImage();
-                ?>
-                <?php
+                    ?>
+                    <?php
                     echo $this->get('blocks[most_placed]')->getPlaced()->format();
-                    else:
-                ?>
+                else:
+                    ?>
                     <em>none</em>
                 <?php endif; ?>
             </p>
@@ -119,14 +120,14 @@
                 <strong>Most Popular Block Destroyed:</strong>
                 <?php
                 if($this->get('blocks[most_destroyed]')):
-                $block = $this->get('blocks[most_destroyed]')->createMaterial();
-                echo $block->getImage();
-                ?>
+                    $block = $this->get('blocks[most_destroyed]')->createMaterial();
+                    echo $block->getImage();
+                    ?>
 
-                <?php
+                    <?php
                     echo $this->get('blocks[most_destroyed]')->getDestroyed()->format();
-                    else:
-                ?>
+                else:
+                    ?>
                     <em>none</em>
                 <?php endif; ?>
             </p>
@@ -144,14 +145,14 @@
                 <strong>Most Popular Item Picked Up:</strong>
                 <?php
                 if($this->get('items[most_picked]')):
-                $item = $this->get('items[most_picked]')->createMaterial();
-                echo $item->getImage();
-                ?>
+                    $item = $this->get('items[most_picked]')->createMaterial();
+                    echo $item->getImage();
+                    ?>
 
-                <?php
+                    <?php
                     echo $this->get('items[most_picked]')->getPickedUp()->format();
-                    else:
-                ?>
+                else:
+                    ?>
                     <em>none</em>
                 <?php endif; ?>
             </p>
@@ -165,14 +166,14 @@
                 <strong>Most Popular Item Dropped:</strong>
                 <?php
                 if($this->get('items[most_dropped]')):
-                $item = $this->get('items[most_dropped]')->createMaterial();
-                echo $item->getImage();
-                ?>
+                    $item = $this->get('items[most_dropped]')->createMaterial();
+                    echo $item->getImage();
+                    ?>
 
-                <?php
+                    <?php
                     echo $this->get('items[most_dropped]')->getDropped()->format();
-                    else:
-                ?>
+                else:
+                    ?>
                     <em>none</em>
                 <?php endif; ?>
             </p>
@@ -311,10 +312,10 @@
 
             <?php if($this->get('deaths') == null): ?>
                 <?php foreach($this->get('deaths') as $death): ?>
-                <p>
-                    <strong><?php echo $death->getName(); ?></strong>
-                    <?php echo $death->getTimes()->format(); ?>
-                </p>
+                    <p>
+                        <strong><?php echo $death->getName(); ?></strong>
+                        <?php echo $death->getTimes()->format(); ?>
+                    </p>
                 <?php endforeach; ?>
             <?php else: ?>
                 <p><strong>This player was not killed by outside influences.</strong></p>
