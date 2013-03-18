@@ -10,6 +10,7 @@ try {
     $pvp_victim = $player->buildTotalPvpKills('victim_id');
     $pve = $player->buildTotalPveKills();
     $deaths = $player->buildTotalDeaths();
+    $misc = $player->createMiscInfoPlayer();
 
     $destroyed = new fNumber(0);
     $placed = new fNumber(0);
@@ -85,6 +86,7 @@ try {
     }
 
     $tpl->set('deaths', $deaths);
+    $tpl->set('misc', $misc);
 
 } catch (fNotFoundException $e) {
     fMessaging::create('no-cache', '{cache}', 1);

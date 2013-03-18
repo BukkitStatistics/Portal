@@ -153,6 +153,19 @@ dl.dl-stats dd {
     }
 }
 
+/* =playerbar */
+.bar-container {
+    height: 9px;
+    width: 9px;
+    background-repeat: no-repeat;
+    float: left;
+    margin-right: 1px;
+}
+
+.bar-container img {
+    vertical-align: top;
+}
+
 /* =Bootstrap */
 
 .alert p {

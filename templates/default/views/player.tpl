@@ -11,6 +11,16 @@
                 <?php endif; ?>
             </h1>
 
+            <p>
+                <div class="clearfix">
+                    <?php echo $this->get('misc')->getHealthBar(); ?>
+                </div>
+            </p>
+            <p>
+                <div class="clearfix">
+                    <?php echo $this->get('misc')->getFoodBar(); ?>
+                </div>
+            </p>
 
             <p>
                 <strong>Joined on:</strong>
