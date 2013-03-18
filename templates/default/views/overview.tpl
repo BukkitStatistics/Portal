@@ -116,7 +116,7 @@
                                 <span class="label label-success">
                                     <i class="icon-signal"></i>
                                     <?php echo $this->get('serverstats[max_players][0]'); ?> -
-                                    <?php echo $this->get('serverstats[max_players][1]'); ?>
+                                    <?php echo $this->get('serverstats[max_players][1]')->format('d.m.Y'); ?>
                                 </span>
                             </td>
                             <td>

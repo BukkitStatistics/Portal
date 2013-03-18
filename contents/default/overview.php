@@ -25,8 +25,8 @@ $tpl->set('death_log', $this->get('death_log'));
 // server stats in dashboard
 $server = new ServerStatistic();
 
-$server_stats['startup'] = $server->getStartup();
-$server_stats['shutdown'] = $server->getShutdown();
+$server_stats['startup'] = $server->getStartup()->format('H:i - d.m.Y');
+$server_stats['shutdown'] = $server->getShutdown()->format('H:i - d.m.Y');
 $server_stats['cur_uptime'] = $server->getCurrentUptime();
 $server_stats['playtime'] = Player::countTotalPlaytime();
 $server_stats['total_logins'] = Player::countAllLogins()->format();

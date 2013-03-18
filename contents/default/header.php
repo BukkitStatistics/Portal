@@ -40,7 +40,14 @@
             <div class="nav-collapse collapse">
                 <ul class="nav pull-right">
                     <li>
-                        <p class="navbar-text">Server status: <span class='label label-success'>Online</span></p>
+                        <p class="navbar-text">
+                            Server status:
+                            <?php if(true): ?>
+                            <span class='label label-success'>Online</span>
+                            <?php else: ?>
+                            <span class='label label-important'>Offline</span>
+                            <?php endif; ?>
+                        </p>
                     </li>
                     <li class="divider-vertical"></li>
                     <li id="admin-navi" class="dropdown">

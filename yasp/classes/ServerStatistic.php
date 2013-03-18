@@ -54,23 +54,19 @@ class ServerStatistic {
     /**
      * Returns the formatted startup time
      *
-     * @return string
+     * @return fTimestamp
      */
     function getStartup() {
-        $time = new fTimestamp($this->getValue('last_startup'));
-
-        return $time->format('H:i:s - d.m.Y');
+        return new fTimestamp($this->getValue('last_startup'));
 }
 
     /**
      * Returns the formatted shutdown time
      *
-     * @return string
+     * @return fTimestamp
      */
     function getShutdown() {
-        $time = new fTimestamp($this->getValue('last_shutdown'));
-
-        return $time->format('H:i:s - d.m.Y');
+        return new fTimestamp($this->getValue('last_shutdown'));
 }
 
     /**
@@ -115,9 +111,8 @@ class ServerStatistic {
             return 0;
 
         if($get_time) {
-            $time = new fTimestamp($this->getValue('max_players_online_time'));
-
-            return array($this->getValue('max_players_online'), $time->format('H:i - d.m.Y'));
+            return array($this->getValue('max_players_online'),
+                         new fTimestamp($this->getValue('max_players_online_time')));
         }
         else
             return $this->getValue('max_players_online');
