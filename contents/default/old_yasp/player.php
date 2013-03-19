@@ -1,13 +1,13 @@
 <?php
 define('__INC__', dirname(__FILE__) . '/');
 
-require_once (__INC__ . '../yasp/config/config.php');
-require_once (__INC__ . '../yasp/config/version.php');
-require_once (__INC__ . '../yasp/locale/' . LOCALE . '.php');
-require_once (__INC__ . '../yasp/_serverObj.php');
-require_once (__INC__ . '../yasp/_playerObj.php');
-require_once (__INC__ . '../yasp/query_utils.php');
-require_once (__INC__ . '../yasp/yasp.php');
+require_once (__INC__ . '../include/config/config.php');
+require_once (__INC__ . '../include/config/version.php');
+require_once (__INC__ . '../include/locale/' . LOCALE . '.php');
+require_once (__INC__ . '../include/_serverObj.php');
+require_once (__INC__ . '../include/_playerObj.php');
+require_once (__INC__ . '../include/query_utils.php');
+require_once (__INC__ . '../include/loader.php');
 
 $start = microtime(true);
 
@@ -16,7 +16,7 @@ $serverObj = $sObj->getServer();
 
 $online = !($serverObj->getServerStatus() == 'Offline');
 
-include("../yasp/security/init.php");
+include("../include/security/init.php");
 
 $url =  ($_SERVER['REQUEST_URI']);
 if($url[strlen($url)-1] == "/") { $url = substr($url, 0, strlen($url)-1); }
@@ -123,13 +123,13 @@ $_online = $_player->isOnline();
 
 	<h1>
 	<?php 
-	echo "<img src='../yasp/util/player/head/".$_playerName."' alt='".$_playerName."' /> ".$_playerName." ";
+	echo "<img src='../include/util/player/head/".$_playerName."' alt='".$_playerName."' /> ".$_playerName." ";
 	if($_online) echo "<span class='label label-success'>In-Game</span>";
 	else echo "<span class='label label-important'>Offline</span>";
 	?>
 	</h1>
 	
-	<?php @include ('../yasp/modules/players_search.php'); ?>
+	<?php @include ('../include/modules/players_search.php'); ?>
 	
 	<p><strong>Joined on:</strong> <?php echo(QueryUtils::formatDate($_player->getFirstLogin())); ?></p>
 	<p><strong>Last seen:</strong> <?php echo(QueryUtils::formatDate($_player->getLastLogin())); ?></p>

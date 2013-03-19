@@ -19,7 +19,7 @@ $mostDestroyedNum = $serverObj->getBlocksPlacedOfTypeTotal($mostDestroyed);
 	<dd style="margin-left: 130px !important;">Total Placed</dd>
 </dl>
 <dl class="dl-horizontal">
-	<dt style="width: 110px !important;"><span class="badge badge-success"><?php echo "<img src='./yasp/util/block/".$mostPlacedName."' style='width:15px; height:15px;' alt='".$mostPlaced."' title='".$mostPlacedNum." times' /> ".$mostPlacedNum; ?></span></dt>
+	<dt style="width: 110px !important;"><span class="badge badge-success"><?php echo "<img src='./include/util/block/".$mostPlacedName."' style='width:15px; height:15px;' alt='".$mostPlaced."' title='".$mostPlacedNum." times' /> ".$mostPlacedNum; ?></span></dt>
 	<dd style="margin-left: 130px !important;">Most Placed</dd>
 </dl>
 <dl class="dl-horizontal">
@@ -27,7 +27,7 @@ $mostDestroyedNum = $serverObj->getBlocksPlacedOfTypeTotal($mostDestroyed);
 	<dd style="margin-left: 130px !important;">Total Destroyed</dd>
 </dl>
 <dl class="dl-horizontal">
-	<dt style="width: 110px !important;"><span class="badge badge-important"><?php echo "<img src='./yasp/util/block/".$mostDestroyedName."' style='width:15px; height:15px;' alt='".$mostDestroyed."' title='".$mostDestroyedNum." times' /> ".$mostDestroyedNum; ?></span></dt>
+	<dt style="width: 110px !important;"><span class="badge badge-important"><?php echo "<img src='./include/util/block/".$mostDestroyedName."' style='width:15px; height:15px;' alt='".$mostDestroyed."' title='".$mostDestroyedNum." times' /> ".$mostDestroyedNum; ?></span></dt>
 	<dd style="margin-left: 130px !important;">Most Destroyed</dd>
 </dl>
 

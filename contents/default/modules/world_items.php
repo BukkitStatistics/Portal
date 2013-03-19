@@ -17,7 +17,7 @@
 		if($row['name'] == "") continue;
 		$blockName = str_replace(" ", "%20", $row['name']);
 		echo "<tr>";
-		echo "<td style='height:33px;text-align: center;'><img src='./yasp/util/block/".$blockName."' alt='".$row['name']."' /></td>";
+		echo "<td style='height:33px;text-align: center;'><img src='./include/util/block/".$blockName."' alt='".$row['name']."' /></td>";
 		echo "<td style='text-align: center;'>".$row['picked']."</td>";
 		echo "<td style='text-align: center;'>".$row['dropped']."</td>";
 		echo "</tr>";

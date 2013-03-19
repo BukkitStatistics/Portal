@@ -1,5 +1,5 @@
 <?php
-include_once 'yasp/init.php';
+include_once 'include/init.php';
 
 /*
  * Gets the requested page and checks if the page exists or not

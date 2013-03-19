@@ -1,6 +1,6 @@
 <?php
-include("../yasp/config/config.php");
-include("../yasp/security/logout.php");
+include("../include/config/config.php");
+include("../include/security/logout.php");
 
 $origin = $_POST['origin'];
 header("Location: ../".$origin); 

@@ -21,7 +21,7 @@
 			$player = new PLAYER($row['uuid']);
 			
 			echo "<tr>";
-			echo "<td><img src='./yasp/util/player/head/".$player->getName()."' alt='".$player->getName()."' class='img-thumb' /> <a href='./player/".$player->getName()."' >".$player->getName()."</a></td>";
+			echo "<td><img src='./include/util/player/head/".$player->getName()."' alt='".$player->getName()."' class='img-thumb' /> <a href='./player/".$player->getName()."' >".$player->getName()."</a></td>";
 			echo "<td>".QueryUtils::formatDate($player->getLastLogin())."</td>";
 			echo "<td>".QueryUtils::formatDate($player->getFirstLogin())."</td>";
 			echo "</tr>";
