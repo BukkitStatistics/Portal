@@ -36,11 +36,14 @@ $(document).ready(function() {
                     "?api&type=search",
                     { q: query },
                     function (data) {
+                        if(data['error'] == 'no_data')
+                            return;
+
                         query_cache[query] = data;
                         return process(data);
                     }
                 );
-            }, 100);
+            }, 200);
         }
     });
 });
