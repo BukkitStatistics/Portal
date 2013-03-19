@@ -43,7 +43,6 @@
                         <p class="navbar-text">
                             Server status:
                             <?php
-                                ServerStatistic::init();
                                 if(ServerStatistic::getStatus()):
                             ?>
                             <span class='label label-success'>Online</span>

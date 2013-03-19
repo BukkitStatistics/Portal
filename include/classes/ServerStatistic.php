@@ -28,10 +28,14 @@ class ServerStatistic {
                         SELECT * FROM "prefix_server_statistics"
         ');
 
-        $res->tossIfNoRows();
+        try {
+            $res->tossIfNoRows();
 
-        foreach($res as $row)
-            self::$values[$row['key']] = $row['value'];
+            foreach($res as $row)
+                self::$values[$row['key']] = $row['value'];
+        } catch (fNoRowsException $e) {
+            fCore::debug($e->getMessage());
+        }
     }
 
     /**
