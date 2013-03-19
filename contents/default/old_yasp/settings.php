@@ -1,10 +1,10 @@
 <?php
-include("../yasp/config/config.php");
+include("../include/config/config.php");
 
 if(SETUP_COMPLETE) {
 
-	include("../yasp/security/init.php");
-	include("../yasp/security/secure.php");
+	include("../include/security/init.php");
+	include("../include/security/secure.php");
 
 }
 ?>
@@ -99,7 +99,7 @@ if (!isset($_POST["Save"])) {
     define("TIMEZONE", "");
 ?>';
 		
-			$fp = fopen("../yasp/config/config.php", "w");
+			$fp = fopen("../include/config/config.php", "w");
 			fwrite($fp, $string);
 			fclose($fp);
 		} else {

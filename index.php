@@ -1,5 +1,5 @@
 <?php
-include_once 'yasp/init.php';
+include_once 'include/init.php';
 
 if(file_exists('install.php'))
     fURL::redirect('install.php');

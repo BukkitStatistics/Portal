@@ -1,6 +1,6 @@
 <?php
-include("../yasp/config/config.php");
-include("../yasp/security/login.php");
+include("../include/config/config.php");
+include("../include/security/login.php");
 ?>
 
 <!DOCTYPE html>
