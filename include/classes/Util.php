@@ -302,7 +302,7 @@ class Util {
         $d = floor($timestamp / 86400);
 
         if(strlen($s) == 1)
-            $s .= 0;
+            $s = 0 . $s;
         if(strlen($m) == 1)
             $m = 0 . $m;
         if(strlen($h) == 1)
@@ -318,5 +318,22 @@ class Util {
             return $s;
         else
             return $d . ' ' . $h . ':' . $m . ':' . $s;
+    }
+
+    /**
+     * Removes all cached skins that have expired.
+     *
+     */
+    public static function cleanSkinCache() {
+        if(rand(0, 99) == 50) {
+            $dir = new fDirectory(__ROOT__ . 'cache/skins');
+            $files = $dir->scan('#\.png$#i');
+            $ctime = new fTimestamp('-1 week');
+
+            foreach($files as $file) {
+                if($ctime->gte($file->getMTime()))
+                    $file->delete();
+            }
+        }
     }
 }

@@ -4,10 +4,11 @@ $this->set('title', 'Error occurred.');
 
 $type = fRequest::get('type', 'string');
 
-if(fMessaging::check('critical', '{errors}'))
-    $type = 'critical';
-elseif(fMessaging::check('error', '{errors}'))
+if(fMessaging::check('error', '{errors}'))
     $type = 'error';
+elseif(fMessaging::check('critical', '{errors}'))
+    $type = 'critical';
+
 
 $tpl->set('type', $type);
 

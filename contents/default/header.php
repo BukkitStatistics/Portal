@@ -37,22 +37,31 @@
         <div class="container">
             <a class="brand" href="./"><img class="logo-img" src="media/img/icon-default.png"> <?php echo $this->get('title'); ?></a>
 
-            <div class="nav-collapse collapse">
-                <ul class="nav pull-right">
-                    <li>
-                        <p class="navbar-text">
-                            Server status:
-                            <?php
-                                if(ServerStatistic::getStatus()):
+            <ul class="nav pull-right">
+                <li>
+                    <p class="navbar-text">
+                        Server status:
+                        <?php
+                        if(ServerStatistic::getStatus()):
                             ?>
                             <span class='label label-success'>Online</span>
-                            <?php else: ?>
+                        <?php else: ?>
                             <span class='label label-important'>Offline</span>
-                            <?php endif; ?>
-                        </p>
-                    </li>
-                </ul>
-            </div>
+                        <?php endif; ?>
+                    </p>
+                </li>
+                <li class="divider-vertical"></li>
+                <li>
+                    <form class="navbar-form form-search pull-right" method="post">
+                        <div class="input-append">
+                            <input type="hidden" name="page" value="player">
+                            <input name="player_name" type="text" class="span2 search-query" placeholder="Player" id="playerSearch"
+                                   autocomplete="off">
+                            <button type="submit" class="btn">Search</button>
+                        </div>
+                    </form>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

@@ -10,7 +10,7 @@ if(defined('DB_DATABASE') && DB_DATABASE != '') {
             $cacheSingle->set('dbOffline', false, 60 * 60 * 12);
         }
         elseif($cacheSingle->get('dbOffline'))
-            throw new fConnectivityException(fText::compose('Database not reachable. Try again in a few minutes.'));
+            throw new fConnectivityException('Database not reachable. Try again in a few minutes.');
 
 
         fORMDatabase::attach($db);
@@ -49,6 +49,6 @@ if(defined('DB_DATABASE') && DB_DATABASE != '') {
     }
 }
 else
-    if(!file_exists(__ROOT__ . 'index.php'))
+    if(!file_exists(__ROOT__ . 'install.php'))
         fMessaging::create('error', '{errors}',
                            new fConnectivityException('The database file is filled incorrectly.'));

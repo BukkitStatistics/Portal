@@ -22,19 +22,20 @@ class ServerStatistic {
         if(!is_null(self::$values))
             return;
 
-        self::$db = fORMDatabase::retrieve();
-
-        $res = self::$db->translatedQuery('
-                        SELECT * FROM "prefix_server_statistics"
-        ');
-
         try {
+            self::$db = fORMDatabase::retrieve();
+
+            $res = self::$db->translatedQuery('
+                        SELECT * FROM "prefix_server_statistics"
+            ');
+
             $res->tossIfNoRows();
 
             foreach($res as $row)
                 self::$values[$row['key']] = $row['value'];
         } catch (fNoRowsException $e) {
             fCore::debug($e->getMessage());
+        } catch (fProgrammerException $e) {
         }
     }
 

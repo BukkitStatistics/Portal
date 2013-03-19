@@ -19,7 +19,7 @@ fSession::open();
 try {
     $cache = new fCache('directory', __ROOT__ . 'cache/files');
     $cacheSingle = new fCache('file', __ROOT__ . 'cache/singlecache');
-    $cacheSingle->clean();
+    Util::cleanSkinCache();
 } catch(fEnvironmentException $e) {
     fMessaging::create('critical', '{errors}', $e);
     Util::newDesign('error.php');
@@ -30,6 +30,12 @@ try {
  * Initializes ORM
  */
 include __INC__ . 'config/orm.php';
+
+/*
+ * Include ajax call handling
+ * Handles for example api calls
+ */
+include __INC__ . 'ajax.php';
 
 /*
  * Initializes the language module

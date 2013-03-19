@@ -1,4 +1,16 @@
 <?php
+// redirect the playername to the id
+if(fRequest::isPost() && fRequest::get('player_name')) {
+    $player = new Player(
+        array(
+             'name' => fRequest::get('player_name', 'string')
+        )
+    );
+
+    if($player->exists())
+        fURL::redirect('?page=player&id=' . $player->getPlayerId());
+}
+
 $tpl = Util::newTpl($this, 'player');
 
 try {
