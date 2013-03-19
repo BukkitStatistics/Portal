@@ -40,21 +40,16 @@
             <div class="nav-collapse collapse">
                 <ul class="nav pull-right">
                     <li>
-                        <p class="navbar-text">Server status: <span class='label label-success'>Online</span></p>
-                    </li>
-                    <li class="divider-vertical"></li>
-                    <li id="admin-navi" class="dropdown">
-                        <a id="drop3" class="dropdown-toggle" data-toggle="dropdown" role="button" href="#">
-                            Settings
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="drop3" role="menu">
-                            <li role="menuitem"><a href="contents/default/settings/"><i class="icon-wrench"></i>
-                                Settings</a></li>
-                            <li role="menuitem"><a href="contents/default/logout/"><i class="icon-globe"></i>
-                                Log out</a>
-                            </li>
-                        </ul>
+                        <p class="navbar-text">
+                            Server status:
+                            <?php
+                                if(ServerStatistic::getStatus()):
+                            ?>
+                            <span class='label label-success'>Online</span>
+                            <?php else: ?>
+                            <span class='label label-important'>Offline</span>
+                            <?php endif; ?>
+                        </p>
                     </li>
                 </ul>
             </div>

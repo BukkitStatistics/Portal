@@ -33,7 +33,7 @@ section {
 }
 
 .fixed-height {
-    min-height: 224px;
+    min-height: 260px;
     overflow: hidden;
 }
 
@@ -125,6 +125,10 @@ dl.dl-stats dd {
 	padding: 15px !important;
 }
 
+.grid-img {
+    padding: 6px;
+}
+
 
 /* =Sidebar */
 .nav-sidebar {
@@ -149,8 +153,77 @@ dl.dl-stats dd {
     }
 }
 
+/* =player head */
+#playerhead {
+    width: 450px;
+}
+
+@media (max-width: 979px) {
+    #playerhead {
+        width: auto;
+    }
+
+    #playerhead-bars {
+        display: none;
+    }
+}
+
+.bar-container {
+    height: 9px;
+    width: 9px;
+    background-repeat: no-repeat;
+    float: left;
+    margin-right: 1px;
+}
+
+.bar-container img {
+    vertical-align: top;
+}
+
+.xpbar-container {
+    position: relative;
+    height: 10px;
+    width: 364px;
+    background-image: url("../img/misc/xpbar-bg.png");
+    background-position: top left;
+    background-repeat: no-repeat;
+}
+
+.xpbar-cur {
+    position: absolute;
+    left: 0;
+    top: -25px;
+    width: 364px;
+    text-align: center;
+    font-size: 9px;
+    color: #51a351;
+}
+
+.xpbar {
+    height: 10px;
+    background-image: url("../img/misc/xpbar-full.png");
+    background-repeat: no-repeat;
+    background-position: top left;
+}
+
+.player-status {
+    position: absolute;
+    top: -10px;
+    left: 40px;
+}
+
 /* =Bootstrap */
 
 .alert p {
     margin: 0;
+}
+
+.force-right {
+    text-align: right;
+}
+
+.grid {
+    min-height: 30px;
+    margin-top: 10px;
+    margin-bottom: 15px;
 }

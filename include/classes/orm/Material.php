@@ -35,8 +35,11 @@ class Material extends fActiveRecord {
 
     /**
      * Gets the most dangerous material.<br>
-     * The first array value is an fNumber which is the count. The second one is the block name.
+     * The first array value is an fNumber which is the count. The second one is the block name.<br>
      *
+     * This function is incredibly slow with large tables.
+     *
+     * @deprecated
      * @return array
      */
     public static function getMostDangerous() {
