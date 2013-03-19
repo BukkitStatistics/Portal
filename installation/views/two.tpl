@@ -43,7 +43,7 @@ Util::showMessages('*', 'install/two', 'alert alert-error');
 
     <div class="controls">
         <div class="input-append">
-            <input type="text" name="prefix" id="prefix" value="<?php echo $this->get('prefix', 'include') ?>">
+            <input type="text" name="prefix" id="prefix" value="<?php echo $this->get('prefix', 'stats') ?>">
             <span class="add-on">_</span>
         </div>
         <span class="help-inline">Optional. Tables will look like this: prefix_tablename</span>
