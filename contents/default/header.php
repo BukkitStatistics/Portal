@@ -52,20 +52,6 @@
                             <?php endif; ?>
                         </p>
                     </li>
-                    <li class="divider-vertical"></li>
-                    <li id="admin-navi" class="dropdown">
-                        <a id="drop3" class="dropdown-toggle" data-toggle="dropdown" role="button" href="#">
-                            Settings
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="drop3" role="menu">
-                            <li role="menuitem"><a href="contents/default/settings/"><i class="icon-wrench"></i>
-                                Settings</a></li>
-                            <li role="menuitem"><a href="contents/default/logout/"><i class="icon-globe"></i>
-                                Log out</a>
-                            </li>
-                        </ul>
-                    </li>
                 </ul>
             </div>
         </div>
