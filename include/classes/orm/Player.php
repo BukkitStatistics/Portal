@@ -188,19 +188,8 @@ class Player extends fActiveRecord {
      */
     public function getPlayerHead($size = 32, $classes = null) {
         $name = __ROOT__ . 'cache/skins/head-' . $size . '_' . $this->getUrlName() . '.png';
-        $removed = false;
 
-        if(file_exists($name)) {
-            $file = new fImage($name);
-            $ctime = new fTimestamp('-1 week');
-
-            if($ctime->gte($file->getMTime())) {
-                $removed = true;
-                $file->delete();
-            }
-        }
-
-        if(!file_exists($name) || $removed) {
+        if(!file_exists($name)) {
             $canvas = imagecreatetruecolor($size, $size);
             $image = imagecreatefromstring(file_get_contents($this->getSkin()));
             imagecopyresampled($canvas, $image, 0, 0, 8, 8, $size, $size, 8, 8);

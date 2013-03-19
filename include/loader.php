@@ -19,7 +19,7 @@ fSession::open();
 try {
     $cache = new fCache('directory', __ROOT__ . 'cache/files');
     $cacheSingle = new fCache('file', __ROOT__ . 'cache/singlecache');
-    $cacheSingle->clean();
+    Util::cleanSkinCache();
 } catch(fEnvironmentException $e) {
     fMessaging::create('critical', '{errors}', $e);
     Util::newDesign('error.php');
