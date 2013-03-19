@@ -16,13 +16,6 @@ class ServerStatistic {
     private static $values;
 
     /**
-     * Get the database and fill $values.
-     */
-    public static function init() {
-        self::calcValues();
-    }
-
-    /**
      * Fills values with database values.
      */
     private static function calcValues() {
@@ -49,6 +42,8 @@ class ServerStatistic {
      * @return string
      */
     public static function getValue($key) {
+        self::calcValues();
+
         if(isset(self::$values[$key]))
             return self::$values[$key];
         else

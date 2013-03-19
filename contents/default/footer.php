@@ -12,11 +12,11 @@
                     </p>
                 </div>
                 <div class="span4">
-                    <p style="position:relative; top:5px;">&copy; <?php echo date('Y'); ?> Yet Another Statistics Plugin
+                    <p style="position:relative; top:5px;">&copy; <?php echo date('Y'); ?> Statistics
                 </div>
                 <div class="span4 offset2" style="text-align: right;">
                     <p>
-                        Running database version DEV
+                        <?php echo VERSION; ?>-db<?php echo Util::getOption('version'); ?>
                         <br>
                         <small id="execution_time">
                             Execution time: <?php echo round(
