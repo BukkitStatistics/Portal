@@ -49,6 +49,6 @@ if(defined('DB_DATABASE') && DB_DATABASE != '') {
     }
 }
 else
-    if(!file_exists(__ROOT__ . 'index.php'))
+    if(!file_exists(__ROOT__ . 'install.php'))
         fMessaging::create('error', '{errors}',
                            new fConnectivityException('The database file is filled incorrectly.'));
