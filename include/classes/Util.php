@@ -302,7 +302,7 @@ class Util {
         $d = floor($timestamp / 86400);
 
         if(strlen($s) == 1)
-            $s .= 0;
+            $s = 0 . $s;
         if(strlen($m) == 1)
             $m = 0 . $m;
         if(strlen($h) == 1)
