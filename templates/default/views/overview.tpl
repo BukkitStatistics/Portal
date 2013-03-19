@@ -414,11 +414,13 @@
 
 </section>
 <section id="players">
-    <h1>
-        <i class="icon-group icon-large"></i>
-        Player Information
-        <small>All players tracked on this server</small>
-    </h1>
+    <div class="page-header">
+        <h1>
+            <i class="icon-group icon-large"></i>
+            Player Information
+            <small>All players tracked on this server</small>
+        </h1>
+    </div>
 
     <div class="well custom-wel" data-mod="players" id="playersBlock">
 
@@ -451,11 +453,13 @@
 <section id="deaths">
     <div class="row-fluid">
         <div class="span12">
-            <h1>
-                <i class="icon-tint icon-large"></i>
-                Death Log
-                <small>Latest PVP, PVE and EVP kills</small>
-            </h1>
+            <div class="page-header">
+                <h1>
+                    <i class="icon-tint icon-large"></i>
+                    Death Log
+                    <small>Latest PVP, PVE and EVP kills</small>
+                </h1>
+            </div>
 
             <div class="well custom-well" style="padding: 10px;" id="deathsBlock">
 
