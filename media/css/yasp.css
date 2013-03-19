@@ -153,7 +153,21 @@ dl.dl-stats dd {
     }
 }
 
-/* =playerbar */
+/* =player head */
+#playerhead {
+    width: 450px;
+}
+
+@media (max-width: 979px) {
+    #playerhead {
+        width: auto;
+    }
+
+    #playerhead-bars {
+        display: none;
+    }
+}
+
 .bar-container {
     height: 9px;
     width: 9px;
