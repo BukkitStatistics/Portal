@@ -5,21 +5,22 @@ class MiscInfoPlayer extends fActiveRecord {
      * Returns an bar with the $full and $half image.<br>
      * If the bg is null, no bg will be shown.
      *
+     * @param      $max
      * @param      $full
      * @param      $half
      * @param null $bg
      *
      * @return string
      */
-    private function makeBar($full, $half, $bg = null) {
+    private function makeBar($max, $full, $half, $bg = null) {
         $s = '';
 
         for($i = 1; $i <= 20; $i++) {
             $cur = '';
             $style = '';
 
-            if($i <= $this->getFoodLevel()) {
-                if($i == $this->getFoodLevel() && $i % 2 != 0)
+            if($i <= $max) {
+                if($i == $max && $i % 2 != 0)
                     $cur = '<img src="' . fFilesystem::translateToWebPath($half) . '" alt="bar" />';
                 else
                     $cur = '<img src="' . fFilesystem::translateToWebPath($full) . '" alt="bar" />';
@@ -44,9 +45,8 @@ class MiscInfoPlayer extends fActiveRecord {
      * @return string
      */
     public function getFoodBar() {
-        return $this->makeBar(__ROOT__ . 'media/img/misc/hunger-full.png',
-                              __ROOT__ . 'media/img/misc/hunger-half.png',
-                              __ROOT__ . 'media/img/misc/hunger-bg.png');
+        return $this->makeBar($this->getFoodLevel() , __ROOT__ . 'media/img/misc/hunger-full.png',
+                                __ROOT__ . 'media/img/misc/hunger-half.png', __ROOT__ . 'media/img/misc/hunger-bg.png');
     }
 
     /**
@@ -56,9 +56,8 @@ class MiscInfoPlayer extends fActiveRecord {
      * @return string
      */
     public function getHealthBar() {
-        return $this->makeBar(__ROOT__ . 'media/img/misc/heart-full.png',
-                              __ROOT__ . 'media/img/misc/heart-half.png',
-                              __ROOT__ . 'media/img/misc/heart-bg.png');
+        return $this->makeBar($this->getHealth() , __ROOT__ . 'media/img/misc/heart-full.png', __ROOT__ . 'media/img/misc/heart-half.png',
+                                __ROOT__ . 'media/img/misc/heart-bg.png');
     }
 
     /**
