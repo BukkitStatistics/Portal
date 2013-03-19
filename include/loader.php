@@ -32,6 +32,12 @@ try {
 include __INC__ . 'config/orm.php';
 
 /*
+ * Include ajax call handling
+ * Handles for example api calls
+ */
+include __INC__ . 'ajax.php';
+
+/*
  * Initializes the language module
  */
 $lang = new Language(Util::getOption('language', fSession::get('lang', 'en')));
