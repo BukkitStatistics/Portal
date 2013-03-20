@@ -195,6 +195,16 @@
                                 By boat
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <span class="label label-info">
+                                    <i class="icon-umbrella"></i> <?php echo $this->get('distance[swimmed]'); ?>
+                                </span>
+                            </td>
+                            <td>
+                                Swum
+                            </td>
+                        </tr>
                     </table>
                 </div>
             </div>
