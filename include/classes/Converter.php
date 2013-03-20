@@ -61,7 +61,7 @@ class Converter {
     private function convertPlayers() {
         $result = $this->oldDB->query('
                         SELECT
-                        DISTINCT player_name,
+                        player_name,
                         firstever_login,
                         last_login,
                         num_logins,
@@ -74,6 +74,8 @@ class Converter {
                         FROM players
                         WHERE last_logout IS NOT NULL
                         AND last_login IS NOT NULL
+                        GROUP BY player_name
+                        HAVING COUNT(1) = 1
                         LIMIT %i,%i
                         ', $this->start, $this->itemsPerRun);
 
