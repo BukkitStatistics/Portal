@@ -332,9 +332,13 @@
                     <div class="row-fluid grid">
                         <div class="span12">
                             <span class="badge badge-important grid-img">
+                                <?php if($this->get('deaths[top_killer][1]')->getName() != 'none'): ?>
                                 <a href="?page=player&id=<?php echo $this->get('deaths[top_killer][1]')->getPlayerId(); ?>">
                                     <?php echo $this->get('deaths[top_killer][1]')->getPlayerHead(); ?>
                                 </a>
+                                <?php else: ?>
+                                    <?php echo $this->get('deaths[top_killer][1]')->getPlayerHead(); ?>
+                                <?php endif; ?>
                             </span>
                             Most Kills
                         </div>
@@ -342,9 +346,13 @@
                     <div class="row-fluid grid">
                         <div class="span12">
                             <span class="badge badge-important grid-img">
+                                <?php if($this->get('deaths[most_killed_player][1]')->getName() != 'none'): ?>
                                  <a href="?page=player&id=<?php echo $this->get('deaths[most_killed_player][1]')->getPlayerId(); ?>">
                                      <?php echo $this->get('deaths[most_killed_player][1]')->getPlayerHead(); ?>
                                  </a>
+                                <?php else: ?>
+                                    <?php echo $this->get('deaths[most_killed_player][1]')->getPlayerHead(); ?>
+                                <?php endif; ?>
                             </span>
                             Most Deaths
                         </div>
