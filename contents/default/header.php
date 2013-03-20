@@ -50,10 +50,10 @@
                 </li>
                 <li class="divider-vertical"></li>
                 <li>
-                    <form class="navbar-form form-search pull-right" method="post">
+                    <form class="navbar-form form-search pull-right" method="get">
                         <div class="input-append">
                             <input type="hidden" name="page" value="player">
-                            <input name="player_name" type="text" class="span2 search-query" placeholder="Player" id="playerSearch"
+                            <input name="name" type="text" class="span2 search-query" placeholder="Player" id="playerSearch"
                                    autocomplete="off">
                             <button type="submit" class="btn">Search</button>
                         </div>

@@ -311,7 +311,7 @@
                 <div class="span4">
                     <span class="badge badge-important grid-img">
                         <?php if($this->get('deaths[top_killer][1]')->getName() != 'none'): ?>
-                            <a href="?page=player&id=<?php echo $this->get('deaths[top_killer][1]')->getPlayerId(); ?>">
+                            <a href="?page=player&name=<?php echo $this->get('deaths[top_killer][1]')->getName(); ?>">
                                 <?php echo $this->get('deaths[top_killer][1]')->getPlayerHead(); ?>
                             </a>
                         <?php else: ?>
@@ -322,7 +322,7 @@
                 <div class="span4">
                     <span class="badge badge-important grid-img">
                         <?php if($this->get('deaths[most_killed_player][1]')->getName() != 'none'): ?>
-                            <a href="?page=player&id=<?php echo $this->get('deaths[most_killed_player][1]')->getPlayerId(); ?>">
+                            <a href="?page=player&name=<?php echo $this->get('deaths[most_killed_player][1]')->getName(); ?>">
                                 <?php echo $this->get('deaths[most_killed_player][1]')->getPlayerHead(); ?>
                             </a>
                         <?php else: ?>
@@ -394,8 +394,8 @@
     <div class="page-header">
         <h1>
             <i class="icon-group icon-large"></i>
-            Player Information
-            <small>All players tracked on this server</small>
+            Players
+            <small>Tracked on this server</small>
         </h1>
     </div>
 
@@ -434,7 +434,7 @@
                 <h1>
                     <i class="icon-tint icon-large"></i>
                     Death Log
-                    <small>Latest PVP, PVE and EVP kills</small>
+                    <small>PVP, PVE and EVP kills</small>
                 </h1>
             </div>
 

@@ -1,20 +1,16 @@
 <?php
-// redirect the playername to the id
-if(fRequest::isPost() && fRequest::get('player_name')) {
-    $player = new Player(
-        array(
-             'name' => fRequest::get('player_name', 'string')
-        )
-    );
-
-    if($player->exists())
-        fURL::redirect('?page=player&id=' . $player->getPlayerId());
-}
-
 $tpl = Util::newTpl($this, 'player');
 
 try {
-    $player = new Player(fRequest::get('id', 'int'));
+    $player = new Player(
+        array(
+             'name' => fRequest::get('name', 'string')
+        )
+    );
+
+    if(!$player->exists())
+        throw new fNotFoundException();
+
     $distance = $player->createDistance();
     $blocks = $player->buildTotalBlocks();
     $items = $player->buildTotalItems();

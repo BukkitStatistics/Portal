@@ -33,7 +33,7 @@ $(document).ready(function() {
             }
             searching = setTimeout(function () {
                 return $.getJSON(
-                    "?api&type=search",
+                    "?api=true&type=search",
                     { q: query },
                     function (data) {
                         if(data['error'] == 'no_data')
