@@ -35,7 +35,7 @@ class ServerStatistic {
                 self::$values[$row['key']] = $row['value'];
         } catch (fNoRowsException $e) {
             fCore::debug($e->getMessage());
-        } catch (fProgrammerException $e) {
+        } catch (fException $e) {
         }
     }
 
