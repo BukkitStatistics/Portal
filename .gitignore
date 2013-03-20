@@ -1,4 +1,16 @@
 #################
+## Statistics
+#################
+
+# Cache files
+cache/files/*
+cache/skins/*
+cache/singlecache
+cache/remapped
+
+
+
+#################
 ## Eclipse
 #################
 
