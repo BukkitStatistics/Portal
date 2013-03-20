@@ -49,8 +49,6 @@
         </div>
     </div>
 </div>
-
-<div class="section-split"></div>
 <div class="page-header">
     <h1>
         <i class="icon-tasks icon-large"></i> Dashboard
@@ -115,8 +113,7 @@
                             <td>
                                 <span class="label label-success">
                                     <i class="icon-signal"></i>
-                                    <?php echo $this->get('serverstats[max_players][0]'); ?> -
-                                    <?php echo $this->get('serverstats[max_players][1]')->format('d.m.Y'); ?>
+                                    <?php echo $this->get('serverstats[max_players][0]'); ?>
                                 </span>
                             </td>
                             <td>

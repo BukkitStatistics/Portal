@@ -7,10 +7,12 @@ body {
 .logo-img {
 	height: 25px;
 	margin-right: 15px;
+    margin-top: 7px;
 }
 
 section {
     padding-top: 65px;
+    padding-left: 10px;
 }
 
 #content section:first-child {

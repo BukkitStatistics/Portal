@@ -35,20 +35,18 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="./"><img class="logo-img" src="media/img/icon-default.png"> <?php echo $this->get('title'); ?></a>
+            <img class="logo-img pull-left" src="media/img/icon-default.png">
+            <a class="brand" href="./"><?php echo $this->get('title'); ?></a>
 
             <ul class="nav pull-right">
                 <li>
-                    <p class="navbar-text">
-                        Server status:
-                        <?php
-                        if(ServerStatistic::getStatus()):
-                            ?>
-                            <span class='label label-success'>Online</span>
-                        <?php else: ?>
-                            <span class='label label-important'>Offline</span>
-                        <?php endif; ?>
-                    </p>
+                    <?php
+                    if(ServerStatistic::getStatus()):
+                        ?>
+                        <span class="btn btn-success disabled">Online</span>
+                    <?php else: ?>
+                        <span class="btn btn-danger disabled">Offline</span>
+                    <?php endif; ?>
                 </li>
                 <li class="divider-vertical"></li>
                 <li>
