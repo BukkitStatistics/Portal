@@ -2,7 +2,7 @@
     <div class='force-center'><em>No players online</em></div>
 <?php
 else: ?>
-    <table class="table table-striped table-hover tablesorter">
+    <table class="table table-striped table-hover table-vcenter">
         <thead>
         <tr>
             <th class="sort-button" data-type="1" data-sort="asc">Name</th>

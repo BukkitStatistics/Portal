@@ -33,21 +33,6 @@ section {
     overflow: hidden;
 }
 
-dl.dl-stats {
-}
-
-dl.dl-stats dt {
-    width: 60px !important;
-}
-
-dl.dl-stats dt span {
-    padding: 10px 15px;
-}
-
-dl.dl-stats dd {
-    margin-left: 80px !important;
-}
-
 .section-split {
     height: 50px;
 }
@@ -81,6 +66,10 @@ dl.dl-stats dd {
     text-align: left;
 }
 
+.table-vcenter td, .table-vcenter th {
+    vertical-align: middle;
+}
+
 /* =Format */
 
 .table.no-border td, .table.no-border th {
@@ -94,7 +83,6 @@ dl.dl-stats dd {
 .custom-well {
 	background: #faffff;
 }
-
 
 .player-search {
 	position: relative;
@@ -141,8 +129,10 @@ dl.dl-stats dd {
 	height: 20px !important;
 }
 
-.no-img {
-	padding: 15px !important;
+.no-img, .grid-img {
+    padding: 15px 8px;
+    min-width: 28px;
+    text-align: center;
 }
 
 .grid-img {
@@ -175,14 +165,14 @@ dl.dl-stats dd {
 
 /* =player head */
 #playerhead {
-    width: 450px;
+    margin: 16px 0;
+}
+
+#playerhead-bars {
+    width: 365px;
 }
 
 @media (max-width: 979px) {
-    #playerhead {
-        width: auto;
-    }
-
     #playerhead-bars {
         display: none;
     }
@@ -215,7 +205,8 @@ dl.dl-stats dd {
     top: -25px;
     width: 364px;
     text-align: center;
-    font-size: 9px;
+    font-size: 10px;
+    font-weight: bold;
     color: #51a351;
 }
 

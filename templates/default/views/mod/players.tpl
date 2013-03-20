@@ -1,7 +1,7 @@
 <?php if($this->get('players')->count() == 0): ?>
 <div class='force-center'><em>No players tracked</em></div>
 <?php else: ?>
-<table class="table table-striped table-bordered table-hover sortable" id="playersTable">
+<table class="table table-striped table-bordered table-hover table-vcenter" id="playersTable">
     <thead>
     <tr>
         <th class="sort-button" data-type="1" data-sort="desc">

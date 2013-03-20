@@ -1,4 +1,4 @@
-<table class="table table-striped table-bordered sortable">
+<table class="table table-striped table-bordered table-vcenter">
     <thead>
     <tr>
         <th style="text-align: center;" class="sort-button" data-type="1" data-sort="asc">Item Type</th>

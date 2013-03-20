@@ -15,15 +15,15 @@ class MiscInfoPlayer extends fActiveRecord {
     private function makeBar($max, $full, $half, $bg = null) {
         $s = '';
 
-        for($i = 1; $i <= 20; $i++) {
+        for($i = 1; $i <= 10; $i++) {
             $cur = '';
             $style = '';
 
-            if($i <= $max) {
-                if($i == $max && $i % 2 != 0)
-                    $cur = '<img src="' . fFilesystem::translateToWebPath($half) . '" alt="bar" />';
+            if($i <= ceil($max / 2)) {
+                if($max % 2 && $i == ceil($max / 2))
+                    $cur = '<img src="' . fFilesystem::translateToWebPath($half) . '" alt="bar">';
                 else
-                    $cur = '<img src="' . fFilesystem::translateToWebPath($full) . '" alt="bar" />';
+                    $cur = '<img src="' . fFilesystem::translateToWebPath($full) . '" alt="bar">';
             }
             else
                 if(!is_null($bg))
