@@ -49,8 +49,6 @@
         </div>
     </div>
 </div>
-
-<div class="section-split"></div>
 <div class="page-header">
     <h1>
         <i class="icon-tasks icon-large"></i> Dashboard
@@ -68,12 +66,16 @@
                     <!-- TODO: find a fluid solution -.-' -->
                     <table class="table no-border statbox-table">
                         <tr>
+                            <th class="statbox-head" colspan="2">General</th>
+                            <th class="statbox-head" colspan="2">Player</th>
+                        </tr>
+                        <tr>
                             <td>
                                 <span class="label label-info">
                                     <i class="icon-bell"></i> <?php echo $this->get('serverstats[startup]'); ?>
                                 </span>
                             </td>
-                            <td>
+                            <td class="desc">
                                 Startup
                             </td>
                             <td>
@@ -81,7 +83,7 @@
                                     <i class="icon-group"></i> <?php echo $this->get('players[online]'); ?>
                                 </span>
                             </td>
-                            <td>
+                            <td class="desc">
                                 Currently online
                             </td>
                         </tr>
@@ -91,7 +93,7 @@
                                     <i class="icon-lock"></i> <?php echo $this->get('serverstats[shutdown]'); ?>
                                 </span>
                             </td>
-                            <td>
+                            <td class="desc">
                                 Shutdown
                             </td>
                             <td>
@@ -99,8 +101,8 @@
                                     <i class="icon-star"></i> <?php echo $this->get('players[tracked]'); ?>
                                 </span>
                             </td>
-                            <td>
-                                Tracked players
+                            <td class="desc">
+                                Tracked
                             </td>
                         </tr>
                         <tr>
@@ -109,18 +111,17 @@
                                     <i class="icon-calendar"></i> <?php echo $this->get('serverstats[cur_uptime]'); ?>
                                 </span>
                             </td>
-                            <td>
+                            <td class="desc">
                                 Uptime
                             </td>
                             <td>
                                 <span class="label label-success">
                                     <i class="icon-signal"></i>
-                                    <?php echo $this->get('serverstats[max_players][0]'); ?> -
-                                    <?php echo $this->get('serverstats[max_players][1]')->format('d.m.Y'); ?>
+                                    <?php echo $this->get('serverstats[max_players][0]'); ?>
                                 </span>
                             </td>
-                            <td>
-                                Maximum players
+                            <td class="desc">
+                                Maximum
                             </td>
                         </tr>
                         <tr>
@@ -129,7 +130,7 @@
                                     <i class="icon-bullhorn"></i> <?php echo $this->get('serverstats[playtime]'); ?>
                                 </span>
                             </td>
-                            <td>
+                            <td class="desc">
                                 Gameplay
                             </td>
                             <td>
@@ -137,7 +138,7 @@
                                     <i class="icon-fire"></i> <?php echo $this->get('serverstats[total_logins]'); ?>
                                 </span>
                             </td>
-                            <td>
+                            <td class="desc">
                                 Number of logins
                             </td>
                         </tr>
@@ -153,7 +154,7 @@
 
             <div class="row-fluid">
                 <div class="span11 offset1">
-                    <table class="table no-border statbox-table">
+                    <table class="table no-border statbox-table-small">
                         <tr>
                             <td>
                                 <span class="label label-info">
@@ -161,7 +162,7 @@
                                 </span>
                             </td>
                             <td>
-                                Total distance
+                                Total
                             </td>
                         </tr>
                         <tr>
@@ -208,7 +209,7 @@
 
             <div class="row-fluid">
                 <div class="span11 offset1">
-                    <table class="table no-border statbox-table">
+                    <table class="table no-border statbox-table-small">
                         <tr>
                             <td>
                                 <span class="label label-info">
@@ -216,7 +217,7 @@
                                 </span>
                             </td>
                             <td>
-                                Total placed
+                                Placed
                             </td>
                         </tr>
                         <tr>
@@ -227,7 +228,7 @@
                                 </span>
                             </td>
                             <td>
-                                Most placed
+                                Top placed
                             </td>
                         </tr>
                         <tr>
@@ -237,7 +238,7 @@
                                 </span>
                             </td>
                             <td>
-                                Total destroyed
+                                Destroyed
                             </td>
                         </tr>
                         <tr>
@@ -248,7 +249,7 @@
                                 </span>
                             </td>
                             <td>
-                                Most destroyed
+                                Top destroyed
                             </td>
                         </tr>
                     </table>
@@ -259,6 +260,7 @@
     <div class="span8">
         <div class="well custom-well fixed-height">
             <h3>Online Players</h3>
+
             <div data-mod="players_online">
                 <?php $this->place('players_online'); ?>
             </div>
@@ -270,88 +272,67 @@
     <div class="span8">
         <div class="well custom-well fixed-height">
             <h3>Death Statistics</h3>
-            <div class="row-fluid">
+            <div class="row-fluid grid">
                 <div class="span4">
-                    <div class="row-fluid grid">
-                        <div class="span12">
-                            <span class="badge badge-success no-img">
-                                <?php echo $this->get('deaths[total]') ?>
-                            </span>
-                            Total Kills
-                        </div>
-                    </div>
-                    <div class="row-fluid grid">
-                        <div class="span12">
-                            <span class="badge badge-success no-img">
-                                <?php echo $this->get('deaths[deaths]') ?>
-                            </span>
-                            Total Deaths
-                        </div>
-                    </div>
-                    <div class="row-fluid grid">
-                        <div class="span12">
-                            <span class="badge badge-success grid-img">
-                                <?php echo Material::getMaterialImg($this->get('deaths[top_weapon][1]')) ?>
-                            </span>
-                            Best Weapon
-                        </div>
-                    </div>
+                    <span class="badge badge-success no-img">
+                        <?php echo $this->get('deaths[total]'); ?>
+                    </span> Total Kills
                 </div>
-                <div class="span4 offset1">
-                    <div class="row-fluid grid">
-                        <div class="span12">
-                            <span class="badge badge-success no-img">
-                                <?php echo $this->get('deaths[pve]') ?>
-                            </span>
-                            PvE Kills
-                        </div>
-                    </div>
-                    <div class="row-fluid grid">
-                        <div class="span12">
-                            <span class="badge badge-important grid-img">
-                                <?php echo Entity::getEntityImg($this->get('deaths[most_dangerous][1]')) ?>
-                            </span>
-                            Most Dangerous
-                        </div>
-                    </div>
-                    <div class="row-fluid grid">
-                        <div class="span12">
-                            <span class="badge badge-important grid-img">
-                                <?php echo Entity::getEntityImg($this->get('deaths[most_killed_mob][1]')) ?>
-                            </span>
-                            Most killed
-                        </div>
-                    </div>
+                <div class="span4">
+                     <span class="badge badge-success no-img">
+                        <?php echo $this->get('deaths[deaths]'); ?>
+                    </span> Total Deaths
                 </div>
-                <div class="span3">
-                    <div class="row-fluid grid">
-                        <div class="span12">
-                            <span class="badge badge-success no-img">
-                                <?php echo $this->get('deaths[pvp]') ?>
-                            </span>
-                            PvP Kills
-                        </div>
-                    </div>
-                    <div class="row-fluid grid">
-                        <div class="span12">
-                            <span class="badge badge-important grid-img">
-                                <a href="?page=player&id=<?php echo $this->get('deaths[top_killer][1]')->getPlayerId(); ?>">
-                                    <?php echo $this->get('deaths[top_killer][1]')->getPlayerHead(); ?>
-                                </a>
-                            </span>
-                            Most Kills
-                        </div>
-                    </div>
-                    <div class="row-fluid grid">
-                        <div class="span12">
-                            <span class="badge badge-important grid-img">
-                                 <a href="?page=player&id=<?php echo $this->get('deaths[most_killed_player][1]')->getPlayerId(); ?>">
-                                     <?php echo $this->get('deaths[most_killed_player][1]')->getPlayerHead(); ?>
-                                 </a>
-                            </span>
-                            Most Deaths
-                        </div>
-                    </div>
+                <div class="span4">
+                     <span class="badge badge-success grid-img">
+                        <?php echo Material::getMaterialImg($this->get('deaths[top_weapon][1]')); ?>
+                    </span> Best Weapon
+                </div>
+            </div>
+            <div class="row-fluid grid">
+                <div class="span4">
+                    <span class="badge badge-success no-img">
+                        <?php echo $this->get('deaths[pve]'); ?>
+                    </span> PvE Kills
+                </div>
+                <div class="span4">
+                     <span class="badge badge-success grid-img">
+                        <?php echo Entity::getEntityImg($this->get('deaths[most_dangerous][1]')); ?>
+                    </span> Most Dangerous
+                </div>
+                <div class="span4">
+                     <span class="badge badge-success grid-img">
+                        <?php echo Entity::getEntityImg($this->get('deaths[most_killed_mob][1]')); ?>
+                    </span> Most killed
+                </div>
+            </div>
+            <div class="row-fluid grid">
+                <div class="span4">
+                    <span class="badge badge-success no-img">
+                        <?php echo $this->get('deaths[pvp]'); ?>
+                    </span> PvP Kills
+                </div>
+                <div class="span4">
+                    <span class="badge badge-important grid-img">
+                        <?php if($this->get('deaths[top_killer][1]')->getName() != 'none'): ?>
+                            <a href="?page=player&name=<?php echo $this->get('deaths[top_killer][1]')->getName(); ?>">
+                                <?php echo $this->get('deaths[top_killer][1]')->getPlayerHead(); ?>
+                            </a>
+                        <?php else: ?>
+                            <?php echo $this->get('deaths[top_killer][1]')->getPlayerHead(); ?>
+                        <?php endif; ?>
+                    </span> Most Kills
+                </div>
+                <div class="span4">
+                    <span class="badge badge-important grid-img">
+                        <?php if($this->get('deaths[most_killed_player][1]')->getName() != 'none'): ?>
+                            <a href="?page=player&name=<?php echo $this->get('deaths[most_killed_player][1]')->getName(); ?>">
+                                <?php echo $this->get('deaths[most_killed_player][1]')->getPlayerHead(); ?>
+                            </a>
+                        <?php else: ?>
+                            <?php echo $this->get('deaths[most_killed_player][1]')->getPlayerHead(); ?>
+                        <?php endif; ?>
+                        </span> Most Deaths
                 </div>
             </div>
         </div>
@@ -362,7 +343,7 @@
 
             <div class="row-fluid">
                 <div class="span11 offset1">
-                    <table class="table no-border statbox-table">
+                    <table class="table no-border statbox-table-small">
                         <tr>
                             <td>
                                 <span class="label label-info">
@@ -370,7 +351,7 @@
                                 </span>
                             </td>
                             <td>
-                                Total picked up
+                                Picked up
                             </td>
                         </tr>
                         <tr>
@@ -381,7 +362,7 @@
                                 </span>
                             </td>
                             <td>
-                                Most picked up
+                                Top picked up
                             </td>
                         </tr>
                         <tr>
@@ -391,7 +372,7 @@
                                 </span>
                             </td>
                             <td>
-                                Total dropped
+                                Dropped
                             </td>
                         </tr>
                         <tr>
@@ -402,7 +383,7 @@
                                 </span>
                             </td>
                             <td>
-                                Most dropped
+                                Top dropped
                             </td>
                         </tr>
                     </table>
@@ -417,8 +398,8 @@
     <div class="page-header">
         <h1>
             <i class="icon-group icon-large"></i>
-            Player Information
-            <small>All players tracked on this server</small>
+            Players
+            <small>Tracked on this server</small>
         </h1>
     </div>
 
@@ -457,7 +438,7 @@
                 <h1>
                     <i class="icon-tint icon-large"></i>
                     Death Log
-                    <small>Latest PVP, PVE and EVP kills</small>
+                    <small>PVP, PVE and EVP kills</small>
                 </h1>
             </div>
 

@@ -1,5 +1,5 @@
 <?php
-if(!fRequest::isAjax() && !fRequest::get('api'))
+if(!fRequest::isAjax() || !fRequest::get('api'))
     return;
 
 $type = fRequest::get('type', 'string', 'none');

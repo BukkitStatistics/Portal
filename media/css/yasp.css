@@ -7,10 +7,12 @@ body {
 .logo-img {
 	height: 25px;
 	margin-right: 15px;
+    margin-top: 7px;
 }
 
 section {
-    padding-top: 65px;
+    padding-top: 45px;
+    padding-left: 10px;
 }
 
 #content section:first-child {
@@ -19,17 +21,6 @@ section {
 
 .dashboard {
 	padding-bottom: 25px;
-}
-
-.statbox-table {
-    width: 100%;
-}
-
-.statbox-table td, .statbox-table th {
-    width: 25%;
-}
-.statbox-table td:nth-child(even), .statbox-table th:nth-child(even) {
-    width: 25%;
 }
 
 .fixed-height {
@@ -59,6 +50,35 @@ dl.dl-stats dd {
 
 .section-split {
     height: 50px;
+}
+
+/* =tables */
+.statbox-table, statbox-table-small {
+    width: 100%;
+}
+
+.statbox-head {
+    text-align: center !important;
+}
+
+.statbox-table td {
+    width: 20%;
+    text-align: right;
+}
+
+.statbox-table td.desc {
+    width: 30%;
+    text-align: left;
+}
+
+.statbox-table-small td {
+    width: 25%;
+    text-align: right;
+}
+
+.statbox-table-small td:nth-child(even), .statbox-table-small th:nth-child(even) {
+    width: 75%;
+    text-align: left;
 }
 
 /* =Format */
@@ -225,5 +245,6 @@ dl.dl-stats dd {
 .grid {
     min-height: 30px;
     margin-top: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
+    margin-left: 10px;
 }

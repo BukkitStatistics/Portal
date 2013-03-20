@@ -280,7 +280,7 @@
                 <h4>Most killed:</h4>
                 <p>
                     <?php $victim = $this->get('pvp[most_killed]')->createPlayer('victim_id'); ?>
-                    <a href="?page=player&id=<?php echo $victim->getPlayerId(); ?>">
+                    <a href="?page=player&name=<?php echo $victim->getName(); ?>">
                     <?php
                     echo $victim->getPlayerHead();
                     ?>
@@ -306,7 +306,7 @@
 
                 <p>
                     <?php $killer = $this->get('pvp[most_killed_by]')->createPlayer('player_id'); ?>
-                    <a href="?page=player&id=<?php echo $killer->getPlayerId(); ?>">
+                    <a href="?page=player&name=<?php echo $killer->getName(); ?>">
                     <?php
                     echo $killer->getPlayerHead();
                     ?>
@@ -395,7 +395,7 @@
         <div class="span4" style="width: 30% !important;">
             <h3>Other deaths</h3>
 
-            <?php if($this->get('deaths')): ?>
+            <?php if($this->get('deaths')->count()): ?>
                 <?php foreach($this->get('deaths') as $death): ?>
                     <p>
                         <strong><?php echo $death->getName(); ?></strong>

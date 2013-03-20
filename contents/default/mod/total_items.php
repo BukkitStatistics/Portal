@@ -22,7 +22,7 @@ $items = fRecordSet::buildFromSQL(
     array(
          '
         SELECT m.* FROM "prefix_materials" m
-        LEFT JOIN "prefix_total_items" b ON m.material_id = b.material_id
+        RIGHT JOIN "prefix_total_items" b ON m.material_id = b.material_id
         GROUP BY b.material_id
         ORDER BY ' . $type . ' ' . fRequest::get('order_sort', 'string', 'desc') . '
         LIMIT %i,' . $limit . '

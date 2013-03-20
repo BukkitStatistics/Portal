@@ -14,7 +14,7 @@ else: ?>
         <?php foreach($this->get('online_players') as $player): ?>
             <tr>
                 <td>
-                    <a href="?page=player&name=<?php echo $player->getPlayerId(); ?>">
+                    <a href="?page=player&name=<?php echo $player->getName(); ?>">
                         <?php echo $player->getPlayerHead(); ?>
                         <?php echo $player->encodeName(); ?>
                     </a>

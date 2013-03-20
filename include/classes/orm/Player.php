@@ -122,9 +122,11 @@ class Player extends fActiveRecord {
 
             return array($num->format(), new Player($row['player_id']));
         } catch(fNoRowsException $e) {
-            $p = new Player();
-            return array(0, $p->setName('none'));
+        } catch(fNotFoundException $e) {
         }
+
+        $p = new Player();
+        return array(0, $p->setName('none'));
     }
 
 
@@ -148,9 +150,11 @@ class Player extends fActiveRecord {
 
             return array($num->format(), new Player($row['victim_id']));
         } catch(fNoRowsException $e) {
-            $p = new Player();
-            return array(0, $p->setName('none'));
+        } catch(fNotFoundException $e) {
         }
+
+        $p = new Player();
+        return array(0, $p->setName('none'));
     }
 
     /**
