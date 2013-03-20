@@ -81,6 +81,10 @@ dl.dl-stats dd {
     text-align: left;
 }
 
+.table-vcenter td, .table-vcenter th {
+    vertical-align: middle;
+}
+
 /* =Format */
 
 .table.no-border td, .table.no-border th {
