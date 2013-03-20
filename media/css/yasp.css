@@ -33,21 +33,6 @@ section {
     overflow: hidden;
 }
 
-dl.dl-stats {
-}
-
-dl.dl-stats dt {
-    width: 60px !important;
-}
-
-dl.dl-stats dt span {
-    padding: 10px 15px;
-}
-
-dl.dl-stats dd {
-    margin-left: 80px !important;
-}
-
 .section-split {
     height: 50px;
 }
@@ -99,7 +84,6 @@ dl.dl-stats dd {
 	background: #faffff;
 }
 
-
 .player-search {
 	position: relative;
 	bottom: 50px;
@@ -145,8 +129,10 @@ dl.dl-stats dd {
 	height: 20px !important;
 }
 
-.no-img {
-	padding: 15px !important;
+.no-img, .grid-img {
+    padding: 15px 8px;
+    min-width: 28px;
+    text-align: center;
 }
 
 .grid-img {
@@ -178,6 +164,10 @@ dl.dl-stats dd {
 }
 
 /* =player head */
+#playerhead {
+    margin: 16px 0;
+}
+
 #playerhead-bars {
     width: 365px;
 }
