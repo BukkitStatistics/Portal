@@ -1,7 +1,7 @@
 <?php
 if(defined('DB_DATABASE') && DB_DATABASE != '') {
     try {
-        $db = new fDatabase('mysql', DB_DATABASE, DB_USER, DB_PW, DB_HOST);
+        $db = new fDatabase('mysql', DB_DATABASE, DB_USER, DB_PW, DB_HOST, DB_PORT);
 
         if($cacheSingle->get('dbOffline') === null) {
             $db->connect();
