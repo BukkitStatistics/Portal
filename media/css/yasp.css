@@ -174,15 +174,11 @@ dl.dl-stats dd {
 }
 
 /* =player head */
-#playerhead {
-    width: 450px;
+#playerhead-bars {
+    width: 365px;
 }
 
 @media (max-width: 979px) {
-    #playerhead {
-        width: auto;
-    }
-
     #playerhead-bars {
         display: none;
     }
@@ -215,7 +211,8 @@ dl.dl-stats dd {
     top: -25px;
     width: 364px;
     text-align: center;
-    font-size: 9px;
+    font-size: 10px;
+    font-weight: bold;
     color: #51a351;
 }
 
