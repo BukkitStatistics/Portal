@@ -256,6 +256,7 @@
     <div class="span8">
         <div class="well custom-well fixed-height">
             <h3>Online Players</h3>
+
             <div data-mod="players_online">
                 <?php $this->place('players_online'); ?>
             </div>
@@ -267,96 +268,67 @@
     <div class="span8">
         <div class="well custom-well fixed-height">
             <h3>Death Statistics</h3>
-            <div class="row-fluid">
+            <div class="row-fluid grid">
                 <div class="span4">
-                    <div class="row-fluid grid">
-                        <div class="span12">
-                            <span class="badge badge-success no-img">
-                                <?php echo $this->get('deaths[total]') ?>
-                            </span>
-                            Total Kills
-                        </div>
-                    </div>
-                    <div class="row-fluid grid">
-                        <div class="span12">
-                            <span class="badge badge-success no-img">
-                                <?php echo $this->get('deaths[deaths]') ?>
-                            </span>
-                            Total Deaths
-                        </div>
-                    </div>
-                    <div class="row-fluid grid">
-                        <div class="span12">
-                            <span class="badge badge-success grid-img">
-                                <?php echo Material::getMaterialImg($this->get('deaths[top_weapon][1]')) ?>
-                            </span>
-                            Best Weapon
-                        </div>
-                    </div>
+                    <span class="badge badge-success no-img">
+                        <?php echo $this->get('deaths[total]'); ?>
+                    </span> Total Kills
                 </div>
-                <div class="span4 offset1">
-                    <div class="row-fluid grid">
-                        <div class="span12">
-                            <span class="badge badge-success no-img">
-                                <?php echo $this->get('deaths[pve]') ?>
-                            </span>
-                            PvE Kills
-                        </div>
-                    </div>
-                    <div class="row-fluid grid">
-                        <div class="span12">
-                            <span class="badge badge-important grid-img">
-                                <?php echo Entity::getEntityImg($this->get('deaths[most_dangerous][1]')) ?>
-                            </span>
-                            Most Dangerous
-                        </div>
-                    </div>
-                    <div class="row-fluid grid">
-                        <div class="span12">
-                            <span class="badge badge-important grid-img">
-                                <?php echo Entity::getEntityImg($this->get('deaths[most_killed_mob][1]')) ?>
-                            </span>
-                            Most killed
-                        </div>
-                    </div>
+                <div class="span4">
+                     <span class="badge badge-success no-img">
+                        <?php echo $this->get('deaths[deaths]'); ?>
+                    </span> Total Deaths
                 </div>
-                <div class="span3">
-                    <div class="row-fluid grid">
-                        <div class="span12">
-                            <span class="badge badge-success no-img">
-                                <?php echo $this->get('deaths[pvp]') ?>
-                            </span>
-                            PvP Kills
-                        </div>
-                    </div>
-                    <div class="row-fluid grid">
-                        <div class="span12">
-                            <span class="badge badge-important grid-img">
-                                <?php if($this->get('deaths[top_killer][1]')->getName() != 'none'): ?>
-                                <a href="?page=player&id=<?php echo $this->get('deaths[top_killer][1]')->getPlayerId(); ?>">
-                                    <?php echo $this->get('deaths[top_killer][1]')->getPlayerHead(); ?>
-                                </a>
-                                <?php else: ?>
-                                    <?php echo $this->get('deaths[top_killer][1]')->getPlayerHead(); ?>
-                                <?php endif; ?>
-                            </span>
-                            Most Kills
-                        </div>
-                    </div>
-                    <div class="row-fluid grid">
-                        <div class="span12">
-                            <span class="badge badge-important grid-img">
-                                <?php if($this->get('deaths[most_killed_player][1]')->getName() != 'none'): ?>
-                                 <a href="?page=player&id=<?php echo $this->get('deaths[most_killed_player][1]')->getPlayerId(); ?>">
-                                     <?php echo $this->get('deaths[most_killed_player][1]')->getPlayerHead(); ?>
-                                 </a>
-                                <?php else: ?>
-                                    <?php echo $this->get('deaths[most_killed_player][1]')->getPlayerHead(); ?>
-                                <?php endif; ?>
-                            </span>
-                            Most Deaths
-                        </div>
-                    </div>
+                <div class="span4">
+                     <span class="badge badge-success grid-img">
+                        <?php echo Material::getMaterialImg($this->get('deaths[top_weapon][1]')); ?>
+                    </span> Best Weapon
+                </div>
+            </div>
+            <div class="row-fluid grid">
+                <div class="span4">
+                    <span class="badge badge-success no-img">
+                        <?php echo $this->get('deaths[pve]'); ?>
+                    </span> PvE Kills
+                </div>
+                <div class="span4">
+                     <span class="badge badge-success grid-img">
+                        <?php echo Entity::getEntityImg($this->get('deaths[most_dangerous][1]')); ?>
+                    </span> Most Dangerous
+                </div>
+                <div class="span4">
+                     <span class="badge badge-success grid-img">
+                        <?php echo Entity::getEntityImg($this->get('deaths[most_killed_mob][1]')); ?>
+                    </span> Most killed
+                </div>
+            </div>
+            <div class="row-fluid grid">
+                <div class="span4">
+                    <span class="badge badge-success no-img">
+                        <?php echo $this->get('deaths[pvp]'); ?>
+                    </span> PvP Kills
+                </div>
+                <div class="span4">
+                    <span class="badge badge-important grid-img">
+                        <?php if($this->get('deaths[top_killer][1]')->getName() != 'none'): ?>
+                            <a href="?page=player&id=<?php echo $this->get('deaths[top_killer][1]')->getPlayerId(); ?>">
+                                <?php echo $this->get('deaths[top_killer][1]')->getPlayerHead(); ?>
+                            </a>
+                        <?php else: ?>
+                            <?php echo $this->get('deaths[top_killer][1]')->getPlayerHead(); ?>
+                        <?php endif; ?>
+                    </span> Most Kills
+                </div>
+                <div class="span4">
+                    <span class="badge badge-important grid-img">
+                        <?php if($this->get('deaths[most_killed_player][1]')->getName() != 'none'): ?>
+                            <a href="?page=player&id=<?php echo $this->get('deaths[most_killed_player][1]')->getPlayerId(); ?>">
+                                <?php echo $this->get('deaths[most_killed_player][1]')->getPlayerHead(); ?>
+                            </a>
+                        <?php else: ?>
+                            <?php echo $this->get('deaths[most_killed_player][1]')->getPlayerHead(); ?>
+                        <?php endif; ?>
+                        </span> Most Deaths
                 </div>
             </div>
         </div>
