@@ -17,6 +17,13 @@ Util::showMessages('*', 'install/two', 'alert alert-error');
     </div>
 </div>
 <div class="control-group">
+    <label class="control-label" for="port"><?php echo fText::compose('server port'); ?>:</label>
+
+    <div class="controls">
+        <input type="text" name="port" id="port" value="<?php echo $this->get('port', 3306) ?>">
+    </div>
+</div>
+<div class="control-group">
     <label class="control-label" for="user"><?php echo fText::compose('user'); ?>:</label>
 
     <div class="controls">
@@ -34,8 +41,7 @@ Util::showMessages('*', 'install/two', 'alert alert-error');
     <label class="control-label" for="database"><?php echo fText::compose('db'); ?>:</label>
 
     <div class="controls">
-        <input type="text" name="database" id="database"
-               value="<?php echo $this->get('database') ?>">
+        <input type="text" name="database" id="database" value="<?php echo $this->get('database') ?>">
     </div>
 </div>
 <div class="control-group">

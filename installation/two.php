@@ -15,6 +15,7 @@ if(fRequest::isPost() && fRequest::get('db_submit')) {
     $tpl->set('user', fRequest::encode('user'));
     $tpl->set('pw', fRequest::encode('pw'));
     $tpl->set('database', fRequest::encode('database'));
+    $tpl->set('port', fRequest::encode('port'));
     $tpl->set('prefix', fRequest::encode('prefix'));
 
     try {
@@ -22,13 +23,14 @@ if(fRequest::isPost() && fRequest::get('db_submit')) {
 
         $vali->addRequiredFields(array(
                                       'host',
+                                      'port',
                                       'user',
                                       'pw',
                                       'database'
                                  ))
             ->addCallbackRule('host', Util::checkHost, 'Please enter an valid host.');
 
-        $vali->setMessageOrder('host', 'user', 'pw', 'database')
+        $vali->setMessageOrder('host', 'port', 'user', 'pw', 'database')
             ->validate();
 
         $tpl->set('prefix', preg_replace('/_$/', '', $tpl->get('prefix')));
@@ -36,12 +38,14 @@ if(fRequest::isPost() && fRequest::get('db_submit')) {
         if($tpl->get('prefix') != '')
             $prefix = $tpl->get('prefix') . '_';
         else
-            $prefix ='';
+            $prefix = '';
 
         $db = new fDatabase('mysql', fRequest::encode('database'),
                             fRequest::encode('user'),
                             fRequest::encode('pw'),
-                            fRequest::encode('host'));
+                            fRequest::encode('host'),
+                            fRequest::encode('port')
+        );
         $db->connect();
         $version = $db->translatedQuery(
             'SELECT `value` FROM "' . $prefix . 'settings" WHERE `key` = %s', 'version')->fetchScalar();
@@ -71,7 +75,8 @@ if(fRequest::isPost() && fRequest::get('db_submit')) {
         if(!fMessaging::check('validation', 'install/two')) {
             $contents =
                 "<?php \n/*\n* Do not modify this unless you know what you are doing!\n*/\n\ndefine('DB_HOST', '" .
-                $tpl->get('host') . "');\ndefine('DB_USER', '" . $tpl->get('user') . "');\ndefine('DB_PW', '" . $tpl->get('pw') .
+                $tpl->get('host') . "');\ndefine('DB_PORT', '" . $tpl->get('port') . "');\ndefine('DB_USER', '" .
+                $tpl->get('user') . "');\ndefine('DB_PW', '" . $tpl->get('pw') .
                 "');\ndefine('DB_DATABASE', '" . $tpl->get('database') . "');\ndefine('DB_PREFIX', '" .
                 $tpl->get('prefix') . "');\n";
 
