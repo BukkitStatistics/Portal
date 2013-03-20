@@ -23,17 +23,6 @@ section {
 	padding-bottom: 25px;
 }
 
-.statbox-table {
-    width: 100%;
-}
-
-.statbox-table td, .statbox-table th {
-    width: 25%;
-}
-.statbox-table td:nth-child(even), .statbox-table th:nth-child(even) {
-    width: 25%;
-}
-
 .fixed-height {
     min-height: 260px;
     overflow: hidden;
@@ -61,6 +50,35 @@ dl.dl-stats dd {
 
 .section-split {
     height: 50px;
+}
+
+/* =tables */
+.statbox-table, statbox-table-small {
+    width: 100%;
+}
+
+.statbox-head {
+    text-align: center !important;
+}
+
+.statbox-table td {
+    width: 20%;
+    text-align: right;
+}
+
+.statbox-table td.desc {
+    width: 30%;
+    text-align: left;
+}
+
+.statbox-table-small td {
+    width: 25%;
+    text-align: right;
+}
+
+.statbox-table-small td:nth-child(even), .statbox-table-small th:nth-child(even) {
+    width: 75%;
+    text-align: left;
 }
 
 /* =Format */

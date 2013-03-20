@@ -66,12 +66,16 @@
                     <!-- TODO: find a fluid solution -.-' -->
                     <table class="table no-border statbox-table">
                         <tr>
+                            <th class="statbox-head" colspan="2">General</th>
+                            <th class="statbox-head" colspan="2">Player</th>
+                        </tr>
+                        <tr>
                             <td>
                                 <span class="label label-info">
                                     <i class="icon-bell"></i> <?php echo $this->get('serverstats[startup]'); ?>
                                 </span>
                             </td>
-                            <td>
+                            <td class="desc">
                                 Startup
                             </td>
                             <td>
@@ -79,7 +83,7 @@
                                     <i class="icon-group"></i> <?php echo $this->get('players[online]'); ?>
                                 </span>
                             </td>
-                            <td>
+                            <td class="desc">
                                 Currently online
                             </td>
                         </tr>
@@ -89,7 +93,7 @@
                                     <i class="icon-lock"></i> <?php echo $this->get('serverstats[shutdown]'); ?>
                                 </span>
                             </td>
-                            <td>
+                            <td class="desc">
                                 Shutdown
                             </td>
                             <td>
@@ -97,8 +101,8 @@
                                     <i class="icon-star"></i> <?php echo $this->get('players[tracked]'); ?>
                                 </span>
                             </td>
-                            <td>
-                                Tracked players
+                            <td class="desc">
+                                Tracked
                             </td>
                         </tr>
                         <tr>
@@ -107,7 +111,7 @@
                                     <i class="icon-calendar"></i> <?php echo $this->get('serverstats[cur_uptime]'); ?>
                                 </span>
                             </td>
-                            <td>
+                            <td class="desc">
                                 Uptime
                             </td>
                             <td>
@@ -116,8 +120,8 @@
                                     <?php echo $this->get('serverstats[max_players][0]'); ?>
                                 </span>
                             </td>
-                            <td>
-                                Maximum players
+                            <td class="desc">
+                                Maximum
                             </td>
                         </tr>
                         <tr>
@@ -126,7 +130,7 @@
                                     <i class="icon-bullhorn"></i> <?php echo $this->get('serverstats[playtime]'); ?>
                                 </span>
                             </td>
-                            <td>
+                            <td class="desc">
                                 Gameplay
                             </td>
                             <td>
@@ -134,7 +138,7 @@
                                     <i class="icon-fire"></i> <?php echo $this->get('serverstats[total_logins]'); ?>
                                 </span>
                             </td>
-                            <td>
+                            <td class="desc">
                                 Number of logins
                             </td>
                         </tr>
@@ -150,7 +154,7 @@
 
             <div class="row-fluid">
                 <div class="span11 offset1">
-                    <table class="table no-border statbox-table">
+                    <table class="table no-border statbox-table-small">
                         <tr>
                             <td>
                                 <span class="label label-info">
@@ -158,7 +162,7 @@
                                 </span>
                             </td>
                             <td>
-                                Total distance
+                                Total
                             </td>
                         </tr>
                         <tr>
@@ -205,7 +209,7 @@
 
             <div class="row-fluid">
                 <div class="span11 offset1">
-                    <table class="table no-border statbox-table">
+                    <table class="table no-border statbox-table-small">
                         <tr>
                             <td>
                                 <span class="label label-info">
@@ -213,7 +217,7 @@
                                 </span>
                             </td>
                             <td>
-                                Total placed
+                                Placed
                             </td>
                         </tr>
                         <tr>
@@ -224,7 +228,7 @@
                                 </span>
                             </td>
                             <td>
-                                Most placed
+                                Top placed
                             </td>
                         </tr>
                         <tr>
@@ -234,7 +238,7 @@
                                 </span>
                             </td>
                             <td>
-                                Total destroyed
+                                Destroyed
                             </td>
                         </tr>
                         <tr>
@@ -245,7 +249,7 @@
                                 </span>
                             </td>
                             <td>
-                                Most destroyed
+                                Top destroyed
                             </td>
                         </tr>
                     </table>
@@ -339,7 +343,7 @@
 
             <div class="row-fluid">
                 <div class="span11 offset1">
-                    <table class="table no-border statbox-table">
+                    <table class="table no-border statbox-table-small">
                         <tr>
                             <td>
                                 <span class="label label-info">
@@ -347,7 +351,7 @@
                                 </span>
                             </td>
                             <td>
-                                Total picked up
+                                Picked up
                             </td>
                         </tr>
                         <tr>
@@ -358,7 +362,7 @@
                                 </span>
                             </td>
                             <td>
-                                Most picked up
+                                Top picked up
                             </td>
                         </tr>
                         <tr>
@@ -368,7 +372,7 @@
                                 </span>
                             </td>
                             <td>
-                                Total dropped
+                                Dropped
                             </td>
                         </tr>
                         <tr>
@@ -379,7 +383,7 @@
                                 </span>
                             </td>
                             <td>
-                                Most dropped
+                                Top dropped
                             </td>
                         </tr>
                     </table>
