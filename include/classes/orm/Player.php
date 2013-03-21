@@ -216,7 +216,7 @@ class Player extends fActiveRecord {
     /**
      * Counts all pve kills
      */
-    private function countPveKills() {
+    private function countPve() {
         $pve = $this->buildTotalPveKills();
 
         $this->pve['kills'] = new fNumber(0);
@@ -227,7 +227,10 @@ class Player extends fActiveRecord {
         }
     }
 
-    private function countPvpKills() {
+    /**
+     * Counts all pvp kills
+     */
+    private function countPvp() {
         $pvp_killer = $this->buildTotalPvpKills('player_id');
         $pvp_victim = $this->buildTotalPvpKills('victim_id');
 
@@ -323,9 +326,9 @@ class Player extends fActiveRecord {
      *
      * @return array
      */
-    public function getTotalPveKills() {
+    public function getTotalPve() {
         if(empty($this->pve))
-            $this->countPveKills();
+            $this->countPve();
 
         return $this->pve;
     }
@@ -335,9 +338,9 @@ class Player extends fActiveRecord {
      *
      * @return array
      */
-    public function getTotalPvpKills() {
+    public function getTotalPvp() {
         if(empty($this->pvp))
-            $this->countPvpKills();
+            $this->countPvp();
 
         return $this->pvp;
     }

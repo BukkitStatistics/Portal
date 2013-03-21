@@ -39,16 +39,16 @@ try {
     } catch(fNoRemainingException $e) {
     }
 
-    $tpl->set('pvp[kills]', $player->getTotalPvpKills()['kills']);
-    $tpl->set('pvp[deaths]', $player->getTotalPvpKills()['deaths']);
+    $tpl->set('pvp[kills]', $player->getTotalPvp()['kills']);
+    $tpl->set('pvp[deaths]', $player->getTotalPvp()['deaths']);
     try {
         $tpl->set('pvp[most_killed]', $pvp_killer->sort('getTimes', 'desc')->getRecord(0));
         $tpl->set('pvp[most_killed_by]', $pvp_victim->sort('getTimes', 'desc')->getRecord(0));
     } catch(fNoRemainingException $e) {
     }
 
-    $tpl->set('pve[kills]', $player->getTotalPveKills()['kills']);
-    $tpl->set('pve[deaths]', $player->getTotalPveKills()['deaths']);
+    $tpl->set('pve[kills]', $player->getTotalPve()['kills']);
+    $tpl->set('pve[deaths]', $player->getTotalPve()['deaths']);
     try {
         $tpl->set('pve[most_killed]', $pve->filter(array(
                                                         'getCreatureKilled!' => 0
