@@ -46,6 +46,7 @@ fText::registerComposeCallback('pre', array($lang, 'translate'));
 
 fTimestamp::setDefaultTimezone(Util::getOption('timezone', fTimestamp::getDefaultTimezone()));
 
+fAuthorization::setLoginPage('?page=login');
 /**
  * Automatically includes classes
  *

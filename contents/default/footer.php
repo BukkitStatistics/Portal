@@ -6,13 +6,15 @@
             <div class="row-fluid">
                 <div class="span2">
                     <p>
-                        <a href="https://github.com/bitWolfy/YetAnotherStatisticsPlugin"><img
-                                src="media/img/plugin_logo_small.png" alt="YASP"/>
+                        <a href="https://github.com/bitWolfy/Statistics">
+                            <img src="media/img/plugin_logo_small.png" alt="Statistics"/>
                         </a>
                     </p>
                 </div>
                 <div class="span4">
-                    <p style="position:relative; top:5px;">&copy; <?php echo date('Y'); ?> Statistics
+                    <p style="margin-top: 6px">
+                        &copy; <?php echo date('Y'); ?> Statistics - <a href="?page=admin"><small>Admin</small></a>
+                    </p>
                 </div>
                 <div class="span4 offset2" style="text-align: right;">
                     <p>
