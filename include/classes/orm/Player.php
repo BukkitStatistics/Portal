@@ -158,14 +158,87 @@ class Player extends fActiveRecord {
     }
 
     /**
-     * Returns the url friendly name
+     * Stores calculated total blocks
      *
-     * @return string
+     * @var array
      */
-    public function getUrlName() {
-        return fURL::makeFriendly($this->getName());
+    private $blocks = array();
+
+    /**
+     * Stores calculated total items
+     *
+     * @var array
+     */
+    private $items = array();
+
+    /**
+     * Stores calculated total pve kills
+     *
+     * @var array
+     */
+    private $pve = array();
+
+    /**
+     * Stores calculated total pvp kills
+     *
+     * @var array
+     */
+    private $pvp = array();
+
+    /**
+     * Counts all blocks
+     */
+    private function countBlocks() {
+        $blocks = $this->buildTotalBlocks();
+
+        $this->blocks['destroyed'] = new fNumber(0);
+        $this->blocks['placed'] = new fNumber(0);
+        foreach($blocks as $block) {
+            $this->blocks['destroyed'] = $this->blocks['destroyed']->add($block->getDestroyed());
+            $this->blocks['placed'] = $this->blocks['placed']->add($block->getPlaced());
+        }
     }
 
+    /**
+     * Counts all items
+     */
+    private function countItems() {
+        $items = $this->buildTotalItems();
+
+        $this->items['picked'] = new fNumber(0);
+        $this->items['dropped'] = new fNumber(0);
+        foreach($items as $item) {
+            $this->items['picked'] = $this->items['picked']->add($item->getPickedUp());
+            $this->items['dropped'] = $this->items['dropped']->add($item->getDropped());
+        }
+    }
+
+    /**
+     * Counts all pve kills
+     */
+    private function countPveKills() {
+        $pve = $this->buildTotalPveKills();
+
+        $this->pve['kills'] = new fNumber(0);
+        $this->pve['deaths'] = new fNumber(0);
+        foreach($pve as $pve_kill) {
+            $this->pve['kills'] = $this->pve['kills']->add($pve_kill->getCreatureKilled());
+            $this->pve['deaths'] = $this->pve['deaths']->add($pve_kill->getPlayerKilled());
+        }
+    }
+
+    private function countPvpKills() {
+        $pvp_killer = $this->buildTotalPvpKills('player_id');
+        $pvp_victim = $this->buildTotalPvpKills('victim_id');
+
+        $this->pvp['kills'] = new fNumber(0);
+        foreach($pvp_killer as $kill)
+            $this->pvp['kills'] = $this->pvp['kills']->add($kill->getTimes());
+
+        $this->pvp['deaths'] = new fNumber(0);
+        foreach($pvp_victim as $death)
+            $this->pvp['deaths'] = $this->pvp['deaths']->add($death->getTimes());
+    }
 
     private function getSkin() {
         $headers = get_headers('http://s3.amazonaws.com/MinecraftSkins/' . $this->getName() . '.png');
@@ -179,6 +252,15 @@ class Player extends fActiveRecord {
         }
 
         return $path;
+    }
+
+    /**
+     * Returns the url friendly name
+     *
+     * @return string
+     */
+    public function getUrlName() {
+        return fURL::makeFriendly($this->getName());
     }
 
     /**
@@ -210,5 +292,53 @@ class Player extends fActiveRecord {
         return '<img ' . $class . ' src="' . fFilesystem::translateToWebPath($name) . '" alt="' . $this->getName() .
                '" title="' .
                $this->getName() . '">';
+    }
+
+    /**
+     * Returns an associative array containing placed and destroyed blocks
+     *
+     * @return array
+     */
+    public function getTotalBlocks() {
+        if(empty($this->blocks))
+            $this->countBlocks();
+
+        return $this->blocks;
+    }
+
+    /**
+     * Returns an associative array containing picked and dropped items
+     *
+     * @return array
+     */
+    public function getTotalItems() {
+        if(empty($this->items))
+            $this->countItems();
+
+        return $this->items;
+    }
+
+    /**
+     * Returns an associative array containing pve kills and deaths
+     *
+     * @return array
+     */
+    public function getTotalPveKills() {
+        if(empty($this->pve))
+            $this->countPveKills();
+
+        return $this->pve;
+    }
+
+    /**
+     * Returns an associative array containing pvp kills and deaths
+     *
+     * @return array
+     */
+    public function getTotalPvpKills() {
+        if(empty($this->pvp))
+            $this->countPvpKills();
+
+        return $this->pvp;
     }
 }
