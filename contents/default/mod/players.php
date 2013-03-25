@@ -21,7 +21,7 @@ $players = fRecordSet::build(
          $type => fRequest::get('order_sort', 'string', 'asc')
     ),
     10,
-    fRequest::get('page', 'int', 1)
+    fRequest::get('p', 'int', 1)
 );
 
 $tpl_players->set('players', $players);

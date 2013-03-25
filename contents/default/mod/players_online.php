@@ -20,7 +20,7 @@ $players = fRecordSet::build(
          $type => fRequest::get('order_sort', 'string', 'desc')
     ),
     3,
-    fRequest::get('page', 'int', 1)
+    fRequest::get('p', 'int', 1)
 );
 
 $tpl_ponline->set('online_players', $players);

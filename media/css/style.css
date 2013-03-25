@@ -160,26 +160,23 @@ section {
 	margin: 0 auto;
 }
 
+.hunger-bars {
+    float: right;
+}
+
 .heart-bars {
 	float: left;
 }
 
-.heart-bars img {
-	height: 12px;
-	width: 12px;
-	padding-right: 1px;
-	float: left;
-}
-
-.hunger-bars {
-	float: right;
+.heart-bars img, .hunger-bars img {
+    height: 12px;
+    width: 12px;
+    padding-right: 1px;
+    float: left;
 }
 
 .hunger-bars img {
-	height: 12px;
-	width: 12px;
-	padding-left: 1px;
-	float: right;
+    float: right;
 }
  
 .xpbar-container {

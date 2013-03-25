@@ -39,7 +39,7 @@ function callModule(type, sort, content, page) {
             'mod': content.data('mod'),
             'order_by': type,
             'order_sort': sort,
-            'page': page
+            'p': page
         },
         success: function (data) {
             if (data != 'ajax_error') {

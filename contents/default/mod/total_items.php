@@ -14,7 +14,7 @@ switch(fRequest::get('order_by', 'int')) {
         break;
 }
 
-$page = fRequest::get('page', 'int', 1);
+$page = fRequest::get('p', 'int', 1);
 $limit = 6;
 
 $items = fRecordSet::buildFromSQL(
