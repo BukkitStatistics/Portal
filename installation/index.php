@@ -23,26 +23,74 @@
 
     <script src="media/js/jquery-1.9.1.min.js" type="text/javascript"></script>
     <script src="media/js/bootstrap.min.js" type="text/javascript"></script>
+
+    <style type="text/css">
+        .section-<?php echo fRequest::get('step', 'string', 'one'); ?> {
+            color: #fff;
+            background: #70C68D;
+        }
+
+        .language-form select {
+            margin-right: 20px;
+        }
+
+        <?php
+            $ar = array('one', 'two', 'three', 'four', 'converter', 'process', 'five');
+            for($i = 0; $i < array_search(fRequest::get('step', 'string', 'one'), $ar); $i++):
+        ?>
+        .complete-<?php echo $i; ?> {
+            color: #fff;
+            background: #33AD5C;
+        }
+        <?php endfor; ?>
+
+    </style>
 </head>
 <body>
 <?php
 Util::showMessages();
 ?>
-<div class="container page-width well-large">
-    <img src="media/img/plugin_logo_small.png"/>
-    <fieldset name="installation">
-        <legend>Installation</legend>
-        <form name="install" method="post" action="<?php echo fURL::getWithQueryString(); ?>" class="form-horizontal">
-            <?php
-            $this->place('tpl');
-            ?>
-        </form>
-    </fieldset>
-    <div class="row">
-        <div class="pull-right">
-            <small>Execution time: <?php echo round((float)array_sum(explode(' ', microtime())) - STARTTIME, 4); ?> seconds.</small>
+<div class="force-center">
+    <img src="media/img/plugin_logo.png" alt="Statistics"/>
+</div>
+<section id="page-<?php echo fRequest::get('step', 'string', 'one') ?>">
+    <div class="container page-width install-container">
+        <div class="row-fluid">
+            <div class="section-one complete-0 muted span2 well well-small center">
+                <h4>Language</h4>
+            </div>
+            <div class="muted span1 center">
+                <h1>
+                    <i class="icon-chevron-right"></i>
+                </h1>
+            </div>
+            <div class="section-two complete-1 muted span2 well well-small center">
+                <h4>Database</h4>
+            </div>
+            <div class="muted span1 center">
+                <h1>
+                    <i class="icon-chevron-right"></i>
+                </h1>
+            </div>
+            <div class="section-four complete-3 muted span2 well well-small center">
+                <h4>Settings</h4>
+            </div>
+            <div class="muted span1 center">
+                <h1>
+                    <i class="icon-chevron-right"></i>
+                </h1>
+            </div>
+            <div class="section-five section-converter section-process muted span3 well well-small center">
+                <h4>Confirm / Import</h4>
+            </div>
         </div>
     </div>
-</div>
+    <div class="container page-width install-container" style="padding-top: 25px;">
+        <div class="well">
+            <?php $this->place('tpl'); ?>
+        </div>
+    </div>
+</section>
+
 </body>
 </html>
