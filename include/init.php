@@ -10,7 +10,7 @@ define('__INC__', __ROOT__ . 'include' . '/');
  * Set development mode
  * Will slow down page load
  */
-define('DEVELOPMENT', true);
+define('DEVELOPMENT', false);
 
 include_once __INC__ . 'config/version.php';
 include_once __INC__ . 'config/db.php';
