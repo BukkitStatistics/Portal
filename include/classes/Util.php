@@ -226,8 +226,8 @@ class Util {
 
         echo $capture;
 
-        if(fRequest::get('id', 'string') != '' && $content != 'error.php')
-            $content = $content . '_' . fRequest::get('id', 'string');
+        if(fRequest::get('name', 'string') != '' && $content != 'error.php')
+            $content = $content . '_' . fRequest::get('name', 'string');
 
         // TODO: set cache time in settings
         if(!DEVELOPMENT
@@ -258,8 +258,8 @@ class Util {
         if(DEVELOPMENT || fMessaging::check('*', '{errors}'))
             return;
 
-        if(fRequest::get('id', 'string') != '' && $content != 'error.php')
-            $content = $content . '_' . fRequest::get('id', 'string');
+        if(fRequest::get('name', 'string') != '' && $content != 'error.php')
+            $content = $content . '_' . fRequest::get('name', 'string');
 
         $cached = $cache->get($content . '.cache');
 
