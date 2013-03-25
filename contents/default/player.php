@@ -23,10 +23,6 @@ try {
     $deaths = $player->buildTotalDeaths();
     $misc = $player->createMiscInfoPlayer();
 
-    // death log
-    $this->inject('mod/death_log.php');
-    $tpl->set('death_log', $this->get('death_log'));
-
     $tpl->set('player', $player);
     $tpl->set('distance', $distance);
 
