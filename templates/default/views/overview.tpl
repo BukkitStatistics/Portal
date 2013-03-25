@@ -118,7 +118,7 @@
                         <tr>
                             <td>
                                 <span class="label label-success">
-                                    <i class="icon-signal"></i> <?php echo $this->get('serverstats[max_players]')[0]; ?>
+                                    <i class="icon-signal"></i> <?php echo $this->get('serverstats[max_players][0]'); ?>
                                 </span>
                             </td>
                             <td>Maximum</td>
@@ -147,8 +147,8 @@
                         <tr>
                             <td>
                                 <span class="label label-info">
-                                    <?php echo Material::getMaterialImg($this->get('blocks[most_placed]')[1], 16); ?>
-                                    <?php echo $this->get('blocks[most_placed]')[0]; ?>
+                                    <?php echo Material::getMaterialImg($this->get('blocks[most_placed][1]'), 16); ?>
+                                    <?php echo $this->get('blocks[most_placed][0]'); ?>
                                 </span>
                             </td>
                             <td>Top placed</td>
@@ -164,8 +164,8 @@
                         <tr>
                             <td>
                                 <span class="label label-info">
-                                    <?php echo Material::getMaterialImg($this->get('blocks[most_destroyed]')[1], 16); ?>
-                                    <?php echo $this->get('blocks[most_destroyed]')[0]; ?>
+                                    <?php echo Material::getMaterialImg($this->get('blocks[most_destroyed][1]'), 16); ?>
+                                    <?php echo $this->get('blocks[most_destroyed][0]'); ?>
                                 </span>
                             </td>
                             <td>Top broken</td>
@@ -186,8 +186,8 @@
                         <tr>
                             <td>
                                 <span class="label label-info">
-                                    <?php echo Material::getMaterialImg($this->get('items[most_picked]')[1], 16); ?>
-                                    <?php echo $this->get('items[most_picked]')[0]; ?>
+                                    <?php echo Material::getMaterialImg($this->get('items[most_picked][1]'), 16); ?>
+                                    <?php echo $this->get('items[most_picked][0]'); ?>
                                 </span>
                             </td>
                             <td>Most picked up</td>
@@ -203,8 +203,8 @@
                         <tr>
                             <td>
                                 <span class="label label-info">
-                                    <?php echo Material::getMaterialImg($this->get('items[most_dropped]')[1], 16); ?>
-                                    <?php echo $this->get('items[most_dropped]')[0]; ?>
+                                    <?php echo Material::getMaterialImg($this->get('items[most_dropped][1]'), 16); ?>
+                                    <?php echo $this->get('items[most_dropped][0]'); ?>
                                 </span>
                             </td>
                             <td>Most dropped</td>
