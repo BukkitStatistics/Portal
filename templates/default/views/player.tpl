@@ -319,8 +319,35 @@
             </table>
         </div>
 
-        <div class="span4">
+        <div class="span4 well well-small">
+            <h3>Login statistics</h3>
 
+            <p>
+                <strong>Joined on:</strong>
+                <?php
+                $time = new fTimestamp($this->get('player')->getFirstLogin());
+                echo $time->format('d.m.Y - H:i');
+                ?>
+            </p>
+
+            <p>
+                <strong>Last seen:</strong>
+                <?php
+                if(!is_null($this->get('player')->getLoginTime())):
+                    $time = new fTimestamp($this->get('player')->getLoginTime());
+                    echo $time->format('d.m.Y - H:i');
+                    ?>
+                <?php else: ?>
+                    <em>never</em>
+                <?php endif; ?>
+            </p>
+
+            <p>
+                <strong>Playtime:</strong>
+                <?php
+                echo Util::formatSeconds(new fTimestamp($this->get('player')->getPlaytime()));
+                ?>
+            </p>
         </div>
 
     </div>

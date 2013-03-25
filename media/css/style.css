@@ -102,6 +102,11 @@ section {
     cursor: pointer;
 }
 
+.online-player-heads {
+    float: left;
+    margin: 2px;
+}
+
 /* Custom module styles
 /* ============================== */
 

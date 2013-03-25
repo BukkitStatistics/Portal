@@ -2,45 +2,13 @@
     <div class='force-center'><em>No players online</em></div>
 <?php
 else: ?>
-    <table class="table table-striped table-hover table-vcenter">
-        <thead>
-        <tr>
-            <th class="sort-button" data-type="1" data-sort="asc">Name</th>
-            <th class="sort-button" data-type="2" data-sort="asc">Logged in since</th>
-            <th>Play time</th>
-        </tr>
-        </thead>
-        <tbody class="content">
-        <?php foreach($this->get('online_players') as $player): ?>
-            <tr>
-                <td>
-                    <a href="?page=player&name=<?php echo $player->getName(); ?>">
-                        <?php echo $player->getPlayerHead(); ?>
-                        <?php echo $player->encodeName(); ?>
-                    </a>
-                </td>
-                <td>
-                    <?php
-                    $time = new fTimestamp($player->getLoginTime());
-                    echo $time->format('H:i:s - d.m.Y');
-                    ?>
-                </td>
-                <td>
-                    <?php echo Util::formatSeconds(new fTimestamp($player->getPlaytime())); ?>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div id="online_playersPagination" class="pagination-centered"></div>
+    <?php foreach($this->get('online_players') as $player): ?>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            callModulePage(
-                'online_players',
-                <?php echo $this->get('online_players')->getPages(); ?>,
-                <?php echo $this->get('online_players')->getPage(); ?>
-            );
-        });
-    </script>
+        <div class="online-player-heads">
+            <a href="?page=player&name=<?php echo $player->getName(); ?>">
+                <?php echo $player->getPlayerHead(64, 'img-polaroid'); ?>
+            </a>
+        </div>
+
+    <?php endforeach; ?>
 <?php endif; ?>
