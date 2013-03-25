@@ -23,6 +23,20 @@ class Player extends fActiveRecord {
         return Util::formatSeconds(new fTimestamp(0));
     }
 
+    public static function getPlayerId($name) {
+        $res = fORMDatabase::retrieve()->translatedQuery('
+            SELECT player_id
+            FROM "prefix_players"
+            WHERE name = %s
+            ', $name);
+
+        try {
+            return $res->fetchScalar();
+        } catch (fNoRowsException $e) {
+            return 0;
+        }
+    }
+
     /**
      * Counts all the kills of the specified type.
      *

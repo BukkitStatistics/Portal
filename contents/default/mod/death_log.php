@@ -13,7 +13,7 @@ $death_log_pve = fRecordSet::build(
     array('time' => 'asc')
 );
 
-$page = fRequest::get('page', 'int', 1);
+$page = fRequest::get('p', 'int', 1);
 $limit = 10;
 
 $death_log = fRecordSet::buildFromArray(

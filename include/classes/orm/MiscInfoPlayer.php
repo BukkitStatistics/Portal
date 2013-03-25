@@ -27,12 +27,9 @@ class MiscInfoPlayer extends fActiveRecord {
             }
             else
                 if(!is_null($bg))
-                    $style = 'style="background-image: url(' . fFilesystem::translateToWebPath($bg) . ')"';
+                    $cur = '<img src="' . fFilesystem::translateToWebPath($bg) . '" alt="bar-none">';
 
-            $s .= '
-            <div class="bar-container" ' . $style . '>
-            ' . $cur . '
-            </div>' . "\n";
+            $s .= $cur. "\n";
         }
 
         return $s;
@@ -69,14 +66,7 @@ class MiscInfoPlayer extends fActiveRecord {
         $perc = $this->getExpPerc() * 100;
         $cur = $this->getExpLevel();
 
-        return '
-            <div class="force-center xpbar-container">
-                <div class="xpbar-cur">
-                    ' . $cur .  '
-                </div>
-                <div class="xpbar" style="width: ' . $perc . '%"></div>
-            </div>
-                ';
+        return '<div class="xpbar" style="width: ' . $perc . '%"></div>';
     }
 
 }

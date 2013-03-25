@@ -1,7 +1,8 @@
+<!DOCTYPE html>
+<html>
 <?php $this->inject('header.php'); ?>
-<div class="container">
+<div class="row-fluid page-body page-width">
     <?php $this->place('tpl'); ?>
-    <?php $this->inject('footer.php'); ?>
 </div>
-</body>
+<?php $this->inject('footer.php'); ?>
 </html>

@@ -29,6 +29,7 @@ $server_stats['cur_uptime'] = ServerStatistic::getCurrentUptime();
 $server_stats['playtime'] = Player::countTotalPlaytime();
 $server_stats['total_logins'] = Player::countAllLogins()->format();
 $server_stats['max_players'] = ServerStatistic::getMaxPlayersOnline(true);
+$server_stats['uptime_perc'] = ServerStatistic::getUptimePerc();
 
 $tpl->set('serverstats', $server_stats);
 

@@ -1,5 +1,8 @@
 <?php
 $tpl = Util::newTpl($this, 'player');
+$this->add('js', 'media/js/jquery.bootpag.js');
+$this->get('lang')->load('causes');
+
 
 try {
     $player = new Player(
@@ -20,6 +23,10 @@ try {
     $deaths = $player->buildTotalDeaths();
     $misc = $player->createMiscInfoPlayer();
 
+    // death log
+    $this->inject('mod/death_log.php');
+    $tpl->set('death_log', $this->get('death_log'));
+
     $tpl->set('player', $player);
     $tpl->set('distance', $distance);
 
@@ -27,6 +34,10 @@ try {
     $tpl->set('blocks[placed]', $player->getTotalBlocks()['placed']);
     try {
         $tpl->set('blocks[most_destroyed]', $blocks->sort('getDestroyed', 'desc')->getRecord(0));
+    } catch(fNoRemainingException $e) {
+    }
+
+    try {
         $tpl->set('blocks[most_placed]', $blocks->sort('getPlaced', 'desc')->getRecord(0));
     } catch(fNoRemainingException $e) {
     }
@@ -35,6 +46,9 @@ try {
     $tpl->set('items[dropped]', $player->getTotalItems()['dropped']);
     try {
         $tpl->set('items[most_picked]', $items->sort('getPickedUp', 'desc')->getRecord(0));
+    } catch(fNoRemainingException $e) {
+    }
+    try {
         $tpl->set('items[most_dropped]', $items->sort('getDropped', 'desc')->getRecord(0));
     } catch(fNoRemainingException $e) {
     }
@@ -43,6 +57,10 @@ try {
     $tpl->set('pvp[deaths]', $player->getTotalPvp()['deaths']);
     try {
         $tpl->set('pvp[most_killed]', $pvp_killer->sort('getTimes', 'desc')->getRecord(0));
+    } catch(fNoRemainingException $e) {
+    }
+
+    try {
         $tpl->set('pvp[most_killed_by]', $pvp_victim->sort('getTimes', 'desc')->getRecord(0));
     } catch(fNoRemainingException $e) {
     }
@@ -65,6 +83,8 @@ try {
     }
 
     $tpl->set('deaths', $deaths);
+    $tpl->set('total_blocks', $blocks->sort('getDestroyed', 'desc')->slice(0, 5));
+    $tpl->set('total_items', $items->sort('getPickedUp', 'desc')->slice(0, 5));
     $tpl->set('misc', $misc);
 
 } catch (fNotFoundException $e) {

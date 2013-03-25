@@ -1,175 +1,115 @@
 <?php if(!is_null($this->get('player'))): ?>
-    <div class="row">
-        <div class="span6">
-            <div id="playerhead" class="well">
-                <h1 style="position: relative">
-                    <?php echo $this->get('player')->getPlayerHead(64, 'img-polaroid'); ?>
-                    <?php echo $this->get('player')->encodeName(); ?>
-                    <?php if($this->get('player')->getOnline()): ?>
-                        <span class='label label-success player-status'>In-Game</span>
-                    <?php else: ?>
-                        <span class='label label-important player-status'>Offline</span>
-                    <?php endif; ?>
-                </h1>
-                <div id="playerhead-bars">
-                    <div class="pull-left">
-                        <?php echo $this->get('misc')->getHealthBar(); ?>
-                    </div>
-                    <div class="pull-right">
-                        <?php echo $this->get('misc')->getFoodBar(); ?>
-                    </div>
-                    <p class="clearfix"></p>
-                    <?php echo $this->get('misc')->getXPBar(); ?>
-                </div>
-            </div>
-            <p>
-                <strong>Joined on:</strong>
-                <?php
-                $time = new fTimestamp($this->get('player')->getFirstLogin());
-                echo $time->format('d.m.Y - H:i');
-                ?>
-            </p>
+    <div class="row-fluid">
 
-            <p>
-                <strong>Last seen:</strong>
-                <?php
-                if(!is_null($this->get('player')->getLoginTime())):
-                    $time = new fTimestamp($this->get('player')->getLoginTime());
-                    echo $time->format('d.m.Y - H:i');
-                    ?>
+        <div class="well well-small span4">
+            <h1 style="position: relative">
+                <?php echo $this->get('player')->getPlayerHead(64, 'img-polaroid'); ?>
+                <?php echo $this->get('player')->encodeName(); ?>
+                <?php if($this->get('player')->getOnline()): ?>
+                    <span class='label label-success player-status'>In-Game</span>
                 <?php else: ?>
-                    <em>never</em>
+                    <span class='label label-important player-status'>Offline</span>
                 <?php endif; ?>
-            </p>
+            </h1>
 
-            <p>
-                <strong>Playtime:</strong>
-                <?php
-                echo Util::formatSeconds(new fTimestamp($this->get('player')->getPlaytime()));
-                ?>
-            </p>
+            <div class="xpbar-cur">
+                <strong><?php echo $this->get('misc')->getExpLevel(); ?></strong>
+            </div>
+
+            <div class="row-fluid" id="playerhead-bars">
+                <div class="span6 heart-bars">
+                    <?php echo $this->get('misc')->getHealthBar(); ?>
+                </div>
+
+                <div class="span6 hunger-bars">
+                    <?php echo $this->get('misc')->getFoodBar(); ?>
+                </div>
+            </div>
+
+            <div class="force-center xpbar-container">
+                <?php echo $this->get('misc')->getXPBar(); ?>
+            </div>
         </div>
-        <div class="span5 offset1">
-            <h3><i class="icon-bar-chart"></i> Misc Statistics</h3>
+        <div class="span8">
             <div class="row-fluid">
-                <div class="span12">
-                    <table class="table table-condensed">
-                        <tr>
-                            <td>
-                                <strong>Total XP:</strong>
-                            </td>
-                            <td>
-                                <?php echo $this->get('misc')->getExpTotal(); ?>
-                            </td>
-                            <td>
-                                <strong>Times kicked:</strong>
-                            </td>
-                            <td>
-                            <?php echo $this->get('misc')->getTimesKicked(); ?>
-                            </td>
-                            <td>
-                                <strong>Eggs thrown:</strong>
-                            </td>
-                            <td>
-                                <?php echo $this->get('misc')->getEggsThrown(); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <strong>Food eaten:</strong>
-                            </td>
-                            <td>
-                                <?php echo $this->get('misc')->getFoodEaten(); ?>
-                            </td>
-                            <td>
-                                <strong>Arrows shot:</strong>
-                            </td>
-                            <td>
-                                <?php echo $this->get('misc')->getArrowsShot(); ?>
-                            </td>
-                            <td>
-                                <strong>Damage taken:</strong>
-                            </td>
-                            <td>
-                                <?php echo $this->get('misc')->getDamageTaken(); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <strong>Words said:</strong>
-                            </td>
-                            <td>
-                                <?php echo $this->get('misc')->getWordsSaid(); ?>
-                            </td>
-                            <td>
-                                <strong>Commands sent:</strong>
-                            </td>
-                            <td>
-                                <?php echo $this->get('misc')->getCommandsSent(); ?>
-                            </td>
-                            <td>
-                                <strong>Beds entered:</strong>
-                            </td>
-                            <td>
-                                <?php echo $this->get('misc')->getBedsEntered(); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <strong>Portals entered:</strong>
-                            </td>
-                            <td>
-                                <?php echo $this->get('misc')->getPortalsEntered(); ?>
-                            </td>
-                            <td>
-                                <strong>Fish caught:</strong>
-                            </td>
-                            <td>
-                                <?php echo $this->get('misc')->getFishCaught(); ?>
-                            </td>
-                            <td colspan="2"></td>
-                        </tr>
-                    </table>
+                <div class="span3 center player-trophy">
+                    <?php
+                    if($this->get('pvp[most_killed_by]'))
+                        $player = $this->get('pvp[most_killed_by]')->createPlayer('player_id');
+                    else {
+                        $player = new Player();
+                        $player->setName('none');
+                    }
+                    ?>
+                    <?php echo $player->getPlayerHead(64, 'img-polaroid'); ?>
+                    <h4 class="well well-small center">
+                        <?php if($player->getName() != 'none'): ?>
+                            <a href="?page=player&name=<?php echo $player->getName(); ?>"><?php echo $player->getName(); ?></a>
+                        <?php else: ?>
+                            <?php echo $player->getName(); ?>
+                        <?php endif; ?>
+                        <br/>
+                        <small>Arch Nemesis</small>
+                    </h4>
+                </div>
+                <div class="span3 center player-trophy">
+                    <?php
+                    if($this->get('pvp[most_killed]'))
+                        $player = $this->get('pvp[most_killed]')->createPlayer('victim_id');
+                    else {
+                        $player = new Player();
+                        $player->setName('none');
+                    }
+                    ?>
+                    <?php echo $player->getPlayerHead(64, 'img-polaroid'); ?>
+                    <h4 class="well well-small center">
+                        <?php if($player->getName() != 'none'): ?>
+                            <a href="?page=player&name=<?php echo $player->getName(); ?>"><?php echo $player->getName(); ?></a>
+                        <?php else: ?>
+                            <?php echo $player->getName(); ?>
+                        <?php endif; ?>
+                        <br>
+                        <small>Most killed</small>
+                    </h4>
+                </div>
+                <div class="span3 center player-trophy">
+                    <?php
+                    if($this->get('blocks[most_destroyed]'))
+                        $block = $this->get('blocks[most_destroyed]')->createMaterial();
+                    else
+                        $block = new Material('-1:0');
+                    ?>
+                    <?php echo $block->getImage(64, 'img-polaroid'); ?>
+                    <h4 class="well well-small center">
+                        <?php echo $block->getName(); ?>
+                        <br>
+                        <small>Most broken</small>
+                    </h4>
+                </div>
+                <div class="span3 center player-trophy">
+                    <?php
+                    if($this->get('blocks[most_placed]'))
+                        $block = $this->get('blocks[most_placed]')->createMaterial();
+                    else
+                        $block = new Material('-1:0');
+                    ?>
+                    <?php echo $block->getImage(64, 'img-polaroid'); ?>
+                    <h4 class="well well-small center">
+                        <?php echo $block->getName(); ?>
+                        <br>
+                        <small>Most placed</small>
+                    </h4>
                 </div>
             </div>
         </div>
+
     </div>
-    <div class="row-fluid" style="width:100% !important;">
-        <div class="span4" style="width: 30% !important;">
-            <h3>Distances</h3>
 
-            <p>
-                <strong>Travelled:</strong>
-                <?php echo $this->get('distance')->getTotal()->format(); ?> meters
-            </p>
+    <h2>General Statistics</h2>
 
-            <p>
-                <strong>Walked:</strong>
-                <?php echo $this->get('distance')->getFoot()->format(); ?> meters
-            </p>
+    <div class="row-fluid">
 
-            <p>
-                <strong>Minecarted:</strong>
-                <?php echo $this->get('distance')->getMinecart()->format(); ?> meters
-            </p>
-
-            <p>
-                <strong>Boated:</strong>
-                <?php echo $this->get('distance')->getBoat()->format(); ?> meters
-            </p>
-
-            <p>
-                <strong>Piggybacked:</strong>
-                <?php echo $this->get('distance')->getPig()->format(); ?> meters
-            </p>
-
-            <p>
-                <strong>Swum:</strong>
-                <?php echo $this->get('distance')->getSwimmed()->format(); ?> meters
-            </p>
-        </div>
-
-        <div class="span4" style="width: 30% !important;">
+        <div class="span4 well well-small">
             <h3>Blocks</h3>
 
             <p>
@@ -214,7 +154,7 @@
             </p>
         </div>
 
-        <div class="span4" style="width: 30% !important;">
+        <div class="span4 well well-small">
             <h3>Items</h3>
 
             <p>
@@ -260,11 +200,162 @@
             </p>
         </div>
 
-    </div>
-    <div class="row-fluid" style="width:100% !important;">
+        <div class="span4 well well-small">
+            <h3>Distances</h3>
 
-        <div class="span4" style="width: 30% !important;">
-            <h3>PvP Stats</h3>
+            <p>
+                <strong>Travelled:</strong>
+                <?php echo $this->get('distance')->getTotal()->format(); ?> meters
+            </p>
+
+            <p>
+                <strong>Walked:</strong>
+                <?php echo $this->get('distance')->getFoot()->format(); ?> meters
+            </p>
+
+            <p>
+                <strong>Minecarted:</strong>
+                <?php echo $this->get('distance')->getMinecart()->format(); ?> meters
+            </p>
+
+            <p>
+                <strong>Boated:</strong>
+                <?php echo $this->get('distance')->getBoat()->format(); ?> meters
+            </p>
+
+            <p>
+                <strong>Piggybacked:</strong>
+                <?php echo $this->get('distance')->getPig()->format(); ?> meters
+            </p>
+
+            <p>
+                <strong>Swum:</strong>
+                <?php echo $this->get('distance')->getSwimmed()->format(); ?> meters
+            </p>
+        </div>
+
+    </div>
+
+    <div class="row-fluid">
+
+        <div class="span8 well well-small">
+            <h3>Miscellaneous</h3>
+            <table class="table table-condensed">
+                <tr>
+                    <td>
+                        <strong>Total XP:</strong>
+                    </td>
+                    <td>
+                        <?php echo $this->get('misc')->getExpTotal(); ?>
+                    </td>
+                    <td>
+                        <strong>Times kicked:</strong>
+                    </td>
+                    <td>
+                        <?php echo $this->get('misc')->getTimesKicked(); ?>
+                    </td>
+                    <td>
+                        <strong>Eggs thrown:</strong>
+                    </td>
+                    <td>
+                        <?php echo $this->get('misc')->getEggsThrown(); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Food eaten:</strong>
+                    </td>
+                    <td>
+                        <?php echo $this->get('misc')->getFoodEaten(); ?>
+                    </td>
+                    <td>
+                        <strong>Arrows shot:</strong>
+                    </td>
+                    <td>
+                        <?php echo $this->get('misc')->getArrowsShot(); ?>
+                    </td>
+                    <td>
+                        <strong>Damage taken:</strong>
+                    </td>
+                    <td>
+                        <?php echo $this->get('misc')->getDamageTaken(); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Words said:</strong>
+                    </td>
+                    <td>
+                        <?php echo $this->get('misc')->getWordsSaid(); ?>
+                    </td>
+                    <td>
+                        <strong>Commands sent:</strong>
+                    </td>
+                    <td>
+                        <?php echo $this->get('misc')->getCommandsSent(); ?>
+                    </td>
+                    <td>
+                        <strong>Beds entered:</strong>
+                    </td>
+                    <td>
+                        <?php echo $this->get('misc')->getBedsEntered(); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Portals entered:</strong>
+                    </td>
+                    <td>
+                        <?php echo $this->get('misc')->getPortalsEntered(); ?>
+                    </td>
+                    <td>
+                        <strong>Fish caught:</strong>
+                    </td>
+                    <td>
+                        <?php echo $this->get('misc')->getFishCaught(); ?>
+                    </td>
+                    <td colspan="2"></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="span4 well well-small">
+            <h3>Login statistics</h3>
+
+            <p>
+                <strong>Joined on:</strong>
+                <?php
+                $time = new fTimestamp($this->get('player')->getFirstLogin());
+                echo $time->format('d.m.Y - H:i');
+                ?>
+            </p>
+
+            <p>
+                <strong>Last seen:</strong>
+                <?php
+                if(!is_null($this->get('player')->getLoginTime())):
+                    $time = new fTimestamp($this->get('player')->getLoginTime());
+                    echo $time->format('d.m.Y - H:i');
+                    ?>
+                <?php else: ?>
+                    <em>never</em>
+                <?php endif; ?>
+            </p>
+
+            <p>
+                <strong>Playtime:</strong>
+                <?php
+                echo Util::formatSeconds(new fTimestamp($this->get('player')->getPlaytime()));
+                ?>
+            </p>
+        </div>
+
+    </div>
+
+    <div class="row-fluid">
+
+        <div class="span4 well well-small">
+            <h3>PvP</h3>
 
             <p>
                 <strong>Total Kills:</strong>
@@ -281,10 +372,10 @@
                 <p>
                     <?php $victim = $this->get('pvp[most_killed]')->createPlayer('victim_id'); ?>
                     <a href="?page=player&name=<?php echo $victim->getName(); ?>">
-                    <?php
-                    echo $victim->getPlayerHead();
-                    ?>
-                    <?php echo $victim->encodeName(); ?>
+                        <?php
+                        echo $victim->getPlayerHead();
+                        ?>
+                        <?php echo $victim->encodeName(); ?>
                     </a>
                 </p>
                 <p>
@@ -307,10 +398,10 @@
                 <p>
                     <?php $killer = $this->get('pvp[most_killed_by]')->createPlayer('player_id'); ?>
                     <a href="?page=player&name=<?php echo $killer->getName(); ?>">
-                    <?php
-                    echo $killer->getPlayerHead();
-                    ?>
-                    <?php echo $killer->encodeName(); ?>
+                        <?php
+                        echo $killer->getPlayerHead();
+                        ?>
+                        <?php echo $killer->encodeName(); ?>
                     </a>
                 </p>
 
@@ -326,11 +417,11 @@
                     ?>
                     <?php echo $weapon->encodeName(); ?>
                 </p>
-            <?php endif;  ?>
+            <?php endif; ?>
         </div>
 
-        <div class="span4" style="width: 30% !important;">
-            <h3>PvE Stats</h3>
+        <div class="span4 well well-small">
+            <h3>PvE</h3>
 
             <p>
                 <strong>Total Kills:</strong>
@@ -364,7 +455,7 @@
                     ?>
                     <?php echo $weapon->encodeName(); ?>
                 </p>
-            <?php endif;  ?>
+            <?php endif; ?>
             <?php if($this->get('pve[most_killed_by]')): ?>
                 <br/>
                 <h4>Most killed by:</h4>
@@ -389,12 +480,11 @@
                     ?>
                     <?php echo $weapon->encodeName(); ?>
                 </p>
-            <?php endif;  ?>
+            <?php endif; ?>
         </div>
 
-        <div class="span4" style="width: 30% !important;">
-            <h3>Other deaths</h3>
-
+        <div class="span4 well well-small">
+            <h3>Deaths</h3>
             <?php if($this->get('deaths')->count()): ?>
                 <?php foreach($this->get('deaths') as $death): ?>
                     <p>
@@ -405,6 +495,77 @@
             <?php else: ?>
                 <p><strong>This player was not killed by outside influences.</strong></p>
             <?php endif; ?>
+        </div>
+
+    </div>
+
+    <h2>Detailed Information</h2>
+
+    <div class="row-fluid">
+
+        <div class="span6 well well-small">
+            <h3>Blocks</h3>
+
+            <table class="table table-striped table-bordered table-vcenter">
+                <thead>
+                <tr>
+                    <th style="text-align: center;">Block Type</th>
+                    <th style="text-align: center;">Destroyed</th>
+                    <th style="text-align: center;">Placed</th>
+                </tr>
+                </thead>
+                <tbody class="content">
+                <?php
+                foreach($this->get('total_blocks') as $total):
+                    $block = $total->createMaterial();
+                    ?>
+                    <tr>
+                        <td>
+                            <?php echo $block->getImage(32, 'img-polaroid'); ?>
+                            <?php echo $block->getName(); ?>
+                        </td>
+                        <td>
+                            <?php echo $total->getDestroyed()->format(); ?>
+                        </td>
+                        <td>
+                            <?php echo $total->getPlaced()->format(); ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="span6 well well-small">
+            <h3>Items</h3>
+            <table class="table table-striped table-bordered table-vcenter">
+                <thead>
+                <tr>
+                    <th style="text-align: center;">Item Type</th>
+                    <th style="text-align: center;">Picked Up</th>
+                    <th style="text-align: center;">Dropped</th>
+                </tr>
+                </thead>
+                <tbody class="content">
+                <?php
+                foreach($this->get('total_items') as $total):
+                    $item = $total->createMaterial();
+                    ?>
+                    <tr>
+                        <td>
+                            <?php echo $item->getImage(32, 'img-polaroid'); ?>
+                            <?php echo $item->getName(); ?>
+                        </td>
+                        <td>
+                            <?php echo $total->getPickedUp()->format(); ?>
+                        </td>
+                        <td>
+                            <?php echo $total->getDropped()->format(); ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
         </div>
     </div>
 <?php else: ?>

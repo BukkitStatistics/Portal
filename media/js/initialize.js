@@ -7,6 +7,10 @@ $(document).ready(function() {
         });
     }, 100);
 
+    $('#left-menu').affix(
+        {offset: 240}
+    );
+
     // sortable tables
     $(document).on('click', 'div[data-mod] .sort-button', function () {
         var button = $(this);
