@@ -51,7 +51,9 @@
                 <div class="span8 well well-small module module-big" id="module-online-players">
                     <h3>Online Players</h3>
 
-                    <?php $this->place('players_online'); ?>
+                    <div data-mod="players_online" id="onlinePlayersBlock">
+                        <?php $this->place('players_online'); ?>
+                    </div>
 
                 </div>
                 <div class="span4 well well-small module module-small">

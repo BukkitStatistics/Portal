@@ -32,4 +32,15 @@ else: ?>
         <?php endforeach; ?>
         </tbody>
     </table>
+    <div id="online_playersPagination" class="pagination-centered"></div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            callModulePage(
+                'online_players',
+                <?php echo $this->get('online_players')->getPages(); ?>,
+                <?php echo $this->get('online_players')->getPage(); ?>
+            );
+        });
+    </script>
 <?php endif; ?>
