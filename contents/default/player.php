@@ -88,6 +88,6 @@ try {
     $tpl->set('total_items', $items->sort('getPickedUp', 'desc')->slice(0, 5));
     $tpl->set('misc', $misc);
 
-} catch (fNotFoundException $e) {
+} catch(fNotFoundException $e) {
     fMessaging::create('no-cache', '{cache}', 1);
 }
