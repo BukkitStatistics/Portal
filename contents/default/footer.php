@@ -6,7 +6,7 @@
                 <div class="span2">
                     <p>
                         <a href="https://github.com/bitWolfy/Statistics">
-                            <img src="media/img/plugin_logo_small.png" alt="Statistics"/>
+                            <img src="media/img/plugin_logo.png" alt="Statistics"/>
                         </a>
                     </p>
                 </div>
