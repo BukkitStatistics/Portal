@@ -1,8 +1,7 @@
-<hr>
-
+<!-- <footer> -->
 <footer>
-    <div class="row-fluid">
-        <div class="span10 offset2">
+    <div class="row-fluid page-width footer-block">
+        <div class="span9 offset3">
             <div class="row-fluid">
                 <div class="span2">
                     <p>
@@ -31,3 +30,5 @@
         </div>
     </div>
 </footer>
+</body>
+<!-- </footer> -->

@@ -15,7 +15,7 @@ switch(fRequest::get('order_by', 'int')) {
 }
 
 $page = fRequest::get('page', 'int', 1);
-$limit = 10;
+$limit = 6;
 
 $blocks = fRecordSet::buildFromSQL(
     'Material',

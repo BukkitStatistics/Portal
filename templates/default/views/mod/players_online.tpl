@@ -26,7 +26,7 @@ else: ?>
                     ?>
                 </td>
                 <td>
-                    <?php echo Util::formatSeconds($time); ?>
+                    <?php echo Util::formatSeconds(new fTimestamp($player->getPlaytime())); ?>
                 </td>
             </tr>
         <?php endforeach; ?>

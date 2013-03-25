@@ -1,0 +1,224 @@
+/* Global styles
+/* ============================== */
+
+body {
+	color: #5a5a5a;
+}
+
+.page-width {
+	width: 1024px !important;
+}
+
+.no-border {
+	border: 0 !important;
+}
+
+.center {
+	text-align: center;
+}
+
+.force-center {
+	width: 100%;
+	text-align: center;
+}
+
+section {
+	padding-bottom: 50px;
+}
+
+
+/* Top navbar styles
+/* ============================== */
+
+.header-icon {
+	height: 25px;
+	margin-right: 15px;
+	margin-top: 7px;
+}
+
+/* Left menu styles
+/* ============================== */
+
+.left-menu {
+	width: 235px;
+}
+
+.left-menu.affix,
+.left-menu.affix-bottom {
+	position: fixed;
+	top: 25px;
+}
+
+/* Quick info styles
+/* ============================== */
+
+.quick-info {
+	padding-top: 25px;
+	margin: 0 auto;
+}
+
+.quick-info div {
+	height: 175px;
+	background: #FFE0C2;
+}
+
+/* Page body styles
+/* ============================== */
+
+.page-body {
+	padding-top: 5px;
+	margin: 0 auto;
+}
+
+.ajax-loader {
+    position: absolute;
+    top: 60px;
+    left: 10px;
+    z-index: 99;
+    padding: 10px 20px;
+}
+
+/* Modules styles
+/* ============================== */
+
+.module {
+	min-height: 290px !important;
+}
+
+.module h3 {
+	text-align: center;
+}
+
+
+.no-border tr td {
+	border: 0 !important;
+}
+
+.statbox-table-small tr td span.label {
+	float: right;
+}
+
+.sort-button {
+    cursor: pointer;
+}
+
+/* Custom module styles
+/* ============================== */
+
+.table tr td {
+	vertical-align: middle;
+}
+
+#playersTable tr td img {
+	margin-right: 5px;
+}
+
+
+/* Footer styles
+/* ============================== */
+
+.footer-block {
+	padding-top: 100px;
+	margin: 0 auto;
+}
+
+/* Bootstrap styles
+/* ============================== */
+.alert p {
+    margin: 0;
+}
+
+.force-right {
+    text-align: right;
+}
+
+.grid {
+    min-height: 30px;
+    margin-top: 10px;
+    margin-bottom: 18px;
+    margin-left: 10px;
+}
+
+/* Miscellaneous styles
+/* ============================== */
+
+.no-img, .grid-img {
+    padding: 15px 8px;
+    min-width: 28px;
+    text-align: center;
+}
+ 
+.grid-img {
+	padding: 6px;
+}
+
+/* Player page styles
+/* ============================== */
+
+.player-page-body {
+	padding-top: 25px;
+	margin: 0 auto;
+}
+
+.heart-bars {
+	float: left;
+}
+
+.heart-bars img {
+	height: 12px;
+	width: 12px;
+	padding-right: 1px;
+	float: left;
+}
+
+.hunger-bars {
+	float: right;
+}
+
+.hunger-bars img {
+	height: 12px;
+	width: 12px;
+	padding-left: 1px;
+	float: right;
+}
+ 
+.xpbar-container {
+	position: relative;
+	height: 10px;
+	width: 100%;
+	background-image: url("../img/misc/xpbar-bg.png");
+	background-position: top left;
+	background-repeat: no-repeat;
+}
+ 
+.xpbar-cur {
+	position: relative;
+	top: 15px;
+	text-align: center;
+	width: 100%;
+	font-weight: bold;
+	color: #51a351;
+}
+ 
+.xpbar {
+	height: 10px;
+	background-image: url("../img/misc/xpbar-full.png");
+	background-repeat: no-repeat;
+	background-position: top left;
+}
+ 
+.player-status {
+	position: absolute;
+	top: -10px;
+	left: 40px;
+}
+
+.player-trophy {
+	position: relative;
+	top:30px;
+}
+
+.player-trophy img {
+	width: 64px !important;
+	height: 64px !important;
+}

@@ -18,7 +18,9 @@ $players = fRecordSet::build(
     ),
     array(
          $type => fRequest::get('order_sort', 'string', 'desc')
-    )
+    ),
+    3,
+    1
 );
 
 $tpl_ponline->set('online_players', $players);

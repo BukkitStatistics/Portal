@@ -138,4 +138,10 @@ class ServerStatistic {
         return false;
     }
 
+    public static function getUptimePerc() {
+        $perc = self::getValue('total_uptime') / (time() - self::getValue('first_startup')) * 100;
+
+        return round($perc, 0);
+    }
+
 }

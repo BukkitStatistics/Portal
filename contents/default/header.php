@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html>
+<!-- <header> -->
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <?php
@@ -21,7 +20,7 @@
     <?php $this->place('js'); ?>
 
     <link href="media/css/bootstrap.min.css" rel="stylesheet">
-    <link href="media/css/yasp.css" rel="stylesheet">
+    <link href="media/css/style.css" rel="stylesheet">
     <link href="media/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="media/css/font-awesome.min.css" rel="stylesheet">
 
@@ -32,34 +31,45 @@
     <![endif]-->
 </head>
 <body>
-<div class="navbar navbar-fixed-top">
+<!-- <navbar> -->
+
+<div class="navbar navbar-fixed-top" style="position: static !important;">
     <div class="navbar-inner">
-        <div class="container">
-            <img class="logo-img pull-left" src="media/img/icon-default.png">
-            <a class="brand" href="./"><?php echo $this->get('title'); ?></a>
+        <div class="container page-width">
+
+            <!-- Icon -->
+            <img class="pull-left header-icon" src="media/img/icon-default.png"
+                 alt="logo"/>
+
+            <!-- Project Name -->
+            <a class="brand" href="./"><?php echo $this->encode('title'); ?></a>
 
             <ul class="nav pull-right">
                 <li>
-                    <?php
-                    if(ServerStatistic::getStatus()):
-                        ?>
-                        <span class="btn btn-success disabled">Online</span>
+                    <!-- Online status -->
+                    <?php if(ServerStatistic::getStatus()): ?>
+                    <span class="btn btn-success disabled">Online</span>
                     <?php else: ?>
-                        <span class="btn btn-danger disabled">Offline</span>
+                    <span class="btn btn-danger disabled">Offline</span>
                     <?php endif; ?>
                 </li>
                 <li class="divider-vertical"></li>
                 <li>
-                    <form class="navbar-form form-search pull-right" method="get">
+                    <!-- Search form -->
+                    <form class="navbar-form" method="get">
+                        <input type="hidden" name="page" value="player">
                         <div class="input-append">
-                            <input type="hidden" name="page" value="player">
-                            <input name="name" type="text" class="span2 search-query" placeholder="Player" id="playerSearch"
-                                   autocomplete="off">
-                            <button type="submit" class="btn">Search</button>
+                            <input type="text" name="name" class="" placeholder="Player" id="playerSearch" autocomplete="off">
+                            <button class="btn" type="button">Search</button>
                         </div>
                     </form>
                 </li>
             </ul>
+
         </div>
     </div>
 </div>
+
+<!-- </navbar> -->
+
+<!-- </header> -->
