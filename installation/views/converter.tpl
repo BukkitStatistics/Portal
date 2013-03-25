@@ -1,4 +1,5 @@
-<h2><i class="icon-laptop icon-large" style="color: #ccc"></i> Converter settings</h2>
+<form name="install" method="post">
+<h2><i class="icon-laptop icon-large"></i> Converter settings</h2>
 <?php
 Util::showMessages('*', 'install/converter', 'alert alert-error');
 ?>
@@ -83,4 +84,4 @@ Util::showMessages('*', 'install/converter', 'alert alert-error');
     <button type="submit" name="converter_submit" value="1"
             class="btn btn-primary"><?php echo fText::compose('Next'); ?></button>
 </div>
-
+</form>
