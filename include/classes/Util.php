@@ -197,13 +197,14 @@ class Util {
      * @param $content
      */
     public static function newDesign($content) {
-        global $cache;
+        global $cache, $lang;
 
         $error = false;
 
         fBuffer::startCapture();
         $design = new fTemplating(__ROOT__ . 'contents/default', __ROOT__ . 'templates/default/index.php');
         $design->set('title', Util::getOption('portal_title'));
+        $design->set('lang', $lang);
         $design->set('tplRoot', __ROOT__ . 'templates/default/views');
         $design->add('header_additions', '');
         try {
