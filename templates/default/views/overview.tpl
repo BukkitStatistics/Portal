@@ -35,9 +35,6 @@
                     <li><a href="#deaths"><i class="icon-tint"></i> Death Log</a></li>
                 </ul>
             </div>
-            <div class="nav nav-sidebar well" style="height: 250px;">
-                Stuff goes here. I am not yet sure what exactly, though.
-            </div>
         </div>
         <!-- </navigation> -->
 
