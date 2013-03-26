@@ -49,7 +49,7 @@ class Util {
 
         try {
             $db = fORMDatabase::retrieve();
-            $res = $db->translatedQuery('SELECT `value` FROM %r WHERE `key` = %s', 'settings', $option)->fetchScalar();
+            $res = $db->translatedQuery('SELECT `value` FROM "prefix_settings" WHERE `key` = %s', $option)->fetchScalar();
 
             // temporary: cache for 10 minutes
             // TODO: set cache time in settings + reset on db change!
@@ -92,10 +92,10 @@ class Util {
 
         try {
             $db = fORMDatabase::retrieve();
-            $updated = $db->translatedQuery('UPDATE %r SET "value"=%s WHERE "key"=%s', 'settings', $value,
+            $updated = $db->translatedQuery('UPDATE "prefix_settings" SET "value"=%s WHERE "key"=%s', $value,
                                             $option)->countAffectedRows();
             if($updated <= 0)
-                $db->translatedExecute('INSERT INTO %r ("key", "value") VALUES (%s, %s)', 'settings', $option, $value);
+                $db->translatedExecute('INSERT INTO "prefix_settings" ("key", "value") VALUES (%s, %s)', $option, $value);
 
             if(!DEVELOPMENT)
                 $cacheSingle->delete($option);
@@ -141,7 +141,7 @@ class Util {
 
     /**
      * Add to the sql query the defined prefix
-     * SQL string must contain 'prefix_' or the placeholder %r!
+     * SQL string must contain 'prefix_'!
      *
      * @param fDatabase         $db
      * @param string|fStatement $sql
@@ -156,12 +156,6 @@ class Util {
         // if prefix is included skip this statement
         if(strpos($sql, DB_PREFIX) !== false)
             return;
-        if(strpos($sql, '%r')) {
-            if(strpos($values[0], DB_PREFIX) !== false)
-                return;
-
-            $values[0] = Util::getPrefix() . $values[0];
-        }
         if(preg_match("/^UPDATE `?prefix_\S+`?\s+SET/is", $sql))
             $sql = preg_replace("/^UPDATE `?prefix_(\S+?)`?([\s\.,]|$)/i", "UPDATE `" . Util::getPrefix() . "\\1`\\2",
                                 $sql);
