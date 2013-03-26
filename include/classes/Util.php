@@ -57,6 +57,9 @@ class Util {
             if(!DEVELOPMENT)
                 $cacheSingle->set($option, $res, 60 * 10);
 
+            if(empty($res) && !is_null($default))
+                return $default;
+
             return $res;
         } catch(fNoRowsException $e) {
             fCore::debug($e);
