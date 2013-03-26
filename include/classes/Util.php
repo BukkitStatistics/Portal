@@ -8,8 +8,9 @@ class Util {
     const addPrefix = "Util::addPrefix";
     const newTpl = "Util::newTpl";
     const getCachedContent = "Util::getCachedContent";
-    const newDesign = "Util:newDesign";
-    const formatSeconds = "Util:formatSeconds";
+    const newDesign = "Util::newDesign";
+    const formatSeconds = "Util::formatSeconds";
+    const clearSkinCache = "Util::clearSkinCache";
 
     /**
      * Checks if the given host is an valid IP or localhost
