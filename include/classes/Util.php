@@ -52,10 +52,8 @@ class Util {
             $db = fORMDatabase::retrieve();
             $res = $db->translatedQuery('SELECT `value` FROM "prefix_settings" WHERE `key` = %s', $option)->fetchScalar();
 
-            // temporary: cache for 10 minutes
-            // TODO: set cache time in settings + reset on db change!
-            if(!DEVELOPMENT)
-                $cacheSingle->set($option, $res, 60 * 10);
+            if(!DEVELOPMENT && $option != 'cache.options')
+                $cacheSingle->set($option, $res, Util::getOption('cache.options', 60 * 10));
 
             if(empty($res) && !is_null($default))
                 return $default;
@@ -235,7 +233,7 @@ class Util {
            && !fMessaging::check('*', '{errors}')
            && !fMessaging::check('no-cache', '{cache}')
            && $content != 'error.php')
-            $cache->set($content . '.cache', $capture, 120);
+            $cache->set($content . '.cache', $capture, Util::getOption('cache.pages', 60));
 
         fMessaging::retrieve('no-cache', '{cache}');
     }
@@ -327,7 +325,7 @@ class Util {
         if(rand(0, 99) == 50) {
             $dir = new fDirectory(__ROOT__ . 'cache/skins');
             $files = $dir->scan('#\.png$#i');
-            $ctime = new fTimestamp('-1 week');
+            $ctime = new fTimestamp('-' . Util::getOption('cache.skins') . ' seconds');
 
             foreach($files as $file) {
                 if($ctime->gte($file->getMTime()))

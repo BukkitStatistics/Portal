@@ -124,6 +124,46 @@ $tpl->set('time_format', fRequest::encode('time_format', 'string', Util::getOpti
 $tpl->set('timezone', fRequest::encode('timezone', 'string', Util::getOption('timezone')));
 $tpl->set('logo_url', fRequest::encode('logo_url', 'string', Util::getOption('logo_url')));
 
+$tpl->set('cache_pages[d]', fRequest::encode('cache_pages[d]', 'int', Util::getOption('cache.pages') / 60 / 60 / 24));
+$tpl->set('cache_pages[h]', fRequest::encode('cache_pages[h]', 'int', (Util::getOption('cache.pages') -
+                                                                       $tpl->get('cache_pages[d]') * 60 * 60 * 24) /
+                                                                      60 / 60));
+$tpl->set('cache_pages[m]', fRequest::encode('cache_pages[m]', 'int', (Util::getOption('cache.pages') -
+                                                                       $tpl->get('cache_pages[d]') * 60 * 60 * 24 -
+                                                                       $tpl->get('cache_pages[h]') * 60 * 60) / 60));
+$tpl->set('cache_pages[s]', fRequest::encode('cache_pages[s]', 'int', Util::getOption('cache.pages') -
+                                                                      $tpl->get('cache_pages[d]') * 60 * 60 * 24 -
+                                                                      $tpl->get('cache_pages[h]') * 60 * 60 -
+                                                                      $tpl->get('cache_pages[m]') * 60));
+
+$tpl->set('cache_skins[d]', fRequest::encode('cache_skins[d]', 'int', Util::getOption('cache.skins') / 60 / 60 / 24));
+$tpl->set('cache_skins[h]', fRequest::encode('cache_skins[h]', 'int', (Util::getOption('cache.skins') -
+                                                                       $tpl->get('cache_skins[d]') * 60 * 60 * 24) /
+                                                                      60 / 60));
+$tpl->set('cache_skins[m]', fRequest::encode('cache_skins[m]', 'int', (Util::getOption('cache.skins') -
+                                                                       $tpl->get('cache_skins[d]') * 60 * 60 * 24 -
+                                                                       $tpl->get('cache_skins[h]') * 60 * 60) / 60));
+$tpl->set('cache_skins[s]', fRequest::encode('cache_skins[s]', 'int', Util::getOption('cache.skins') -
+                                                                      $tpl->get('cache_skins[d]') * 60 * 60 * 24 -
+                                                                      $tpl->get('cache_skins[h]') * 60 * 60 -
+                                                                      $tpl->get('cache_skins[m]') * 60));
+
+$tpl->set('cache_options[d]',
+          fRequest::encode('cache_options[d]', 'int', Util::getOption('cache.options') / 60 / 60 / 24));
+$tpl->set('cache_options[h]', fRequest::encode('cache_options[h]', 'int', (Util::getOption('cache.options') -
+                                                                           $tpl->get('cache_options[d]') * 60 * 60 *
+                                                                           24) /
+                                                                          60 / 60));
+$tpl->set('cache_options[m]', fRequest::encode('cache_options[m]', 'int', (Util::getOption('cache.options') -
+                                                                           $tpl->get('cache_options[d]') * 60 * 60 *
+                                                                           24 -
+                                                                           $tpl->get('cache_options[h]') * 60 * 60) /
+                                                                          60));
+$tpl->set('cache_options[s]', fRequest::encode('cache_options[s]', 'int', Util::getOption('cache.options') -
+                                                                          $tpl->get('cache_options[d]') * 60 * 60 * 24 -
+                                                                          $tpl->get('cache_options[h]') * 60 * 60 -
+                                                                          $tpl->get('cache_options[m]') * 60));
+
 if(fRequest::isPost() && fRequest::check('save')) {
     try {
         $vali = new fValidation();
@@ -136,7 +176,21 @@ if(fRequest::isPost() && fRequest::check('save')) {
         Util::setOption('logo_url', $tpl->get('logo_url'));
         Util::setOption('timezone', $tpl->get('timezone'));
         Util::setOption('time_format', $tpl->get('time_format'));
-    } catch (fValidationException $e) {
+
+        $sec = $tpl->get('cache_pages[s]') + $tpl->get('cache_pages[m]') * 60 + $tpl->get('cache_pages[h]') * 60 * 60 +
+               $tpl->get('cache_pages[d]') * 60 * 60 * 24;
+        Util::setOption('cache.pages', $sec);
+
+        $sec = $tpl->get('cache_skins[s]') + $tpl->get('cache_skins[m]') * 60 + $tpl->get('cache_skins[h]') * 60 * 60 +
+               $tpl->get('cache_skins[d]') * 60 * 60 * 24;
+        Util::setOption('cache.skins', $sec);
+
+        $sec = $tpl->get('cache_options[s]') + $tpl->get('cache_options[m]') * 60 +
+               $tpl->get('cache_options[h]') * 60 * 60 +
+               $tpl->get('cache_options[d]') * 60 * 60 * 24;
+        Util::setOption('cache.options', $sec);
+
+    } catch(fValidationException $e) {
         fMessaging::create('input', 'admin', $e->getMessage());
     }
 }
