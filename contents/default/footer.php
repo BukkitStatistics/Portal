@@ -1,7 +1,7 @@
 <!-- <footer> -->
 <footer>
     <div class="row-fluid page-width footer-block">
-        <div class="span9 offset3">
+        <div class="span12">
             <div class="row-fluid">
                 <div class="span2">
                     <p>

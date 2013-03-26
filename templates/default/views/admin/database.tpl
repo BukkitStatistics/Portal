@@ -62,8 +62,8 @@
                         <fieldset>
                             <label for="db_prefix"><strong>Prefix</strong></label>
 
-                            <div class="input-append">
-                                <input type="text" name="db_prefix" id="db_prefix" class="span8"
+                            <div class="input-append span8">
+                                <input type="text" name="db_prefix" id="db_prefix" class="span10"
                                        value="<?php echo $this->get('db_prefix') ?>"/>
                                 <span class="add-on">_</span>
                             </div>
