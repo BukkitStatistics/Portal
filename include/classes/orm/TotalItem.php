@@ -24,15 +24,15 @@ class TotalItem extends fActiveRecord {
         try {
             if($material == null)
                 $res = fORMDatabase::retrieve()->translatedQuery('
-                        SELECT SUM(' . $type . ')
+                        SELECT SUM(%r)
                         FROM "prefix_total_items"
-                ');
+                ', $type);
             else
                 $res = fORMDatabase::retrieve()->translatedQuery('
-                        SELECT SUM(' . $type . ')
+                        SELECT SUM(%r)
                         FROM "prefix_total_items"
                         WHERE material_id = %s
-                ', $material->getMaterialId());
+                ', $type, $material->getMaterialId());
 
             $count = $res->fetchScalar();
             if(is_null($count))
@@ -57,13 +57,13 @@ class TotalItem extends fActiveRecord {
     public static function getMostOfType($type) {
         try {
             $res = fORMDatabase::retrieve()->translatedQuery('
-                        SELECT SUM(i.' . $type . ') AS total, m.tp_name
+                        SELECT SUM(i.%r) AS total, m.tp_name
                         FROM "prefix_total_items" i, "prefix_materials" m
                         WHERE i.material_id = m.material_id
 
                         GROUP BY i.material_id
-                        ORDER BY SUM(i.' . $type . ') DESC LIMIT 0,1
-        ');
+                        ORDER BY SUM(i.%r) DESC LIMIT 0,1
+        ', $type, $type);
 
             $row = $res->fetchRow();
             $num = new fNumber($row['total']);
