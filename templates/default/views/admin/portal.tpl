@@ -51,7 +51,7 @@
                         <span class="label label-info"><strong>Info!</strong></span>
                         Set the time how long the specific module should be stored in the cache.
                         This will drastically increase the performance on large servers.<br>
-                        Set everything to <strong>0</strong> will disable the caching.
+                        Set the specific caching to <strong>0</strong> will disable it.
                     </p>
                 </div>
             </div>

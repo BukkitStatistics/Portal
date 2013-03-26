@@ -8,7 +8,7 @@
         <div class="alert alert-info alert-block">
             <p>
                 <span class="label label-info">Info!</span> Here you can specify which data should be logged.<br>
-                Due to architecture limitations you only can disable major types.
+                Due to architectural limitations, you only can disable major types.
             </p>
         </div>
         <div class="row-fluid">

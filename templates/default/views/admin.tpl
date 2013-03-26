@@ -1,5 +1,5 @@
 <div class="row-fluid">
-    <div class="span10 offset2">
+    <div class="span12">
         <div class="page-header">
             <h1>
                 <i class="icon-cogs icon-large"></i> Admin Panel
@@ -48,20 +48,23 @@
         </div>
     <?php endif; ?>
 <div class="row-fluid">
-    <div class="span10 offset2">
+    <div class="span12">
         <div class="form-actions">
             <div class="pull-left">
                 <?php if($this->get('sub')): ?>
-                <button class="btn btn-large btn-primary" name="save" value="true" id="Save">
-                    <i class="icon-save"></i> Save
-                </button>
+                    <button class="btn btn-large btn-primary" name="save" value="true" id="Save">
+                        <i class="icon-save"></i> Save
+                    </button>
+                    <a href="?page=admin" class="btn btn-large">
+                        <i class="icon-reply"></i> Back
+                    </a>
                 <?php endif; ?>
             </div>
             <div class="pull-right">
                 <button class="btn btn-large btn-danger" name="logout" value="true">
                     <i class="icon-signout"></i> Logout
                 </button>
-                <a href="?page=admin" class="btn btn-large">
+                <a href="./" class="btn btn-large">
                     <i class="icon-home"></i> Home
                 </a>
             </div>
