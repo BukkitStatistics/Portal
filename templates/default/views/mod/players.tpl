@@ -29,7 +29,7 @@
             <?php
             if(!is_null($player->getLoginTime())):
                 $time = new fTimestamp($player->getLoginTime());
-                echo $time->format('d.m.Y - H:i');
+                echo $time->format('std');
                 ?>
             <?php else: ?>
                 <em>never</em>
@@ -38,7 +38,7 @@
         <td>
             <?php
             $time = new fTimestamp($player->getFirstLogin());
-            echo $time->format('D d.m.Y');
+            echo $time->format('day');
             ?>
         </td>
     </tr>

@@ -326,7 +326,7 @@
                 <strong>Joined on:</strong>
                 <?php
                 $time = new fTimestamp($this->get('player')->getFirstLogin());
-                echo $time->format('d.m.Y - H:i');
+                echo $time->format('std');
                 ?>
             </p>
 
@@ -335,7 +335,7 @@
                 <?php
                 if(!is_null($this->get('player')->getLoginTime())):
                     $time = new fTimestamp($this->get('player')->getLoginTime());
-                    echo $time->format('d.m.Y - H:i');
+                    echo $time->format('std');
                     ?>
                 <?php else: ?>
                     <em>never</em>

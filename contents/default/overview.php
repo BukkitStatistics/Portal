@@ -23,8 +23,8 @@ $this->inject('mod/death_log.php');
 $tpl->set('death_log', $this->get('death_log'));
 
 // server stats in dashboard
-$server_stats['startup'] = ServerStatistic::getStartup()->format('H:i - d.m.Y');
-$server_stats['shutdown'] = ServerStatistic::getShutdown()->format('H:i - d.m.Y');
+$server_stats['startup'] = ServerStatistic::getStartup()->format('std');
+$server_stats['shutdown'] = ServerStatistic::getShutdown()->format('std');
 $server_stats['cur_uptime'] = ServerStatistic::getCurrentUptime();
 $server_stats['playtime'] = Player::countTotalPlaytime();
 $server_stats['total_logins'] = Player::countAllLogins()->format();

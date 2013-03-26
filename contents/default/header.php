@@ -38,7 +38,7 @@
         <div class="container page-width">
 
             <!-- Icon -->
-            <img class="pull-left header-icon" src="media/img/icon-default.png"
+            <img class="pull-left header-icon" src="<?php echo Util::getOption('logo_url', 'media/img/icon-default.png'); ?>"
                  alt="logo"/>
 
             <!-- Project Name -->
