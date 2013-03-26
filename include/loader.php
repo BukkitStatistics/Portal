@@ -31,11 +31,6 @@ try {
  */
 include __INC__ . 'config/orm.php';
 
-/*
- * Include ajax call handling
- * Handles for example api calls
- */
-include __INC__ . 'ajax.php';
 
 /*
  * Initializes the language module
@@ -44,9 +39,28 @@ $lang = new Language(Util::getOption('language', fSession::get('lang', 'en')));
 $lang->load('errors');
 fText::registerComposeCallback('pre', array($lang, 'translate'));
 
+/*
+ * Set timezones and time formats
+ */
 fTimestamp::setDefaultTimezone(Util::getOption('timezone', fTimestamp::getDefaultTimezone()));
+if(Util::getOption('time_format', 24) == 24)
+    fTimestamp::defineFormat('std', 'H:i - d.m.Y');
+else
+    fTimestamp::defineFormat('std', 'g:i a - d.m.Y');
 
+fTimestamp::defineFormat('day', 'D d.m.Y');
+
+/*
+ * Sets login page for admin panel
+ */
 fAuthorization::setLoginPage('?page=login');
+
+/*
+ * Include ajax call handling
+ * Handles for example api calls
+ */
+include __INC__ . 'ajax.php';
+
 /**
  * Automatically includes classes
  *
