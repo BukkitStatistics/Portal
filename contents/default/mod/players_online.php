@@ -4,7 +4,7 @@ $tpl_ponline = Util::newTpl($this, 'mod/players_online', 'players_online');
 $players = fRecordSet::build(
     'Player',
     array(
-         'online=' => true
+         'online=' => '1'
     ),
     array(
          'login_time' => 'desc'

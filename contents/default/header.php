@@ -60,7 +60,7 @@
                         <input type="hidden" name="page" value="player">
                         <div class="input-append">
                             <input type="text" name="name" class="" placeholder="Player" id="playerSearch" autocomplete="off">
-                            <button class="btn" type="button">Search</button>
+                            <button class="btn" value="1" type="submit">Search</button>
                         </div>
                     </form>
                 </li>

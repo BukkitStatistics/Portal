@@ -31,7 +31,7 @@ if($type == 'search') {
 
         $json = fJSON::encode($ar);
 
-        $cache->add('search-player', $json, 60 * 60 * 1);
+        $cache->add('search-player', $json, Util::getOption('cache.search', 60 * 60 * 1));
 
         die($json);
 
