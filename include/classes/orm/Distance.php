@@ -66,7 +66,8 @@ class Distance extends fActiveRecord {
         fORMColumn::configureNumberColumn($this, 'minecart');
         fORMColumn::configureNumberColumn($this, 'boat');
         fORMColumn::configureNumberColumn($this, 'pig');
-        fORMColumn::configureNumberColumn($this, 'swimmed');
+        fORMColumn::configureNumberColumn($this, 'swim');
+        fORMColumn::configureNumberColumn($this, 'flight');
     }
 
     /**

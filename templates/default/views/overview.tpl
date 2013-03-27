@@ -248,10 +248,18 @@
                         <tr>
                             <td>
                                 <span class="label label-info">
-                                    <i class="icon-umbrella"></i> <?php echo $this->get('distance[swimmed]'); ?>
+                                    <i class="icon-umbrella"></i> <?php echo $this->get('distance[swim]'); ?>
                                 </span>
                             </td>
                             <td>Swum</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="label label-info">
+                                    <i class="icon-fighter-jet"></i> <?php echo $this->get('distance[flight]'); ?>
+                                </span>
+                            </td>
+                            <td>Flight</td>
                         </tr>
                     </table>
                 </div>

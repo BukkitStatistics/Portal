@@ -230,7 +230,12 @@
 
             <p>
                 <strong>Swum:</strong>
-                <?php echo $this->get('distance')->getSwimmed()->format(); ?> meters
+                <?php echo $this->get('distance')->getSwim()->format(); ?> meters
+            </p>
+
+            <p>
+                <strong>Flight:</strong>
+                <?php echo $this->get('distance')->getFlight()->format(); ?> meters
             </p>
         </div>
 
