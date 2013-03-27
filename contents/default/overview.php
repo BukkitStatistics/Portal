@@ -46,7 +46,8 @@ $distance_stats['total'] = Distance::getDistanceOfType('total')->format();
 $distance_stats['foot'] = Distance::getDistanceOfType('foot')->format();
 $distance_stats['minecart'] = Distance::getDistanceOfType('minecart')->format();
 $distance_stats['boat'] = Distance::getDistanceOfType('boat')->format();
-$distance_stats['swimmed'] = Distance::getDistanceOfType('swimmed')->format();
+$distance_stats['swim'] = Distance::getDistanceOfType('swim')->format();
+$distance_stats['flight'] = Distance::getDistanceOfType('flight')->format();
 
 $tpl->set('distance', $distance_stats);
 
