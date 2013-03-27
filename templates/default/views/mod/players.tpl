@@ -27,7 +27,7 @@
         </td>
         <td>
             <?php
-            if(!is_null($player->getLoginTime())):
+            if($player->getLoginTime() != 0):
                 $time = new fTimestamp($player->getLoginTime());
                 echo $time->format('std');
                 ?>

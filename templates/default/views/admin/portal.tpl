@@ -51,7 +51,7 @@
                         <span class="label label-info"><strong>Info!</strong></span>
                         Set the time how long the specific module should be stored in the cache.
                         This will drastically increase the performance on large servers.<br>
-                        Set the specific caching to <strong>0</strong> will disable it.
+                        Set the specific caching to <strong>0</strong> to disable it.
                     </p>
                 </div>
             </div>
@@ -133,6 +133,31 @@
                         <label for="cache_skins[s]">seconds</label>
                         <input type="text" class="input-block-level" id="cache_skins[s]" name="cache_skins[s]"
                                value="<?php echo $this->get('cache_skins[s]'); ?>"/>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4">
+                        <h4>Player search</h4>
+                    </div>
+                    <div class="span2">
+                        <label for="cache_search[d]">days</label>
+                        <input type="text" class="input-block-level" id="cache_search[d]" name="cache_search[d]"
+                               value="<?php echo $this->get('cache_search[d]'); ?>"/>
+                    </div>
+                    <div class="span2">
+                        <label for="cache_search[h]">hours</label>
+                        <input type="text" class="input-block-level" id="cache_search[h]" name="cache_search[h]"
+                               value="<?php echo $this->get('cache_search[h]'); ?>"/>
+                    </div>
+                    <div class="span2">
+                        <label for="cache_search[m]">minutes</label>
+                        <input type="text" class="input-block-level" id="cache_search[m]" name="cache_search[m]"
+                               value="<?php echo $this->get('cache_search[m]'); ?>"/>
+                    </div>
+                    <div class="span2">
+                        <label for="cache_search[s]">seconds</label>
+                        <input type="text" class="input-block-level" id="cache_search[s]" name="cache_search[s]"
+                               value="<?php echo $this->get('cache_search[s]'); ?>"/>
                     </div>
                 </div>
             </div>

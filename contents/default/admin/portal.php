@@ -164,6 +164,21 @@ $tpl->set('cache_options[s]', fRequest::encode('cache_options[s]', 'int', Util::
                                                                           $tpl->get('cache_options[h]') * 60 * 60 -
                                                                           $tpl->get('cache_options[m]') * 60));
 
+$tpl->set('cache_search[d]', fRequest::encode('cache_search[d]', 'int', Util::getOption('cache.search') / 60 / 60 / 24));
+$tpl->set('cache_search[h]', fRequest::encode('cache_search[h]', 'int', (Util::getOption('cache.search') -
+                                                                           $tpl->get('cache_search[d]') * 60 * 60 *
+                                                                           24) /
+                                                                          60 / 60));
+$tpl->set('cache_search[m]', fRequest::encode('cache_search[m]', 'int', (Util::getOption('cache.search') -
+                                                                           $tpl->get('cache_search[d]') * 60 * 60 *
+                                                                           24 -
+                                                                           $tpl->get('cache_search[h]') * 60 * 60) /
+                                                                          60));
+$tpl->set('cache_search[s]', fRequest::encode('cache_search[s]', 'int', Util::getOption('cache.search') -
+                                                                          $tpl->get('cache_search[d]') * 60 * 60 * 24 -
+                                                                          $tpl->get('cache_search[h]') * 60 * 60 -
+                                                                          $tpl->get('cache_search[m]') * 60));
+
 if(fRequest::isPost() && fRequest::check('save')) {
     try {
         $vali = new fValidation();
@@ -189,6 +204,11 @@ if(fRequest::isPost() && fRequest::check('save')) {
                $tpl->get('cache_options[h]') * 60 * 60 +
                $tpl->get('cache_options[d]') * 60 * 60 * 24;
         Util::setOption('cache.options', $sec);
+
+        $sec = $tpl->get('cache_search[s]') + $tpl->get('cache_search[m]') * 60 +
+               $tpl->get('cache_search[h]') * 60 * 60 +
+               $tpl->get('cache_search[d]') * 60 * 60 * 24;
+        Util::setOption('cache.search', $sec);
 
     } catch(fValidationException $e) {
         fMessaging::create('input', 'admin', $e->getMessage());

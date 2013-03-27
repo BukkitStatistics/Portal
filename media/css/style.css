@@ -82,7 +82,7 @@ section {
 /* ============================== */
 
 .module {
-	min-height: 290px !important;
+	min-height: 320px !important;
 }
 
 .module h3 {
@@ -102,9 +102,14 @@ section {
     cursor: pointer;
 }
 
+.online-players {
+    height: 228px;
+    overflow-y: auto;
+}
+
 .online-player-heads {
     float: left;
-    margin: 2px;
+    margin: 1px;
 }
 
 /* Custom module styles

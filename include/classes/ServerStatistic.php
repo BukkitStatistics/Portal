@@ -97,10 +97,7 @@ class ServerStatistic {
      * @return fNumber
      */
     public static function getPlayersOnline() {
-        if(self::getValue('players_online') == 0)
-            return new fNumber(0);
-
-        return new fNumber(self::getValue('players_online'));
+        return new fNumber(fRecordSet::tally('Player', array('online=' => true)));
     }
 
     /**

@@ -325,7 +325,7 @@ class Util {
         if(rand(0, 99) == 50) {
             $dir = new fDirectory(__ROOT__ . 'cache/skins');
             $files = $dir->scan('#\.png$#i');
-            $ctime = new fTimestamp('-' . Util::getOption('cache.skins') . ' seconds');
+            $ctime = new fTimestamp('-' . Util::getOption('cache.skins', 60 * 60 * 24) . ' seconds');
 
             foreach($files as $file) {
                 if($ctime->gte($file->getMTime()))
