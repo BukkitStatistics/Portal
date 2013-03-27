@@ -265,7 +265,7 @@ class Player extends fActiveRecord {
             $path = 'http://s3.amazonaws.com/MinecraftSkins/' . $this->getName() . '.png';
         }
         else {
-            $path = 'http://s3.amazonaws.com/MinecraftSkins/char.png';
+            $path = __ROOT__ . 'media/img/misc/char.png';
         }
 
         return $path;
