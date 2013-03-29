@@ -36,11 +36,6 @@ class Util {
 
             if(!DEVELOPMENT && $option != 'cache.options')
                 $cacheSingle->set($option, $res, Util::getOption('cache.options', 60 * 10));
-
-            if(empty($res) && !is_null($default))
-                return $default;
-
-            return $res;
         } catch(fNoRowsException $e) {
             fCore::debug($e->getMessage());
         } catch(fProgrammerException $e) {
@@ -54,6 +49,11 @@ class Util {
         } catch(fConnectivityException $e) {
             fMessaging::create('error', '{errors}', $e);
         }
+
+        if(isset($res) && !empty($res))
+            return $res;
+
+        fCore::debug('non set option: ' . $option);
 
         if($default == null)
             return false;
