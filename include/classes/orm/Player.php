@@ -4,6 +4,11 @@
  */
 class Player extends fActiveRecord {
 
+    /**
+     * Returns the total playtime of all players.
+     *
+     * @return int
+     */
     public static function countTotalPlaytime() {
         $res = fORMDatabase::retrieve()->translatedQuery('
                         SELECT SUM(playtime)
@@ -136,7 +141,9 @@ class Player extends fActiveRecord {
 
             return array($num->format(), new Player($row['player_id']));
         } catch(fNoRowsException $e) {
+            fCore::debug($e->getMessage());
         } catch(fNotFoundException $e) {
+            fCore::debug($e->getMessage());
         }
 
         $p = new Player();
@@ -164,7 +171,9 @@ class Player extends fActiveRecord {
 
             return array($num->format(), new Player($row['victim_id']));
         } catch(fNoRowsException $e) {
+            fCore::debug($e->getMessage());
         } catch(fNotFoundException $e) {
+            fCore::debug($e->getMessage());
         }
 
         $p = new Player();

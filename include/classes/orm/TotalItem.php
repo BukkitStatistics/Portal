@@ -70,7 +70,9 @@ class TotalItem extends fActiveRecord {
 
             return array($num->format(), $row['tp_name']);
         } catch(fSQLException $e) {
+            fCore::debug($e->getMessage());
         } catch(fNoRowsException $e) {
+            fCore::debug($e->getMessage());
         }
 
         return array(0, 'none');

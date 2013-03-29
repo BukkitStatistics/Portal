@@ -10,6 +10,11 @@ if(!extension_loaded('xdebug')) {
     }
 }
 
+if(DEBUG) {
+    fCore::enableDebugging(true);
+    fCore::registerDebugCallback(Util::handleDebug);
+}
+
 fSession::setLength('1day');
 fSession::open();
 
@@ -23,7 +28,7 @@ try {
 } catch(fEnvironmentException $e) {
     fMessaging::create('critical', '{errors}', $e);
     Util::newDesign('error.php');
-    die();
+    exit();
 }
 
 /*
