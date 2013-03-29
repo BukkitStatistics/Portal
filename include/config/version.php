@@ -1,3 +1,3 @@
 <?php
-define('VERSION', '1.0.0-beta-r7');
+define('VERSION', '1.0.0-beta-r8');
 
