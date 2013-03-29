@@ -54,8 +54,10 @@ class ServerStatistic {
 
         if(isset(self::$values[$key]))
             return self::$values[$key];
-        else
-            return 0;
+
+        fCore::debug('not set: '. $key);
+
+        return 0;
     }
 
     /**
