@@ -2,30 +2,11 @@
 class Util {
 
     // The following constants allow for nice looking callbacks to static methods
-    const checkHost = "Util::checkHost";
     const getOption = "Util::getOption";
     const showMessages = "Util::showMessages";
     const addPrefix = "Util::addPrefix";
     const newTpl = "Util::newTpl";
     const getCachedContent = "Util::getCachedContent";
-
-    /**
-     * Checks if the given host is an valid IP or localhost
-     *
-     * @param $host
-     *
-     * @return bool
-     */
-    public static function checkHost($host) {
-        if(strtolower($host) == 'localhost')
-            return true;
-        elseif(preg_match('%^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])$%',
-                          $host)
-        )
-            return true;
-        else return false;
-    }
-
 
     /**
      * Returns the requested option out of the settings table.
