@@ -36,10 +36,13 @@ if($type == 'search') {
         die($json);
 
     } catch (fProgrammerException $e) {
+        fCore::debug('ajax: ' . $e->getMessage());
         $error = true;
     } catch (fSQLException $e) {
+        fCore::debug('ajax: ' . $e->getMessage());
         $error = true;
     } catch (fNoRowsException $e) {
+        fCore::debug('ajax: ' . $e->getMessage());
         $error = true;
     }
 }

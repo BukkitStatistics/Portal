@@ -10,6 +10,7 @@ class Util {
     const newDesign = "Util::newDesign";
     const formatSeconds = "Util::formatSeconds";
     const clearSkinCache = "Util::clearSkinCache";
+    const handleDebug = "Util::handleDebug";
 
     /**
      * Returns the requested option out of the settings table.
@@ -41,11 +42,11 @@ class Util {
 
             return $res;
         } catch(fNoRowsException $e) {
-            fCore::debug($e);
+            fCore::debug($e->getMessage());
         } catch(fProgrammerException $e) {
-            fCore::debug($e);
+            fCore::debug($e->getMessage());
         } catch(fNotFoundException $e) {
-            fCore::debug($e);
+            fCore::debug($e->getMessage());
         } catch(fSQLException $e) {
             fMessaging::create('critical', '{errors}', $e);
         } catch(fAuthorizationException $e) {
@@ -85,9 +86,9 @@ class Util {
 
             return true;
         } catch(fSQLException $e) {
-            fCore::debug($e);
+            fCore::debug($e->getMessage());
         } catch(fProgrammerException $e) {
-            fCore::debug($e);
+            fCore::debug($e->getMessage());
         }
 
         return false;
@@ -206,15 +207,17 @@ class Util {
         if(fRequest::get('name', 'string') != '' && $content != 'error.php')
             $content = $content . '_' . fRequest::get('name', 'string');
 
-        // TODO: set cache time in settings
         if(!DEVELOPMENT
            && !is_null($cache)
            && !$error
            && !fRequest::isAjax()
            && !fMessaging::check('*', '{errors}')
            && !fMessaging::check('no-cache', '{cache}')
-           && $content != 'error.php')
-            $cache->set($content . '.cache', $capture, Util::getOption('cache.pages', 60));
+           && $content != 'error.php') {
+            if($cache->set($content . '.cache', $capture, Util::getOption('cache.pages', 60)))
+                fCore::debug('cached for ' . Util::getOption('cache.pages', 60) . ' seconds: ' . $content);
+        }
+
 
         fMessaging::retrieve('no-cache', '{cache}');
     }
@@ -243,6 +246,8 @@ class Util {
         if($cached == null)
             return;
 
+        fCore::debug('returned cached: ' . $cached);
+
         try {
             $file = new fFile(__ROOT__ . 'cache/files/' . $content . '.cache');
             $time = $file->getMTime();
@@ -255,7 +260,7 @@ class Util {
         } catch(fValidationException $e) {
         }
 
-        die($cached);
+        exit($cached);
     }
 
     /**
@@ -299,11 +304,13 @@ class Util {
     }
 
     /**
-     * Removes all cached skins that have expired.
+     * Removes all cached skins that have expired.<br>
+     * To force cleaning set $force to true.
      *
+     * @param boolean $force
      */
-    public static function cleanSkinCache() {
-        if(rand(0, 99) == 50) {
+    public static function cleanSkinCache($force = false) {
+        if(rand(0, 99) == 50 || $force) {
             $dir = new fDirectory(__ROOT__ . 'cache/skins');
             $files = $dir->scan('#\.png$#i');
             $ctime = new fTimestamp('-' . Util::getOption('cache.skins', 60 * 60 * 24) . ' seconds');
@@ -312,6 +319,31 @@ class Util {
                 if($ctime->gte($file->getMTime()))
                     $file->delete();
             }
+
+            fCore::debug('cleard skins');
         }
+    }
+
+    /**
+     * Saves all debug messages except query times in cache/debug.txt
+     *
+     * @param $msg
+     */
+    public static function handleDebug($msg) {
+        $time = new fTimestamp();
+        $head = 'DEBUG Messages (' . $time->format('d.m.Y - H:i:s') . ")\n\n\n";
+        static $first = true;
+
+        try {
+            $file = new fFile(__ROOT__ . 'cache/debug.txt');
+        } catch (fValidationException $e) {
+            $file = fFile::create(__ROOT__ . 'cache/debug.txt', '');
+        }
+        if($first)
+            $file->write($head);
+        $first = false;
+
+        if(stripos($msg, 'query') === false)
+            $file->append($msg . "\n\n");
     }
 }
