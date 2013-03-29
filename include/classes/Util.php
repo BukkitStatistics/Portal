@@ -120,7 +120,9 @@ class Util {
      * @return string
      */
     public static function getPrefix() {
-        return DB_PREFIX != '' ? DB_PREFIX . '_' : '';
+        $prefix = preg_replace('/_$/', '', DB_PREFIX);
+
+        return $prefix != '' ? $prefix . '_' : '';
     }
 
     /**
@@ -134,11 +136,8 @@ class Util {
      * @return void
      */
     public static function addPrefix($db, &$sql, &$values) {
-        if(DB_PREFIX == '')
-            return;
-
         // if prefix is included skip this statement
-        if(strpos($sql, DB_PREFIX) !== false)
+        if(strpos($sql, self::getPrefix()) !== false)
             return;
         if(preg_match("/^UPDATE `?prefix_\S+`?\s+SET/is", $sql))
             $sql = preg_replace("/^UPDATE `?prefix_(\S+?)`?([\s\.,]|$)/i", "UPDATE `" . Util::getPrefix() . "\\1`\\2",
