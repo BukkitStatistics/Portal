@@ -38,6 +38,8 @@ class ServerStatistic {
         } catch (fException $e) {
             fCore::debug($e->getMessage());
         }
+
+        fCore::debug(self::$values);
     }
 
     /**

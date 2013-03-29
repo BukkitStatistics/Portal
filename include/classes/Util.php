@@ -343,7 +343,9 @@ class Util {
             $file->write($head);
         $first = false;
 
-        if(stripos($msg, 'query') === false)
-            $file->append($msg . "\n\n");
+        if(is_string($msg) && stripos($msg, 'query') !== false)
+            return;
+
+        $file->append(fCore::dump($msg) . "\n\n");
     }
 }
