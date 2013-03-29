@@ -7,14 +7,6 @@
 
     <p>If you have a Statistician database to import, you can do that after you specify the database details.</p>
 
-    <h2><i class="icon-info-sign"></i> Skip installation</h2>
-
-    <p>
-        If you already installed the portal then you can go directly to the portal with no further configuration.
-    </p>
-    <p>
-        <button type="submit" name="skip" value="1" class="btn btn-large">Skip</button>
-    </p>
     <br>
 
     <h2><i class="icon-globe"></i> Language</h2>
