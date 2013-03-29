@@ -320,7 +320,7 @@ class Util {
                     $file->delete();
             }
 
-            fCore::debug('cleard skins');
+            fCore::debug('cleared skins');
         }
     }
 
