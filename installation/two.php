@@ -27,8 +27,7 @@ if(fRequest::isPost() && fRequest::get('db_submit')) {
                                       'user',
                                       'pw',
                                       'database'
-                                 ))
-            ->addCallbackRule('host', Util::checkHost, 'Please enter an valid host.');
+                                 ));
 
         $vali->setMessageOrder('host', 'port', 'user', 'pw', 'database')
             ->validate();
