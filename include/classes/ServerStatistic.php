@@ -36,15 +36,16 @@ class ServerStatistic {
         } catch (fNoRowsException $e) {
             fCore::debug($e->getMessage());
         } catch (fException $e) {
+            fCore::debug($e->getMessage());
         }
     }
 
     /**
-     * Returns the given value. If empty it will return an empty string.
+     * Returns the given value. If empty it will return 0.
      *
      * @param $key
      *
-     * @return string
+     * @return string|int
      */
     public static function getValue($key) {
         self::calcValues();
@@ -52,7 +53,7 @@ class ServerStatistic {
         if(isset(self::$values[$key]))
             return self::$values[$key];
         else
-            return '';
+            return 0;
     }
 
     /**
@@ -101,25 +102,12 @@ class ServerStatistic {
     }
 
     /**
-     * Returns the number of maximal online players.<br>
-     * If $get_time is true it will also return the formatted time.
+     * Returns the number of maximal online players.
      *
-     * @param bool $get_time
-     *
-     * @return array|int|string
+     * @return int
      */
-    public static function getMaxPlayersOnline($get_time = false) {
-        if(self::getValue('max_players_online') == 0)
-            return 0;
-
-        if($get_time) {
-            return array(
-                self::getValue('max_players_online'),
-                new fTimestamp(self::getValue('max_players_online_time'))
-            );
-        }
-        else
-            return self::getValue('max_players_online');
+    public static function getMaxPlayersOnline() {
+        return self::getValue('max_players_online');
     }
 
 
