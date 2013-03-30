@@ -17,7 +17,7 @@
     </target>
 
     <target name="-setup-dirs" depends="-load-properties">
-        <property name="build.dir" value="${project.basedir}\build"/>
+        <property name="build.dir" value="${project.basedir}/build"/>
         <property name="src.dir" value="${project.basedir}"/>
 
         <property name="build.dist.dir" value="${build.dir}/dist"/>
