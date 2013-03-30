@@ -5,7 +5,7 @@ else: ?>
     <?php foreach($this->get('online_players') as $player): ?>
 
         <div class="online-player-heads">
-            <a href="?page=player&name=<?php echo $player->getName(); ?>">
+            <a href="?page=player&name=<?php echo $player->getName(); ?>" data-toggle="tooltip" title="<?php echo $player->getName(); ?>">
                 <?php echo $player->getPlayerHead(64, 'img-polaroid'); ?>
             </a>
         </div>
