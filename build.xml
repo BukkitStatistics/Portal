@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<project name="Statistics" default="build">
+
+    <target name="build" depends="init, clean, dist" description="Default target"/>
+
+    <target name="init" depends="-load-properties, -setup-dirs" unless="project.initialised">
+        <property name="project.initialised" value="true"/>
+    </target>
+
+    <target name="-load-properties">
+        <!-- Take a project name and make it safe for use as directory or file names -->
+        <php expression="str_replace(' ', '-', strtolower('${phing.project.name}'))"
+             returnProperty="project.name.safe"/>
+
+        <property file="build.properties" override="true"/>
+    </target>
+
+    <target name="-setup-dirs" depends="-load-properties">
+        <property name="build.dir" value="${project.basedir}\build"/>
+        <property name="src.dir" value="${project.basedir}"/>
+
+        <property name="build.dist.dir" value="${build.dir}/dist"/>
+        <property name="build.compare.dir" value="${build.dir}/compare"/>
+    </target>
+
+    <target name="clean" depends="init" unless="project.cleaned">
+        <!-- Remove previous build subdirectories, and recreate fresh versions -->
+        <echo message="Deleting build directories" level="debug"/>
+        <delete dir="${build.compare.dir}"/>
+
+        <echo message="Creating build directories" level="debug"/>
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${build.dist.dir}"/>
+        <mkdir dir="${build.compare.dir}"/>
+
+        <property name="project.cleaned" value="true"/>
+    </target>
+
+    <target name="dist" depends="init" description="Create distributable file">
+        <property name="build.dist.temp.dir" value="${build.dist.dir}/${project.name.safe}"/>
+        <property name="build.dist.zip.root.dir" value="${build.dist.temp.dir}/${project.name.safe}"/>
+
+        <mkdir dir="${build.dist.temp.dir}"/>
+        <mkdir dir="${build.dist.zip.root.dir}"/>
+        <copy todir="${build.dist.zip.root.dir}">
+            <fileset dir="${src.dir}">
+                <exclude name="build/"/>
+                <exclude name="*.markdown"/>
+                <exclude name=".idea/"/>
+                <exclude name=".git/"/>
+                <exclude name="build.properties"/>
+                <exclude name="build.xml/"/>
+                <exclude name="**/.DS_Store"/>
+                <exclude name="**/Thumbs.db"/>
+                <exclude name="cache/files/*"/>
+                <exclude name="cache/skins/*"/>
+                <exclude name="cache/debug.txt"/>
+                <exclude name="cache/singlecache"/>
+            </fileset>
+        </copy>
+
+        <zip destfile="${build.dist.dir}/${project.name.safe}-${project.version}.zip">
+            <fileset dir="${build.dist.temp.dir}/"/>
+        </zip>
+
+        <!--
+        We're finished with the temporary folder and it's subfolder, so delete them (deleting
+        the parent temp folder is enough).
+        -->
+        <delete dir="${build.dist.temp.dir}"/>
+    </target>
+
+</project>
