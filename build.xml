@@ -28,6 +28,7 @@
         <!-- Remove previous build subdirectories, and recreate fresh versions -->
         <echo message="Deleting build directories" level="debug"/>
         <delete dir="${build.compare.dir}"/>
+        <delete dir="${build.dist.dir}"/>
 
         <echo message="Creating build directories" level="debug"/>
         <mkdir dir="${build.dir}"/>
