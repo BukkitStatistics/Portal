@@ -179,6 +179,7 @@ class Util {
         $design = new fTemplating(__ROOT__ . 'contents/default', __ROOT__ . 'templates/default/index.php');
         $design->set('title', Util::getOption('portal_title'));
         $design->set('lang', $lang);
+        $design->set('cache', $cache);
         $design->set('tplRoot', __ROOT__ . 'templates/default/views');
         $design->add('header_additions', '');
         try {

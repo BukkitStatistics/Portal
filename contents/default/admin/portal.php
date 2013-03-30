@@ -210,6 +210,17 @@ if(fRequest::isPost() && fRequest::check('save')) {
                $tpl->get('cache_search[d]') * 60 * 60 * 24;
         Util::setOption('cache.search', $sec);
 
+        if(fRequest::get('delete_skins')) {
+            $dir = new fDirectory(__ROOT__ . 'cache/skins');
+            $files = $dir->scan('#\.png$#i');
+
+            foreach($files as $file)
+                $file->delete();
+        }
+
+        if(fRequest::get('delete_pages'))
+            $this->get('cache')->clear();
+
     } catch(fValidationException $e) {
         fMessaging::create('input', 'admin', $e->getMessage());
     }
