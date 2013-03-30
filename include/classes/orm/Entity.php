@@ -5,17 +5,17 @@ class Entity extends fActiveRecord {
     /**
      *
      * Returns the html code to the entity image.<br>
-     * If no images was found it will return the default image.
+     * If no images was found it will return the default image.<br>
+     * Set $tooltip to show the bootstrap tooltip instead of the browser alt tag.
      *
      * @param String $tp_name
-     *
      * @param int    $size
-     *
      * @param String $classes
+     * @param bool   $tooltip
      *
      * @return string
      */
-    public static function getEntityImg($tp_name, $size = 32, $classes = null) {
+    public static function getEntityImg($tp_name, $size = 32, $classes = null, $tooltip = false) {
         $path = __ROOT__ . 'media/img/entities/';
         $img = $path . $tp_name . '.png';
 
@@ -27,10 +27,15 @@ class Entity extends fActiveRecord {
         else
             $class = '';
 
+        if($tooltip)
+            $tooltip = 'rel="tooltip"';
+        else
+            $tooltip = '';
+
         return
             '<img ' . $class . ' src="' . fFilesystem::translateToWebPath($img) . '" title="' .
             fText::compose($tp_name) . '" alt="' .
-            fText::compose($tp_name) . '" style="width: ' . $size . 'px; height: ' . $size . 'px">';
+            fText::compose($tp_name) . '" style="width: ' . $size . 'px; height: ' . $size . 'px" ' . $tooltip . '>';
     }
 
     /**
@@ -91,11 +96,12 @@ class Entity extends fActiveRecord {
      *
      * @param int    $size
      * @param String $classes
+     * @param bool   $tooltip
      *
      * @return string
      */
-    public function getImage($size = 32, $classes = null) {
-        return Entity::getEntityImg($this->getTpName(), $size, $classes);
+    public function getImage($size = 32, $classes = null, $tooltip = false) {
+        return Entity::getEntityImg($this->getTpName(), $size, $classes, $tooltip);
     }
 
     /**

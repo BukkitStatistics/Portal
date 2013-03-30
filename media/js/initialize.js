@@ -50,4 +50,9 @@ $(document).ready(function() {
             }, 200);
         }
     });
+
+    /*
+    Enable tooltips with rel="tooltip"
+     */
+    $('[rel="tooltip"]').tooltip();
 });

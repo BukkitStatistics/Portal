@@ -6,7 +6,7 @@ else: ?>
 
         <div class="online-player-heads">
             <a href="?page=player&name=<?php echo $player->getName(); ?>">
-                <?php echo $player->getPlayerHead(64, 'img-polaroid'); ?>
+                <?php echo $player->getPlayerHead(64, 'img-polaroid', true); ?>
             </a>
         </div>
 
