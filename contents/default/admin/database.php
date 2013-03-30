@@ -1,6 +1,6 @@
 <?php
 $tpl = Util::newTpl($this, 'admin/database', 'sub');
-
+// TODO: reset database options
 /*
  * Store input values
  */

@@ -31,7 +31,7 @@
             <div class="well well-small">
                 <div class="row-fluid">
                     <div class="span3">
-                        <?php echo $time->format('D d.m.Y'); ?>
+                        <?php echo $time->format('std'); ?>
                     </div>
                     <div class="span3">
                         <span class="label label-success">
@@ -40,7 +40,7 @@
                         </span>
                     </div>
                     <div class="span2">
-                        <?php echo $material->getImage(); ?>
+                        <?php echo $material->getImage(32, null, true); ?>
                     </div>
                     <div class="span4">
                         <span class="label label-important">

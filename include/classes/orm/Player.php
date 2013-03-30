@@ -291,14 +291,16 @@ class Player extends fActiveRecord {
 
     /**
      * Returns the html code to the player head image.<br>
-     * If no image was found it will return the default image.
+     * If no image was found it will return the default image.<br>
+     * Use $tooltip to show an bootstrap tooltip over the image instead if an simple browser alt tag.
      *
      * @param int    $size
      * @param String $classes
+     * @param bool   $tooltip
      *
      * @return mixed
      */
-    public function getPlayerHead($size = 32, $classes = null) {
+    public function getPlayerHead($size = 32, $classes = null, $tooltip = false) {
         $name = __ROOT__ . 'cache/skins/head-' . $size . '_' . $this->getUrlName() . '.png';
 
         if(!file_exists($name)) {
@@ -315,9 +317,13 @@ class Player extends fActiveRecord {
         else
             $class = '';
 
+        if($tooltip)
+            $tooltip = 'rel="tooltip"';
+        else
+            $tooltip = '';
+
         return '<img ' . $class . ' src="' . fFilesystem::translateToWebPath($name) . '" alt="' . $this->getName() .
-               '" title="' .
-               $this->getName() . '">';
+               '" title="' . $this->getName() . '" ' . $tooltip . '>';
     }
 
     /**

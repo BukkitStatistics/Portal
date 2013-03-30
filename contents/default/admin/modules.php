@@ -4,9 +4,9 @@ $tpl = Util::newTpl($this, 'admin/modules', 'sub');
 /*
  * Store input values
  */
-$tpl->set('module_blocks', fRequest::encode('module_blocks', 'string', Util::getOption('module_blocks')));
-$tpl->set('module_items', fRequest::encode('module_items', 'string', Util::getOption('module_items')));
-$tpl->set('module_deaths', fRequest::encode('module_deaths', 'string', Util::getOption('module_deaths')));
+$tpl->set('module_blocks', fRequest::encode('module_blocks', 'int', Util::getOption('module.blocks')));
+$tpl->set('module_items', fRequest::encode('module_items', 'int', Util::getOption('module.items')));
+$tpl->set('module_deaths', fRequest::encode('module_deaths', 'int', Util::getOption('module.deaths')));
 
 if(fRequest::isPost() && fRequest::check('save')) {
     Util::setOption('module.blocks', $tpl->get('module_blocks'));

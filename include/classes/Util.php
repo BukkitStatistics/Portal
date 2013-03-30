@@ -136,9 +136,6 @@ class Util {
      * @return void
      */
     public static function addPrefix($db, &$sql, &$values) {
-        // if prefix is included skip this statement
-        if(strpos($sql, self::getPrefix()) !== false)
-            return;
         if(preg_match("/^UPDATE `?prefix_\S+`?\s+SET/is", $sql))
             $sql = preg_replace("/^UPDATE `?prefix_(\S+?)`?([\s\.,]|$)/i", "UPDATE `" . Util::getPrefix() . "\\1`\\2",
                                 $sql);
@@ -182,6 +179,7 @@ class Util {
         $design = new fTemplating(__ROOT__ . 'contents/default', __ROOT__ . 'templates/default/index.php');
         $design->set('title', Util::getOption('portal_title'));
         $design->set('lang', $lang);
+        $design->set('cache', $cache);
         $design->set('tplRoot', __ROOT__ . 'templates/default/views');
         $design->add('header_additions', '');
         try {

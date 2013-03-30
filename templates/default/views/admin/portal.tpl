@@ -108,6 +108,20 @@
                                value="<?php echo $this->get('cache_options[s]'); ?>"/>
                     </div>
                 </div>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <label for="delete_pages" class="checkbox">
+                            <input type="hidden" name="delete_pages" value="0"/>
+                            <input type="checkbox" value="1" name="delete_pages" id="delete_pages" />
+                            Delete all cached pages.
+                        </label>
+                        <label for="delete_skins" class="checkbox">
+                            <input type="hidden" name="delete_skins" value="0"/>
+                            <input type="checkbox" value="1" name="delete_skins" id="delete_skins" />
+                            Delete all cached skins.
+                        </label>
+                    </div>
+                </div>
             </div>
             <div class="span6">
                 <div class="row-fluid">
