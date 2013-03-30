@@ -136,9 +136,6 @@ class Util {
      * @return void
      */
     public static function addPrefix($db, &$sql, &$values) {
-        // if prefix is included skip this statement
-        if(strpos($sql, self::getPrefix()) !== false)
-            return;
         if(preg_match("/^UPDATE `?prefix_\S+`?\s+SET/is", $sql))
             $sql = preg_replace("/^UPDATE `?prefix_(\S+?)`?([\s\.,]|$)/i", "UPDATE `" . Util::getPrefix() . "\\1`\\2",
                                 $sql);
