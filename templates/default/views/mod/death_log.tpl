@@ -40,7 +40,7 @@
                         </span>
                     </div>
                     <div class="span2">
-                        <?php echo $material->getImage(); ?>
+                        <?php echo $material->getImage(32, null, true); ?>
                     </div>
                     <div class="span4">
                         <span class="label label-important">
