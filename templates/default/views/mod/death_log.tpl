@@ -31,7 +31,7 @@
             <div class="well well-small">
                 <div class="row-fluid">
                     <div class="span3">
-                        <?php echo $time->format('D d.m.Y'); ?>
+                        <?php echo $time->format('std'); ?>
                     </div>
                     <div class="span3">
                         <span class="label label-success">
