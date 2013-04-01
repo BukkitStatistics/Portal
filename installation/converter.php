@@ -45,8 +45,7 @@ if(fRequest::isPost() && fRequest::get('converter_submit')) {
                                           'user',
                                           'pw',
                                           'database'
-                                     ))
-                ->addCallbackRule('host', Util::checkHost, 'Please enter an valid host.');
+                                     ));
 
 
             $vali->setMessageOrder('host', 'user', 'pw', 'database')
