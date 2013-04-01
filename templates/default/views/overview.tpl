@@ -115,7 +115,7 @@
                         <tr>
                             <td>
                                 <span class="label label-success">
-                                    <i class="icon-signal"></i> <?php echo $this->get('serverstats[max_players][0]'); ?>
+                                    <i class="icon-signal"></i> <?php echo $this->get('serverstats[max_players]'); ?>
                                 </span>
                             </td>
                             <td>Maximum</td>
