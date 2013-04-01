@@ -3,10 +3,10 @@
 #################
 
 # Cache files
-cache/files/*
-cache/skins/*
+cache/files/*.cache
+cache/skins/*.png
 cache/singlecache
-cache/remapped
+cache/files/remapped
 
 
 
