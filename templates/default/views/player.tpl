@@ -1,7 +1,10 @@
 <?php if(!is_null($this->get('player'))): ?>
     <div class="row-fluid">
 
-        <div class="well well-small span4">
+        <div class="well well-small span4
+        <?php if($this->get('misc')->getIsBanned()): ?>
+        alert-danger
+        <?php endif; ?>">
             <h1 style="position: relative">
                 <?php echo $this->get('player')->getPlayerHead(64, 'img-polaroid'); ?>
                 <?php echo $this->get('player')->encodeName(); ?>
@@ -9,6 +12,14 @@
                     <span class='label label-success player-status'>In-Game</span>
                 <?php else: ?>
                     <span class='label label-important player-status'>Offline</span>
+                <?php endif; ?>
+                <?php if($this->get('misc')->getIsOp()): ?>
+                    <span class="label label-info player-op">OP</span>
+                <?php endif; ?>
+                <?php if($this->get('misc')->getIsBanned()): ?>
+                    <span class="label label-important player-banned">
+                        <strong>banned</strong>
+                    </span>
                 <?php endif; ?>
             </h1>
 

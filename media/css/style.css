@@ -220,6 +220,17 @@ section {
 	left: 40px;
 }
 
+.player-op {
+	position: absolute;
+	top: -10px;
+	left: -8px;
+}
+.player-banned {
+	position: absolute;
+	top: -10px;
+	right: 0;
+}
+
 .player-trophy {
 	position: relative;
 	top:30px;
