@@ -61,7 +61,8 @@
             </fileset>
         </copy>
 
-        <zip destfile="${build.dist.dir}/${project.name.safe}-${project.version}.zip">
+        <zip includeemptydirs="true"
+             destfile="${build.dist.dir}/${project.name.safe}-${project.version}-${project.type}${project.rev}.zip">
             <fileset dir="${build.dist.temp.dir}/"/>
         </zip>
 
