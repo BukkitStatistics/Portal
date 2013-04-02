@@ -13,7 +13,7 @@
         <php expression="str_replace(' ', '-', strtolower('${phing.project.name}'))"
              returnProperty="project.name.safe"/>
 
-        <property file="build.properties" override="true"/>
+        <property name="project.type" value="beta"/>
     </target>
 
     <target name="-setup-dirs" depends="-load-properties">
@@ -61,8 +61,10 @@
             </fileset>
         </copy>
 
+        <echo file="${build.dist.zip.root.dir}/include/config/version.php">&lt;?php&#13;&#10;&#9;define('VERSION', '${project.type}.${jenkins.build}');</echo>
+
         <zip includeemptydirs="true"
-             destfile="${build.dist.dir}/${project.name.safe}-${project.version}-${project.type}${project.rev}.zip">
+             destfile="${build.dist.dir}/${project.name.safe}-${project.type}.${jenkins.build}.zip">
             <fileset dir="${build.dist.temp.dir}/"/>
         </zip>
 
