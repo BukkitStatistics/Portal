@@ -124,12 +124,12 @@
             <h3>Blocks</h3>
 
             <p>
-                <strong>Total Blocks Placed:</strong>
+                <strong>Total Placed:</strong>
                 <?php echo $this->get('blocks[placed]')->format(); ?> Blocks
             </p>
 
             <p>
-                <strong>Most Popular Block Placed:</strong>
+                <strong>Most Placed:</strong>
                 <?php
                 if($this->get('blocks[most_placed]')):
                     $block = $this->get('blocks[most_placed]')->createMaterial();
@@ -144,12 +144,12 @@
             </p>
 
             <p>
-                <strong>Total Blocks Destroyed:</strong>
+                <strong>Total Destroyed:</strong>
                 <?php echo $this->get('blocks[destroyed]')->format(); ?> Blocks
             </p>
 
             <p>
-                <strong>Most Popular Block Destroyed:</strong>
+                <strong>Most Destroyed:</strong>
                 <?php
                 if($this->get('blocks[most_destroyed]')):
                     $block = $this->get('blocks[most_destroyed]')->createMaterial();
@@ -169,7 +169,7 @@
             <h3>Items</h3>
 
             <p>
-                <strong>Total Items Picked Up:</strong>
+                <strong>Total Picked Up:</strong>
                 <?php echo $this->get('items[picked]')->format(); ?> Items
             </p>
 
@@ -190,12 +190,12 @@
             </p>
 
             <p>
-                <strong>Total Items Dropped:</strong>
+                <strong>Total Dropped:</strong>
                 <?php echo $this->get('items[dropped]')->format(); ?> Items
             </p>
 
             <p>
-                <strong>Most Popular Item Dropped:</strong>
+                <strong>Most Dropped:</strong>
                 <?php
                 if($this->get('items[most_dropped]')):
                     $item = $this->get('items[most_dropped]')->createMaterial();
@@ -215,7 +215,7 @@
             <h3>Distances</h3>
 
             <p>
-                <strong>Travelled:</strong>
+                <strong>Total:</strong>
                 <?php echo $this->get('distance')->getTotal()->format(); ?> meters
             </p>
 
@@ -500,7 +500,7 @@
         </div>
 
         <div class="span4 well well-small">
-            <h3>Deaths</h3>
+            <h3>Other</h3>
             <?php if($this->get('deaths')->count()): ?>
                 <?php foreach($this->get('deaths') as $death): ?>
                     <p>
