@@ -362,6 +362,10 @@ class Util {
         // clean singlecache
         $cacheSingle->clean();
 
+        // clear database cache
+        fORMDatabase::retrieve('name:default')->clearCache();
+        fORMSchema::retrieve('name:default')->clearCache();
+
         // delete overview when player not found -> could be caused by an outdated cached overview page
         if($type == 'fNotFoundException' && fRequest::get('page', 'string') == 'player') {
             if($cache->get('overview.php.cache'))
