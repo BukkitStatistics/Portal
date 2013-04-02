@@ -66,7 +66,7 @@ section {
 /* ============================== */
 
 .page-body {
-	padding-top: 5px;
+	padding-top: 15px;
 	margin: 0 auto;
 }
 
@@ -165,9 +165,19 @@ section {
 /* Player page styles
 /* ============================== */
 
-.player-page-body {
-	padding-top: 25px;
-	margin: 0 auto;
+.bar-container {
+    width: 365px;
+}
+
+.player-effects {
+    position: absolute;
+    bottom: 5px;
+    right: 0;
+    width: 100px;
+}
+
+.player-effect {
+    margin: 2px;
 }
 
 .hunger-bars {
@@ -218,6 +228,17 @@ section {
 	position: absolute;
 	top: -10px;
 	left: 40px;
+}
+
+.player-op {
+	position: absolute;
+	top: -10px;
+	left: -8px;
+}
+.player-banned {
+	position: absolute;
+	top: -10px;
+	right: 0;
 }
 
 .player-trophy {

@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
     // sidebar
     setTimeout(function () {
         $('body').scrollspy({
@@ -21,8 +21,8 @@ $(document).ready(function() {
     });
 
     /*
-    Player search
-    thanks to: @mrgcohen (http://gist.github.com/mrgcohen)
+     Player search
+     thanks to: @mrgcohen (http://gist.github.com/mrgcohen)
      */
     window.query_cache = {};
     $('#playerSearch').typeahead({
@@ -40,7 +40,7 @@ $(document).ready(function() {
                     "?api=true&type=search",
                     { q: query },
                     function (data) {
-                        if(data['error'] == 'no_data')
+                        if (data['error'] == 'no_data')
                             return;
 
                         query_cache[query] = data;
@@ -52,7 +52,9 @@ $(document).ready(function() {
     });
 
     /*
-    Enable tooltips with rel="tooltip"
+     Enable tooltips with rel="tooltip"
      */
-    $('[rel="tooltip"]').tooltip();
+    $('[rel="tooltip"]').tooltip({
+        container: 'body'
+    });
 });

@@ -1,7 +1,11 @@
 <?php if(!is_null($this->get('player'))): ?>
     <div class="row-fluid">
 
-        <div class="well well-small span4">
+        <div class="well well-small span6
+        <?php if($this->get('misc')->getIsBanned()): ?>
+        alert-danger
+        <?php endif; ?>"
+            style="position: relative;">
             <h1 style="position: relative">
                 <?php echo $this->get('player')->getPlayerHead(64, 'img-polaroid'); ?>
                 <?php echo $this->get('player')->encodeName(); ?>
@@ -10,99 +14,112 @@
                 <?php else: ?>
                     <span class='label label-important player-status'>Offline</span>
                 <?php endif; ?>
+                <?php if($this->get('misc')->getIsOp()): ?>
+                    <span class="label label-info player-op">OP</span>
+                <?php endif; ?>
+                <?php if($this->get('misc')->getIsBanned()): ?>
+                    <span class="label label-important player-banned">
+                        <strong>banned</strong>
+                    </span>
+                <?php endif; ?>
             </h1>
 
-            <div class="xpbar-cur">
-                <strong><?php echo $this->get('misc')->getExpLevel(); ?></strong>
-            </div>
+           <div class="bar-container">
+               <div class="xpbar-cur">
+                   <strong><?php echo $this->get('misc')->getExpLevel(); ?></strong>
+               </div>
 
-            <div class="row-fluid" id="playerhead-bars">
-                <div class="span6 heart-bars">
-                    <?php echo $this->get('misc')->getHealthBar(); ?>
-                </div>
+               <div class="row-fluid" id="playerhead-bars">
+                   <div class="span6 heart-bars">
+                       <?php echo $this->get('misc')->getHealthBar(); ?>
+                   </div>
 
-                <div class="span6 hunger-bars">
-                    <?php echo $this->get('misc')->getFoodBar(); ?>
-                </div>
-            </div>
+                   <div class="span6 hunger-bars">
+                       <?php echo $this->get('misc')->getFoodBar(); ?>
+                   </div>
+               </div>
 
-            <div class="force-center xpbar-container">
-                <?php echo $this->get('misc')->getXPBar(); ?>
-            </div>
+               <div class="force-center xpbar-container">
+                   <?php echo $this->get('misc')->getXPBar(); ?>
+               </div>
+           </div>
+
+           <div class="player-effects">
+               <?php $this->get('inv')->printEffects(); ?>
+           </div>
         </div>
-        <div class="span8">
-            <div class="row-fluid">
-                <div class="span3 center player-trophy">
-                    <?php
-                    if($this->get('pvp[most_killed_by]'))
-                        $player = $this->get('pvp[most_killed_by]')->createPlayer('player_id');
-                    else {
-                        $player = new Player();
-                        $player->setName('none');
-                    }
-                    ?>
-                    <?php echo $player->getPlayerHead(64, 'img-polaroid'); ?>
-                    <h4 class="well well-small center">
-                        <?php if($player->getName() != 'none'): ?>
-                            <a href="?page=player&name=<?php echo $player->getName(); ?>"><?php echo $player->getName(); ?></a>
-                        <?php else: ?>
-                            <?php echo $player->getName(); ?>
-                        <?php endif; ?>
-                        <br/>
-                        <small>Arch Nemesis</small>
-                    </h4>
-                </div>
-                <div class="span3 center player-trophy">
-                    <?php
-                    if($this->get('pvp[most_killed]'))
-                        $player = $this->get('pvp[most_killed]')->createPlayer('victim_id');
-                    else {
-                        $player = new Player();
-                        $player->setName('none');
-                    }
-                    ?>
-                    <?php echo $player->getPlayerHead(64, 'img-polaroid'); ?>
-                    <h4 class="well well-small center">
-                        <?php if($player->getName() != 'none'): ?>
-                            <a href="?page=player&name=<?php echo $player->getName(); ?>"><?php echo $player->getName(); ?></a>
-                        <?php else: ?>
-                            <?php echo $player->getName(); ?>
-                        <?php endif; ?>
-                        <br>
-                        <small>Most killed</small>
-                    </h4>
-                </div>
-                <div class="span3 center player-trophy">
-                    <?php
-                    if($this->get('blocks[most_destroyed]'))
-                        $block = $this->get('blocks[most_destroyed]')->createMaterial();
-                    else
-                        $block = new Material('-1:0');
-                    ?>
-                    <?php echo $block->getImage(64, 'img-polaroid'); ?>
-                    <h4 class="well well-small center">
-                        <?php echo $block->getName(); ?>
-                        <br>
-                        <small>Most broken</small>
-                    </h4>
-                </div>
-                <div class="span3 center player-trophy">
-                    <?php
-                    if($this->get('blocks[most_placed]'))
-                        $block = $this->get('blocks[most_placed]')->createMaterial();
-                    else
-                        $block = new Material('-1:0');
-                    ?>
-                    <?php echo $block->getImage(64, 'img-polaroid'); ?>
-                    <h4 class="well well-small center">
-                        <?php echo $block->getName(); ?>
-                        <br>
-                        <small>Most placed</small>
-                    </h4>
-                </div>
-            </div>
+        <div class="span6">
         </div>
-
+    </div>
+    <div class="row-fluid">
+        <div class="span3 center">
+            <?php
+            if($this->get('pvp[most_killed_by]'))
+                $player = $this->get('pvp[most_killed_by]')->createPlayer('player_id');
+            else {
+                $player = new Player();
+                $player->setName('none');
+            }
+            ?>
+            <?php echo $player->getPlayerHead(64, 'img-polaroid'); ?>
+            <h4 class="well well-small center">
+                <?php if($player->getName() != 'none'): ?>
+                    <a href="?page=player&name=<?php echo $player->getName(); ?>"><?php echo $player->getName(); ?></a>
+                <?php else: ?>
+                    <?php echo $player->getName(); ?>
+                <?php endif; ?>
+                <br/>
+                <small>Arch Nemesis</small>
+            </h4>
+        </div>
+        <div class="span3 center">
+            <?php
+            if($this->get('pvp[most_killed]'))
+                $player = $this->get('pvp[most_killed]')->createPlayer('victim_id');
+            else {
+                $player = new Player();
+                $player->setName('none');
+            }
+            ?>
+            <?php echo $player->getPlayerHead(64, 'img-polaroid'); ?>
+            <h4 class="well well-small center">
+                <?php if($player->getName() != 'none'): ?>
+                    <a href="?page=player&name=<?php echo $player->getName(); ?>"><?php echo $player->getName(); ?></a>
+                <?php else: ?>
+                    <?php echo $player->getName(); ?>
+                <?php endif; ?>
+                <br>
+                <small>Most killed</small>
+            </h4>
+        </div>
+        <div class="span3 center">
+            <?php
+            if($this->get('blocks[most_destroyed]'))
+                $block = $this->get('blocks[most_destroyed]')->createMaterial();
+            else
+                $block = new Material('-1:0');
+            ?>
+            <?php echo $block->getImage(64, 'img-polaroid'); ?>
+            <h4 class="well well-small center">
+                <?php echo $block->getName(); ?>
+                <br>
+                <small>Most broken</small>
+            </h4>
+        </div>
+        <div class="span3 center">
+            <?php
+            if($this->get('blocks[most_placed]'))
+                $block = $this->get('blocks[most_placed]')->createMaterial();
+            else
+                $block = new Material('-1:0');
+            ?>
+            <?php echo $block->getImage(64, 'img-polaroid'); ?>
+            <h4 class="well well-small center">
+                <?php echo $block->getName(); ?>
+                <br>
+                <small>Most placed</small>
+            </h4>
+        </div>
     </div>
 
     <h2>General Statistics</h2>
@@ -113,12 +130,12 @@
             <h3>Blocks</h3>
 
             <p>
-                <strong>Total Blocks Placed:</strong>
+                <strong>Total Placed:</strong>
                 <?php echo $this->get('blocks[placed]')->format(); ?> Blocks
             </p>
 
             <p>
-                <strong>Most Popular Block Placed:</strong>
+                <strong>Most Placed:</strong>
                 <?php
                 if($this->get('blocks[most_placed]')):
                     $block = $this->get('blocks[most_placed]')->createMaterial();
@@ -133,12 +150,12 @@
             </p>
 
             <p>
-                <strong>Total Blocks Destroyed:</strong>
+                <strong>Total Destroyed:</strong>
                 <?php echo $this->get('blocks[destroyed]')->format(); ?> Blocks
             </p>
 
             <p>
-                <strong>Most Popular Block Destroyed:</strong>
+                <strong>Most Destroyed:</strong>
                 <?php
                 if($this->get('blocks[most_destroyed]')):
                     $block = $this->get('blocks[most_destroyed]')->createMaterial();
@@ -158,7 +175,7 @@
             <h3>Items</h3>
 
             <p>
-                <strong>Total Items Picked Up:</strong>
+                <strong>Total Picked Up:</strong>
                 <?php echo $this->get('items[picked]')->format(); ?> Items
             </p>
 
@@ -179,12 +196,12 @@
             </p>
 
             <p>
-                <strong>Total Items Dropped:</strong>
+                <strong>Total Dropped:</strong>
                 <?php echo $this->get('items[dropped]')->format(); ?> Items
             </p>
 
             <p>
-                <strong>Most Popular Item Dropped:</strong>
+                <strong>Most Dropped:</strong>
                 <?php
                 if($this->get('items[most_dropped]')):
                     $item = $this->get('items[most_dropped]')->createMaterial();
@@ -245,7 +262,7 @@
 
         <div class="span8 well well-small">
             <h3>Miscellaneous</h3>
-            <table class="table table-condensed">
+            <table class="table table-condensed no-border">
                 <tr>
                     <td>
                         <strong>Total XP:</strong>
@@ -489,7 +506,7 @@
         </div>
 
         <div class="span4 well well-small">
-            <h3>Deaths</h3>
+            <h3>Other</h3>
             <?php if($this->get('deaths')->count()): ?>
                 <?php foreach($this->get('deaths') as $death): ?>
                     <p>

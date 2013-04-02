@@ -11,6 +11,7 @@ class Util {
     const formatSeconds = "Util::formatSeconds";
     const clearSkinCache = "Util::clearSkinCache";
     const handleDebug = "Util::handleDebug";
+    const exceptionCallback = "Util::exceptionCallback";
 
     /**
      * Returns the requested option out of the settings table.
@@ -344,5 +345,33 @@ class Util {
             return;
 
         $file->append(fCore::dump($msg) . "\n\n");
+    }
+
+    /**
+     * Will be called when an exception occurred.
+     *
+     * @param fException $type
+     */
+    public static function exceptionCallback($type) {
+        global $cache, $cacheSingle;
+
+        // delete remapped cache
+        if($cache->get('remapped'))
+            $cache->delete('remapped');
+
+        // clean singlecache
+        $cacheSingle->clean();
+
+        // clear database cache
+        fORMDatabase::retrieve('name:default')->clearCache();
+        fORMSchema::retrieve('name:default')->clearCache();
+
+        // delete overview when player not found -> could be caused by an outdated cached overview page
+        if($type == 'fNotFoundException' && fRequest::get('page', 'string') == 'player') {
+            if($cache->get('overview.php.cache'))
+                $cache->delete('overview.php.cache');
+        }
+
+        fCore::debug('exception call: ' . $type);
     }
 }

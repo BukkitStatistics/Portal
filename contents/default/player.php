@@ -22,9 +22,11 @@ try {
     $pve = $player->buildTotalPveKills();
     $deaths = $player->buildTotalDeaths();
     $misc = $player->createMiscInfoPlayer();
+    $inv = $player->createPlayerInventory();
 
     $tpl->set('player', $player);
     $tpl->set('distance', $distance);
+    $tpl->set('inv', $inv);
 
 
     $b = $player->getTotalBlocks();
