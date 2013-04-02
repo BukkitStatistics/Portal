@@ -4,7 +4,8 @@
         <div class="well well-small span6
         <?php if($this->get('misc')->getIsBanned()): ?>
         alert-danger
-        <?php endif; ?>">
+        <?php endif; ?>"
+            style="position: relative;">
             <h1 style="position: relative">
                 <?php echo $this->get('player')->getPlayerHead(64, 'img-polaroid'); ?>
                 <?php echo $this->get('player')->encodeName(); ?>
@@ -41,6 +42,10 @@
                <div class="force-center xpbar-container">
                    <?php echo $this->get('misc')->getXPBar(); ?>
                </div>
+           </div>
+
+           <div class="player-effects">
+               <?php $this->get('inv')->printEffects(); ?>
            </div>
         </div>
         <div class="span6">
@@ -257,7 +262,7 @@
 
         <div class="span8 well well-small">
             <h3>Miscellaneous</h3>
-            <table class="table table-condensed">
+            <table class="table table-condensed no-border">
                 <tr>
                     <td>
                         <strong>Total XP:</strong>

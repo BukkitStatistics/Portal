@@ -350,7 +350,7 @@ class Util {
     /**
      * Will be called when an exception occurred.
      *
-     * @param $type
+     * @param fException $type
      */
     public static function exceptionCallback($type) {
         global $cache, $cacheSingle;

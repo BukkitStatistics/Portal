@@ -169,6 +169,17 @@ section {
     width: 365px;
 }
 
+.player-effects {
+    position: absolute;
+    bottom: 5px;
+    right: 0;
+    width: 100px;
+}
+
+.player-effect {
+    margin: 2px;
+}
+
 .hunger-bars {
     float: right;
 }
