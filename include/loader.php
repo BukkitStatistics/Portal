@@ -33,8 +33,9 @@ try {
 
 /*
  * Register fException callback
+ * Temporally disabled
  */
-fException::registerCallback(Util::exceptionCallback);
+//fException::registerCallback(Util::exceptionCallback);
 
 /*
  * Initializes ORM
