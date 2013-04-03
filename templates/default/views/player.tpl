@@ -124,9 +124,9 @@
 
     <h2>General Statistics</h2>
 
-    <div class="row-fluid">
+    <div class="row-fluid col-wrap-320">
 
-        <div class="span4 well well-small">
+        <div class="span4 well well-small col">
             <h3>Blocks</h3>
 
             <p>
@@ -171,7 +171,7 @@
             </p>
         </div>
 
-        <div class="span4 well well-small">
+        <div class="span4 well well-small col">
             <h3>Items</h3>
 
             <p>
@@ -217,7 +217,7 @@
             </p>
         </div>
 
-        <div class="span4 well well-small">
+        <div class="span4 well well-small col">
             <h3>Distances</h3>
 
             <p>
@@ -258,9 +258,9 @@
 
     </div>
 
-    <div class="row-fluid">
+    <div class="row-fluid col-wrap-220">
 
-        <div class="span8 well well-small">
+        <div class="span8 well well-small col">
             <h3>Miscellaneous</h3>
             <table class="table table-condensed no-border">
                 <tr>
@@ -346,7 +346,7 @@
             </table>
         </div>
 
-        <div class="span4 well well-small">
+        <div class="span4 well well-small col">
             <h3>Login statistics</h3>
 
             <p>

@@ -115,7 +115,7 @@ section {
 /* Custom module styles
 /* ============================== */
 
-.table tr td {
+.table-vcenter tr td {
 	vertical-align: middle;
 }
 
@@ -162,6 +162,18 @@ section {
 	padding: 6px;
 }
 
+.col-wrap-320 {
+    height: 320px;
+}
+
+.col-wrap-220 {
+    height: 220px;
+}
+
+.col {
+    height: 100%;
+    overflow: auto;
+}
 /* Player page styles
 /* ============================== */
 

@@ -357,12 +357,8 @@ class Util {
     public static function exceptionCallback($type) {
         global $cache;
 
-        // delete remapped cache
-        if($type == 'fProgrammerException' && $cache->get('remapped'))
-            $cache->delete('remapped');
-
         // delete overview when player not found -> could be caused by an outdated cached overview page
-        if($type == 'fNotFoundException' && fRequest::get('page', 'string') == 'player') {
+        if($type instanceof fNotFoundException && fRequest::get('page', 'string') == 'player') {
             if($cache->get('overview.php.cache'))
                 $cache->delete('overview.php.cache');
         }
