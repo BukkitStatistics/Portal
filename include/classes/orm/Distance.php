@@ -61,15 +61,6 @@ class Distance extends fActiveRecord {
         return new fNumber(0);
     }
 
-    protected function configure() {
-        fORMColumn::configureNumberColumn($this, 'foot');
-        fORMColumn::configureNumberColumn($this, 'minecart');
-        fORMColumn::configureNumberColumn($this, 'boat');
-        fORMColumn::configureNumberColumn($this, 'pig');
-        fORMColumn::configureNumberColumn($this, 'swim');
-        fORMColumn::configureNumberColumn($this, 'flight');
-    }
-
     /**
      * Returns the total distance of the associated player.
      *

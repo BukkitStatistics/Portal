@@ -5,7 +5,7 @@
         <?php if($this->get('misc')->getIsBanned()): ?>
         alert-danger
         <?php endif; ?>"
-            style="position: relative;">
+             style="position: relative;">
             <h1 style="position: relative">
                 <?php echo $this->get('player')->getPlayerHead(64, 'img-polaroid'); ?>
                 <?php echo $this->get('player')->encodeName(); ?>
@@ -24,29 +24,29 @@
                 <?php endif; ?>
             </h1>
 
-           <div class="bar-container">
-               <div class="xpbar-cur">
-                   <strong><?php echo $this->get('misc')->getExpLevel(); ?></strong>
-               </div>
+            <div class="bar-container">
+                <div class="xpbar-cur">
+                    <strong><?php echo $this->get('misc')->getExpLevel(); ?></strong>
+                </div>
 
-               <div class="row-fluid" id="playerhead-bars">
-                   <div class="span6 heart-bars">
-                       <?php echo $this->get('misc')->getHealthBar(); ?>
-                   </div>
+                <div class="row-fluid" id="playerhead-bars">
+                    <div class="span6 heart-bars">
+                        <?php echo $this->get('misc')->getHealthBar(); ?>
+                    </div>
 
-                   <div class="span6 hunger-bars">
-                       <?php echo $this->get('misc')->getFoodBar(); ?>
-                   </div>
-               </div>
+                    <div class="span6 hunger-bars">
+                        <?php echo $this->get('misc')->getFoodBar(); ?>
+                    </div>
+                </div>
 
-               <div class="force-center xpbar-container">
-                   <?php echo $this->get('misc')->getXPBar(); ?>
-               </div>
-           </div>
+                <div class="force-center xpbar-container">
+                    <?php echo $this->get('misc')->getXPBar(); ?>
+                </div>
+            </div>
 
-           <div class="player-effects">
-               <?php $this->get('inv')->printEffects(); ?>
-           </div>
+            <div class="player-effects">
+                <?php $this->get('inv')->printEffects(); ?>
+            </div>
         </div>
         <div class="span6">
         </div>
@@ -180,7 +180,7 @@
             </p>
 
             <p>
-                <strong>Most Popular Item Picked Up:</strong>
+                <strong>Most Picked Up:</strong>
                 <?php
                 if($this->get('items[most_picked]')):
                     $item = $this->get('items[most_picked]')->createMaterial();
@@ -222,37 +222,37 @@
 
             <p>
                 <strong>Travelled:</strong>
-                <?php echo $this->get('distance')->getTotal()->format(); ?> meters
+                <?php echo $this->get('distance')->prepareTotal(); ?> meters
             </p>
 
             <p>
                 <strong>Walked:</strong>
-                <?php echo $this->get('distance')->getFoot()->format(); ?> meters
+                <?php echo $this->get('distance')->prepareFoot(); ?> meters
             </p>
 
             <p>
                 <strong>Minecarted:</strong>
-                <?php echo $this->get('distance')->getMinecart()->format(); ?> meters
+                <?php echo $this->get('distance')->prepareMinecart(); ?> meters
             </p>
 
             <p>
                 <strong>Boated:</strong>
-                <?php echo $this->get('distance')->getBoat()->format(); ?> meters
+                <?php echo $this->get('distance')->prepareBoat(); ?> meters
             </p>
 
             <p>
                 <strong>Piggybacked:</strong>
-                <?php echo $this->get('distance')->getPig()->format(); ?> meters
+                <?php echo $this->get('distance')->preparePig(); ?> meters
             </p>
 
             <p>
                 <strong>Swum:</strong>
-                <?php echo $this->get('distance')->getSwim()->format(); ?> meters
+                <?php echo $this->get('distance')->prepareSwim(); ?> meters
             </p>
 
             <p>
                 <strong>Flight:</strong>
-                <?php echo $this->get('distance')->getFlight()->format(); ?> meters
+                <?php echo $this->get('distance')->prepareFlight(); ?> meters
             </p>
         </div>
 
@@ -268,19 +268,19 @@
                         <strong>Total XP:</strong>
                     </td>
                     <td>
-                        <?php echo $this->get('misc')->getExpTotal(); ?>
+                        <?php echo $this->get('misc')->prepareExpTotal(); ?>
                     </td>
                     <td>
                         <strong>Times kicked:</strong>
                     </td>
                     <td>
-                        <?php echo $this->get('misc')->getTimesKicked(); ?>
+                        <?php echo $this->get('misc')->prepareTimesKicked(); ?>
                     </td>
                     <td>
                         <strong>Eggs thrown:</strong>
                     </td>
                     <td>
-                        <?php echo $this->get('misc')->getEggsThrown(); ?>
+                        <?php echo $this->get('misc')->prepareEggsThrown(); ?>
                     </td>
                 </tr>
                 <tr>
@@ -288,19 +288,19 @@
                         <strong>Food eaten:</strong>
                     </td>
                     <td>
-                        <?php echo $this->get('misc')->getFoodEaten(); ?>
+                        <?php echo $this->get('misc')->prepareFoodEaten(); ?>
                     </td>
                     <td>
                         <strong>Arrows shot:</strong>
                     </td>
                     <td>
-                        <?php echo $this->get('misc')->getArrowsShot(); ?>
+                        <?php echo $this->get('misc')->prepareArrowsShot(); ?>
                     </td>
                     <td>
                         <strong>Damage taken:</strong>
                     </td>
                     <td>
-                        <?php echo $this->get('misc')->getDamageTaken(); ?>
+                        <?php echo $this->get('misc')->prepareDamageTaken(); ?>
                     </td>
                 </tr>
                 <tr>
@@ -308,19 +308,19 @@
                         <strong>Words said:</strong>
                     </td>
                     <td>
-                        <?php echo $this->get('misc')->getWordsSaid(); ?>
+                        <?php echo $this->get('misc')->prepareWordsSaid(); ?>
                     </td>
                     <td>
                         <strong>Commands sent:</strong>
                     </td>
                     <td>
-                        <?php echo $this->get('misc')->getCommandsSent(); ?>
+                        <?php echo $this->get('misc')->prepareCommandsSent(); ?>
                     </td>
                     <td>
                         <strong>Beds entered:</strong>
                     </td>
                     <td>
-                        <?php echo $this->get('misc')->getBedsEntered(); ?>
+                        <?php echo $this->get('misc')->prepareBedsEntered(); ?>
                     </td>
                 </tr>
                 <tr>
@@ -328,15 +328,20 @@
                         <strong>Portals entered:</strong>
                     </td>
                     <td>
-                        <?php echo $this->get('misc')->getPortalsEntered(); ?>
+                        <?php echo $this->get('misc')->preparePortalsEntered(); ?>
                     </td>
                     <td>
                         <strong>Fish caught:</strong>
                     </td>
                     <td>
-                        <?php echo $this->get('misc')->getFishCaught(); ?>
+                        <?php echo $this->get('misc')->prepareFishCaught(); ?>
                     </td>
-                    <td colspan="2"></td>
+                    <td>
+                        <strong>Times jumped:</strong>
+                    </td>
+                    <td>
+                        <?php echo $this->get('misc')->prepareTimesJumped(); ?>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -387,6 +392,16 @@
             <p>
                 <strong>Total Deaths:</strong>
                 <?php echo $this->get('pvp[deaths]')->format(); ?>
+            </p>
+
+            <p>
+                <strong>Current kill streak:</strong>
+                <?php echo $this->get('misc')->prepareKillStreak(); ?>
+            </p>
+
+            <p>
+                <strong>Best kill streak:</strong>
+                <?php echo $this->get('misc')->prepareMaxKillStreak(); ?>
             </p>
             <?php if($this->get('pvp[most_killed]')): ?>
                 <br/>

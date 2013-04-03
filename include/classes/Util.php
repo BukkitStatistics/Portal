@@ -186,6 +186,8 @@ class Util {
         try {
             $design->inject($content);
         } catch(fException $e) {
+            fCore::debug('design error: ' . $e->getMessage());
+
             if(fRequest::isAjax())
                 die('ajax_error');
 
