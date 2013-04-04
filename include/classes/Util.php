@@ -348,21 +348,4 @@ class Util {
 
         $file->append(fCore::dump($msg) . "\n\n");
     }
-
-    /**
-     * Will be called when an exception occurred.
-     *
-     * @param fException $type
-     */
-    public static function exceptionCallback($type) {
-        global $cache;
-
-        // delete overview when player not found -> could be caused by an outdated cached overview page
-        if($type instanceof fNotFoundException && fRequest::get('page', 'string') == 'player') {
-            if($cache->get('overview.php.cache'))
-                $cache->delete('overview.php.cache');
-        }
-
-        fCore::debug('exception call: ' . $type);
-    }
 }
