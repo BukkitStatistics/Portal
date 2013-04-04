@@ -9,7 +9,7 @@
         <?php if(fRequest::isPost() && !fMessaging::check('input', 'admin')): ?>
             <div class="alert alert-block alert-success">
                 <p>
-                    <strong>Success!</strong> Data successfully stored in the database.
+                    <strong>Success!</strong> Operation successfully executed.
                 </p>
             </div>
         <?php endif; ?>
@@ -35,7 +35,7 @@
             </a>
         </div>
         <div class="row-fluid">
-            <a href="?page=admin&sub=messages" class="span2 offset4 well well-small force-center">
+            <a href="?page=admin&sub=messages" class="span2 offset3 well well-small force-center">
                 <h2><i class="icon-comment icon-3x"></i></h2>
 
                 <h3>Messages</h3>
@@ -44,6 +44,11 @@
                 <h2><i class="icon-tasks icon-3x"></i></h2>
 
                 <h3>Modules</h3>
+            </a>
+            <a href="?page=admin&sub=dump" class="span2 well well-small force-center">
+                <h2><i class="icon-remove-circle icon-3x"></i></h2>
+
+                <h3>Dump data</h3>
             </a>
         </div>
     <?php endif; ?>
