@@ -309,6 +309,8 @@ class Player extends fActiveRecord {
             imagecopyresampled($canvas, $image, 0, 0, 8, 8, $size, $size, 8, 8);
 
             imagepng($canvas, $name);
+
+            fCore::debug('new player head:' . $this->getName());
         }
 
 
