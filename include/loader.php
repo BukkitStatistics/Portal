@@ -32,12 +32,6 @@ try {
 }
 
 /*
- * Register fException callback
- * Temporally disabled
- */
-fException::registerCallback(Util::exceptionCallback);
-
-/*
  * Initializes ORM
  */
 include __INC__ . 'config/orm.php';
