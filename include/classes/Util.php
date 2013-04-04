@@ -351,6 +351,7 @@ class Util {
 
         $file->append(fCore::dump($msg) . "\n\n");
 
-        fFilesystem::commit();
+        if(fFilesystem::isInsideTransaction())
+            fFilesystem::commit();
     }
 }
