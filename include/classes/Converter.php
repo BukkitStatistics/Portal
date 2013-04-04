@@ -157,9 +157,9 @@ class Converter {
                                       $victim_id,
                                       $row['times']);
             } catch(fSQLException $e) {
-                // if material/player/creature id does not exsist
+                fCore::debug('convertPVP:' . $e->getMessage());
             } catch(fNoRowsException $e) {
-                //skip -> player does not exist!
+                fCore::debug('convertPVP:' . $e->getMessage());
             }
             $i++;
             fSession::set('converter[last_start]', $i);
@@ -208,9 +208,9 @@ class Converter {
                                       $player_id,
                                       $row['times']);
             } catch(fSQLException $e) {
-                // if material/player/creature id does not exsist
+                fCore::debug('convertPVE:' . $e->getMessage());
             } catch(fNoRowsException $e) {
-                //skip -> player does not exist!
+                fCore::debug('convertPVE:' . $e->getMessage());
             }
             $i++;
             fSession::set('converter[last_start]', $i);
@@ -270,9 +270,9 @@ class Converter {
                                           $row['times']);
                 }
             } catch(fSQLException $e) {
-                // if material/player/creature id does not exsist
+                fCore::debug('convertEVP:' . $e->getMessage());
             } catch(fNoRowsException $e) {
-                //skip -> player does not exist!
+                fCore::debug('convertEVP:' . $e->getMessage());
             }
             $i++;
             fSession::set('converter[last_start]', $i);
@@ -308,7 +308,9 @@ class Converter {
                 $player_id = $this->newDB->query($id_stmt, $row['player'])->fetchScalar();
                 $this->newDB->execute($death_stmt, $player_id, $this->mapDeathType($row['cause']), $row['times']);
             } catch(fNoRowsException $e) {
-                //skip -> player does not exist!
+                fCore::debug('convertDeaths:' . $e->getMessage());
+            } catch(fSQLException $e) {
+                fCore::debug('convertDeaths:' . $e->getMessage());
             }
             $i++;
             fSession::set('converter[last_start]', $i);
@@ -344,7 +346,9 @@ class Converter {
                 $this->newDB->query($block_stmt, $player_id, $row['block_id'] . ':0', $row['num_destroyed'],
                                     $row['num_placed']);
             } catch(fNoRowsException $e) {
-                //skip -> player does not exist!
+                fCore::debug('convertBlocks:' . $e->getMessage());
+            } catch(fSQLException $e) {
+                fCore::debug('convertBlocks:' . $e->getMessage());
             }
             $i++;
             fSession::set('converter[last_start]', $i);
@@ -380,7 +384,9 @@ class Converter {
                 $this->newDB->query($item_stmt, $player_id, $this->mapMaterialIds($row['item']) . ':0', $row['num_dropped'],
                                     $row['num_pickedup']);
             } catch(fNoRowsException $e) {
-                //skip -> player does not exist!
+                fCore::debug('convertItems:' . $e->getMessage());
+            } catch(fNoRowsException $e) {
+                fCore::debug('convertItems:' . $e->getMessage());
             }
             $i++;
             fSession::set('converter[last_start]', $i);
@@ -417,7 +423,10 @@ class Converter {
                             WHERE "key" = %s
                             ', $value, $name);
                 }
+            } catch(fNoRowsException $e) {
+                fCore::debug('convertServerStats:' . $e->getMessage());
             } catch(fSQLException $e) {
+                fCore::debug('convertServerStats:' . $e->getMessage());
             }
             fSession::set('converter[last_start]', 4);
         }
