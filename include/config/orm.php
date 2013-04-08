@@ -9,12 +9,27 @@ if(defined('DB_DATABASE') && DB_DATABASE != '') {
             // cache for 12 hours
             $cacheSingle->set('dbOffline', false, 60 * 60 * 12);
         }
-        elseif($cacheSingle->get('dbOffline'))
+
+        if($cacheSingle->get('dbOffline'))
             throw new fConnectivityException('Database not reachable. Try again in a few minutes.');
 
 
         fORMDatabase::attach($db);
         fORM::enableSchemaCaching($cacheSingle);
+
+        // adds prefix
+        $db->registerHookCallback('unmodified', Util::addPrefix);
+
+        // delete cached files if database was patched by the plugin
+        if(Util::getOption('patched', 0)) {
+            $cache->delete('remapped');
+            fORMDatabase::retrieve('name:default')->clearCache();
+            fORMSchema::retrieve('name:default')->clearCache();
+
+            fCore::debug('cleared db cache');
+
+            Util::setOption('patched', 0);
+        }
 
         $schema = new fSchema($db);
         $remapped = $cache->get('remapped');
@@ -31,9 +46,6 @@ if(defined('DB_DATABASE') && DB_DATABASE != '') {
         }
 
         eval($remapped);
-
-        // adds prefix
-        $db->registerHookCallback('unmodified', Util::addPrefix);
     } catch(fNotFoundException $e) {
         if(is_null($cacheSingle->get('dbOffline')))
             $cacheSingle->set('dbOffline', true, 60 * 2);
