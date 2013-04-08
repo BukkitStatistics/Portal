@@ -385,7 +385,7 @@ class Converter {
                                     $row['num_pickedup']);
             } catch(fNoRowsException $e) {
                 fCore::debug('convertItems:' . $e->getMessage());
-            } catch(fNoRowsException $e) {
+            } catch(fSQLException $e) {
                 fCore::debug('convertItems:' . $e->getMessage());
             }
             $i++;
