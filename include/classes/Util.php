@@ -28,6 +28,8 @@ class Util {
         if($option == '')
             return false;
 
+        $exclude_cache = array('cache.options', 'patched');
+
         if(!DEVELOPMENT && $cacheSingle->get($option) != null)
             return $cacheSingle->get($option);
 
@@ -35,7 +37,7 @@ class Util {
             $db = fORMDatabase::retrieve();
             $res = $db->translatedQuery('SELECT `value` FROM "prefix_settings" WHERE `key` = %s', $option)->fetchScalar();
 
-            if(!DEVELOPMENT && $option != 'cache.options')
+            if(!DEVELOPMENT && !in_array($option, $exclude_cache))
                 $cacheSingle->set($option, $res, Util::getOption('cache.options', 60 * 10));
         } catch(fNoRowsException $e) {
             fCore::debug($e->getMessage());
@@ -51,7 +53,7 @@ class Util {
             fMessaging::create('error', '{errors}', $e);
         }
 
-        if(isset($res) && !empty($res))
+        if(isset($res) && $res != '')
             return $res;
 
         fCore::debug('non set option: ' . $option);
