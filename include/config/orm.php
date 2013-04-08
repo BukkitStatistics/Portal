@@ -36,8 +36,8 @@ if(defined('DB_DATABASE') && DB_DATABASE != '') {
         if($remapped == NULL) {
             $remapped = '';
             foreach($schema->getTables() as $table) {
-                if(DB_PREFIX != '' && stripos($table, DB_PREFIX) !== false) {
-                    $class_name = fGrammar::singularize(fGrammar::camelize(str_replace(DB_PREFIX . '_', '', $table),
+                if(Util::getPrefix() != '' && stripos($table, Util::getPrefix()) !== false) {
+                    $class_name = fGrammar::singularize(fGrammar::camelize(str_replace(Util::getPrefix(), '', $table),
                                                                            true));
                     $remapped .= 'fORM::mapClassToTable("' . $class_name . '", "' . $table . '");';
                 }
