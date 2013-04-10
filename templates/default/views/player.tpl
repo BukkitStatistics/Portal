@@ -63,6 +63,9 @@
                     <?php $this->get('inv')->printHotbar(); ?>
                 </div>
             </div>
+            <div class="player-armor pull-right">
+                <?php $this->get('inv')->printArmor(); ?>
+            </div>
         </div>
     </div>
     <div class="row-fluid">
