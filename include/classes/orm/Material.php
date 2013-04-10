@@ -41,6 +41,32 @@ class Material extends fActiveRecord {
     }
 
     /**
+     * Returns the css class for the current durability percentage.<br>
+     * <ul>
+     *     <li>$perc >= 70 - good</li>
+     *     <li>$perc < 70 and >= 30 - medium</li>
+     *     <li>$perc < 30 and >= 10 - bad</li>
+     *     <li>$perc < 10 - critical</li>
+     * </ul>
+     *
+     * @param $perc
+     *
+     * @return string
+     */
+    public static function calcDurability($perc) {
+        $perc = $perc * 100;
+
+        if($perc >= 70)
+            return 'good';
+        elseif($perc < 70 && $perc >= 30)
+            return 'medium';
+        elseif($perc < 30 && $perc >= 10)
+            return 'bad';
+        else
+            return 'critical';
+    }
+
+    /**
      * Gets the most dangerous material.<br>
      * The first array value is an fNumber which is the count. The second one is the block name.<br>
      *

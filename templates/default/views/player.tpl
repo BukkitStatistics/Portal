@@ -49,6 +49,20 @@
             </div>
         </div>
         <div class="span6">
+            <div class="player-inv pull-right">
+                <div class="player-inv-row clearfix">
+                    <?php $this->get('inv')->printRowOne(); ?>
+                </div>
+                <div class="player-inv-row clearfix">
+                    <?php $this->get('inv')->printRowTwo(); ?>
+                </div>
+                <div class="player-inv-row clearfix">
+                    <?php $this->get('inv')->printRowThree(); ?>
+                </div>
+                <div class="player-inv-hotbar clearfix">
+                    <?php $this->get('inv')->printHotbar(); ?>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row-fluid">
