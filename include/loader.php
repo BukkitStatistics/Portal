@@ -34,7 +34,7 @@ try {
 /*
  * Initializes ORM
  */
-include __INC__ . 'config/orm.php';
+include __INC__ . 'orm.php';
 
 
 /*

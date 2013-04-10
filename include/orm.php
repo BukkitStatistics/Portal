@@ -22,7 +22,9 @@ if(defined('DB_DATABASE') && DB_DATABASE != '') {
 
         // delete cached files if database was patched by the plugin
         if(Util::getOption('patched', 0)) {
-            $cache->delete('remapped');
+            if($cache->get('remapped'))
+                $cache->delete('remapped');
+
             fORMDatabase::retrieve('name:default')->clearCache();
             fORMSchema::retrieve('name:default')->clearCache();
 
