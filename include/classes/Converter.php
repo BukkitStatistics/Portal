@@ -152,7 +152,7 @@ class Converter {
             try {
                 $player_id = $this->newDB->query($id_stmt, $row['killer'])->fetchScalar();
                 $victim_id = $this->newDB->query($id_stmt, $row['victim'])->fetchScalar();
-                $this->newDB->execute($pvp_stmt, $row['material'] . ':0',
+                $this->newDB->execute($pvp_stmt, $this->mapMaterialIds($row['material']) . ':0',
                                       $player_id,
                                       $victim_id,
                                       $row['times']);
@@ -203,7 +203,7 @@ class Converter {
         foreach($result as $row) {
             try {
                 $player_id = $this->newDB->query($id_stmt, $row['killer'])->fetchScalar();
-                $this->newDB->execute($pve_stmt, $row['material'] . ':0',
+                $this->newDB->execute($pve_stmt, $this->mapMaterialIds($row['material']) . ':0',
                                       $this->mapEntityIds($row['creature']),
                                       $player_id,
                                       $row['times']);
@@ -262,7 +262,7 @@ class Converter {
                 $player_id = $this->newDB->query($id_stmt, $row['victim'])->fetchScalar();
                 $count = $this->newDB->query($evp_stmt_update, $row['times'], $player_id,
                                              $this->mapEntityIds($row['creature']),
-                                             $row['material'] . ':0')->countAffectedRows();
+                                             $this->mapMaterialIds($row['material']) . ':0')->countAffectedRows();
 
                 if($count <= 0) {
                     $this->newDB->execute($evp_stmt_new, $row['material'] . ':0', $this->mapEntityIds($row['creature']),
@@ -343,7 +343,7 @@ class Converter {
         foreach($result as $row) {
             try {
                 $player_id = $this->newDB->query($id_stmt, $row['player'])->fetchScalar();
-                $this->newDB->query($block_stmt, $player_id, $row['block_id'] . ':0', $row['num_destroyed'],
+                $this->newDB->query($block_stmt, $player_id, $this->mapMaterialIds($row['block_id']) . ':0', $row['num_destroyed'],
                                     $row['num_placed']);
             } catch(fNoRowsException $e) {
                 fCore::debug('convertBlocks:' . $e->getMessage());
