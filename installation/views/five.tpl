@@ -20,5 +20,5 @@ Util::showMessages('*', 'install/five', 'alert alert-error');
     <li>install.php</li>
 </ul>
 <br>
-<input type="submit" value="Go to web portal" name="finish" class="btn btn-success"/>
+<button type="submit" name="finish" value="1" class="btn btn-success">Go to web portal</button>
 </form>

@@ -6,15 +6,15 @@ $tpl = Util::newTpl($this, 'five');
 
 if(fRequest::isPost() && fRequest::get('finish')) {
     try {
-        $installDir = new fDirectory('installation');
-        $installFile = new fFile('install.php');
+        $installDir = new fDirectory(__ROOT__ . 'installation');
+        $installFile = new fFile(__ROOT__ . 'install.php');
 
         $installDir->delete();
         $installFile->delete();
 
         fURL::redirect('.');
     } catch(fValidationException $e) {
-        // already deleted
+        fURL::redirect('.');
     } catch(fEnvironmentException $e) {
         fMessaging::create('delete', 'install/five', $e->getMessage());
     }
