@@ -49,6 +49,20 @@
             </div>
         </div>
         <div class="span6">
+            <div class="player-inv pull-right">
+                <div class="player-inv-row clearfix">
+                    <?php $this->get('inv')->printRowOne(); ?>
+                </div>
+                <div class="player-inv-row clearfix">
+                    <?php $this->get('inv')->printRowTwo(); ?>
+                </div>
+                <div class="player-inv-row clearfix">
+                    <?php $this->get('inv')->printRowThree(); ?>
+                </div>
+                <div class="player-inv-hotbar clearfix">
+                    <?php $this->get('inv')->printHotbar(); ?>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row-fluid">
@@ -139,7 +153,7 @@
                 <?php
                 if($this->get('blocks[most_placed]')):
                     $block = $this->get('blocks[most_placed]')->createMaterial();
-                    echo $block->getImage();
+                    echo $block->getImage(32, null ,true);
                     ?>
                     <?php
                     echo $this->get('blocks[most_placed]')->getPlaced()->format();
@@ -159,7 +173,7 @@
                 <?php
                 if($this->get('blocks[most_destroyed]')):
                     $block = $this->get('blocks[most_destroyed]')->createMaterial();
-                    echo $block->getImage();
+                    echo $block->getImage(32, null, true);
                     ?>
 
                     <?php
@@ -184,7 +198,7 @@
                 <?php
                 if($this->get('items[most_picked]')):
                     $item = $this->get('items[most_picked]')->createMaterial();
-                    echo $item->getImage();
+                    echo $item->getImage(32, null, true);
                     ?>
 
                     <?php
@@ -205,7 +219,7 @@
                 <?php
                 if($this->get('items[most_dropped]')):
                     $item = $this->get('items[most_dropped]')->createMaterial();
-                    echo $item->getImage();
+                    echo $item->getImage(32, null, true);
                     ?>
 
                     <?php

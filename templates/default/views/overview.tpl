@@ -144,7 +144,7 @@
                         <tr>
                             <td>
                                 <span class="label label-info">
-                                    <?php echo Material::getMaterialImg($this->get('blocks[most_placed][1]'), 16); ?>
+                                    <?php echo Material::getMaterialImg($this->get('blocks[most_placed][1]'), 16, null, true); ?>
                                     <?php echo $this->get('blocks[most_placed][0]'); ?>
                                 </span>
                             </td>
@@ -161,7 +161,7 @@
                         <tr>
                             <td>
                                 <span class="label label-info">
-                                    <?php echo Material::getMaterialImg($this->get('blocks[most_destroyed][1]'), 16); ?>
+                                    <?php echo Material::getMaterialImg($this->get('blocks[most_destroyed][1]'), 16, null, true); ?>
                                     <?php echo $this->get('blocks[most_destroyed][0]'); ?>
                                 </span>
                             </td>
@@ -183,7 +183,7 @@
                         <tr>
                             <td>
                                 <span class="label label-info">
-                                    <?php echo Material::getMaterialImg($this->get('items[most_picked][1]'), 16); ?>
+                                    <?php echo Material::getMaterialImg($this->get('items[most_picked][1]'), 16, null, true); ?>
                                     <?php echo $this->get('items[most_picked][0]'); ?>
                                 </span>
                             </td>
@@ -200,7 +200,7 @@
                         <tr>
                             <td>
                                 <span class="label label-info">
-                                    <?php echo Material::getMaterialImg($this->get('items[most_dropped][1]'), 16); ?>
+                                    <?php echo Material::getMaterialImg($this->get('items[most_dropped][1]'), 16, null, true); ?>
                                     <?php echo $this->get('items[most_dropped][0]'); ?>
                                 </span>
                             </td>
