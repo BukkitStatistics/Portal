@@ -341,8 +341,6 @@ class Util {
         } catch (fValidationException $e) {
             $file = fFile::create(__ROOT__ . 'cache/debug.txt', '');
         }
-        if(!fFilesystem::isInsideTransaction())
-            fFilesystem::begin();
 
         if($first)
             $file->write($head);
@@ -352,8 +350,5 @@ class Util {
             return;
 
         $file->append(fCore::dump($msg) . "\n\n");
-
-        if(fFilesystem::isInsideTransaction())
-            fFilesystem::commit();
     }
 }
