@@ -30,6 +30,13 @@ class PlayerInventory extends fActiveRecord {
     }
 
     /**
+     * Prints the armour bar.
+     */
+    public function printArmor() {
+        echo $this->getRow(fJSON::decode($this->getArmor(), true), true);
+    }
+
+    /**
      * Prints all effects if effects are given.
      */
     public function printEffects() {
@@ -46,33 +53,42 @@ class PlayerInventory extends fActiveRecord {
     /**
      * Returns all images of an inventory row.
      *
-     * @param $row
+     * @param      $row
+     *
+     * @param bool $armor
      *
      * @return string
      */
-    private function getRow($row) {
-        // TODO: move to an tpl file...
+    private function getRow($row, $armor = false) {
         $s = '';
 
         if($row == '')
-            return $s;
+            return '';
 
-        foreach($row as $slot) {
-            $item = new Material($slot['material_id']);
-            $s .= '<div class="inv-row-item">';
-            if($item->getMaterialId() != '0:0' && $item->getMaterialId() != '-1:0') {
-                $s .= $item->getImage(30, null, true);
-                if($slot['amount'] > 1) {
-                    $s .= '<div class="row-item-amount">' . $slot['amount'] . '</div>';
-                }
-                if($slot['amount'] <= 1 && $slot['durability'] != 0) {
-                    $s .= '<div class="row-item-durability"><div class="row-item-durabilty-bar ' .
-                          Material::calcDurability($slot['durability']) . '" style="width: ' .
-                          $slot['durability'] * 100 . '%"></div></div>';
-                }
+        foreach($row as $slot)
+            $s .= $this->getSlotItem($slot, $armor);
+
+        return $s;
+    }
+
+    private function getSlotItem($slot, $armor = false) {
+        // TODO: move to an tpl file...
+        $item = new Material($slot['material_id']);
+        $s = '';
+
+        $s .= '<div class="' . ($armor ? 'inv-row-item-armor' : 'inv-row-item') . '">';
+        if($item->getMaterialId() != '0:0' && $item->getMaterialId() != '-1:0') {
+            $s .= $item->getImage(32, null, true);
+            if($slot['amount'] > 1) {
+                $s .= '<div class="row-item-amount">' . $slot['amount'] . '</div>';
             }
-            $s .= '</div>';
+            if($slot['amount'] <= 1 && $slot['durability'] != 0) {
+                $s .= '<div class="row-item-durability"><div class="row-item-durabilty-bar ' .
+                      Material::calcDurability($slot['durability']) . '" style="width: ' .
+                      $slot['durability'] * 100 . '%"></div></div>';
+            }
         }
+        $s .= '</div>';
 
         return $s;
     }

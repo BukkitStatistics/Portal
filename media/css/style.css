@@ -181,6 +181,16 @@ section {
     width: 365px;
 }
 
+.player-armor {
+    width: 37px;
+    height: 158px;
+    padding-top: 12px;
+    padding-left: 7px;
+    margin: 5px 0;
+    background-image: url("../img/misc/inv-armor.png");
+    background-repeat: no-repeat;
+}
+
 .player-inv {
     width: 348px;
     height: 164px;
@@ -201,12 +211,17 @@ section {
     margin-top: 6px;
 }
 
-.inv-row-item {
+.inv-row-item, .inv-row-item-armor {
     position: relative;
     width: 30px;
     height: 30px;
     margin: 3px;
     float: left;
+}
+
+.inv-row-item-armor {
+    float: none;
+    padding-top: 3px;
 }
 
 .row-item-amount {
@@ -228,6 +243,7 @@ section {
     width: 28px;
     background-color: #0e0e0e;
     box-shadow: 0 1px 1px #232323;
+    overflow: hidden;
 }
 
 .row-item-durabilty-bar {
