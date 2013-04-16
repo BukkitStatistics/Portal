@@ -64,10 +64,19 @@ class Distance extends fActiveRecord {
     /**
      * Returns the total distance of the associated player.
      *
-     * @return fNumber
+     * @return int
      */
     public function getTotal() {
-        return Distance::getDistanceOfType('total', $this->getPlayerId());
+        return (int)Distance::getDistanceOfType('total', $this->getPlayerId())->__toString();
+    }
+
+    /**
+     * Returns the formatted total distance of the associated player
+     *
+     * @return string
+     */
+    public function prepareTotal() {
+        return Distance::getDistanceOfType('total', $this->getPlayerId())->format();
     }
 
 }
