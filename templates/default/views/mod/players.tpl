@@ -13,6 +13,9 @@
         <th class="sort-button" data-type="3" data-sort="desc">
             Date Joined
         </th>
+        <th class="sort-button" data-type="4" data-sort="desc">
+            Playtime
+        </th>
     </tr>
     </thead>
     <tbody class="content">
@@ -39,6 +42,11 @@
             <?php
             $time = new fTimestamp($player->getFirstLogin());
             echo $time->format('day');
+            ?>
+        </td>
+        <td>
+            <?php
+            echo Util::formatSeconds(new fTimestamp($player->getPlaytime()));
             ?>
         </td>
     </tr>
