@@ -69,6 +69,9 @@ function callModule(type, sort, content, page) {
                         $(this).remove();
                     });
             }
+            $('[rel="tooltip"]').tooltip({
+                container: 'body'
+            });
         }
     });
 }
