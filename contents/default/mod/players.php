@@ -12,6 +12,9 @@ switch(fRequest::get('order_by', 'int')) {
     case 3:
         $type = 'first_login';
         break;
+    case 4:
+        $type = 'playtime';
+        break;
 }
 
 $players = fRecordSet::build(
