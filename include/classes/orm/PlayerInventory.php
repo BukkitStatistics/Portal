@@ -83,7 +83,7 @@ class PlayerInventory extends fActiveRecord {
                 $s .= '<div class="row-item-amount">' . $slot['amount'] . '</div>';
             }
             if($slot['amount'] <= 1 && $slot['durability'] != 0) {
-                $s .= '<div class="row-item-durability"><div class="row-item-durabilty-bar ' .
+                $s .= '<div class="row-item-durability"><div class="row-item-durability-bar ' .
                       Material::calcDurability($slot['durability']) . '" style="width: ' .
                       $slot['durability'] * 100 . '%"></div></div>';
             }
