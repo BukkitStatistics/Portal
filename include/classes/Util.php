@@ -12,6 +12,7 @@ class Util {
     const clearSkinCache = "Util::clearSkinCache";
     const handleDebug = "Util::handleDebug";
     const exceptionCallback = "Util::exceptionCallback";
+    const getRomanNumber = "Util::getRomanNumber";
 
     /**
      * Returns the requested option out of the settings table.
@@ -35,7 +36,8 @@ class Util {
 
         try {
             $db = fORMDatabase::retrieve();
-            $res = $db->translatedQuery('SELECT `value` FROM "prefix_settings" WHERE `key` = %s', $option)->fetchScalar();
+            $res = $db->translatedQuery('SELECT `value` FROM "prefix_settings" WHERE `key` = %s',
+                                        $option)->fetchScalar();
 
             if(!DEVELOPMENT && !in_array($option, $exclude_cache))
                 $cacheSingle->set($option, $res, Util::getOption('cache.options', 60 * 10));
@@ -82,7 +84,8 @@ class Util {
             $updated = $db->translatedQuery('UPDATE "prefix_settings" SET "value"=%s WHERE "key"=%s', $value,
                                             $option)->countAffectedRows();
             if($updated <= 0)
-                $db->translatedExecute('INSERT INTO "prefix_settings" ("key", "value") VALUES (%s, %s)', $option, $value);
+                $db->translatedExecute('INSERT INTO "prefix_settings" ("key", "value") VALUES (%s, %s)', $option,
+                                       $value);
 
             if(!DEVELOPMENT)
                 $cacheSingle->delete($option);
@@ -215,7 +218,8 @@ class Util {
            && !fRequest::isAjax()
            && !fMessaging::check('*', '{errors}')
            && !fMessaging::check('no-cache', '{cache}')
-           && $content != 'error.php') {
+           && $content != 'error.php'
+        ) {
             if($cache->set($content . '.cache', $capture, Util::getOption('cache.pages', 60)))
                 fCore::debug('cached for ' . Util::getOption('cache.pages', 60) . ' seconds: ' . $content);
         }
@@ -338,7 +342,7 @@ class Util {
 
         try {
             $file = new fFile(__ROOT__ . 'cache/debug.txt');
-        } catch (fValidationException $e) {
+        } catch(fValidationException $e) {
             $file = fFile::create(__ROOT__ . 'cache/debug.txt', '');
         }
 
@@ -349,6 +353,45 @@ class Util {
         if(is_string($msg) && stripos($msg, 'query') !== false)
             return;
 
-        $file->append(fCore::dump($msg) . "\n\n");
+        if(!is_string($msg))
+            $msg = fCore::dump($msg);
+
+        $file->append($msg . "\n\n");
+    }
+
+    /**
+     * Returns the roman equivalent of an latin number
+     *
+     * @param int $num
+     *
+     * @return string
+     */
+    public static function getRomanNumber($num) {
+        $n = intval($num);
+        $result = '';
+
+        $lookup = array(
+            'M'  => 1000,
+            'CM' => 900,
+            'D'  => 500,
+            'CD' => 400,
+            'C'  => 100,
+            'XC' => 90,
+            'L'  => 50,
+            'XL' => 40,
+            'X'  => 10,
+            'IX' => 9,
+            'V'  => 5,
+            'IV' => 4,
+            'I'  => 1
+        );
+
+        foreach($lookup as $roman => $value) {
+            $matches = intval($n / $value);
+            $result .= str_repeat($roman, $matches);
+            $n = $n % $value;
+        }
+
+        return $result;
     }
 }

@@ -44,7 +44,7 @@ class TotalBlock extends fActiveRecord {
 
     /**
      * Gets the most block of the specified type.<br>
-     * The first array value is an fNumber which is the count. The second one is the block name.
+     * The first array value is an fNumber which is the count. The second one is the material_id.
      *
      * @param string   $type
      *
@@ -53,7 +53,7 @@ class TotalBlock extends fActiveRecord {
     public static function getMostOfType($type) {
         try {
             $res = fORMDatabase::retrieve()->translatedQuery('
-                        SELECT SUM(b.%r) AS total, m.tp_name
+                        SELECT SUM(b.%r) AS total, m.material_id
                         FROM "prefix_total_blocks" b, "prefix_materials" m
                         WHERE b.material_id = m.material_id
                         GROUP BY b.material_id
@@ -63,7 +63,7 @@ class TotalBlock extends fActiveRecord {
             $row = $res->fetchRow();
             $num = new fNumber($row['total']);
 
-            return array($num->format(), $row['tp_name']);
+            return array($num->format(), $row['material_id']);
         } catch(fSQLException $e) {
             fCore::debug($e->getMessage());
         } catch(fNoRowsException $e) {

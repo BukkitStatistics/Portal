@@ -51,10 +51,5 @@ $(document).ready(function () {
         }
     });
 
-    /*
-     Enable tooltips with rel="tooltip"
-     */
-    $('[rel="tooltip"]').tooltip({
-        container: 'body'
-    });
+    init();
 });

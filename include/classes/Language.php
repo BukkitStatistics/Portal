@@ -1,29 +1,39 @@
 <?php
 class Language {
-    /*
+    /**
      * stores the language files
      */
     private $lang_files = array();
 
-    /*
-    * the chosen language
-    */
+    /**
+     * the chosen language
+     */
     private $lang = '';
 
-    /*
-    * language path
-    */
+    /**
+     * language path
+     */
     private $path = '';
 
-    /*
-    * languages keys => values
-    */
+    /**
+     * languages keys => values
+     */
     private $translations = array();
 
-    /*
-    * loaded moduls
-    */
+    /**
+     * loaded modules
+     */
     private $modules = array();
+
+    /**
+     * unloadable modules
+     */
+    private $err_modules = array();
+
+    /**
+     * unset strings
+     */
+    private $err_strings = array();
 
     /**
      * Initializes a new Language class
@@ -49,20 +59,29 @@ class Language {
             include $file;
             return array_merge($array, $translations); // $translations form the given file
         }
-        else throw new fNotFoundException('The language file ' . $file . ' could not be loaded');
+        else {
+            $this->err_modules[end($this->modules)] = true;
+            unset($this->lang_files[end($this->modules)]);
+            unset($this->modules[count($this->modules) - 1]);
+        }
+
+        return $array;
     }
 
     /**
      * Loads an additional modul to the translations
      *
-     * @param string $modul
+     * @param string $module
      *
      * @return void
      */
-    public function load($modul) {
-        $this->modules[] = $modul;
-        $this->lang_files[$modul] = $this->path . $modul . '.php';
-        $this->translations = $this->loadFile($this->lang_files[$modul], $this->translations);
+    public function load($module) {
+        if(in_array($module, $this->modules) || isset($this->err_modules[$module]))
+            return;
+
+        $this->modules[] = $module;
+        $this->lang_files[$module] = $this->path . $module . '.php';
+        $this->translations = $this->loadFile($this->lang_files[$module], $this->translations);
     }
 
     /**
@@ -77,13 +96,22 @@ class Language {
         if(isset($this->translations[$string]))
             return $this->translations[$string];
         else {
+            if(!isset($this->err_strings[$string]))
+                $this->err_strings[$string] = true;
+
             $default = $this->loadFile(__INC__ . 'languages/en/en.php');
-            foreach($this->modules as $modul) {
-                $default = $this->loadFile(__INC__ . 'languages/en/' . $modul . '.php', $default);
+            foreach($this->modules as $module) {
+                $default = $this->loadFile(__INC__ . 'languages/en/' . $module . '.php', $default);
             }
             if(isset($default[$string]))
                 return $default[$string];
         }
         return $string;
+    }
+
+    function __destruct() {
+        fCore::debug($this->err_strings);
+        fCore::debug('loaded lang modules: ' . fCore::dump($this->modules));
+        fCore::debug('unloadable lang modules: ' . fCore::dump($this->err_modules));
     }
 }

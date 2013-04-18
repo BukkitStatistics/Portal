@@ -74,6 +74,7 @@ class PlayerInventory extends fActiveRecord {
     private function getSlotItem($slot, $armor = false) {
         // TODO: move to an tpl file...
         $item = new Material($slot['material_id']);
+        $item->setEnchantments($slot['enchantments']);
         $s = '';
 
         $s .= '<div class="' . ($armor ? 'inv-row-item-armor' : 'inv-row-item') . '">';

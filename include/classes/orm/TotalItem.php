@@ -48,7 +48,7 @@ class TotalItem extends fActiveRecord {
 
     /**
      * Gets the most item of the specified type.<br>
-     * The first array value is an fNumber which is the count. The second one is the block name.
+     * The first array value is an fNumber which is the count. The second one is the material_id.
      *
      * @param $type
      *
@@ -57,7 +57,7 @@ class TotalItem extends fActiveRecord {
     public static function getMostOfType($type) {
         try {
             $res = fORMDatabase::retrieve()->translatedQuery('
-                        SELECT SUM(i.%r) AS total, m.tp_name
+                        SELECT SUM(i.%r) AS total, m.material_id
                         FROM "prefix_total_items" i, "prefix_materials" m
                         WHERE i.material_id = m.material_id
 
@@ -68,7 +68,7 @@ class TotalItem extends fActiveRecord {
             $row = $res->fetchRow();
             $num = new fNumber($row['total']);
 
-            return array($num->format(), $row['tp_name']);
+            return array($num->format(), $row['material_id']);
         } catch(fSQLException $e) {
             fCore::debug($e->getMessage());
         } catch(fNoRowsException $e) {
