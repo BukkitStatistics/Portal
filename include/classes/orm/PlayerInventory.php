@@ -74,6 +74,7 @@ class PlayerInventory extends fActiveRecord {
     private function getSlotItem($slot, $armor = false) {
         // TODO: move to an tpl file...
         $item = new Material($slot['material_id']);
+        $item->setEnchantments($slot['enchantments']);
         $s = '';
 
         $s .= '<div class="' . ($armor ? 'inv-row-item-armor' : 'inv-row-item') . '">';
@@ -83,7 +84,7 @@ class PlayerInventory extends fActiveRecord {
                 $s .= '<div class="row-item-amount">' . $slot['amount'] . '</div>';
             }
             if($slot['amount'] <= 1 && $slot['durability'] != 0) {
-                $s .= '<div class="row-item-durability"><div class="row-item-durabilty-bar ' .
+                $s .= '<div class="row-item-durability"><div class="row-item-durability-bar ' .
                       Material::calcDurability($slot['durability']) . '" style="width: ' .
                       $slot['durability'] * 100 . '%"></div></div>';
             }

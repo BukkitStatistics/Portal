@@ -246,24 +246,24 @@ section {
     overflow: hidden;
 }
 
-.row-item-durabilty-bar {
+.row-item-durability-bar {
     height: 3px;
     width: 0px;
 }
 
-.row-item-durabilty-bar.good {
+.row-item-durability-bar.good {
     background-color: #069e14;
 }
 
-.row-item-durabilty-bar.medium {
+.row-item-durability-bar.medium {
     background-color: #e8791f;
 }
 
-.row-item-durabilty-bar.bad {
+.row-item-durability-bar.bad {
     background-color: #c00f00;
 }
 
-.row-item-durabilty-bar.critical {
+.row-item-durability-bar.critical {
     background-color: #3f1f0a;
 }
 

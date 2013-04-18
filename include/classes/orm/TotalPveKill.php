@@ -8,14 +8,14 @@ class TotalPveKill extends fActiveRecord {
 
     /**
      * Gets the most dangerous material.<br>
-     * The first array value is an fNumber which is the count. The second one is the block name.
+     * The first array value is an fNumber which is the count. The second one is the material_id.
      *
      * @return array
      */
     public static function getMostDangerousWeapon() {
         $res = fORMDatabase::retrieve()->translatedQuery('
                     SELECT SUM(pve.creature_killed) AS total,
-                        m.tp_name
+                        m.material_id
                     FROM "prefix_total_pve_kills" pve, "prefix_materials" m
                     WHERE pve.material_id != %s
                     AND m.material_id = pve.material_id
@@ -28,7 +28,7 @@ class TotalPveKill extends fActiveRecord {
             $row = $res->fetchRow();
             $num = new fNumber($row['total']);
 
-            return array($num->format(), $row['tp_name']);
+            return array($num->format(), $row['material_id']);
         } catch(fNoRowsException $e) {
             return array(0, 'none');
         }

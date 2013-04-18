@@ -8,16 +8,23 @@ class Material extends fActiveRecord {
      *
      * Returns the html code to the material image.<br>
      * If no images was found it will return the default image.
-     * Set $tooltip to show the bootstrap tooltip instead of the browser alt tag.
+     * Set $tooltip to show the bootstrap tooltip instead of the browser alt tag.<br>
+     * If the material got enchantments an popover will be displayed.
      *
-     * @param String $tp_name
-     * @param int    $size
-     * @param String $classes
-     * @param bool   $tooltip
+     * @param Material|string $material
+     * @param int             $size
+     * @param String          $classes
+     * @param bool            $tooltip
      *
      * @return string
      */
-    public static function getMaterialImg($tp_name, $size = 32, $classes = null, $tooltip = false) {
+    public static function getMaterialImg($material, $size = 32, $classes = null, $tooltip = false) {
+        global $lang;
+
+        if(is_string($material))
+            $material = new Material($material);
+        $tp_name = $material->getTpName();
+
         $path = __ROOT__ . 'media/img/materials/';
         $img = $path . $tp_name . '.png';
 
@@ -34,10 +41,31 @@ class Material extends fActiveRecord {
         else
             $tooltip = '';
 
+        $popover_data = '';
+        if(count($material->getEnchantments())) {
+            // load enchantment translation
+            $lang->load('enchantments');
+
+            $tooltip = 'rel="popover"';
+            $popover_data = 'data-content="';
+            $popover_data .= '<ul>';
+
+            foreach($material->getEnchantments() as $enchant) {
+                $popover_data .= '<li>';
+                $popover_data .= fText::compose('enchantment_' . $enchant['enchantment_id']);
+                $popover_data .= ' ' . Util::getRomanNumber($enchant['enchantment_level']);
+                $popover_data .= '</li>';
+            }
+
+            $popover_data .= '</ul>';
+            $popover_data .= '"';
+        }
+
         return
             '<img ' . $class . ' src="' . fFilesystem::translateToWebPath($img) . '" title="' .
             fText::compose($tp_name) . '" alt="' .
-            fText::compose($tp_name) . '" style="width: ' . $size . 'px; height: ' . $size . 'px" ' . $tooltip . '>';
+            fText::compose($tp_name) . '" style="width: ' . $size . 'px; height: ' . $size . 'px" ' . $tooltip . ' ' .
+            $popover_data . '>';
     }
 
     /**
@@ -68,7 +96,7 @@ class Material extends fActiveRecord {
 
     /**
      * Gets the most dangerous material.<br>
-     * The first array value is an fNumber which is the count. The second one is the block name.<br>
+     * The first array value is an fNumber which is the count. The second one is the material_id.<br>
      *
      * This function is incredibly slow with large tables.
      *
@@ -76,10 +104,10 @@ class Material extends fActiveRecord {
      * @return array
      */
     public static function getMostDangerous() {
-        // need to be optimized
+        // TODO need to be optimized
         $res = fORMDatabase::retrieve()->translatedQuery('
                     SELECT SUM(pve.creature_killed) + SUM(pvp.times) AS total,
-                        m.tp_name
+                        m.material_id
                     FROM "prefix_total_pve_kills" pve
                             INNER JOIN "prefix_total_pvp_kills" pvp ON pve.material_id = pvp.material_id,
                         "prefix_materials" m
@@ -94,10 +122,39 @@ class Material extends fActiveRecord {
             $row = $res->fetchRow();
             $num = new fNumber($row['total']);
 
-            return array($num->format(), $row['tp_name']);
+            return array($num->format(), $row['material_id']);
         } catch(fNoRowsException $e) {
             return array(0, 'none');
         }
+    }
+
+    /**
+     * Enchantment array of this material
+     *
+     * @var array
+     */
+    private $enchantments = array();
+
+    /**
+     * Stores the enchantments in the $enchantments array.<br>
+     * Needs an json string
+     *
+     * @param array $enchants
+     */
+    public function setEnchantments($enchants) {
+        if(!is_array($enchants) || empty($enchants))
+            return;
+
+        $this->enchantments = $enchants;
+    }
+
+    /**
+     * Returns the enchantment array
+     *
+     * @return array
+     */
+    public function getEnchantments() {
+        return $this->enchantments;
     }
 
     /**
@@ -110,7 +167,7 @@ class Material extends fActiveRecord {
      * @return string
      */
     public function getImage($size = 32, $classes = null, $tooltip = false) {
-        return Material::getMaterialImg($this->getTpName(), $size, $classes, $tooltip);
+        return Material::getMaterialImg($this, $size, $classes, $tooltip);
     }
 
     /**

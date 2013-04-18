@@ -15,7 +15,7 @@ class TotalPvpKill extends fActiveRecord {
     public static function getMostDangerousWeapon() {
         $res = fORMDatabase::retrieve()->translatedQuery('
                     SELECT SUM(pvp.times) AS total,
-                        m.tp_name
+                        m.material_id
                     FROM "prefix_total_pvp_kills" pvp, "prefix_materials" m
                     WHERE pvp.material_id != "-1:0"
                     AND m.material_id = pvp.material_id
@@ -28,7 +28,7 @@ class TotalPvpKill extends fActiveRecord {
             $row = $res->fetchRow();
             $num = new fNumber($row['total']);
 
-            return array($num->format(), $row['tp_name']);
+            return array($num->format(), $row['material_id']);
         } catch(fNoRowsException $e) {
             return array(0, 'none');
         }

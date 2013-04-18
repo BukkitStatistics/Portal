@@ -1,3 +1,22 @@
+function init() {
+    /*
+     Enable tooltips with rel="tooltip"
+     */
+    $('[rel="tooltip"]').tooltip({
+        container: 'body'
+    });
+
+    /*
+     Enable popovers with rel="popover"
+     */
+    $('[rel="popover"]').popover({
+        container: 'body',
+        placement: 'top',
+        trigger: 'hover focus',
+        html: true
+    });
+}
+
 function callModulePage(id, total, page, max) {
     if (max == undefined)
         max = 5;
@@ -46,7 +65,7 @@ function callModule(type, sort, content, page) {
                 loader.removeClass('alert-info')
                     .addClass('alert-success')
                     .delay(500)
-                    .fadeOut('slow', function() {
+                    .fadeOut('slow', function () {
                         $(this).remove();
                     });
                 content.data('last-call', {'type': type, 'sort': sort});
@@ -69,6 +88,7 @@ function callModule(type, sort, content, page) {
                         $(this).remove();
                     });
             }
+            init();
         }
     });
 }
