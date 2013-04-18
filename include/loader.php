@@ -26,8 +26,8 @@ try {
     $cacheSingle = new fCache('file', __ROOT__ . 'cache/singlecache');
     Util::cleanSkinCache();
 } catch(fEnvironmentException $e) {
-    fMessaging::create('critical', '{errors}', $e);
-    Util::newDesign('error.php');
+    echo $e->getMessage();
+    $e->printTrace();
     exit();
 }
 
