@@ -14,12 +14,8 @@ class TotalDeath extends fActiveRecord {
 
         try {
             return new fNumber($res->fetchScalar());
-        } catch(fNoRowsException $e) {
-            fCore::debug($e->getMessage());
-        } catch(fNoRemainingException $e) {
-            fCore::debug($e->getMessage());
-        } catch(fValidationException $e) {
-            fCore::debug($e->getMessage());
+        } catch(fException $e) {
+            fCore::debug($e);
         }
 
         return new fNumber(0);

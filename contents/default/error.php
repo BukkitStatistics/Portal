@@ -17,7 +17,7 @@ if($type != '' && $type != '404') {
 
     $tpl->set('e_message', $e->getMessage());
     $tpl->set('e_name', get_class($e));
-    $tpl->set('e_backtrace', $e->getTraceAsString());
+    $tpl->set('e_backtrace', $e->formatTrace());
     $tpl->set('e_file', $e->getFile());
     $tpl->set('e_line', $e->getLine());
 }

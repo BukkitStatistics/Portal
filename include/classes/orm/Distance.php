@@ -48,14 +48,8 @@ class Distance extends fActiveRecord {
             }
 
             return new fNumber($count);
-        } catch(fNoRowsException $e) {
-            fCore::debug($e->getMessage());
-        } catch(fNoRemainingException $e) {
-            fCore::debug($e->getMessage());
-        } catch(fSQLException $e) {
-            fCore::debug($e->getMessage());
-        } catch(fValidationException $e) {
-            fCore::debug($e->getMessage());
+        } catch(fException $e) {
+            fCore::debug($e);
         }
 
         return new fNumber(0);
