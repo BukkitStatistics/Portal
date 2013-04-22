@@ -13,7 +13,23 @@
         <php expression="str_replace(' ', '-', strtolower('${phing.project.name}'))"
              returnProperty="project.name.safe"/>
 
-        <property name="project.type" value="beta"/>
+        <xmlproperty file="version.xml"/>
+
+        <if>
+            <equals arg1="${build.type}" arg2="RECOMMENDED"/>
+            <then>
+                <property name="project.type" value="${build.version}"/>
+            </then>
+            <elseif>
+                <equals arg1="${build.type}" arg2="BETA"/>
+                <then>
+                    <property name="project.type" value="${build.version}-beta.${jenkins.build}"/>
+                </then>
+            </elseif>
+            <else>
+                <property name="project.type" value="${build.version}-dev.${jenkins.build}"/>
+            </else>
+        </if>
     </target>
 
     <target name="-setup-dirs" depends="-load-properties">
@@ -40,11 +56,9 @@
 
     <target name="dist" depends="init" description="Create distributable file">
         <property name="build.dist.temp.dir" value="${build.dist.dir}/${project.name.safe}"/>
-        <property name="build.dist.zip.root.dir" value="${build.dist.temp.dir}/${project.name.safe}"/>
 
         <mkdir dir="${build.dist.temp.dir}"/>
-        <mkdir dir="${build.dist.zip.root.dir}"/>
-        <copy todir="${build.dist.zip.root.dir}">
+        <copy todir="${build.dist.temp.dir}">
             <fileset dir="${src.dir}">
                 <exclude name="build/"/>
                 <exclude name="*.markdown"/>
@@ -52,6 +66,7 @@
                 <exclude name=".git/"/>
                 <exclude name="build.properties"/>
                 <exclude name="build.xml/"/>
+                <exclude name="version.xml/"/>
                 <exclude name="**/.DS_Store"/>
                 <exclude name="**/Thumbs.db"/>
                 <exclude name="cache/files/*"/>
@@ -61,10 +76,10 @@
             </fileset>
         </copy>
 
-        <echo file="${build.dist.zip.root.dir}/include/config/version.php">&lt;?php&#13;&#10;&#9;define('VERSION', '${project.type}.${jenkins.build}');</echo>
+        <echo file="${build.dist.temp.dir}/include/config/version.php">&lt;?php&#13;&#10;&#9;define('VERSION', '${project.type}');</echo>
 
         <zip includeemptydirs="true"
-             destfile="${build.dist.dir}/${project.name.safe}-${project.type}.${jenkins.build}.zip">
+             destfile="${build.dist.dir}/${project.name.safe}.zip">
             <fileset dir="${build.dist.temp.dir}/"/>
         </zip>
 
