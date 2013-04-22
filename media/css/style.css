@@ -162,18 +162,14 @@ section {
 	padding: 6px;
 }
 
-.col-wrap-320 {
+.col-wrap-320 div {
     height: 320px;
 }
 
-.col-wrap-220 {
+.col-wrap-220 div {
     height: 220px;
 }
 
-.col {
-    height: 100%;
-    overflow: auto;
-}
 /* Player page styles
 /* ============================== */
 
@@ -333,10 +329,15 @@ section {
 	top: -10px;
 	left: -8px;
 }
-.player-banned {
-	position: absolute;
-	top: -10px;
-	right: 0;
+.player-top-right-info-label {
+    float: left;
+    margin-left: 5px;
+}
+
+.player-top-right-info {
+    position: absolute;
+    top: -10px;
+    right: 0;
 }
 
 .player-trophy {

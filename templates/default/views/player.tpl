@@ -17,11 +17,22 @@
                 <?php if($this->get('misc')->getIsOp()): ?>
                     <span class="label label-info player-op">OP</span>
                 <?php endif; ?>
-                <?php if($this->get('misc')->getIsBanned()): ?>
-                    <span class="label label-important player-banned">
+                <div class="player-top-right-info">
+                    <?php if($this->get('misc')->getIsBanned()): ?>
+                    <span class="label label-important player-top-right-info-label">
                         <strong>banned</strong>
                     </span>
-                <?php endif; ?>
+                    <?php endif; ?>
+                    <?php if($this->get('misc')->getGamemode() > 0): ?>
+                    <span class="label label-warning player-top-right-info-label">
+                        <?php if($this->get('misc')->getGamemode() == 1): ?>
+                            <strong>creative</strong>
+                        <?php else: ?>
+                            <strong>adventure</strong>
+                        <?php endif; ?>
+                    </span>
+                    <?php endif; ?>
+                </div>
             </h1>
 
             <div class="bar-container">
@@ -53,7 +64,7 @@
         </div>
         <div class="span6">
             <?php if($this->get('inv')): ?>
-                <div class="player-inv pull-right">
+                <div class="player-inv pull-right hidden-phone">
                     <div class="player-inv-row clearfix">
                         <?php $this->get('inv')->printRowOne(); ?>
                     </div>
@@ -67,7 +78,7 @@
                         <?php $this->get('inv')->printHotbar(); ?>
                     </div>
                 </div>
-                <div class="player-armor pull-right">
+                <div class="player-armor pull-right hidden-phone">
                     <?php $this->get('inv')->printArmor(); ?>
                 </div>
             <?php endif; ?>
@@ -148,7 +159,7 @@
 
     <div class="row-fluid col-wrap-320">
 
-        <div class="span4 well well-small col">
+        <div class="span4 well well-small">
             <h3>Blocks</h3>
 
             <p>
@@ -193,7 +204,7 @@
             </p>
         </div>
 
-        <div class="span4 well well-small col">
+        <div class="span4 well well-small">
             <h3>Items</h3>
 
             <p>
@@ -239,7 +250,7 @@
             </p>
         </div>
 
-        <div class="span4 well well-small col">
+        <div class="span4 well well-small">
             <h3>Distances</h3>
 
             <p>
@@ -282,7 +293,7 @@
 
     <div class="row-fluid col-wrap-220">
 
-        <div class="span8 well well-small col">
+        <div class="span8 well well-small">
             <h3>Miscellaneous</h3>
             <table class="table table-condensed no-border">
                 <tr>
@@ -368,7 +379,7 @@
             </table>
         </div>
 
-        <div class="span4 well well-small col">
+        <div class="span4 well well-small">
             <h3>Login statistics</h3>
 
             <p>
@@ -395,6 +406,13 @@
                 <strong>Playtime:</strong>
                 <?php
                 echo Util::formatSeconds(new fTimestamp($this->get('player')->getPlaytime()));
+                ?>
+            </p>
+
+            <p>
+                <strong>Logins:</strong>
+                <?php
+                echo $this->get('player')->prepareLogins();
                 ?>
             </p>
         </div>

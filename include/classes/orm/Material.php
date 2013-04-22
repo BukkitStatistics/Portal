@@ -41,31 +41,31 @@ class Material extends fActiveRecord {
         else
             $tooltip = '';
 
-        $popover_data = '';
+        $title = 'title="' . fText::compose($tp_name) . '"';
+
+        $tooltip_data = '';
         if(count($material->getEnchantments())) {
             // load enchantment translation
             $lang->load('enchantments');
 
-            $tooltip = 'rel="popover"';
-            $popover_data = 'data-content="';
-            $popover_data .= '<ul>';
+            $title = '';
+            $tooltip_data = 'data-original-title="';
+            $tooltip_data .= $tp_name . '<br>';
 
             foreach($material->getEnchantments() as $enchant) {
-                $popover_data .= '<li>';
-                $popover_data .= fText::compose('enchantment_' . $enchant['enchantment_id']);
-                $popover_data .= ' ' . Util::getRomanNumber($enchant['enchantment_level']);
-                $popover_data .= '</li>';
+                $tooltip_data .= fText::compose('enchantment_' . $enchant['enchantment_id']);
+                $tooltip_data .= ' ' . Util::getRomanNumber($enchant['enchantment_level']);
+                $tooltip_data .= '<br>';
             }
 
-            $popover_data .= '</ul>';
-            $popover_data .= '"';
+            $tooltip_data .= '"';
         }
 
         return
-            '<img ' . $class . ' src="' . fFilesystem::translateToWebPath($img) . '" title="' .
-            fText::compose($tp_name) . '" alt="' .
-            fText::compose($tp_name) . '" style="width: ' . $size . 'px; height: ' . $size . 'px" ' . $tooltip . ' ' .
-            $popover_data . '>';
+            '<img ' . $class . ' src="' . fFilesystem::translateToWebPath($img) . '" alt="' .
+            fText::compose($tp_name) . '" ' . $title . ' style="width: ' . $size . 'px; height: ' . $size . 'px" ' .
+            $tooltip . ' ' .
+            $tooltip_data . '>';
     }
 
     /**

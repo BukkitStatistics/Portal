@@ -3,7 +3,8 @@ function init() {
      Enable tooltips with rel="tooltip"
      */
     $('[rel="tooltip"]').tooltip({
-        container: 'body'
+        container: 'body',
+        html: true
     });
 
     /*
