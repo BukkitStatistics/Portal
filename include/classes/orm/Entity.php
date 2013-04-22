@@ -91,6 +91,18 @@ class Entity extends fActiveRecord {
     }
 
     /**
+     * Calls the parent constructor and loads the entity language file.
+     *
+     * @param null $key
+     */
+    public function __construct($key = NULL) {
+        global $lang;
+        parent::__construct($key);
+
+        $lang->load('entities');
+    }
+
+    /**
      * Returns the html code to the entity.<br>
      * If no image was found it will return the default image.
      *

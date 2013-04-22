@@ -34,12 +34,12 @@ class ServerStatistic {
             foreach($res as $row)
                 self::$values[$row['key']] = $row['value'];
         } catch (fNoRowsException $e) {
-            fCore::debug($e->getMessage());
+            fCore::debug($e);
         } catch (fException $e) {
-            fCore::debug($e->getMessage());
+            fCore::debug($e);
         }
 
-        fCore::debug(self::$values);
+        fCore::debug(array('server statistics: ', self::$values));
     }
 
     /**

@@ -27,6 +27,8 @@ if(fRequest::get('signin') && fRequest::isPost()) {
            && fCryptography::checkPasswordHash(fRequest::get('pw', 'string'), Util::getOption('adminpw'))
         ) {
             fAuthorization::setUserToken('logged');
+            if(fRequest::get('keep_login'))
+                fSession::enablePersistence();
             fURL::redirect(fAuthorization::getRequestedURL(TRUE, '?page=admin'));
         }
         else

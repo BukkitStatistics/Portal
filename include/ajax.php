@@ -35,17 +35,12 @@ if($type == 'search') {
 
         die($json);
 
-    } catch (fProgrammerException $e) {
-        fCore::debug('ajax: ' . $e->getMessage());
-        $error = true;
-    } catch (fSQLException $e) {
-        fCore::debug('ajax: ' . $e->getMessage());
-        $error = true;
-    } catch (fNoRowsException $e) {
-        fCore::debug('ajax: ' . $e->getMessage());
-        $error = true;
+    } catch (fException $e) {
+        $error = $e;
     }
 }
 
-if($error)
+if($error) {
+    fCore::debug(array('ajax:', $e));
     die(fJSON::encode(array('error' => 'no_data')));
+}

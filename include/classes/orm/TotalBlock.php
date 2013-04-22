@@ -35,8 +35,8 @@ class TotalBlock extends fActiveRecord {
                 return new fNumber(0);
 
             return new fNumber($count);
-        } catch(fSQLException $e) {
-            fCore::debug($e->getMessage());
+        } catch(fException $e) {
+            fCore::debug($e);
         }
 
         return new fNumber(0);
@@ -64,10 +64,8 @@ class TotalBlock extends fActiveRecord {
             $num = new fNumber($row['total']);
 
             return array($num->format(), $row['material_id']);
-        } catch(fSQLException $e) {
-            fCore::debug($e->getMessage());
-        } catch(fNoRowsException $e) {
-            fCore::debug($e->getMessage());
+        } catch(fException $e) {
+            fCore::debug($e);
         }
 
         return array(0, 'none');

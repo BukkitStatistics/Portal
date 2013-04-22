@@ -110,8 +110,8 @@ class Language {
     }
 
     function __destruct() {
-        fCore::debug($this->err_strings);
-        fCore::debug('loaded lang modules: ' . fCore::dump($this->modules));
-        fCore::debug('unloadable lang modules: ' . fCore::dump($this->err_modules));
+        fCore::debug(array('unset strings:', $this->err_strings));
+        fCore::debug(array('loaded lang modules: ', $this->modules));
+        fCore::debug(array('unloadable lang modules: ', $this->err_modules));
     }
 }

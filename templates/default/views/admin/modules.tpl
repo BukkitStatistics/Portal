@@ -35,7 +35,14 @@
                         Log Deaths
                         <small class="help-inline">This will log all pvp, pve, evp and other death causes of the players.</small>
                     </label>
-
+                    <label for="module_inventory" class="checkbox">
+                        <input type="hidden" name="module_inventory" value="0"/>
+                        <input type="checkbox" value="1" name="module_inventory" id="module_inventory"
+                            <?php fHTML::showChecked('1', $this->get('module_inventory')); ?>>
+                        Log and show players inventory
+                        <small class="help-inline">This will log the inventory of every player.
+                        </small>
+                    </label>
                 </fieldset>
             </div>
         </div>

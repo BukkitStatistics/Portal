@@ -42,11 +42,11 @@ class Util {
             if(!DEVELOPMENT && !in_array($option, $exclude_cache))
                 $cacheSingle->set($option, $res, Util::getOption('cache.options', 60 * 10));
         } catch(fNoRowsException $e) {
-            fCore::debug($e->getMessage());
+            fCore::debug($e);
         } catch(fProgrammerException $e) {
-            fCore::debug($e->getMessage());
+            fCore::debug($e);
         } catch(fNotFoundException $e) {
-            fCore::debug($e->getMessage());
+            fCore::debug($e);
         } catch(fSQLException $e) {
             fMessaging::create('critical', '{errors}', $e);
         } catch(fAuthorizationException $e) {
@@ -91,10 +91,8 @@ class Util {
                 $cacheSingle->delete($option);
 
             return true;
-        } catch(fSQLException $e) {
-            fCore::debug($e->getMessage());
-        } catch(fProgrammerException $e) {
-            fCore::debug($e->getMessage());
+        } catch(fException $e) {
+            fCore::debug($e);
         }
 
         return false;
@@ -191,7 +189,7 @@ class Util {
         try {
             $design->inject($content);
         } catch(fException $e) {
-            fCore::debug('design error: ' . $e->getMessage());
+            fCore::debug(array('design error: ', $e));
 
             if(fRequest::isAjax())
                 die('ajax_error');
@@ -331,9 +329,9 @@ class Util {
     }
 
     /**
-     * Saves all debug messages except query times in cache/debug.txt
-     *
-     * @param $msg
+     * Saves all debug messages except query times in cache/debug.txt<br>
+     * If $msg is an array only the first two elements will be displayed
+     * @param string|array $msg
      */
     public static function handleDebug($msg) {
         $time = new fTimestamp();
@@ -353,10 +351,21 @@ class Util {
         if(is_string($msg) && stripos($msg, 'query') !== false)
             return;
 
-        if(!is_string($msg))
-            $msg = fCore::dump($msg);
+        if(is_array($msg)) {
+            $out = $msg[0];
+            $msg = $msg[1];
+        }
+        else
+            $out = '';
 
-        $file->append($msg . "\n\n");
+        $out .= ' ';
+
+        if($msg instanceof fException)
+            $out .= $msg->getMessage() . '\n' . $msg->formatTrace();
+        else
+            $out .= fCore::dump($msg);
+
+        $file->append($out . "\n\n");
     }
 
     /**

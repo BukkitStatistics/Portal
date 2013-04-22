@@ -14,6 +14,10 @@
                     <input type="password" class="input-block-level" placeholder="Password" name="pw"
                            style="width: 90%;"/>
                 </div>
+                <label class="checkbox" for="keep_login">
+                    <input type="hidden" name="keep_login" value="0"/>
+                    <input type="checkbox" value="1" name="keep_login" id="keep_login"> Remember me
+                </label>
             </fieldset>
             <div class="form-actions">
                 <button class="btn btn-large btn-primary" name="signin" value="true" id="signin">

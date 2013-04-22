@@ -135,6 +135,19 @@ class Material extends fActiveRecord {
      */
     private $enchantments = array();
 
+
+    /**
+     * Calls the parent constructor and loads the material language file.
+     *
+     * @param null $key
+     */
+    public function __construct($key = NULL) {
+        global $lang;
+        parent::__construct($key);
+
+        $lang->load('materials');
+    }
+
     /**
      * Stores the enchantments in the $enchantments array.<br>
      * Needs an json string

@@ -86,12 +86,8 @@ class Player extends fActiveRecord {
 
         try {
             return new fNumber($res->fetchScalar());
-        } catch(fNoRowsException $e) {
-            fCore::debug($e->getMessage());
-        } catch(fNoRemainingException $e) {
-            fCore::debug($e->getMessage());
-        } catch(fValidationException $e) {
-            fCore::debug($e->getMessage());
+        } catch(fException $e) {
+            fCore::debug($e);
         }
 
         return new fNumber(0);
@@ -110,12 +106,8 @@ class Player extends fActiveRecord {
 
         try {
             return new fNumber($res->fetchScalar());
-        } catch(fNoRowsException $e) {
-            fCore::debug($e->getMessage());
-        } catch(fNoRemainingException $e) {
-            fCore::debug($e->getMessage());
-        } catch(fValidationException $e) {
-            fCore::debug($e->getMessage());
+        } catch(fException $e) {
+            fCore::debug($e);
         }
 
         return new fNumber(0);
@@ -140,10 +132,8 @@ class Player extends fActiveRecord {
             $num = new fNumber($row['total']);
 
             return array($num->format(), new Player($row['player_id']));
-        } catch(fNoRowsException $e) {
-            fCore::debug($e->getMessage());
-        } catch(fNotFoundException $e) {
-            fCore::debug($e->getMessage());
+        } catch(fException $e) {
+            fCore::debug($e);
         }
 
         $p = new Player();
@@ -170,10 +160,8 @@ class Player extends fActiveRecord {
             $num = new fNumber($row['total']);
 
             return array($num->format(), new Player($row['victim_id']));
-        } catch(fNoRowsException $e) {
-            fCore::debug($e->getMessage());
-        } catch(fNotFoundException $e) {
-            fCore::debug($e->getMessage());
+        } catch(fException $e) {
+            fCore::debug($e);
         }
 
         $p = new Player();

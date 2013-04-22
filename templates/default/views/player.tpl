@@ -45,27 +45,32 @@
             </div>
 
             <div class="player-effects">
-                <?php $this->get('inv')->printEffects(); ?>
+                <?php
+                if($this->get('inv'))
+                    $this->get('inv')->printEffects();
+                ?>
             </div>
         </div>
         <div class="span6">
-            <div class="player-inv pull-right">
-                <div class="player-inv-row clearfix">
-                    <?php $this->get('inv')->printRowOne(); ?>
+            <?php if($this->get('inv')): ?>
+                <div class="player-inv pull-right">
+                    <div class="player-inv-row clearfix">
+                        <?php $this->get('inv')->printRowOne(); ?>
+                    </div>
+                    <div class="player-inv-row clearfix">
+                        <?php $this->get('inv')->printRowTwo(); ?>
+                    </div>
+                    <div class="player-inv-row clearfix">
+                        <?php $this->get('inv')->printRowThree(); ?>
+                    </div>
+                    <div class="player-inv-hotbar clearfix">
+                        <?php $this->get('inv')->printHotbar(); ?>
+                    </div>
                 </div>
-                <div class="player-inv-row clearfix">
-                    <?php $this->get('inv')->printRowTwo(); ?>
+                <div class="player-armor pull-right">
+                    <?php $this->get('inv')->printArmor(); ?>
                 </div>
-                <div class="player-inv-row clearfix">
-                    <?php $this->get('inv')->printRowThree(); ?>
-                </div>
-                <div class="player-inv-hotbar clearfix">
-                    <?php $this->get('inv')->printHotbar(); ?>
-                </div>
-            </div>
-            <div class="player-armor pull-right">
-                <?php $this->get('inv')->printArmor(); ?>
-            </div>
+            <?php endif; ?>
         </div>
     </div>
     <div class="row-fluid">
