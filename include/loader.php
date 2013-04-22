@@ -15,7 +15,7 @@ if(DEBUG) {
     fCore::registerDebugCallback(Util::handleDebug);
 }
 
-fSession::setLength('1day');
+fSession::setLength('1day', '1week');
 fSession::open();
 
 /*
