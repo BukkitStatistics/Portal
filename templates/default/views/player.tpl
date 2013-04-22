@@ -17,11 +17,22 @@
                 <?php if($this->get('misc')->getIsOp()): ?>
                     <span class="label label-info player-op">OP</span>
                 <?php endif; ?>
-                <?php if($this->get('misc')->getIsBanned()): ?>
-                    <span class="label label-important player-banned">
+                <div class="player-top-right-info">
+                    <?php if($this->get('misc')->getIsBanned()): ?>
+                    <span class="label label-important player-top-right-info-label">
                         <strong>banned</strong>
                     </span>
-                <?php endif; ?>
+                    <?php endif; ?>
+                    <?php if($this->get('misc')->getGamemode() > 0): ?>
+                    <span class="label label-warning player-top-right-info-label">
+                        <?php if($this->get('misc')->getGamemode() == 1): ?>
+                            <strong>creative</strong>
+                        <?php else: ?>
+                            <strong>adventure</strong>
+                        <?php endif; ?>
+                    </span>
+                    <?php endif; ?>
+                </div>
             </h1>
 
             <div class="bar-container">
@@ -395,6 +406,13 @@
                 <strong>Playtime:</strong>
                 <?php
                 echo Util::formatSeconds(new fTimestamp($this->get('player')->getPlaytime()));
+                ?>
+            </p>
+
+            <p>
+                <strong>Logins:</strong>
+                <?php
+                echo $this->get('player')->prepareLogins();
                 ?>
             </p>
         </div>
