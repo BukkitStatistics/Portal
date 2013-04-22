@@ -64,7 +64,7 @@
         </div>
         <div class="span6">
             <?php if($this->get('inv')): ?>
-                <div class="player-inv pull-right">
+                <div class="player-inv pull-right hidden-phone">
                     <div class="player-inv-row clearfix">
                         <?php $this->get('inv')->printRowOne(); ?>
                     </div>
@@ -78,7 +78,7 @@
                         <?php $this->get('inv')->printHotbar(); ?>
                     </div>
                 </div>
-                <div class="player-armor pull-right">
+                <div class="player-armor pull-right hidden-phone">
                     <?php $this->get('inv')->printArmor(); ?>
                 </div>
             <?php endif; ?>
@@ -159,7 +159,7 @@
 
     <div class="row-fluid col-wrap-320">
 
-        <div class="span4 well well-small col">
+        <div class="span4 well well-small">
             <h3>Blocks</h3>
 
             <p>
@@ -204,7 +204,7 @@
             </p>
         </div>
 
-        <div class="span4 well well-small col">
+        <div class="span4 well well-small">
             <h3>Items</h3>
 
             <p>
@@ -250,7 +250,7 @@
             </p>
         </div>
 
-        <div class="span4 well well-small col">
+        <div class="span4 well well-small">
             <h3>Distances</h3>
 
             <p>
@@ -293,7 +293,7 @@
 
     <div class="row-fluid col-wrap-220">
 
-        <div class="span8 well well-small col">
+        <div class="span8 well well-small">
             <h3>Miscellaneous</h3>
             <table class="table table-condensed no-border">
                 <tr>
@@ -379,7 +379,7 @@
             </table>
         </div>
 
-        <div class="span4 well well-small col">
+        <div class="span4 well well-small">
             <h3>Login statistics</h3>
 
             <p>
