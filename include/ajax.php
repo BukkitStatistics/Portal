@@ -19,7 +19,7 @@ if($type == 'search') {
         die($cache->get('search-player'));
 
     try {
-        $res = fORMDatabase::retrieve()->translatedQuery('
+        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
                     SELECT name FROM "prefix_players"
                     ORDER BY name ASC
         ');
@@ -31,7 +31,7 @@ if($type == 'search') {
 
         $json = fJSON::encode($ar);
 
-        $cache->add('search-player', $json, Util::getOption('cache.search', 60 * 60 * 1));
+        $cache->add('search-player.' . DB_TYPE . '.cache', $json, Util::getOption('cache.search', 60 * 60 * 1));
 
         die($json);
 
