@@ -2,7 +2,7 @@
 if(!fRequest::isAjax() || !fRequest::get('api'))
     return;
 
-$type = fRequest::get('type', 'string', 'none');
+$type = strtolower(fRequest::get('type', 'string', 'none'));
 $error = false;
 fJSON::sendHeader();
 
@@ -38,6 +38,13 @@ if($type == 'search') {
     } catch (fException $e) {
         $error = $e;
     }
+}
+
+if($type == 'server_stats') {
+    $ar = ServerStatistic::getValues();
+    $ar['online_players'] = ServerStatistic::getPlayersOnline()->__toString();
+
+    die(fJSON::encode($ar));
 }
 
 if($error) {
