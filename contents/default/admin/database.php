@@ -42,12 +42,20 @@ if(fRequest::isPost() && fRequest::check('save')) {
 
         $tpl->set('prefix', preg_replace('/_$/', '', $tpl->get('prefix')));
 
-        $contents =
-            "<?php \n/*\n* Do not modify this unless you know what you are doing!\n*/\n\ndefine('DB_HOST', '" .
-            $tpl->get('db_host') . "');\ndefine('DB_PORT', '" . $tpl->get('db_port') . "');\ndefine('DB_USER', '" .
-            $tpl->get('db_user') . "');\ndefine('DB_PW', '" . $tpl->get('db_pw') .
-            "');\ndefine('DB_DATABASE', '" . $tpl->get('db_name') . "');\ndefine('DB_PREFIX', '" .
-            $tpl->get('db_prefix') . "');\n";
+        $contents = "<?php
+/*
+* Do not modify this unless you know what you are doing!
+*/
+
+\$db_values = array(
+    'host'     => '" . $tpl->get('db_host') . "',
+    'port'     => '" . $tpl->get('db_port') . "',
+    'user'     => '" . $tpl->get('db_user') . "',
+    'pw'       => '" . $tpl->get('db_pw') . "',
+    'database' => '" . $tpl->get('db_name') . "',
+    'prefix'   => '" . $tpl->get('db_prefix') . "',
+    'type'     => 'default'
+);";
 
         $db_file = new fFile(__INC__ . 'config/db.php');
         $db_file->write($contents);

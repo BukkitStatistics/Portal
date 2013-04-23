@@ -18,5 +18,4 @@ define('DEVELOPMENT', true);
 define('DEBUG', true);
 
 include_once __INC__ . 'config/version.php';
-include_once __INC__ . 'config/db.php';
 include_once __INC__ . 'loader.php';

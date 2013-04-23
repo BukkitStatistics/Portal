@@ -15,6 +15,17 @@ if(DEBUG) {
     fCore::registerDebugCallback(Util::handleDebug);
 }
 
+/*
+ * Define db values
+ */
+include_once __INC__ . 'config/db.php';
+define('DB_HOST', $db_values['host']);
+define('DB_PORT', $db_values['port']);
+define('DB_USER', $db_values['user']);
+define('DB_PW', $db_values['pw']);
+define('DB_DATABASE', $db_values['database']);
+define('DB_PREFIX', $db_values['prefix']);
+
 fSession::setLength('1day', '1week');
 fSession::open();
 
@@ -34,7 +45,7 @@ try {
 /*
  * Initializes ORM
  */
-include __INC__ . 'orm.php';
+include_once __INC__ . 'orm.php';
 
 
 /*
@@ -64,7 +75,7 @@ fAuthorization::setLoginPage('?page=login');
  * Include ajax call handling
  * Handles for example api calls
  */
-include __INC__ . 'ajax.php';
+include_once __INC__ . 'ajax.php';
 
 /**
  * Automatically includes classes
