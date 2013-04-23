@@ -23,7 +23,7 @@ class ServerStatistic {
             return;
 
         try {
-            self::$db = fORMDatabase::retrieve();
+            self::$db = fORMDatabase::retrieve('name:' . DB_TYPE);
 
             $res = self::$db->translatedQuery('
                         SELECT * FROM "prefix_server_statistics"
@@ -40,6 +40,17 @@ class ServerStatistic {
         }
 
         fCore::debug(array('server statistics: ', self::$values));
+    }
+
+    /**
+     * Returns all server statistics rows.
+     *
+     * @return array
+     */
+    public static function getValues() {
+        self::calcValues();
+
+        return self::$values;
     }
 
     /**

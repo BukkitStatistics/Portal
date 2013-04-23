@@ -415,4 +415,19 @@ class Util {
 
         return $result;
     }
+
+    public static function getFileContents($url, $ajax = false) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_URL, $url);
+
+        if($ajax) {
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('X-Requested-With: XMLHttpRequest'));
+        }
+        $data = curl_exec($ch);
+        curl_close($ch);
+
+        return $data;
+    }
 }
