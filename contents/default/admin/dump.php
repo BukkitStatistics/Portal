@@ -3,7 +3,7 @@ $tpl = Util::newTpl($this, 'admin/dump', 'sub');
 
 if(fRequest::isPost() && fRequest::check('save')) {
     try {
-        $db = fORMDatabase::retrieve();
+        $db = fORMDatabase::retrieve('name:' . DB_TYPE);
 
         if(fRequest::get('dump_players', 'int')) {
             $db->translatedExecute('
