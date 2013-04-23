@@ -88,7 +88,6 @@
                                 class="text-info">To track the players immediately set value to <strong>0</strong>.</span>
                         </span>
                 </fieldset>
-                </fieldset>
             </div>
         </div>
     </div>

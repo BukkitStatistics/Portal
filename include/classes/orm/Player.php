@@ -10,7 +10,7 @@ class Player extends fActiveRecord {
      * @return int
      */
     public static function countTotalPlaytime() {
-        $res = fORMDatabase::retrieve()->translatedQuery('
+        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
                         SELECT SUM(playtime)
                         FROM "prefix_players"
         ');
@@ -29,7 +29,7 @@ class Player extends fActiveRecord {
     }
 
     public static function getPlayerId($name) {
-        $res = fORMDatabase::retrieve()->translatedQuery('
+        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
             SELECT player_id
             FROM "prefix_players"
             WHERE name = %s
@@ -82,7 +82,7 @@ class Player extends fActiveRecord {
                       )
             ';
 
-        $res = fORMDatabase::retrieve()->translatedQuery($sql);
+        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery($sql);
 
         try {
             return new fNumber($res->fetchScalar());
@@ -99,7 +99,7 @@ class Player extends fActiveRecord {
      * @return fNumber
      */
     public static function countAllLogins() {
-        $res = fORMDatabase::retrieve()->translatedQuery('
+        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
                         SELECT SUM(logins)
                         FROM "prefix_players"
         ');
@@ -120,7 +120,7 @@ class Player extends fActiveRecord {
      * @return array
      */
     public static function getMostDangerous() {
-        $res = fORMDatabase::retrieve()->translatedQuery('
+        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
                     SELECT SUM(pvp.times) AS total, pvp.player_id FROM "prefix_total_pvp_kills" pvp
                     GROUP BY pvp.player_id
                     ORDER BY SUM(pvp.times) DESC
@@ -148,7 +148,7 @@ class Player extends fActiveRecord {
      * @return array
      */
     public static function getMostKilled() {
-        $res = fORMDatabase::retrieve()->translatedQuery('
+        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
                     SELECT SUM(pvp.times) AS total, pvp.victim_id FROM "prefix_total_pvp_kills" pvp
                     GROUP BY pvp.victim_id
                     ORDER BY SUM(pvp.times) DESC

@@ -35,6 +35,19 @@
                     <li><a href="#deaths"><i class="icon-tint"></i> Death Log</a></li>
                 </ul>
             </div>
+            <?php if(DB_TYPE == 'default' && count($this->get('multi')) > 0): ?>
+            <div class="well">
+                <h4>Other servers</h4>
+                <?php foreach($this->get('multi') as $server): ?>
+                    <a href="?server=<?php echo $server['slug']; ?>"><?php echo $server['name']; ?></a>
+                    <br>
+                <?php endforeach; ?>
+            </div>
+            <?php else: ?>
+            <div class="well">
+                <a href="?server=default"><h4><i class="icon-reply"></i> Back to main server</h4></a>
+            </div>
+            <?php endif;?>
         </div>
         <!-- </navigation> -->
 

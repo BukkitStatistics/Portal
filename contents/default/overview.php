@@ -22,6 +22,10 @@ $tpl->set('total_items', $this->get('total_items'));
 $this->inject('mod/death_log.php');
 $tpl->set('death_log', $this->get('death_log'));
 
+// multi server
+if(DB_TYPE == 'default')
+    $tpl->set('multi', unserialize(Util::getOption('servers')));
+
 // server stats in dashboard
 $ts_zero = new fTimestamp(0);
 $server_stats['startup'] = $ts_zero->eq(ServerStatistic::getStartup()) ==

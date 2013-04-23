@@ -35,7 +35,7 @@ class Util {
             return $cacheSingle->get($option);
 
         try {
-            $db = fORMDatabase::retrieve();
+            $db = fORMDatabase::retrieve('name:' . DB_TYPE);
             $res = $db->translatedQuery('SELECT `value` FROM "prefix_settings" WHERE `key` = %s',
                                         $option)->fetchScalar();
 
@@ -80,7 +80,7 @@ class Util {
             return false;
 
         try {
-            $db = fORMDatabase::retrieve();
+            $db = fORMDatabase::retrieve('name:' . DB_TYPE);
             $updated = $db->translatedQuery('UPDATE "prefix_settings" SET "value"=%s WHERE "key"=%s', $value,
                                             $option)->countAffectedRows();
             if($updated <= 0)
@@ -165,6 +165,9 @@ class Util {
         $tpl = new fTemplating($context->get('tplRoot'), $tplName . '.tpl');
         $context->set($tplKey, $tpl);
 
+        if(!is_null($context->get('tplRoot')))
+            $tpl->set('tplRoot', $context->get('tplRoot'));
+
         return $tpl;
     }
 
@@ -178,6 +181,10 @@ class Util {
         global $cache, $lang;
 
         $error = false;
+        $server = '';
+
+        if(DB_TYPE != 'default')
+            $server = DB_TYPE;
 
         fBuffer::startCapture();
         $design = new fTemplating(__ROOT__ . 'contents/default', __ROOT__ . 'templates/default/index.php');
@@ -218,7 +225,7 @@ class Util {
            && !fMessaging::check('no-cache', '{cache}')
            && $content != 'error.php'
         ) {
-            if($cache->set($content . '.cache', $capture, Util::getOption('cache.pages', 60)))
+            if($cache->set($content . '.' . $server . '.cache', $capture, Util::getOption('cache.pages', 60)))
                 fCore::debug('cached for ' . Util::getOption('cache.pages', 60) . ' seconds: ' . $content);
         }
 
@@ -242,10 +249,15 @@ class Util {
         if(DEVELOPMENT || fMessaging::check('*', '{errors}'))
             return;
 
+        $server = '';
+
         if(fRequest::get('name', 'string') != '' && $content != 'error.php')
             $content = $content . '_' . fRequest::get('name', 'string');
 
-        $cached = $cache->get($content . '.cache');
+        if(DB_TYPE != 'default')
+            $server = DB_TYPE;
+
+        $cached = $cache->get($content . '.' . $server . '.cache');
 
         if($cached == null)
             return;
@@ -253,7 +265,7 @@ class Util {
         fCore::debug('returned cached: ' . $cached);
 
         try {
-            $file = new fFile(__ROOT__ . 'cache/files/' . $content . '.cache');
+            $file = new fFile(__ROOT__ . 'cache/files/' . $content . '.' . $server . '.cache');
             $time = $file->getMTime();
             $text = '
                 <small>
