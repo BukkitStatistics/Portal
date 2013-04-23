@@ -18,6 +18,18 @@ function init() {
     });
 }
 
+function string_to_slug(str, spacer) {
+    if(spacer == undefined)
+        spacer = '-';
+
+    str = str.replace(/^\s+|\s+$/g, ''); // trim
+    str = str.toLowerCase();
+
+    str = str.replace(/[^A-Za-z0-9]+/g, spacer);
+
+    return str;
+}
+
 function callModulePage(id, total, page, max) {
     if (max == undefined)
         max = 5;

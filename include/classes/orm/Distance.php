@@ -20,7 +20,7 @@ class Distance extends fActiveRecord {
 
             if($type == 'total') {
                 $count = 0;
-                $res = fORMDatabase::retrieve()->translatedQuery('
+                $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
                         SHOW COLUMNS
                         FROM "prefix_distances"
                         WHERE Field != %s
@@ -28,7 +28,7 @@ class Distance extends fActiveRecord {
                 ', 'distance_player_id', 'player_id');
 
                 foreach($res as $col) {
-                    $col_res = fORMDatabase::retrieve()->translatedQuery('
+                    $col_res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
                         SELECT SUM(' . $col['Field'] . ')
                         FROM "prefix_distances"
                         ' . $where . '
@@ -38,7 +38,7 @@ class Distance extends fActiveRecord {
                 }
             }
             else {
-                $res = fORMDatabase::retrieve()->translatedQuery('
+                $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
                         SELECT SUM(' . $type . ')
                         FROM "prefix_distances"
                         ' . $where . '

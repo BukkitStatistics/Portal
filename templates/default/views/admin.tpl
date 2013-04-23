@@ -51,6 +51,15 @@
                 <h3>Dump data</h3>
             </a>
         </div>
+        <div class="row-fluid">
+            <?php if(DB_TYPE == 'default'): ?>
+            <a href="?page=admin&sub=multi" class="span2 offset3 well well-small force-center">
+                <h2><i class="icon-sitemap icon-3x"></i></h2>
+
+                <h3>Multi Portal</h3>
+            </a>
+            <?php endif;?>
+        </div>
     <?php endif; ?>
 <div class="row-fluid">
     <div class="span12">

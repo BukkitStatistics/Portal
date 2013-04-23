@@ -16,18 +16,35 @@ if(DEBUG) {
 }
 
 /*
+ * Open session
+ */
+fSession::setLength('1day', '1week');
+fSession::open();
+
+/*
+ * Save active server to session
+ */
+if(fRequest::check('server'))
+    fSession::set('server', fRequest::get('server', 'string'));
+
+/*
  * Define db values
  */
-include_once __INC__ . 'config/db.php';
+$db_file = 'none';
+if(fSession::get('server'))
+    $db_file = __INC__ . 'config/db_' . fSession::get('server', 'string') .'.php';
+
+if(!file_exists($db_file))
+    $db_file =  __INC__ . 'config/db.php';
+
+include $db_file;
 define('DB_HOST', $db_values['host']);
 define('DB_PORT', $db_values['port']);
 define('DB_USER', $db_values['user']);
 define('DB_PW', $db_values['pw']);
 define('DB_DATABASE', $db_values['database']);
 define('DB_PREFIX', $db_values['prefix']);
-
-fSession::setLength('1day', '1week');
-fSession::open();
+define('DB_TYPE', $db_values['type']);
 
 /*
  * Initialize cache
