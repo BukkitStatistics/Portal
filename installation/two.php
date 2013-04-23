@@ -72,12 +72,20 @@ if(fRequest::isPost() && fRequest::get('db_submit')) {
         $db_file = new fFile(__INC__ . 'config/db.php');
 
         if(!fMessaging::check('validation', 'install/two')) {
-            $contents =
-                "<?php \n/*\n* Do not modify this unless you know what you are doing!\n*/\n\ndefine('DB_HOST', '" .
-                $tpl->get('host') . "');\ndefine('DB_PORT', '" . $tpl->get('port') . "');\ndefine('DB_USER', '" .
-                $tpl->get('user') . "');\ndefine('DB_PW', '" . $tpl->get('pw') .
-                "');\ndefine('DB_DATABASE', '" . $tpl->get('database') . "');\ndefine('DB_PREFIX', '" .
-                $tpl->get('prefix') . "');\n";
+            $contents = "<?php
+/*
+* Do not modify this unless you know what you are doing!
+*/
+
+\$db_values = array(
+    'host'     => '" . $tpl->get('host') . "',
+    'port'     => '" . $tpl->get('port') . "',
+    'user'     => '" . $tpl->get('user') . "',
+    'pw'       => '" . $tpl->get('pw') . "',
+    'database' => '" . $tpl->get('database') . "',
+    'prefix'   => '" . $tpl->get('prefix') . "',
+    'type'     => 'default'
+);";
 
             $db_file->write($contents);
         }
