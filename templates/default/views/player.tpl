@@ -37,7 +37,7 @@
 
             <div class="bar-container">
                 <div class="xpbar-cur">
-                    <strong><?php echo $this->get('misc')->getExpLevel(); ?>000</strong>
+                    <strong><?php echo $this->get('misc')->getExpLevel(); ?></strong>
                 </div>
                 <div class="row-fluid">
                     <div class="span12">
