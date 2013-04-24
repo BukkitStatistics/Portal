@@ -39,14 +39,24 @@
                 <div class="xpbar-cur">
                     <strong><?php echo $this->get('misc')->getExpLevel(); ?></strong>
                 </div>
-
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="armor-bar">
+                            <?php echo $this->get('misc')->getArmorBar(); ?>
+                        </div>
+                    </div>
+                </div>
                 <div class="row-fluid" id="playerhead-bars">
-                    <div class="span6 heart-bars">
-                        <?php echo $this->get('misc')->getHealthBar(); ?>
+                    <div class="span6">
+                        <div class="heart-bar clearfix">
+                            <?php echo $this->get('misc')->getHealthBar(); ?>
+                        </div>
                     </div>
 
-                    <div class="span6 hunger-bars">
-                        <?php echo $this->get('misc')->getFoodBar(); ?>
+                    <div class="span6">
+                        <div class="hunger-bar">
+                            <?php echo $this->get('misc')->getFoodBar(); ?>
+                        </div>
                     </div>
                 </div>
 

@@ -21,9 +21,17 @@ class Material extends fActiveRecord {
     public static function getMaterialImg($material, $size = 32, $classes = null, $tooltip = false) {
         global $lang;
 
-        if(is_string($material))
-            $material = new Material($material);
-        $tp_name = $material->getTpName();
+        if(is_string($material)) {
+            try {
+                $material = new Material($material);
+                $tp_name = $material->getTpName();;
+            } catch(fNotFoundException $e) {
+                fCore::debug($e);
+                $tp_name = 'none';
+            }
+        }
+        else
+            $tp_name = $material->getTpName();
 
         $path = __ROOT__ . 'media/img/materials/';
         $img = $path . $tp_name . '.png';
@@ -44,7 +52,7 @@ class Material extends fActiveRecord {
         $title = 'title="' . fText::compose($tp_name) . '"';
 
         $tooltip_data = '';
-        if(count($material->getEnchantments())) {
+        if(is_object($material) && count($material->getEnchantments())) {
             // load enchantment translation
             $lang->load('enchantments');
 
