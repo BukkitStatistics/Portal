@@ -22,7 +22,7 @@
         </div>
         <div class="row-fluid">
             <div class="span12">
-                <?php if(count($this->get('servers')) > 0): ?>
+                <?php if($this->get('servers')): ?>
                     <table class="table">
                         <thead>
                         <tr>
