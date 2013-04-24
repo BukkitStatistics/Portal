@@ -44,8 +44,8 @@
                         fURL::getDomain() . fURL::get() . '?server=' . $server['slug'] . '&api=true&type=server_stats',
                         true);
                     $info = fJSON::decode($info, true);
-                ?>
-                <?php if($info['current_uptime'] > 0): ?>
+                    ?>
+                    <?php if($info['current_uptime'] > 0): ?>
                     <i class="icon-circle text-success"></i>
                 <?php else: ?>
                     <i class="icon-circle text-error"></i>
@@ -86,33 +86,33 @@
         <table class="table no-border statbox-table-small">
             <tr>
                 <td>
-                                <span class="label label-info">
-                                    <i class="icon-bell"></i> <?php echo $this->get('serverstats[startup]'); ?>
-                                </span>
+                    <span class="label label-info">
+                        <i class="icon-bell"></i> <?php echo $this->get('serverstats[startup]'); ?>
+                    </span>
                 </td>
                 <td>Startup</td>
             </tr>
             <tr>
                 <td>
-                                <span class="label label-warning">
-                                    <i class="icon-lock"></i> <?php echo $this->get('serverstats[shutdown]'); ?>
-                                </span>
+                    <span class="label label-warning">
+                        <i class="icon-lock"></i> <?php echo $this->get('serverstats[shutdown]'); ?>
+                    </span>
                 </td>
                 <td>Shutdown</td>
             </tr>
             <tr>
                 <td>
-                                <span class="label label-important">
-                                    <i class="icon-calendar"></i> <?php echo $this->get('serverstats[cur_uptime]'); ?>
-                                </span>
+                    <span class="label label-important">
+                        <i class="icon-calendar"></i> <?php echo $this->get('serverstats[cur_uptime]'); ?>
+                    </span>
                 </td>
                 <td>Uptime</td>
             </tr>
             <tr>
                 <td>
-                                <span class="label label-info">
-                                    <i class="icon-bullhorn"></i> <?php echo $this->get('serverstats[playtime]'); ?>
-                                </span>
+                    <span class="label label-info">
+                        <i class="icon-bullhorn"></i> <?php echo $this->get('serverstats[playtime]'); ?>
+                    </span>
                 </td>
                 <td>Gameplay</td>
             </tr>
@@ -125,33 +125,33 @@
         <table class="table no-border statbox-table-small">
             <tr>
                 <td>
-                                <span class="label label-info">
-                                    <i class="icon-group"></i> <?php echo $this->get('players[online]'); ?>
-                                </span>
+                    <span class="label label-info">
+                        <i class="icon-group"></i> <?php echo $this->get('players[online]'); ?>
+                    </span>
                 </td>
                 <td>Currently online</td>
             </tr>
             <tr>
                 <td>
-                                <span class="label label-important">
-                                    <i class="icon-star"></i> <?php echo $this->get('players[tracked]'); ?>
-                                </span>
+                    <span class="label label-important">
+                        <i class="icon-star"></i> <?php echo $this->get('players[tracked]'); ?>
+                    </span>
                 </td>
                 <td>Tracked</td>
             </tr>
             <tr>
                 <td>
-                                <span class="label label-success">
-                                    <i class="icon-signal"></i> <?php echo $this->get('serverstats[max_players]'); ?>
-                                </span>
+                    <span class="label label-success">
+                        <i class="icon-signal"></i> <?php echo $this->get('serverstats[max_players]'); ?>
+                    </span>
                 </td>
                 <td>Maximum</td>
             </tr>
             <tr>
                 <td>
-                                <span class="label label-info">
-                                    <i class="icon-fire"></i> <?php echo $this->get('serverstats[total_logins]'); ?>
-                                </span>
+                    <span class="label label-info">
+                        <i class="icon-fire"></i> <?php echo $this->get('serverstats[total_logins]'); ?>
+                    </span>
                 </td>
                 <td>Total logins</td>
             </tr>
@@ -162,37 +162,37 @@
         <table class="table no-border statbox-table-small">
             <tr>
                 <td>
-                                <span class="label label-info">
-                                    <i class="icon-plus"></i> <?php echo $this->get('blocks[placed]'); ?>
-                                </span>
+                    <span class="label label-info">
+                        <i class="icon-plus"></i> <?php echo $this->get('blocks[placed]'); ?>
+                    </span>
                 </td>
                 <td>Placed</td>
             </tr>
             <tr>
                 <td>
-                                <span class="label label-info">
-                                    <?php echo Material::getMaterialImg($this->get('blocks[most_placed][1]'), 16, null,
-                                                                        true); ?>
-                                    <?php echo $this->get('blocks[most_placed][0]'); ?>
-                                </span>
+                    <span class="label label-info">
+                        <?php echo Material::getMaterialImg($this->get('blocks[most_placed][1]'), 16, null,
+                                                            true); ?>
+                        <?php echo $this->get('blocks[most_placed][0]'); ?>
+                    </span>
                 </td>
                 <td>Top placed</td>
             </tr>
             <tr>
                 <td>
-                                <span class="label label-info">
-                                    <i class="icon-minus"></i> <?php echo $this->get('blocks[destroyed]'); ?>
-                                </span>
+                    <span class="label label-info">
+                        <i class="icon-minus"></i> <?php echo $this->get('blocks[destroyed]'); ?>
+                    </span>
                 </td>
                 <td>Broken</td>
             </tr>
             <tr>
                 <td>
-                                <span class="label label-info">
-                                    <?php echo Material::getMaterialImg($this->get('blocks[most_destroyed][1]'), 16,
-                                                                        null, true); ?>
-                                    <?php echo $this->get('blocks[most_destroyed][0]'); ?>
-                                </span>
+                    <span class="label label-info">
+                        <?php echo Material::getMaterialImg($this->get('blocks[most_destroyed][1]'), 16,
+                                                            null, true); ?>
+                        <?php echo $this->get('blocks[most_destroyed][0]'); ?>
+                    </span>
                 </td>
                 <td>Top broken</td>
             </tr>
@@ -203,37 +203,37 @@
         <table class="table no-border statbox-table-small">
             <tr>
                 <td>
-                                <span class="label label-info">
-                                    <i class="icon-plus"></i> <?php echo $this->get('items[picked]'); ?>
-                                </span>
+                    <span class="label label-info">
+                        <i class="icon-plus"></i> <?php echo $this->get('items[picked]'); ?>
+                    </span>
                 </td>
                 <td>Picked up</td>
             </tr>
             <tr>
                 <td>
-                                <span class="label label-info">
-                                    <?php echo Material::getMaterialImg($this->get('items[most_picked][1]'), 16, null,
-                                                                        true); ?>
-                                    <?php echo $this->get('items[most_picked][0]'); ?>
-                                </span>
+                    <span class="label label-info">
+                        <?php echo Material::getMaterialImg($this->get('items[most_picked][1]'), 16, null,
+                                                            true); ?>
+                        <?php echo $this->get('items[most_picked][0]'); ?>
+                    </span>
                 </td>
                 <td>Most picked up</td>
             </tr>
             <tr>
                 <td>
-                                <span class="label label-info">
-                                    <i class="icon-minus"></i> <?php echo $this->get('items[dropped]'); ?>
-                                </span>
+                    <span class="label label-info">
+                        <i class="icon-minus"></i> <?php echo $this->get('items[dropped]'); ?>
+                    </span>
                 </td>
                 <td>Dropped</td>
             </tr>
             <tr>
                 <td>
-                                <span class="label label-info">
-                                    <?php echo Material::getMaterialImg($this->get('items[most_dropped][1]'), 16, null,
-                                                                        true); ?>
-                                    <?php echo $this->get('items[most_dropped][0]'); ?>
-                                </span>
+                    <span class="label label-info">
+                        <?php echo Material::getMaterialImg($this->get('items[most_dropped][1]'), 16, null,
+                                                            true); ?>
+                        <?php echo $this->get('items[most_dropped][0]'); ?>
+                    </span>
                 </td>
                 <td>Most dropped</td>
             </tr>
@@ -246,49 +246,49 @@
         <table class="table no-border statbox-table-small">
             <tr>
                 <td>
-                                <span class="label label-info">
-                                    <i class="icon-globe"></i> <?php echo $this->get('distance[total]'); ?>
-                                </span>
+                    <span class="label label-info">
+                        <i class="icon-globe"></i> <?php echo $this->get('distance[total]'); ?>
+                    </span>
                 </td>
                 <td>Total</td>
             </tr>
             <tr>
                 <td>
-                                <span class="label label-info">
-                                    <i class="icon-exchange"></i> <?php echo $this->get('distance[foot]'); ?>
-                                </span>
+                    <span class="label label-info">
+                        <i class="icon-exchange"></i> <?php echo $this->get('distance[foot]'); ?>
+                    </span>
                 </td>
                 <td>By foot</td>
             </tr>
             <tr>
                 <td>
-                                <span class="label label-info">
-                                    <i class="icon-shopping-cart"></i> <?php echo $this->get('distance[minecart]'); ?>
-                                </span>
+                    <span class="label label-info">
+                        <i class="icon-shopping-cart"></i> <?php echo $this->get('distance[minecart]'); ?>
+                    </span>
                 </td>
                 <td>By minecart</td>
             </tr>
             <tr>
                 <td>
-                                <span class="label label-info">
-                                    <i class="icon-tablet"></i> <?php echo $this->get('distance[boat]'); ?>
-                                </span>
+                    <span class="label label-info">
+                        <i class="icon-tablet"></i> <?php echo $this->get('distance[boat]'); ?>
+                    </span>
                 </td>
                 <td>By boat</td>
             </tr>
             <tr>
                 <td>
-                                <span class="label label-info">
-                                    <i class="icon-umbrella"></i> <?php echo $this->get('distance[swim]'); ?>
-                                </span>
+                    <span class="label label-info">
+                        <i class="icon-umbrella"></i> <?php echo $this->get('distance[swim]'); ?>
+                    </span>
                 </td>
                 <td>Swum</td>
             </tr>
             <tr>
                 <td>
-                                <span class="label label-info">
-                                    <i class="icon-fighter-jet"></i> <?php echo $this->get('distance[flight]'); ?>
-                                </span>
+                    <span class="label label-info">
+                        <i class="icon-fighter-jet"></i> <?php echo $this->get('distance[flight]'); ?>
+                    </span>
                 </td>
                 <td>Flight</td>
             </tr>
@@ -299,79 +299,79 @@
 
         <div class="row-fluid grid">
             <div class="span4">
-                            <span class="badge badge-success no-img">
-                                <?php echo $this->get('deaths[total]'); ?>
-                            </span>
+                <span class="badge badge-success no-img">
+                    <?php echo $this->get('deaths[total]'); ?>
+                </span>
                 Total Kills
             </div>
             <div class="span4">
-                            <span class="badge badge-success no-img">
-                                <?php echo $this->get('deaths[deaths]'); ?>
-                            </span>
+                <span class="badge badge-success no-img">
+                    <?php echo $this->get('deaths[deaths]'); ?>
+                </span>
                 Total Deaths
             </div>
             <div class="span4">
-                            <span class="badge badge-success grid-img">
-                                <?php echo Material::getMaterialImg($this->get('deaths[top_weapon][1]'), 32, null,
-                                                                    true); ?>
-                            </span>
+                <span class="badge badge-success grid-img">
+                    <?php echo Material::getMaterialImg($this->get('deaths[top_weapon][1]'), 32, null,
+                                                        true); ?>
+                </span>
                 Best Weapon
             </div>
         </div>
         <div class="row-fluid grid">
             <div class="span4">
-                            <span class="badge badge-success no-img">
-                                <?php echo $this->get('deaths[pve]'); ?>
-                            </span>
+                <span class="badge badge-success no-img">
+                    <?php echo $this->get('deaths[pve]'); ?>
+                </span>
                 PvE Kills
             </div>
             <div class="span4">
-                            <span class="badge badge-success grid-img">
-                                <?php echo Entity::getEntityImg($this->get('deaths[most_dangerous][1]'), 32, null,
-                                                                true); ?>
-                            </span>
+                <span class="badge badge-success grid-img">
+                    <?php echo Entity::getEntityImg($this->get('deaths[most_dangerous][1]'), 32, null,
+                                                    true); ?>
+                </span>
                 Most Dangerous
             </div>
             <div class="span4">
-                            <span class="badge badge-success grid-img">
-                                <?php echo Entity::getEntityImg($this->get('deaths[most_killed_mob][1]'), 32, null,
-                                                                true); ?>
-                            </span>
+                <span class="badge badge-success grid-img">
+                    <?php echo Entity::getEntityImg($this->get('deaths[most_killed_mob][1]'), 32, null,
+                                                    true); ?>
+                </span>
                 Most killed
             </div>
         </div>
         <div class="row-fluid grid">
             <div class="span4">
-                            <span class="badge badge-success no-img">
-                                <?php echo $this->get('deaths[pvp]'); ?>
-                            </span>
+                <span class="badge badge-success no-img">
+                    <?php echo $this->get('deaths[pvp]'); ?>
+                </span>
                 PvP Kills
             </div>
             <div class="span4">
-                            <span class="badge badge-important grid-img">
-                                <?php if($this->get('deaths[top_killer][1]')->getName() != 'none'): ?>
-                                    <a href="?page=player&name=<?php echo $this->get('deaths[top_killer][1]')->getName(); ?>">
-                                        <?php echo $this->get('deaths[top_killer][1]')->getPlayerHead(32, null,
-                                                                                                      true); ?>
-                                    </a>
-                                <?php else: ?>
-                                    <?php echo $this->get('deaths[top_killer][1]')->getPlayerHead(); ?>
-                                <?php endif; ?>
-                            </span>
+                <span class="badge badge-important grid-img">
+                    <?php if($this->get('deaths[top_killer][1]')->getName() != 'none'): ?>
+                        <a href="?page=player&name=<?php echo $this->get('deaths[top_killer][1]')->getName(); ?>">
+                            <?php echo $this->get('deaths[top_killer][1]')->getPlayerHead(32, null,
+                                                                                          true); ?>
+                        </a>
+                    <?php else: ?>
+                        <?php echo $this->get('deaths[top_killer][1]')->getPlayerHead(); ?>
+                    <?php endif; ?>
+                </span>
                 Most Kills
             </div>
             <div class="span4">
-                            <span class="badge badge-important grid-img">
-                                <?php if($this->get('deaths[most_killed_player][1]')->getName() != 'none'): ?>
-                                    <a href="?page=player&name=<?php echo $this->get('deaths[most_killed_player][1]')
-                                        ->getName(); ?>">
-                                        <?php echo $this->get('deaths[most_killed_player][1]')->getPlayerHead(32, null,
-                                                                                                              true); ?>
-                                    </a>
-                                <?php else: ?>
-                                    <?php echo $this->get('deaths[most_killed_player][1]')->getPlayerHead(); ?>
-                                <?php endif; ?>
-                            </span>
+                <span class="badge badge-important grid-img">
+                    <?php if($this->get('deaths[most_killed_player][1]')->getName() != 'none'): ?>
+                        <a href="?page=player&name=<?php echo $this->get('deaths[most_killed_player][1]')
+                            ->getName(); ?>">
+                            <?php echo $this->get('deaths[most_killed_player][1]')->getPlayerHead(32, null,
+                                                                                                  true); ?>
+                        </a>
+                    <?php else: ?>
+                        <?php echo $this->get('deaths[most_killed_player][1]')->getPlayerHead(); ?>
+                    <?php endif; ?>
+                </span>
                 Most Deaths
             </div>
         </div>
