@@ -29,7 +29,7 @@ class MiscInfoPlayer extends fActiveRecord {
                 if(!is_null($bg))
                     $cur = '<img src="' . fFilesystem::translateToWebPath($bg) . '" alt="bar-none">';
 
-            $s .= $cur. "\n";
+            $s .= $cur . "\n";
         }
 
         return $s;
@@ -42,8 +42,8 @@ class MiscInfoPlayer extends fActiveRecord {
      * @return string
      */
     public function getFoodBar() {
-        return $this->makeBar($this->getFoodLevel() , __ROOT__ . 'media/img/misc/hunger-full.png',
-                                __ROOT__ . 'media/img/misc/hunger-half.png', __ROOT__ . 'media/img/misc/hunger-bg.png');
+        return $this->makeBar($this->getFoodLevel(), __ROOT__ . 'media/img/misc/hunger-full.png',
+                              __ROOT__ . 'media/img/misc/hunger-half.png', __ROOT__ . 'media/img/misc/hunger-bg.png');
     }
 
     /**
@@ -53,8 +53,20 @@ class MiscInfoPlayer extends fActiveRecord {
      * @return string
      */
     public function getHealthBar() {
-        return $this->makeBar($this->getHealth() , __ROOT__ . 'media/img/misc/heart-full.png', __ROOT__ . 'media/img/misc/heart-half.png',
-                                __ROOT__ . 'media/img/misc/heart-bg.png');
+        return $this->makeBar($this->getHealth(), __ROOT__ . 'media/img/misc/heart-full.png',
+                              __ROOT__ . 'media/img/misc/heart-half.png',
+                              __ROOT__ . 'media/img/misc/heart-bg.png');
+    }
+
+    /**
+     * Returns the full armor bar with half and full armor.<br>
+     * The missing parts are not displayed.
+     *
+     * @return string
+     */
+    public function getArmorBar() {
+        return $this->makeBar($this->getArmorRating(), __ROOT__ . 'media/img/misc/armor-full.png',
+                              __ROOT__ . 'media/img/misc/armor-half.png');
     }
 
     /**
