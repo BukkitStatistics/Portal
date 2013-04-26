@@ -33,7 +33,7 @@ class Material extends fActiveRecord {
         else
             $tp_name = $material->getTpName();
 
-        $path = __ROOT__ . 'media/img/materials/';
+        $path = 'media/img/materials/';
         $img = $path . $tp_name . '.png';
 
         if(!file_exists($img))
