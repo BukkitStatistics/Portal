@@ -185,7 +185,7 @@
                     echo $block->getImage(32, null ,true);
                     ?>
                     <?php
-                    echo $this->get('blocks[most_placed]')->getPlaced()->format();
+                    echo $this->get('blocks[most_placed]')->preparePlaced();
                 else:
                     ?>
                     <em>none</em>
@@ -206,7 +206,7 @@
                     ?>
 
                     <?php
-                    echo $this->get('blocks[most_destroyed]')->getDestroyed()->format();
+                    echo $this->get('blocks[most_destroyed]')->prepareDestroyed();
                 else:
                     ?>
                     <em>none</em>
@@ -231,7 +231,7 @@
                     ?>
 
                     <?php
-                    echo $this->get('items[most_picked]')->getPickedUp()->format();
+                    echo $this->get('items[most_picked]')->preparePickedUp();
                 else:
                     ?>
                     <em>none</em>
@@ -252,7 +252,7 @@
                     ?>
 
                     <?php
-                    echo $this->get('items[most_dropped]')->getDropped()->format();
+                    echo $this->get('items[most_dropped]')->prepareDropped();
                 else:
                     ?>
                     <em>none</em>
@@ -532,7 +532,7 @@
 
                 <p>
                     <strong>Kills:</strong>
-                    <?php echo $this->get('pve[most_killed]')->getCreatureKilled()->format(); ?>
+                    <?php echo $this->get('pve[most_killed]')->prepareCreatureKilled(); ?>
                 </p>
                 <p>
                     <strong>Used weapon:</strong>
@@ -557,7 +557,7 @@
 
                 <p>
                     <strong>Kills:</strong>
-                    <?php echo $this->get('pve[most_killed_by]')->getPlayerKilled()->format(); ?>
+                    <?php echo $this->get('pve[most_killed_by]')->preparePlayerKilled(); ?>
                 </p>
                 <p>
                     <strong>Used weapon:</strong>
@@ -612,10 +612,10 @@
                             <?php echo $block->getName(); ?>
                         </td>
                         <td>
-                            <?php echo $total->getDestroyed()->format(); ?>
+                            <?php echo $total->prepareDestroyed(); ?>
                         </td>
                         <td>
-                            <?php echo $total->getPlaced()->format(); ?>
+                            <?php echo $total->preparePlaced(); ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -644,10 +644,10 @@
                             <?php echo $item->getName(); ?>
                         </td>
                         <td>
-                            <?php echo $total->getPickedUp()->format(); ?>
+                            <?php echo $total->preparePickedUp(); ?>
                         </td>
                         <td>
-                            <?php echo $total->getDropped()->format(); ?>
+                            <?php echo $total->prepareDropped(); ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
