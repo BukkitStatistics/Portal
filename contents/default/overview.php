@@ -98,6 +98,7 @@ if(DB_TYPE == 'default')
 
 $server->set('serverstats', $server_stats);
 $headbar->set('players', $player_stats);
+$headbar->set('serverstats', $server_stats);
 $players->set('players', $player_stats);
 $players->set('serverstats', $server_stats);
 $blocks->set('blocks', $block_stats);
