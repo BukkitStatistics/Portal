@@ -102,7 +102,7 @@ class PlayerInventory extends fActiveRecord {
      * @return bool|string
      */
     private function getEffect($effect) {
-        $path = __ROOT__ . 'media/img/effects/';
+        $path = 'media/img/effects/';
         $id = strlen($effect['effect_id']) > 1 ? $effect['effect_id'] : 0 . $effect['effect_id'];
         $img = $path . 'effect_' . $id . '.png';
 

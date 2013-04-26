@@ -16,7 +16,7 @@ class Entity extends fActiveRecord {
      * @return string
      */
     public static function getEntityImg($tp_name, $size = 32, $classes = null, $tooltip = false) {
-        $path = __ROOT__ . 'media/img/entities/';
+        $path = 'media/img/entities/';
         $img = $path . $tp_name . '.png';
 
         if(!file_exists($img))

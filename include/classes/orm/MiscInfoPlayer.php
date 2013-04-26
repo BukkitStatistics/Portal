@@ -42,8 +42,8 @@ class MiscInfoPlayer extends fActiveRecord {
      * @return string
      */
     public function getFoodBar() {
-        return $this->makeBar($this->getFoodLevel(), __ROOT__ . 'media/img/misc/hunger-full.png',
-                              __ROOT__ . 'media/img/misc/hunger-half.png', __ROOT__ . 'media/img/misc/hunger-bg.png');
+        return $this->makeBar($this->getFoodLevel(), 'media/img/misc/hunger-full.png',
+                              'media/img/misc/hunger-half.png', 'media/img/misc/hunger-bg.png');
     }
 
     /**
@@ -53,9 +53,8 @@ class MiscInfoPlayer extends fActiveRecord {
      * @return string
      */
     public function getHealthBar() {
-        return $this->makeBar($this->getHealth(), __ROOT__ . 'media/img/misc/heart-full.png',
-                              __ROOT__ . 'media/img/misc/heart-half.png',
-                              __ROOT__ . 'media/img/misc/heart-bg.png');
+        return $this->makeBar($this->getHealth(), 'media/img/misc/heart-full.png', 'media/img/misc/heart-half.png',
+                              'media/img/misc/heart-bg.png');
     }
 
     /**
@@ -65,8 +64,7 @@ class MiscInfoPlayer extends fActiveRecord {
      * @return string
      */
     public function getArmorBar() {
-        return $this->makeBar($this->getArmorRating(), __ROOT__ . 'media/img/misc/armor-full.png',
-                              __ROOT__ . 'media/img/misc/armor-half.png');
+        return $this->makeBar($this->getArmorRating(), 'media/img/misc/armor-full.png', 'media/img/misc/armor-half.png');
     }
 
     /**

@@ -289,7 +289,7 @@ class Player extends fActiveRecord {
      * @return mixed
      */
     public function getPlayerHead($size = 32, $classes = null, $tooltip = false) {
-        $name = __ROOT__ . 'cache/skins/head-' . $size . '_' . $this->getUrlName() . '.png';
+        $name = 'cache/skins/head-' . $size . '_' . $this->getUrlName() . '.png';
 
         if(!file_exists($name)) {
             $canvas = imagecreatetruecolor($size, $size);

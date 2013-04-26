@@ -16,5 +16,5 @@
 <div class="span3 well">
     <h1 style="text-align:center;"><i class="icon-arrow-up icon-large"></i></h1>
 
-    <h3 style="text-align:center;"><?php echo $this->get('server_stats[uptime_perc]'); ?>% uptime</h3>
+    <h3 style="text-align:center;"><?php echo $this->get('serverstats[uptime_perc]'); ?>% uptime</h3>
 </div>
