@@ -13,11 +13,10 @@ if(fRequest::isPost() && fRequest::get('db_submit')) {
      */
     $tpl->set('host', fRequest::encode('host'));
     $tpl->set('user', fRequest::encode('user'));
-    $tpl->set('pw', fRequest::encode('pw'));
+    $tpl->set('pw', fRequest::get('pw', 'string?'));
     $tpl->set('database', fRequest::encode('database'));
     $tpl->set('port', fRequest::encode('port'));
     $tpl->set('prefix', fRequest::encode('prefix'));
-
     try {
         $vali = new fValidation();
 
@@ -25,7 +24,6 @@ if(fRequest::isPost() && fRequest::get('db_submit')) {
                                       'host',
                                       'port',
                                       'user',
-                                      'pw',
                                       'database'
                                  ));
 
