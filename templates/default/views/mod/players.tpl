@@ -4,16 +4,16 @@
 <table class="table table-striped table-bordered table-hover table-vcenter" id="playersTable">
     <thead>
     <tr>
-        <th class="sort-button" data-type="1" data-sort="desc">
+        <th class="sort-button <?php echo $this->get('sort[1]'); ?>" data-type="1" data-sort="desc">
             Name
         </th>
-        <th class="sort-button" data-type="2" data-sort="desc">
+        <th class="sort-button <?php echo $this->get('sort[2]'); ?>" data-type="2" data-sort="desc">
             Last Seen
         </th>
-        <th class="sort-button" data-type="3" data-sort="desc">
+        <th class="sort-button <?php echo $this->get('sort[3]'); ?>" data-type="3" data-sort="desc">
             Date Joined
         </th>
-        <th class="sort-button" data-type="4" data-sort="desc">
+        <th class="sort-button <?php echo $this->get('sort[4]'); ?>" data-type="4" data-sort="desc">
             Playtime
         </th>
     </tr>
