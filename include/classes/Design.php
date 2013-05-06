@@ -36,13 +36,32 @@ class Design {
      */
     private $index;
 
-    function __construct($design) {
+    /**
+     * An new design. Everything depends on this.<br>
+     * The default template folders are templates/$design and templates/views/$designs <br>
+     * The default content folder is contents/$design
+     *
+     * @param string       $design
+     * @param string       $content_folder
+     * @param string|array $template_path
+     */
+    function __construct($design, $content_folder = null, $template_path = null) {
         global $lang;
 
-        $twig_loader = new Twig_Loader_Filesystem(array(
-                                                       __ROOT__ . 'templates/' . $design . '/views',
-                                                       __ROOT__ . 'templates/' . $design
-                                                  ));
+        $tpls = array(
+            __ROOT__ . 'templates/' . $design . '/views',
+            __ROOT__ . 'templates/' . $design
+        );
+
+        if($template_path != null) {
+            if(is_array($template_path))
+                $tpls = array_merge($template_path, $tpls);
+            elseif(is_string($template_path))
+                $tpls[] = $template_path;
+        }
+
+
+        $twig_loader = new Twig_Loader_Filesystem($tpls);
         $this->twig = new Twig_Environment($twig_loader, array(
                                                               'base_template_class' => 'Template',
                                                               'debug'               => DEBUG,
@@ -54,7 +73,10 @@ class Design {
         $this->twig->addExtension(new Statistics_Twig_Extension());
         $this->twig->getExtension('core')->setTimezone(Util::getOption('timezone', fTimestamp::getDefaultTimezone()));
 
-        $this->content_folder = __ROOT__ . 'contents/' . $design . '/';
+        if(is_null($content_folder) || !is_string($content_folder))
+            $this->content_folder = __ROOT__ . 'contents/' . $design . '/';
+        else
+            $this->content_folder = $content_folder;
 
         $this->templates = array();
         $this->modules = array();
@@ -187,20 +209,20 @@ class Design {
         global $cache;
 
         $error = false;
+        $err = $tpl = $this->twig->loadTemplate('error.tpl');
+
+        if(fMessaging::check('*', '{errors}')) {
+            $error = true;
+            $tpl = $err;
+            $content = 'error';
+        }
 
         $this->displayCached($content);
 
         $this->loadModule($content);
 
-        $err = $tpl = $this->twig->loadTemplate('error.tpl');
-
         if(isset($this->templates['tpl']))
             $tpl = $this->templates['tpl'];
-
-        if(fMessaging::check('*', '{errors}')) {
-            $error = true;
-            $tpl = $err;
-        }
 
         $output = $this->templates['__main__']->render(array('tpl' => $tpl));
 
