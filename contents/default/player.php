@@ -1,7 +1,6 @@
 <?php
-$tpl = Util::newTpl($this, 'player');
-$this->add('js', 'media/js/jquery.bootpag.js');
-$this->get('lang')->load('causes');
+$tpl = $this->loadTemplate('player', 'tpl');
+$GLOBALS['lang']->load('causes');
 
 
 try {

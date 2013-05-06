@@ -1,6 +1,6 @@
 <?php
 fMessaging::create('no-cache', '{cache}', true);
-$tpl = Util::newTpl($this, 'login');
+$tpl = $this->loadTemplate('login', 'tpl');
 
 if(fRequest::get('signin') && fRequest::isPost()) {
     /*

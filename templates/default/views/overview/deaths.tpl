@@ -1,63 +1,63 @@
 <div class="row-fluid grid">
     <div class="span4">
         <span class="badge badge-success no-img">
-            <?php echo $this->get('deaths[total]'); ?>
+            {{ death_stats.total }}
         </span> Total Kills
     </div>
     <div class="span4">
         <span class="badge badge-success no-img">
-            <?php echo $this->get('deaths[deaths]'); ?>
+            {{ death_stats.deaths }}
         </span> Total Deaths
     </div>
     <div class="span4">
         <span class="badge badge-success grid-img">
-            <?php echo Material::getMaterialImg($this->get('deaths[top_weapon][1]'), 32, null, true); ?>
+            {{ staticCall('Material', 'getMaterialImg', [death_stats.top_weapon[1], 32, null, true])|raw }}
         </span> Best Weapon
     </div>
 </div>
 <div class="row-fluid grid">
     <div class="span4">
         <span class="badge badge-success no-img">
-            <?php echo $this->get('deaths[pve]'); ?>
+            {{ death_stats.pve }}
         </span> PvE Kills
     </div>
     <div class="span4">
         <span class="badge badge-success grid-img">
-            <?php echo Entity::getEntityImg($this->get('deaths[most_dangerous][1]'), 32, null, true); ?>
+            {{ staticCall('Entity', 'getEntityImg', [death_stats.most_dangerous[1], 32, null, true])|raw }}
         </span> Most Dangerous
     </div>
     <div class="span4">
         <span class="badge badge-success grid-img">
-            <?php echo Entity::getEntityImg($this->get('deaths[most_killed_mob][1]'), 32, null, true); ?>
+            {{ staticCall('Entity', 'getEntityImg', [death_stats.most_killed_mob[1], 32, null, true])|raw }}
         </span> Most killed
     </div>
 </div>
 <div class="row-fluid grid">
     <div class="span4">
         <span class="badge badge-success no-img">
-            <?php echo $this->get('deaths[pvp]'); ?>
+            {{ death_stats.pvp }}
         </span> PvP Kills
     </div>
     <div class="span4">
         <span class="badge badge-important grid-img">
-            <?php if($this->get('deaths[top_killer][1]')->getName() != 'none'): ?>
-                <a href="?page=player&name=<?php echo $this->get('deaths[top_killer][1]')->getName(); ?>">
-                    <?php echo $this->get('deaths[top_killer][1]')->getPlayerHead(32, null, true); ?>
+            {% if death_stats.top_killer[1].getName != 'none' %}
+                <a href="?page=player&name={{ death_stats.top_killer[1].getName|e('url') }}">
+                    {{ death_stats.top_killer[1].getPlayerHead(32, null, true)|raw }}
                 </a>
-            <?php else: ?>
-                <?php echo $this->get('deaths[top_killer][1]')->getPlayerHead(); ?>
-            <?php endif; ?>
+            {% else %}
+                {{ death_stats.top_killer[1].getPlayerHead|raw }}
+            {% endif %}
         </span> Most Kills
     </div>
     <div class="span4">
         <span class="badge badge-important grid-img">
-            <?php if($this->get('deaths[most_killed_player][1]')->getName() != 'none'): ?>
-                <a href="?page=player&name=<?php echo $this->get('deaths[most_killed_player][1]')->getName(); ?>">
-                    <?php echo $this->get('deaths[most_killed_player][1]')->getPlayerHead(32, null, true); ?>
+            {% if death_stats.most_killed_player[1].getName != 'none' %}
+                <a href="?page=player&name={{ death_stats.most_killed_player[1].getName|e('url') }}">
+                    {{ death_stats.most_killed_player[1].getPlayerHead(32, null, true)|raw }}
                 </a>
-            <?php else: ?>
-                <?php echo $this->get('deaths[most_killed_player][1]')->getPlayerHead(); ?>
-            <?php endif; ?>
+            {% else %}
+                {{ death_stats.most_killed_player[1].getPlayerHead|raw }}
+            {% endif %}
         </span> Most Deaths
     </div>
 </div>

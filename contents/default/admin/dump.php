@@ -1,5 +1,5 @@
 <?php
-$tpl = Util::newTpl($this, 'admin/dump', 'sub');
+$tpl = $this->loadTemplate('admin/dump', 'sub');
 
 if(fRequest::isPost() && fRequest::check('save')) {
     try {

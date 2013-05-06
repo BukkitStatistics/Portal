@@ -1,5 +1,5 @@
 <?php
-$tpl = Util::newTpl($this, 'admin/modules', 'sub');
+$tpl = $this->loadTemplate('admin/modules', 'sub');
 
 /*
  * Store input values

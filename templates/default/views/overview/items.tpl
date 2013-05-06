@@ -2,7 +2,7 @@
     <tr>
         <td>
             <span class="label label-info">
-                <i class="icon-plus"></i> <?php echo $this->get('items[picked]'); ?>
+                <i class="icon-plus"></i> {{ item_stats.picked }}
             </span>
         </td>
         <td>Picked up</td>
@@ -10,8 +10,8 @@
     <tr>
         <td>
             <span class="label label-info">
-                <?php echo Material::getMaterialImg($this->get('items[most_picked][1]'), 16, null, true); ?>
-                <?php echo $this->get('items[most_picked][0]'); ?>
+                {{ staticCall('Material', 'getMaterialImg', [item_stats.most_picked[1], 16, null, true])|raw }}
+                {{ item_stats.most_picked[0] }}
             </span>
         </td>
         <td>Most picked up</td>
@@ -19,7 +19,7 @@
     <tr>
         <td>
             <span class="label label-info">
-                <i class="icon-minus"></i> <?php echo $this->get('items[dropped]'); ?>
+                <i class="icon-minus"></i> {{ item_stats.dropped }}
             </span>
         </td>
         <td>Dropped</td>
@@ -27,8 +27,8 @@
     <tr>
         <td>
             <span class="label label-info">
-                <?php echo Material::getMaterialImg($this->get('items[most_dropped][1]'), 16, null, true); ?>
-                <?php echo $this->get('items[most_dropped][0]'); ?>
+                {{ staticCall('Material', 'getMaterialImg', [item_stats.most_dropped[1], 16, null, true])|raw }}
+                {{ item_stats.most_dropped[0] }}
             </span>
         </td>
         <td>Most dropped</td>

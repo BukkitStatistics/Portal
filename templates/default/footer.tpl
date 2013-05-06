@@ -12,17 +12,17 @@
                 </div>
                 <div class="span4">
                     <p style="margin-top: 6px">
-                        &copy; <?php echo date('Y'); ?> Statistics - <a href="?page=admin"><small>Admin</small></a>
+                        &copy; {{ 'now'|date('Y') }} Statistics - <a href="?page=admin">
+                            <small>Admin</small>
+                        </a>
                     </p>
                 </div>
                 <div class="span4 offset2" style="text-align: right;">
                     <p>
-                        <?php echo VERSION; ?>-db<?php echo Util::getOption('version'); ?>
+                        {{ constant('VERSION') }}-db{{ Util.getOption('version') }}
                         <br>
                         <small id="execution_time">
-                            Execution time: <?php echo round(
-                            (float)array_sum(explode(' ', microtime())) - STARTTIME, 4); ?>
-                            seconds.
+                            Execution time: {{ Util.getExecTime }} seconds.
                         </small>
                     </p>
                 </div>

@@ -1,306 +1,264 @@
-<?php if(!is_null($this->get('player'))): ?>
+{% if player is not null %}
     <div class="row-fluid">
-
-        <div class="well well-small span6
-        <?php if($this->get('misc')->getIsBanned()): ?>
-        alert-danger
-        <?php endif; ?>"
+        <div class="well well-small span6 {% if misc.getIsBanned %} alert-danger {% endif %}"
              style="position: relative;">
             <h1 style="position: relative">
-                <?php echo $this->get('player')->getPlayerHead(64, 'img-polaroid'); ?>
-                <?php echo $this->get('player')->encodeName(); ?>
-                <?php if($this->get('player')->getOnline()): ?>
+                {{ player.getPlayerHead(64, 'img-polaroid')|raw }}
+                {{ player.getName }}
+                {% if player.getOnline %}
                     <span class='label label-success player-status'>In-Game</span>
-                <?php else: ?>
+                {% else %}
                     <span class='label label-important player-status'>Offline</span>
-                <?php endif; ?>
-                <?php if($this->get('misc')->getIsOp()): ?>
+                {% endif %}
+                {% if misc.getIsOp %}
                     <span class="label label-info player-op">OP</span>
-                <?php endif; ?>
+                {% endif %}
                 <div class="player-top-right-info">
-                    <?php if($this->get('misc')->getIsBanned()): ?>
-                    <span class="label label-important player-top-right-info-label">
-                        <strong>banned</strong>
-                    </span>
-                    <?php endif; ?>
-                    <?php if($this->get('misc')->getGamemode() > 0): ?>
-                    <span class="label label-warning player-top-right-info-label">
-                        <?php if($this->get('misc')->getGamemode() == 1): ?>
-                            <strong>creative</strong>
-                        <?php else: ?>
-                            <strong>adventure</strong>
-                        <?php endif; ?>
-                    </span>
+                    {% if misc.getIsBanned %}
+                        <span class="label label-important player-top-right-info-label">
+                            <strong>banned</strong>
+                        </span>
+                    {% endif %}
+                    {% if misc.getGamemode > 0 %}
+                        <span class="label label-warning player-top-right-info-label">
+                            {% if misc.getGamemode == 1 %}
+                                <strong>creative</strong>
+                            {% else %}
+                                <strong>adventure</strong>
+                            {% endif %}
+                        </span>
+                    {% endif %}
                     <?php endif; ?>
                 </div>
             </h1>
-
             <div class="bar-container">
                 <div class="xpbar-cur">
-                    <strong><?php echo $this->get('misc')->getExpLevel(); ?></strong>
+                    <strong>{{ misc.getExpLevel }}</strong>
                 </div>
                 <div class="row-fluid">
                     <div class="span12">
                         <div class="armor-bar">
-                            <?php echo $this->get('misc')->getArmorBar(); ?>
+                            {{ misc.getArmorBar|raw }}
                         </div>
                     </div>
                 </div>
                 <div class="row-fluid" id="playerhead-bars">
                     <div class="span6">
                         <div class="heart-bar clearfix">
-                            <?php echo $this->get('misc')->getHealthBar(); ?>
+                            {{ misc.getHealthBar|raw }}
                         </div>
                     </div>
 
                     <div class="span6">
                         <div class="hunger-bar">
-                            <?php echo $this->get('misc')->getFoodBar(); ?>
+                            {{ misc.getFoodBar|raw }}
                         </div>
                     </div>
                 </div>
 
                 <div class="force-center xpbar-container">
-                    <?php echo $this->get('misc')->getXPBar(); ?>
+                    {{ misc.getXPBar|raw }}
                 </div>
             </div>
 
             <div class="player-effects">
-                <?php
-                if($this->get('inv'))
-                    $this->get('inv')->printEffects();
-                ?>
+                {% if inv %}
+                    {{ inv.printEffects|raw }}
+                {% endif %}
             </div>
         </div>
         <div class="span6">
-            <?php if($this->get('inv')): ?>
+            {% if inv %}
                 <div class="player-inv pull-right hidden-phone">
                     <div class="player-inv-row clearfix">
-                        <?php $this->get('inv')->printRowOne(); ?>
+                        {{ inv.printRowOne|raw }}
                     </div>
                     <div class="player-inv-row clearfix">
-                        <?php $this->get('inv')->printRowTwo(); ?>
+                        {{ inv.printRowTwo|raw }}
                     </div>
                     <div class="player-inv-row clearfix">
-                        <?php $this->get('inv')->printRowThree(); ?>
+                        {{ inv.printRowThree|raw }}
                     </div>
                     <div class="player-inv-hotbar clearfix">
-                        <?php $this->get('inv')->printHotbar(); ?>
+                        {{ inv.printHotbar|raw }}
                     </div>
                 </div>
                 <div class="player-armor pull-right hidden-phone">
-                    <?php $this->get('inv')->printArmor(); ?>
+                    {{ inv.printArmor|raw }}
                 </div>
-            <?php endif; ?>
+            {% endif %}
         </div>
     </div>
     <div class="row-fluid">
         <div class="span3 center">
-            <?php
-            if($this->get('pvp[most_killed_by]'))
-                $player = $this->get('pvp[most_killed_by]')->createPlayer('player_id');
-            else {
-                $player = new Player();
-                $player->setName('none');
-            }
-            ?>
-            <?php echo $player->getPlayerHead(64, 'img-polaroid'); ?>
+            {% if pvp.most_killed_by is not null %}
+                {% set player = pvp.most_killed_by.createPlayer('player_id') %}
+            {% else %}
+                {% set player = Player().setName('none') %}
+            {% endif %}
+            {{ player.getPlayerHead(64, 'img-polaroid')|raw }}
             <h4 class="well well-small center">
-                <?php if($player->getName() != 'none'): ?>
-                    <a href="?page=player&name=<?php echo $player->getName(); ?>"><?php echo $player->getName(); ?></a>
-                <?php else: ?>
-                    <?php echo $player->getName(); ?>
-                <?php endif; ?>
-                <br/>
+                {% if player.getName != 'none' %}
+                    <a href="?page=player&name={{ player.getName|e('url') }}">{{ player.getName }}</a>
+                {% else %}
+                    {{ player.getName }}
+                {% endif %}
+                <br>
                 <small>Arch Nemesis</small>
             </h4>
         </div>
         <div class="span3 center">
-            <?php
-            if($this->get('pvp[most_killed]'))
-                $player = $this->get('pvp[most_killed]')->createPlayer('victim_id');
-            else {
-                $player = new Player();
-                $player->setName('none');
-            }
-            ?>
-            <?php echo $player->getPlayerHead(64, 'img-polaroid'); ?>
+            {% if pvp.most_killed is not null %}
+                {% set player = pvp.most_killed.createPlayer('victim_id') %}
+            {% else %}
+                {% set player = Player().setName('none') %}
+            {% endif %}
+            {{ player.getPlayerHead(64, 'img-polaroid')|raw }}
             <h4 class="well well-small center">
-                <?php if($player->getName() != 'none'): ?>
-                    <a href="?page=player&name=<?php echo $player->getName(); ?>"><?php echo $player->getName(); ?></a>
-                <?php else: ?>
-                    <?php echo $player->getName(); ?>
-                <?php endif; ?>
+                {% if player.getName != 'none' %}
+                    <a href="?page=player&name={{ player.getName|e('url') }}">{{ player.getName }}</a>
+                {% else %}
+                    {{ player.getName }}
+                {% endif %}
                 <br>
                 <small>Most killed</small>
             </h4>
         </div>
         <div class="span3 center">
-            <?php
-            if($this->get('blocks[most_destroyed]'))
-                $block = $this->get('blocks[most_destroyed]')->createMaterial();
-            else
-                $block = new Material('-1:0');
-            ?>
-            <?php echo $block->getImage(64, 'img-polaroid'); ?>
+            {% if blocks.most_destroyed %}
+                {% set block = blocks.most_destroyed.createMaterial %}
+            {% else %}
+                {% set block = Material('-1:0') %}
+            {% endif %}
+            {{ block.getImage(64, 'img-polaroid')|raw }}
             <h4 class="well well-small center">
-                <?php echo $block->getName(); ?>
+                {{ block.getName }}
                 <br>
                 <small>Most broken</small>
             </h4>
         </div>
         <div class="span3 center">
-            <?php
-            if($this->get('blocks[most_placed]'))
-                $block = $this->get('blocks[most_placed]')->createMaterial();
-            else
-                $block = new Material('-1:0');
-            ?>
-            <?php echo $block->getImage(64, 'img-polaroid'); ?>
+            {% if blocks.most_placed %}
+                {% set block = blocks.most_placed.createMaterial %}
+            {% else %}
+                {% set block = Material('-1:0') %}
+            {% endif %}
+            {{ block.getImage(64, 'img-polaroid')|raw }}
             <h4 class="well well-small center">
-                <?php echo $block->getName(); ?>
+                {{ block.getName }}
                 <br>
                 <small>Most placed</small>
             </h4>
         </div>
     </div>
-
     <h2>General Statistics</h2>
 
     <div class="row-fluid col-wrap-320">
-
         <div class="span4 well well-small">
             <h3>Blocks</h3>
 
             <p>
                 <strong>Total Placed:</strong>
-                <?php echo $this->get('blocks[placed]')->format(); ?> Blocks
+                {{ blocks.placed|ffNumber }} Blocks
             </p>
 
             <p>
                 <strong>Most Placed:</strong>
-                <?php
-                if($this->get('blocks[most_placed]')):
-                    $block = $this->get('blocks[most_placed]')->createMaterial();
-                    echo $block->getImage(32, null ,true);
-                    ?>
-                    <?php
-                    echo $this->get('blocks[most_placed]')->preparePlaced();
-                else:
-                    ?>
+                {% if blocks.most_placed %}
+                    {{ blocks.most_placed.createMaterial.getImage(32, null, true)|raw }}
+                    {{ blocks.most_placed.preparePlaced }}
+                {% else %}
                     <em>none</em>
-                <?php endif; ?>
+                {% endif %}
             </p>
 
             <p>
                 <strong>Total Destroyed:</strong>
-                <?php echo $this->get('blocks[destroyed]')->format(); ?> Blocks
+                {{ blocks.destroyed|ffNumber }} Blocks
             </p>
 
             <p>
                 <strong>Most Destroyed:</strong>
-                <?php
-                if($this->get('blocks[most_destroyed]')):
-                    $block = $this->get('blocks[most_destroyed]')->createMaterial();
-                    echo $block->getImage(32, null, true);
-                    ?>
-
-                    <?php
-                    echo $this->get('blocks[most_destroyed]')->prepareDestroyed();
-                else:
-                    ?>
+                {% if blocks.most_destroyed %}
+                    {{ blocks.most_destroyed.createMaterial.getImage(32, null, true)|raw }}
+                    {{ blocks.most_destroyed.prepareDestroyed }}
+                {% else %}
                     <em>none</em>
-                <?php endif; ?>
+                {% endif %}
             </p>
         </div>
-
         <div class="span4 well well-small">
             <h3>Items</h3>
 
             <p>
                 <strong>Total Picked Up:</strong>
-                <?php echo $this->get('items[picked]')->format(); ?> Items
+                {{ items.picked|ffNumber }} Items
             </p>
 
             <p>
                 <strong>Most Picked Up:</strong>
-                <?php
-                if($this->get('items[most_picked]')):
-                    $item = $this->get('items[most_picked]')->createMaterial();
-                    echo $item->getImage(32, null, true);
-                    ?>
-
-                    <?php
-                    echo $this->get('items[most_picked]')->preparePickedUp();
-                else:
-                    ?>
+                {% if items.most_picked %}
+                    {{ items.most_picked.createMaterial.getImage(32, null, true)|raw }}
+                    {{ items.most_picked.preparePickedUp }}
+                {% else %}
                     <em>none</em>
-                <?php endif; ?>
+                {% endif %}
             </p>
 
             <p>
                 <strong>Total Dropped:</strong>
-                <?php echo $this->get('items[dropped]')->format(); ?> Items
+                {{ items.dropped|ffNumber }} Items
             </p>
 
             <p>
                 <strong>Most Dropped:</strong>
-                <?php
-                if($this->get('items[most_dropped]')):
-                    $item = $this->get('items[most_dropped]')->createMaterial();
-                    echo $item->getImage(32, null, true);
-                    ?>
-
-                    <?php
-                    echo $this->get('items[most_dropped]')->prepareDropped();
-                else:
-                    ?>
+                {% if items.most_dropped %}
+                    {{ items.most_dropped.createMaterial.getImage(32, null, true)|raw }}
+                    {{ items.most_dropped.prepareDropped }}
+                {% else %}
                     <em>none</em>
-                <?php endif; ?>
+                {% endif %}
             </p>
         </div>
-
         <div class="span4 well well-small">
             <h3>Distances</h3>
 
             <p>
                 <strong>Travelled:</strong>
-                <?php echo $this->get('distance')->prepareTotal(); ?> meters
+                {{ distance.prepareTotal }} meters
             </p>
 
             <p>
                 <strong>Walked:</strong>
-                <?php echo $this->get('distance')->prepareFoot(); ?> meters
+                {{ distance.prepareFoot }} meters
             </p>
 
             <p>
                 <strong>Minecarted:</strong>
-                <?php echo $this->get('distance')->prepareMinecart(); ?> meters
+                {{ distance.prepareMinecart }} meters
             </p>
 
             <p>
                 <strong>Boated:</strong>
-                <?php echo $this->get('distance')->prepareBoat(); ?> meters
+                {{ distance.prepareBoat }} meters
             </p>
 
             <p>
                 <strong>Piggybacked:</strong>
-                <?php echo $this->get('distance')->preparePig(); ?> meters
+                {{ distance.preparePig }} meters
             </p>
 
             <p>
                 <strong>Swum:</strong>
-                <?php echo $this->get('distance')->prepareSwim(); ?> meters
+                {{ distance.prepareSwim }} meters
             </p>
 
             <p>
                 <strong>Flight:</strong>
-                <?php echo $this->get('distance')->prepareFlight(); ?> meters
+                {{ distance.prepareFlight }} meters
             </p>
         </div>
-
     </div>
-
     <div class="row-fluid col-wrap-220">
 
         <div class="span8 well well-small">
@@ -311,19 +269,19 @@
                         <strong>Total XP:</strong>
                     </td>
                     <td>
-                        <?php echo $this->get('misc')->prepareExpTotal(); ?>
+                        {{ misc.prepareExpTotal }}
                     </td>
                     <td>
                         <strong>Times kicked:</strong>
                     </td>
                     <td>
-                        <?php echo $this->get('misc')->prepareTimesKicked(); ?>
+                        {{ misc.prepareTimesKicked }}
                     </td>
                     <td>
                         <strong>Eggs thrown:</strong>
                     </td>
                     <td>
-                        <?php echo $this->get('misc')->prepareEggsThrown(); ?>
+                        {{ misc.prepareEggsThrown }}
                     </td>
                 </tr>
                 <tr>
@@ -331,19 +289,19 @@
                         <strong>Food eaten:</strong>
                     </td>
                     <td>
-                        <?php echo $this->get('misc')->prepareFoodEaten(); ?>
+                        {{ misc.prepareFoodEaten }}
                     </td>
                     <td>
                         <strong>Arrows shot:</strong>
                     </td>
                     <td>
-                        <?php echo $this->get('misc')->prepareArrowsShot(); ?>
+                        {{ misc.prepareArrowsShot }}
                     </td>
                     <td>
                         <strong>Damage taken:</strong>
                     </td>
                     <td>
-                        <?php echo $this->get('misc')->prepareDamageTaken(); ?>
+                        {{ misc.prepareDamageTaken }}
                     </td>
                 </tr>
                 <tr>
@@ -351,19 +309,19 @@
                         <strong>Words said:</strong>
                     </td>
                     <td>
-                        <?php echo $this->get('misc')->prepareWordsSaid(); ?>
+                        {{ misc.prepareWordsSaid }}
                     </td>
                     <td>
                         <strong>Commands sent:</strong>
                     </td>
                     <td>
-                        <?php echo $this->get('misc')->prepareCommandsSent(); ?>
+                        {{ misc.prepareCommandsSent }}
                     </td>
                     <td>
                         <strong>Beds entered:</strong>
                     </td>
                     <td>
-                        <?php echo $this->get('misc')->prepareBedsEntered(); ?>
+                        {{ misc.prepareBedsEntered }}
                     </td>
                 </tr>
                 <tr>
@@ -371,64 +329,51 @@
                         <strong>Portals entered:</strong>
                     </td>
                     <td>
-                        <?php echo $this->get('misc')->preparePortalsEntered(); ?>
+                        {{ misc.preparePortalsEntered }}
                     </td>
                     <td>
                         <strong>Fish caught:</strong>
                     </td>
                     <td>
-                        <?php echo $this->get('misc')->prepareFishCaught(); ?>
+                        {{ misc.prepareFishCaught }}
                     </td>
                     <td>
                         <strong>Times jumped:</strong>
                     </td>
                     <td>
-                        <?php echo $this->get('misc')->prepareTimesJumped(); ?>
+                        {{ misc.prepareTimesJumped }}
                     </td>
                 </tr>
             </table>
         </div>
-
         <div class="span4 well well-small">
             <h3>Login statistics</h3>
 
             <p>
                 <strong>Joined on:</strong>
-                <?php
-                $time = new fTimestamp($this->get('player')->getFirstLogin());
-                echo $time->format('std');
-                ?>
+                {{ player.getFirstLogin|date }}
             </p>
 
             <p>
                 <strong>Last seen:</strong>
-                <?php
-                if(!is_null($this->get('player')->getLoginTime())):
-                    $time = new fTimestamp($this->get('player')->getLoginTime());
-                    echo $time->format('std');
-                    ?>
-                <?php else: ?>
+                {% if player.getLoginTime is not null %}
+                    {{ player.getLoginTime|date }}
+                {% else %}
                     <em>never</em>
-                <?php endif; ?>
+                {% endif %}
             </p>
 
             <p>
                 <strong>Playtime:</strong>
-                <?php
-                echo Util::formatSeconds(new fTimestamp($this->get('player')->getPlaytime()));
-                ?>
+                {{ Util.formatSeconds(fTimestamp(player.getPlaytime)) }}
             </p>
 
             <p>
                 <strong>Logins:</strong>
-                <?php
-                echo $this->get('player')->prepareLogins();
-                ?>
+                {{ player.prepareLogins }}
             </p>
         </div>
-
     </div>
-
     <div class="row-fluid">
 
         <div class="span4 well well-small">
@@ -436,75 +381,71 @@
 
             <p>
                 <strong>Total Kills:</strong>
-                <?php echo $this->get('pvp[kills]')->format(); ?>
+                {{ pvp.kills|ffNumber }}
             </p>
 
             <p>
                 <strong>Total Deaths:</strong>
-                <?php echo $this->get('pvp[deaths]')->format(); ?>
+                {{ pvp.deaths|ffNumber }}
             </p>
 
             <p>
                 <strong>Current kill streak:</strong>
-                <?php echo $this->get('misc')->prepareKillStreak(); ?>
+                {{ misc.prepareKillStreak }}
             </p>
 
             <p>
                 <strong>Best kill streak:</strong>
-                <?php echo $this->get('misc')->prepareMaxKillStreak(); ?>
+                {{ misc.prepareMaxKillStreak }}
             </p>
-            <?php if($this->get('pvp[most_killed]')): ?>
+            {% if pvp.most_killed %}
                 <br/>
                 <h4>Most killed:</h4>
+
                 <p>
-                    <?php $victim = $this->get('pvp[most_killed]')->createPlayer('victim_id'); ?>
-                    <a href="?page=player&name=<?php echo $victim->getName(); ?>">
-                        <?php
-                        echo $victim->getPlayerHead();
-                        ?>
-                        <?php echo $victim->encodeName(); ?>
+                    {% set victim = pvp.most_killed.createPlayer('victim_id') %}
+                    <a href="?page=player&name={{ victim.getName|e('url') }}">
+                        {{ victim.getPlayerHead|raw }}
+                        {{ victim.getName }}
                     </a>
                 </p>
+
                 <p>
                     <strong>Kills:</strong>
-                    <?php echo $this->get('pvp[most_killed]')->getTimes()->format(); ?>
+                    {{ pvp.most_killed.getTimes|ffNumber }}
                 </p>
+
                 <p>
                     <strong>Used weapon:</strong>
-                    <?php
-                    $weapon = $this->get('pvp[most_killed]')->createMaterial();
-                    echo $weapon->getImage();
-                    ?>
-                    <?php echo $weapon->encodeName(); ?>
+                    {% set weapon = pvp.most_killed.createMaterial %}
+                    {{ weapon.getImage|raw }}
+                    {{ weapon.getName }}
                 </p>
-            <?php endif; ?>
-            <?php if($this->get('pvp[most_killed_by]')): ?>
+            {% endif %}
+            {% if pvp.most_killed_by %}
                 <br/>
                 <h4>Most killed by:</h4>
 
                 <p>
-                    <?php $killer = $this->get('pvp[most_killed_by]')->createPlayer('player_id'); ?>
-                    <a href="?page=player&name=<?php echo $killer->getName(); ?>">
-                        <?php
-                        echo $killer->getPlayerHead();
-                        ?>
-                        <?php echo $killer->encodeName(); ?>
+                    {% set killer = pvp.most_killed_by.createPlayer('player_id') %}
+                    <a href="?page=player&name={{ killer.getName|e('url') }}">
+                        {{ killer.getPlayerHead|raw }}
+                        {{ killer.getName }}
                     </a>
                 </p>
 
                 <p>
                     <strong>Kills:</strong>
-                    <?php echo $this->get('pvp[most_killed_by]')->getTimes()->format(); ?>
+                    {{ pvp.most_killed_by.getTimes|ffNumber }}
                 </p>
+
                 <p>
                     <strong>Used weapon:</strong>
-                    <?php
-                    $weapon = $this->get('pvp[most_killed_by]')->createMaterial();
-                    echo $weapon->getImage();
-                    ?>
-                    <?php echo $weapon->encodeName(); ?>
+                    {% set weapon = pvp.most_killed_by.createMaterial %}
+                    {{ weapon.getImage|raw }}
+                    {{ weapon.getName }}
                 </p>
-            <?php endif; ?>
+            {% endif %}
         </div>
 
         <div class="span4 well well-small">
@@ -512,151 +453,72 @@
 
             <p>
                 <strong>Total Kills:</strong>
-                <?php echo $this->get('pve[kills]')->format(); ?>
+                {{ pve.kills|ffNumber }}
             </p>
 
             <p><strong>Total Deaths:</strong>
-                <?php echo $this->get('pve[deaths]')->format(); ?>
+                {{ pve.deaths|ffNumber }}
             </p>
-            <?php if($this->get('pve[most_killed]')): ?>
+            {% if pve.most_killed %}
                 <br/>
                 <h4>Most killed:</h4>
 
                 <p>
-                    <?php
-                    $victim = $this->get('pve[most_killed]')->createEntity();
-                    echo $victim->getimage();
-                    ?>
-                    <?php echo $victim->encodeName(); ?>
+                    {% set victim = pve.most_killed.createEntity %}
+                    {{ victim.getImage|raw }}
+                    {{ victim.getName }}
                 </p>
 
                 <p>
                     <strong>Kills:</strong>
-                    <?php echo $this->get('pve[most_killed]')->prepareCreatureKilled(); ?>
+                    {{ pve.most_killed.prepareCreatureKilled }}
                 </p>
+
                 <p>
                     <strong>Used weapon:</strong>
-                    <?php
-                    $weapon = $this->get('pve[most_killed]')->createMaterial();
-                    echo $weapon->getImage();
-                    ?>
-                    <?php echo $weapon->encodeName(); ?>
+                    {% set weapon = pve.most_killed.createMaterial %}
+                    {{ weapon.getImage|raw }}
+                    {{ weapon.getName }}
                 </p>
-            <?php endif; ?>
-            <?php if($this->get('pve[most_killed_by]')): ?>
+            {% endif %}
+            {% if pve.most_killed_by %}
                 <br/>
                 <h4>Most killed by:</h4>
 
                 <p>
-                    <?php
-                    $killer = $this->get('pve[most_killed_by]')->createEntity();
-                    echo $killer->getimage();
-                    ?>
-                    <?php echo $killer->encodeName(); ?>
+                    {% set killer = pve.most_killed_by.createEntity %}
+                    {{ killer.getImage|raw }}
+                    {{ killer.getName }}
                 </p>
 
                 <p>
                     <strong>Kills:</strong>
-                    <?php echo $this->get('pve[most_killed_by]')->preparePlayerKilled(); ?>
+                    {{ pve.most_killed_by.preparePlayerKilled }}
                 </p>
+
                 <p>
                     <strong>Used weapon:</strong>
-                    <?php
-                    $weapon = $this->get('pve[most_killed_by]')->createMaterial();
-                    echo $weapon->getImage();
-                    ?>
-                    <?php echo $weapon->encodeName(); ?>
+                    {% set weapon = pve.most_killed_by.createMaterial %}
+                    {{ weapon.getImage|raw }}
+                    {{ weapon.getName }}
                 </p>
-            <?php endif; ?>
+            {% endif %}
         </div>
 
         <div class="span4 well well-small">
             <h3>Other</h3>
-            <?php if($this->get('deaths')->count()): ?>
-                <?php foreach($this->get('deaths') as $death): ?>
-                    <p>
-                        <strong><?php echo $death->getName(); ?></strong>
-                        <?php echo $death->getTimes()->format(); ?>
-                    </p>
-                <?php endforeach; ?>
-            <?php else: ?>
+            {% for death in deaths %}
+                <p>
+                    <strong>{{ death.getName }}</strong>
+                    {{ death.getTimes|ffNumber }}
+                </p>
+            {% else %}
                 <p><strong>This player was not killed by outside influences.</strong></p>
-            <?php endif; ?>
-        </div>
-
-    </div>
-
-    <h2>Detailed Information</h2>
-
-    <div class="row-fluid">
-
-        <div class="span6 well well-small">
-            <h3>Blocks</h3>
-
-            <table class="table table-striped table-bordered table-vcenter">
-                <thead>
-                <tr>
-                    <th style="text-align: center;">Block Type</th>
-                    <th style="text-align: center;">Destroyed</th>
-                    <th style="text-align: center;">Placed</th>
-                </tr>
-                </thead>
-                <tbody class="content">
-                <?php
-                foreach($this->get('total_blocks') as $total):
-                    $block = $total->createMaterial();
-                    ?>
-                    <tr>
-                        <td>
-                            <?php echo $block->getImage(32, 'img-polaroid'); ?>
-                            <?php echo $block->getName(); ?>
-                        </td>
-                        <td>
-                            <?php echo $total->prepareDestroyed(); ?>
-                        </td>
-                        <td>
-                            <?php echo $total->preparePlaced(); ?>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="span6 well well-small">
-            <h3>Items</h3>
-            <table class="table table-striped table-bordered table-vcenter">
-                <thead>
-                <tr>
-                    <th style="text-align: center;">Item Type</th>
-                    <th style="text-align: center;">Picked Up</th>
-                    <th style="text-align: center;">Dropped</th>
-                </tr>
-                </thead>
-                <tbody class="content">
-                <?php
-                foreach($this->get('total_items') as $total):
-                    $item = $total->createMaterial();
-                    ?>
-                    <tr>
-                        <td>
-                            <?php echo $item->getImage(32, 'img-polaroid'); ?>
-                            <?php echo $item->getName(); ?>
-                        </td>
-                        <td>
-                            <?php echo $total->preparePickedUp(); ?>
-                        </td>
-                        <td>
-                            <?php echo $total->prepareDropped(); ?>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
+            {% endfor %}
         </div>
     </div>
-<?php else: ?>
+{% else %}
     <div class="alert alert-block alert-error">
         <h3>Player not found!</h3>
     </div>
-<?php endif; ?>
+{% endif %}

@@ -2,7 +2,7 @@
     <tr>
         <td>
             <span class="label label-info">
-                <i class="icon-plus"></i> <?php echo $this->get('blocks[placed]'); ?>
+                <i class="icon-plus"></i> {{ block_stats.placed }}
             </span>
         </td>
         <td>Placed</td>
@@ -10,8 +10,8 @@
     <tr>
         <td>
             <span class="label label-info">
-                <?php echo Material::getMaterialImg($this->get('blocks[most_placed][1]'), 16, null, true); ?>
-                <?php echo $this->get('blocks[most_placed][0]'); ?>
+                {{ staticCall('Material', 'getMaterialImg', [block_stats.most_placed[1], 16, null, true])|raw }}
+                {{ block_stats.most_placed[0] }}
             </span>
         </td>
         <td>Top placed</td>
@@ -19,7 +19,7 @@
     <tr>
         <td>
             <span class="label label-info">
-                <i class="icon-minus"></i> <?php echo $this->get('blocks[destroyed]'); ?>
+                <i class="icon-minus"></i> {{ block_stats.destroyed }}
             </span>
         </td>
         <td>Broken</td>
@@ -27,8 +27,8 @@
     <tr>
         <td>
             <span class="label label-info">
-                <?php echo Material::getMaterialImg($this->get('blocks[most_destroyed][1]'), 16, null, true); ?>
-                <?php echo $this->get('blocks[most_destroyed][0]'); ?>
+                {{ staticCall('Material', 'getMaterialImg', [block_stats.most_destroyed[1], 16, null, true])|raw }}
+                {{ block_stats.most_destroyed[0] }}
             </span>
         </td>
         <td>Top broken</td>

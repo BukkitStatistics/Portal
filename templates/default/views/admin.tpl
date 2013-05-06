@@ -6,20 +6,20 @@
                 <small>Configuration for the web portal and plugin.</small>
             </h1>
         </div>
-        <?php if(fRequest::isPost() && !fMessaging::check('input', 'admin')): ?>
+        {% if staticCall('fRequest', 'isPost') and not checkMessage('input', 'admin') %}
             <div class="alert alert-block alert-success">
                 <p>
                     <strong>Success!</strong> Operation successfully executed.
                 </p>
             </div>
-        <?php endif; ?>
-        <?php Util::showMessages('input', 'admin', 'alert alert-block alert-danger'); ?>
+        {% endif %}
+        {{ Util.showMessages('input', 'admin', 'alert alert-block alert-danger') }}
     </div>
 </div>
 <form method="post" name="settings" id="settings" class="form-setup">
-    <?php if($this->get('sub')): ?>
-        <?php $this->place('sub'); ?>
-    <?php else: ?>
+    {% if sub %}
+        {% include sub %}
+    {% else %}
         <div class="row-fluid">
             <a href="?page=admin&sub=general" class="span2 offset3 well well-small force-center">
                 <h2><i class="icon-user icon-3x"></i></h2>
@@ -52,27 +52,27 @@
             </a>
         </div>
         <div class="row-fluid">
-            <?php if(DB_TYPE == 'default'): ?>
-            <a href="?page=admin&sub=multi" class="span2 offset3 well well-small force-center">
-                <h2><i class="icon-sitemap icon-3x"></i></h2>
+            {% if constant('DB_TYPE') == 'default' %}
+                <a href="?page=admin&sub=multi" class="span2 offset3 well well-small force-center">
+                    <h2><i class="icon-sitemap icon-3x"></i></h2>
 
-                <h3>Multi Portal</h3>
-            </a>
-            <?php endif;?>
+                    <h3>Multi Portal</h3>
+                </a>
+            {% endif %}
         </div>
-    <?php endif; ?>
+    {% endif %}
 <div class="row-fluid">
     <div class="span12">
         <div class="form-actions">
             <div class="pull-left">
-                <?php if($this->get('sub')): ?>
+                {% if sub %}
                     <button class="btn btn-large btn-primary" name="save" value="true" id="Save">
                         <i class="icon-save"></i> Save
                     </button>
                     <a href="?page=admin" class="btn btn-large">
                         <i class="icon-reply"></i> Back
                     </a>
-                <?php endif; ?>
+                {% endif %}
             </div>
             <div class="pull-right">
                 <button class="btn btn-large btn-danger" name="logout" value="true">

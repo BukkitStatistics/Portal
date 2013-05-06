@@ -1,5 +1,5 @@
 <?php
-$tpl_death = Util::newTpl($this, 'mod/death_log', 'death_log');
+$tpl_death = $this->loadTemplate('mod/death_log', 'death_log');
 
 $page = fRequest::get('p', 'int', 1);
 $limit = 10;
@@ -25,6 +25,6 @@ $tpl_death->set('death_log_page', $page);
 $tpl_death->set('death_log_pages', ceil($pages / $limit));
 
 if(fRequest::isAjax()) {
-    $tpl_death->place();
+    $tpl_death->display();
     die();
 }

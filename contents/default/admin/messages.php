@@ -1,5 +1,5 @@
 <?php
-$tpl = Util::newTpl($this, 'admin/messages', 'sub');
+$tpl = $this->loadTemplate('admin/messages', 'sub');
 
 /*
  * Store input values

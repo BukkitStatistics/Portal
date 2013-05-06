@@ -2,7 +2,7 @@
     <tr>
         <td>
             <span class="label label-info">
-                <i class="icon-globe"></i> <?php echo $this->get('distance[total]'); ?>
+                <i class="icon-globe"></i> {{ distance_stats.total }}
             </span>
         </td>
         <td>Total</td>
@@ -10,7 +10,7 @@
     <tr>
         <td>
             <span class="label label-info">
-                <i class="icon-exchange"></i> <?php echo $this->get('distance[foot]'); ?>
+                <i class="icon-exchange"></i> {{ distance_stats.foot }}
             </span>
         </td>
         <td>By foot</td>
@@ -18,7 +18,7 @@
     <tr>
         <td>
             <span class="label label-info">
-                <i class="icon-shopping-cart"></i> <?php echo $this->get('distance[minecart]'); ?>
+                <i class="icon-shopping-cart"></i> {{ distance_stats.minecart }}
             </span>
         </td>
         <td>By minecart</td>
@@ -26,7 +26,7 @@
     <tr>
         <td>
             <span class="label label-info">
-                <i class="icon-tablet"></i> <?php echo $this->get('distance[boat]'); ?>
+                <i class="icon-tablet"></i> {{ distance_stats.boat }}
             </span>
         </td>
         <td>By boat</td>
@@ -34,7 +34,7 @@
     <tr>
         <td>
             <span class="label label-info">
-                <i class="icon-umbrella"></i> <?php echo $this->get('distance[swim]'); ?>
+                <i class="icon-umbrella"></i> {{ distance_stats.swim }}
             </span>
         </td>
         <td>Swum</td>
@@ -42,7 +42,7 @@
     <tr>
         <td>
             <span class="label label-info">
-                <i class="icon-fighter-jet"></i> <?php echo $this->get('distance[flight]'); ?>
+                <i class="icon-fighter-jet"></i> {{ distance_stats.flight }}
             </span>
         </td>
         <td>Flight</td>

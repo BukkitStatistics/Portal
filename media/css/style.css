@@ -100,6 +100,18 @@ section {
 
 .sort-button {
     cursor: pointer;
+    background-image: url("../img/misc/sort/bg.gif");
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 16px !important;
+}
+
+.sort-button.desc {
+    background-image: url("../img/misc/sort/desc.gif");
+}
+
+.sort-button.asc {
+    background-image: url("../img/misc/sort/asc.gif");
 }
 
 .online-players {

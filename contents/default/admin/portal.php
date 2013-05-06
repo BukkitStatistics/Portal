@@ -1,5 +1,5 @@
 <?php
-$tpl = Util::newTpl($this, 'admin/portal', 'sub');
+$tpl = $this->loadTemplate('admin/portal', 'sub');
 
 $tpl->set('times', array(
                         'Pacific/Midway'       => "(GMT-11:00) Midway Island",

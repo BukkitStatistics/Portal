@@ -9,15 +9,13 @@
                 <fieldset>
                     <label for="adminemail"><strong>E-Mail</strong></label>
                     <input type="email" name="adminemail" id="adminemail" class="input-block-level"
-                           value="<?php echo $this->get('adminemail'); ?>"/>
+                           value="{{ adminemail }}"/>
 
                     <label for="language"><strong>Language</strong></label>
                     <select id="language" name="language" class="input-block-level">
-                        <?php
-
-                        foreach($this->get('langs') as $key => $value)
-                            fHTML::printOption($value, $key, $this->get('language'));
-                        ?>
+                        {% for key, value in langs %}
+                            {{ printOption(value, key, language) }}
+                        {% endfor %}
                     </select>
                 </fieldset>
             </div>

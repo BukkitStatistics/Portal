@@ -2,13 +2,10 @@
 fMessaging::create('no-cache', '{cache}', true);
 fAuthorization::requireLoggedIn();
 
-$tpl = Util::newTpl($this, 'admin');
+$tpl = $this->loadTemplate('admin', 'tpl');
 
-if(fRequest::get('sub', 'string')) {
-    $this->inject('admin/' . fRequest::get('sub', 'string') . '.php');
-    $tpl->set('sub', $this->get('sub'));
-}
-
+if(fRequest::get('sub', 'string'))
+    $this->loadSubModule('admin/' . fRequest::get('sub', 'string'));
 if(fRequest::isPost() && fRequest::get('logout')) {
     fAuthorization::destroyUserInfo();
     fURL::redirect('./');

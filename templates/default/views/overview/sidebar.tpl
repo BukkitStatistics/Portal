@@ -1,3 +1,4 @@
+<!-- TODO: test multiserver -->
 <!-- <navigation> -->
 <div class="left-menu hidden-phone" id="left-menu">
     <div class="nav nav-sidebar well">
@@ -9,32 +10,30 @@
             <li><a href="#deaths"><i class="icon-tint"></i> Death Log</a></li>
         </ul>
     </div>
-    <?php if(DB_TYPE == 'default' && $this->get('multi')): ?>
+    {% if constant('DB_TYPE') == 'default' and multi %}
         <div class="well">
             <h4>Other servers</h4>
-            <?php
-            foreach($this->get('multi') as $server):
-                $info = Util::getFileContents(
-                    fURL::getDomain() . fURL::get() . '?server=' . $server['slug'] . '&api=true&type=server_stats',
-                    true);
-                $info = fJSON::decode($info, true);
-                ?>
-                <?php if($info['current_uptime'] > 0): ?>
+        {% for server in multi %}
+            {% set domain = staticCall('fUrl', 'getDomain') %}
+            {% set url = staticCall('fUrl', 'get') %}
+            {% set info = Util.getFileContents(domain ~ url ~ '?server=' ~ server.slug ~ '&api=true&type=server_stats', true) %}
+            {% set info = staticCall('fJSON', 'decode', [info, true]) %}
+
+            {% if info.current_uptime > 0 %}
                 <i class="icon-circle text-success"></i>
-            <?php else: ?>
+            {% else %}
                 <i class="icon-circle text-error"></i>
-            <?php endif; ?>
-                <a href="?server=<?php echo $server['slug']; ?>">
-                    <?php echo $server['name']; ?> -
-                    <?php echo $info['online_players']; ?>/<?php echo $info['players_allowed']; ?>
-                </a>
-                <br>
-            <?php endforeach; ?>
+            {% endif %}
+            <a href="?server={{ server.slug }}">
+                {{ server.name }} {{ info.online_players }}/{{ info.players_allowed }}
+            </a>
+            <br>
+        {% endfor %}
         </div>
-    <?php elseif(DB_TYPE != 'default'): ?>
+    {% elseif constant('DB_TYPE') != 'default' %}
         <div class="well">
             <a href="?server=default"><h4><i class="icon-reply"></i> Back to main server</h4></a>
         </div>
-    <?php endif; ?>
+    {% endif %}
 </div>
 <!-- </navigation> -->

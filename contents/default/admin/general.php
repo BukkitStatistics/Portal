@@ -1,5 +1,5 @@
 <?php
-$tpl = Util::newTpl($this, 'admin/general', 'sub');
+$tpl = $this->loadTemplate('admin/general', 'sub');
 
 $tpl->set('langs', array(
                         'en' => 'English',
