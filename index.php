@@ -18,5 +18,6 @@ if(!file_exists(__ROOT__ . 'contents/default/' . $content) && is_null(fRequest::
     $content = 'error.php';
 }
 
-Util::getCachedContent($content);
-Util::newDesign($content);
+$design = new Design('default');
+$design->getIndex()->set('title', Util::getOption('portal_title'));
+$design->display($content);

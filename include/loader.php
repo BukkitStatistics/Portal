@@ -116,5 +116,10 @@ function __autoload($class_name) {
     if(file_exists($file))
         return require $file;
 
-    throw new fEnvironmentException('The class ' . $class_name . ' could not be loaded');
+    $file = __INC__ . str_replace(array('_', "\0"), array('/', ''), $class_name) . '.php';
+    if(is_file($file))
+        return require $file;
+
+
+    throw new fEnvironmentException('The class ' . $class_name . ' could not be loaded here: ' . $file);
 }

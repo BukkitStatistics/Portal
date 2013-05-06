@@ -1,67 +1,58 @@
-<?php if($this->get('players')->count() == 0): ?>
-<div class='force-center'><em>No players tracked</em></div>
-<?php else: ?>
-<table class="table table-striped table-bordered table-hover table-vcenter" id="playersTable">
-    <thead>
-    <tr>
-        <th class="sort-button <?php echo $this->get('sort[1]'); ?>" data-type="1" data-sort="desc">
-            Name
-        </th>
-        <th class="sort-button <?php echo $this->get('sort[2]'); ?>" data-type="2" data-sort="desc">
-            Last Seen
-        </th>
-        <th class="sort-button <?php echo $this->get('sort[3]'); ?>" data-type="3" data-sort="desc">
-            Date Joined
-        </th>
-        <th class="sort-button <?php echo $this->get('sort[4]'); ?>" data-type="4" data-sort="desc">
-            Playtime
-        </th>
-    </tr>
-    </thead>
-    <tbody class="content">
+{% if players|length == 0 %}
+    <div class='force-center'><em>No players tracked</em></div>
+{% else %}
+    <table class="table table-striped table-bordered table-hover table-vcenter" id="playersTable">
+        <thead>
+        <tr>
+            <th class="sort-button {{ sort[1] }}" data-type="1" data-sort="desc">
+                Name
+            </th>
+            <th class="sort-button {{ sort[2] }}" data-type="2" data-sort="desc">
+                Last Seen
+            </th>
+            <th class="sort-button {{ sort[3] }}" data-type="3" data-sort="desc">
+                Date Joined
+            </th>
+            <th class="sort-button {{ sort[4] }}" data-type="4" data-sort="desc">
+                Playtime
+            </th>
+        </tr>
+        </thead>
+        <tbody class="content">
+        {% for player in players %}
+            <tr>
+                <td>
+                    <a href="?page=player&name={{ player.getName|e('url') }}">
+                        {{ player.getPlayerHead(32, 'img-polaroid')|raw }}
+                        {{ player.getName }}
+                    </a>
+                </td>
+                <td>
+                    {% if player.getLoginTime != 0 %}
+                        {{ player.getLoginTime|date }}
+                    {% else %}
+                        <em>never</em>
+                    {% endif %}
+                </td>
+                <td>
+                    {{ player.getFirstLogin|date }}
+                </td>
+                <td>
+                    {{ Util.formatSeconds(fTimestamp(player.getPlaytime)) }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div id="playersPagination" class="pagination-centered"></div>
 
-        <?php foreach($this->get('players') as $player): ?>
-    <tr>
-        <td>
-            <a href="?page=player&name=<?php echo $player->getName(); ?>">
-                <?php echo $player->getPlayerHead(32, 'img-polaroid'); ?>
-                <?php echo $player->encodeName(); ?>
-            </a>
-        </td>
-        <td>
-            <?php
-            if($player->getLoginTime() != 0):
-                $time = new fTimestamp($player->getLoginTime());
-                echo $time->format('std');
-                ?>
-            <?php else: ?>
-                <em>never</em>
-            <?php endif; ?>
-        </td>
-        <td>
-            <?php
-            $time = new fTimestamp($player->getFirstLogin());
-            echo $time->format('day');
-            ?>
-        </td>
-        <td>
-            <?php
-            echo Util::formatSeconds(new fTimestamp($player->getPlaytime()));
-            ?>
-        </td>
-    </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
-<div id="playersPagination" class="pagination-centered"></div>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        callModulePage(
-            'players',
-            <?php echo $this->get('players')->getPages(); ?>,
-            <?php echo $this->get('players')->getPage(); ?>
-        );
-    });
-</script>
-<?php endif; ?>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            callModulePage(
+                    'players',
+                    {{ players.getPages }},
+                    {{ players.getPage }}
+            );
+        });
+    </script>
+{% endif %}

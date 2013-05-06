@@ -1,33 +1,32 @@
 <table class="table table-striped table-bordered table-vcenter">
     <thead>
     <tr>
-        <th class="sort-button <?php echo $this->get('sort[1]'); ?>" data-type="1" data-sort="asc">
+        <th class="sort-button {{ sort[1] }}" data-type="1" data-sort="asc">
             Block Type
         </th>
-        <th class="sort-button <?php echo $this->get('sort[2]'); ?>" data-type="2" data-sort="asc">
+        <th class="sort-button {{ sort[2] }}" data-type="2" data-sort="asc">
             Destroyed
         </th>
-        <th class="sort-button <?php echo $this->get('sort[3]'); ?>" data-type="3" data-sort="asc">
+        <th class="sort-button {{ sort[3] }}" data-type="3" data-sort="asc">
             Placed
         </th>
     </tr>
     </thead>
     <tbody class="content">
-    <?php
-    foreach($this->get('block_list') as $block): ?>
+    {% for block in block_list %}
         <tr>
             <td>
-                <?php echo $block->getImage(32, 'img-polaroid'); ?>
-                <?php echo $block->getName(); ?>
+                {{ block.getImage(32, 'img-polaroid')|raw }}
+                {{ block.getName }}
             </td>
             <td>
-                <?php echo TotalBlock::countAllOfType('destroyed', $block)->format(); ?>
+                {{ staticCall('TotalBlock', 'countAllOfType', ['destroyed', block])|ffNumber }}
             </td>
             <td>
-                <?php echo TotalBlock::countAllOfType('placed', $block)->format(); ?>
+                {{ staticCall('TotalBlock', 'countAllOfType', ['placed', block])|ffNumber }}
             </td>
         </tr>
-    <?php endforeach; ?>
+    {% endfor %}
     </tbody>
 </table>
 <div id="block_listPagination" class="pagination-centered"></div>
@@ -36,8 +35,8 @@
     $(document).ready(function () {
         callModulePage(
             'block_list',
-            <?php echo $this->get('block_list')->getPages(); ?>,
-            <?php echo $this->get('block_list')->getPage(); ?>
+            {{ block_list.getPages }},
+            {{ block_list.getPage }}
         );
     });
 </script>

@@ -1,5 +1,5 @@
 <?php
-$tpl_items = Util::newTpl($this, 'mod/total_items', 'total_items');
+$tpl_items = $this->loadTemplate('mod/total_items', 'total_items');
 
 $sort = fRequest::get('order_sort', 'string', 'desc');
 
@@ -46,6 +46,6 @@ $items = fRecordSet::buildFromSQL(
 $tpl_items->set('item_list', $items);
 
 if(fRequest::isAjax()) {
-    $tpl_items->place();
+    $tpl_items->display();
     die();
 }

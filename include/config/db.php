@@ -4,11 +4,11 @@
 */
 
 $db_values = array(
-    'host'     => 'localhost',
-    'port'     => '3306',
-    'user'     => 'root',
-    'pw'       => 'tzclan',
-    'database' => 'yasp_new',
-    'prefix'   => 'statistics',
-    'type'     => 'default'
+    'host'     => '',
+    'port'     => '',
+    'user'     => '',
+    'pw'       => '',
+    'database' => '',
+    'prefix'   => '',
+    'type'     => ''
 );

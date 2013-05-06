@@ -1,5 +1,5 @@
 <?php
-$tpl_blocks = Util::newTpl($this, 'mod/total_blocks', 'total_blocks');
+$tpl_blocks = $this->loadTemplate('mod/total_blocks', 'total_blocks');
 
 $sort = fRequest::get('order_sort', 'string', 'desc');
 
@@ -45,6 +45,6 @@ $blocks = fRecordSet::buildFromSQL(
 $tpl_blocks->set('block_list', $blocks);
 
 if(fRequest::isAjax()) {
-    $tpl_blocks->place();
+    $tpl_blocks->display();
     die();
 }

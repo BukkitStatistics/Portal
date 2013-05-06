@@ -5,9 +5,6 @@ class Util {
     const getOption = "Util::getOption";
     const showMessages = "Util::showMessages";
     const addPrefix = "Util::addPrefix";
-    const newTpl = "Util::newTpl";
-    const getCachedContent = "Util::getCachedContent";
-    const newDesign = "Util::newDesign";
     const formatSeconds = "Util::formatSeconds";
     const clearSkinCache = "Util::clearSkinCache";
     const handleDebug = "Util::handleDebug";
@@ -150,135 +147,6 @@ class Util {
         else $sql = preg_replace("/prefix_(\S+?)([\s\.,]|$)/", Util::getPrefix() . "\\1\\2", $sql);
     }
 
-
-    /**
-     * Sets the tpl variable in the main design.<br>
-     * Context is for the most times <b>$this</b>
-     *
-     * @param fTemplating $context
-     * @param String      $tplName
-     * @param string      $tplKey
-     *
-     * @return fTemplating
-     */
-    public static function newTpl(fTemplating $context, $tplName, $tplKey = 'tpl') {
-        $tpl = new fTemplating($context->get('tplRoot'), $tplName . '.tpl');
-        $context->set($tplKey, $tpl);
-
-        if(!is_null($context->get('tplRoot')))
-            $tpl->set('tplRoot', $context->get('tplRoot'));
-
-        return $tpl;
-    }
-
-
-    /**
-     * This will output the main content! If the $content is cached the cached content will be echoed.
-     *
-     * @param $content
-     */
-    public static function newDesign($content) {
-        global $cache, $lang;
-
-        $error = false;
-        $server = '';
-
-        if(DB_TYPE != 'default')
-            $server = DB_TYPE;
-
-        fBuffer::startCapture();
-        $design = new fTemplating(__ROOT__ . 'contents/default', __ROOT__ . 'templates/default/index.php');
-        $design->set('title', Util::getOption('portal_title'));
-        $design->set('lang', $lang);
-        $design->set('cache', $cache);
-        $design->set('tplRoot', __ROOT__ . 'templates/default/views');
-        $design->add('header_additions', '');
-        try {
-            $design->inject($content);
-        } catch(fException $e) {
-            fCore::debug(array('design error: ', $e));
-
-            if(fRequest::isAjax())
-                die('ajax_error');
-
-            if(!fMessaging::check('*', '{errors}'))
-                fMessaging::create('critical', '{errors}', $e);
-        }
-        if(fMessaging::check('*', '{errors}')) {
-            $error = true;
-            $design->inject('error.php');
-        }
-
-        $design->place();
-        $capture = fBuffer::stopCapture();
-
-        echo $capture;
-
-        if(fRequest::get('name', 'string') != '' && $content != 'error.php')
-            $content = $content . '_' . fRequest::get('name', 'string');
-
-        if(!DEVELOPMENT
-           && !is_null($cache)
-           && !$error
-           && !fRequest::isAjax()
-           && !fMessaging::check('*', '{errors}')
-           && !fMessaging::check('no-cache', '{cache}')
-           && $content != 'error.php'
-        ) {
-            if($cache->set($content . '.' . $server . '.cache', $capture, Util::getOption('cache.pages', 60)))
-                fCore::debug('cached for ' . Util::getOption('cache.pages', 60) . ' seconds: ' . $content);
-        }
-
-
-        fMessaging::retrieve('no-cache', '{cache}');
-    }
-
-
-    /**
-     * Gets the cached file.<br>
-     * If one exists it searches for an small tag with id="execution_time" <br>
-     * and replaces the contents with 'cached (filetime)'.
-     *
-     * @param        $content
-     *
-     * @internal param \fCache $cache
-     */
-    public static function getCachedContent($content) {
-        global $cache;
-
-        if(DEVELOPMENT || fMessaging::check('*', '{errors}'))
-            return;
-
-        $server = '';
-
-        if(fRequest::get('name', 'string') != '' && $content != 'error.php')
-            $content = $content . '_' . fRequest::get('name', 'string');
-
-        if(DB_TYPE != 'default')
-            $server = DB_TYPE;
-
-        $cached = $cache->get($content . '.' . $server . '.cache');
-
-        if($cached == null)
-            return;
-
-        fCore::debug('returned cached: ' . $cached);
-
-        try {
-            $file = new fFile(__ROOT__ . 'cache/files/' . $content . '.' . $server . '.cache');
-            $time = $file->getMTime();
-            $text = '
-                <small>
-                    <em>cached (' . $time->format('H:i:s') . ')</em>
-                </small>
-             ';
-            $cached = preg_replace('%<small .*id="execution_time".*>(.*)</small>%si', $text, $cached);
-        } catch(fValidationException $e) {
-        }
-
-        exit($cached);
-    }
-
     /**
      * Returns an nice formatted string of the seconds in this format: dd:hh:mm:ss
      *
@@ -290,7 +158,7 @@ class Util {
      *
      * @return int|string
      */
-    public static function  formatSeconds(fTimestamp $timestamp, $seconds = true, $minutes = true, $hours = true,
+    public static function formatSeconds(fTimestamp $timestamp, $seconds = true, $minutes = true, $hours = true,
                                           $days = true) {
 
         $timestamp = strtotime($timestamp->__toString());
@@ -343,6 +211,7 @@ class Util {
     /**
      * Saves all debug messages except query times in cache/debug.txt<br>
      * If $msg is an array only the first two elements will be displayed
+     *
      * @param string|array $msg
      */
     public static function handleDebug($msg) {
@@ -429,5 +298,9 @@ class Util {
         curl_close($ch);
 
         return $data;
+    }
+
+    public static function getExecTime() {
+        return round((float)array_sum(explode(' ', microtime())) - STARTTIME, 4);
     }
 }

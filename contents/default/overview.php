@@ -1,33 +1,24 @@
 <?php
-$tpl = Util::newTpl($this, 'overview');
-$this->add('js', 'media/js/jquery.bootpag.js');
+/** @var Module $this */
+$tpl = $this->loadTemplate('overview', 'tpl');
+$this->addJs('media/js/jquery.bootpag.js');
 
 // sub templates
-$sidebar = Util::newTpl($tpl, 'overview/sidebar', 'sidebar');
-$online_players = Util::newTpl($tpl, 'overview/online_players', 'online_players');
-$server = Util::newTpl($tpl, 'overview/server_stats', 'server_stats');
-$headbar = Util::newTpl($tpl, 'overview/headbar', 'headbar');
-$players = Util::newTpl($tpl, 'overview/players', 'players');
-$blocks = Util::newTpl($tpl, 'overview/blocks', 'blocks');
-$items = Util::newTpl($tpl, 'overview/items', 'items');
-$distances = Util::newTpl($tpl, 'overview/distances', 'distances');
-$deaths = Util::newTpl($tpl, 'overview/deaths', 'deaths');
+$this->loadTemplate('overview/headbar', 'headbar');
+$this->loadTemplate('overview/sidebar', 'sidebar');
+$this->loadTemplate('overview/online_players', 'online_players');
+$this->loadTemplate('overview/server_stats', 'server_stats');
+$this->loadTemplate('overview/players', 'players');
+$this->loadTemplate('overview/blocks', 'blocks');
+$this->loadTemplate('overview/items', 'items');
+$this->loadTemplate('overview/distances', 'distances');
+$this->loadTemplate('overview/deaths', 'deaths');
 
-// players
-$this->inject('mod/players.php');
-$tpl->set('total_players', $this->get('total_players'));
-
-// total_blocks
-$this->inject('mod/total_blocks.php');
-$tpl->set('total_blocks', $this->get('total_blocks'));
-
-// total_items
-$this->inject('mod/total_items.php');
-$tpl->set('total_items', $this->get('total_items'));
-
-// death log
-$this->inject('mod/death_log.php');
-$tpl->set('death_log', $this->get('death_log'));
+// sub modules
+$this->loadSubModule('mod/players');
+$this->loadSubModule('mod/total_blocks');
+$this->loadSubModule('mod/total_items');
+$this->loadSubModule('mod/death_log');
 
 // online players
 $op = fRecordSet::build(
@@ -39,7 +30,8 @@ $op = fRecordSet::build(
          'login_time' => 'desc'
     )
 );
-$online_players->set('online_players', $op);
+
+$tpl->set('players_online', $op);
 
 // server stats in dashboard
 $ts_zero = new fTimestamp(0);
@@ -94,14 +86,11 @@ $item_stats['most_picked'] = TotalItem::getMostOfType('picked_up');
 // setting vars
 // multi server
 if(DB_TYPE == 'default')
-    $sidebar->set('multi', unserialize(Util::getOption('servers')));
+    $tpl->set('multi', unserialize(Util::getOption('servers')));
 
-$server->set('serverstats', $server_stats);
-$headbar->set('players', $player_stats);
-$headbar->set('serverstats', $server_stats);
-$players->set('players', $player_stats);
-$players->set('serverstats', $server_stats);
-$blocks->set('blocks', $block_stats);
-$items->set('items', $item_stats);
-$distances->set('distance', $distance_stats);
-$deaths->set('deaths', $death_stats);
+$tpl->set('player_stats', $player_stats);
+$tpl->set('serverstats', $server_stats);
+$tpl->set('distance_stats', $distance_stats);
+$tpl->set('block_stats', $block_stats);
+$tpl->set('item_stats', $item_stats);
+$tpl->set('death_stats', $death_stats);

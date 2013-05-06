@@ -1,6 +1,6 @@
 <?php
-$tpl = Util::newTpl($this, 'error');
-$this->set('title', 'Error occurred.');
+$tpl = $this->loadTemplate('error', 'tpl');
+$this->getDesignTpl()->set('title', 'Error occurred.');
 
 $type = fRequest::get('type', 'string');
 

@@ -2,7 +2,7 @@
     <tr>
         <td>
             <span class="label label-info">
-                <i class="icon-group"></i> <?php echo $this->get('players[online]'); ?>
+                <i class="icon-group"></i> {{ player_stats.online }}
             </span>
         </td>
         <td>Currently online</td>
@@ -10,7 +10,7 @@
     <tr>
         <td>
             <span class="label label-important">
-                <i class="icon-star"></i> <?php echo $this->get('players[tracked]'); ?>
+                <i class="icon-star"></i> {{ player_stats.tracked }}
             </span>
         </td>
         <td>Tracked</td>
@@ -18,7 +18,7 @@
     <tr>
         <td>
             <span class="label label-success">
-                <i class="icon-signal"></i> <?php echo $this->get('serverstats[max_players]'); ?>
+                <i class="icon-signal"></i> {{ serverstats.max_players }}
             </span>
         </td>
         <td>Maximum</td>
@@ -26,7 +26,7 @@
     <tr>
         <td>
             <span class="label label-info">
-                <i class="icon-fire"></i> <?php echo $this->get('serverstats[total_logins]'); ?>
+                <i class="icon-fire"></i> {{ serverstats.total_logins }}
             </span>
         </td>
         <td>Total logins</td>

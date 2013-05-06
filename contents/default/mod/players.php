@@ -1,5 +1,5 @@
 <?php
-$tpl_players = Util::newTpl($this, 'mod/players', 'total_players');
+$tpl_players = $this->loadTemplate('mod/players', 'total_players');
 
 $sort = fRequest::get('order_sort', 'string', 'asc');
 
@@ -36,6 +36,6 @@ $players = fRecordSet::build(
 $tpl_players->set('players', $players);
 
 if(fRequest::isAjax()) {
-    $tpl_players->place();
+    $tpl_players->display();
     die();
 }

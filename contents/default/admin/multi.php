@@ -1,11 +1,12 @@
 <?php
 if(DB_TYPE != 'default')
     return;
-$tpl = Util::newTpl($this, 'admin/multi', 'sub');
-$multi_form = Util::newTpl($tpl, 'admin/multi_form', 'multi_form');
+$tpl = $this->loadTemplate('admin/multi', 'sub');
+$multi_form = $this->loadTemplate('admin/multi_form', 'multi_form');
 
 $action = fRequest::get('action', 'string', '');
 $tpl->set('main', true);
+$tpl->set('action', $action);
 
 if($action == 'delete') {
     try {
@@ -76,6 +77,17 @@ if($action == 'add' || $action == 'edit') {
 else {
     $servers = Util::getOption('servers');
     $servers = unserialize($servers);
+
+    foreach($servers as $server) {
+        $file = __INC__ . 'config/db_' . $server['slug'] . '.php';
+        if(!file_exists($file)) {
+            $servers[$server['slug']]['db_values'] = null;
+            continue;
+        }
+
+        include $file;
+        $servers[$server['slug']]['db_values'] = $db_values;
+    }
 
     $tpl->set('servers', $servers);
 }

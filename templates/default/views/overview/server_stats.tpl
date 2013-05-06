@@ -2,7 +2,7 @@
     <tr>
         <td>
             <span class="label label-info">
-                <i class="icon-bell"></i> <?php echo $this->get('serverstats[startup]'); ?>
+                <i class="icon-bell"></i> {{ serverstats.startup }}
             </span>
         </td>
         <td>Startup</td>
@@ -10,7 +10,7 @@
     <tr>
         <td>
             <span class="label label-warning">
-                <i class="icon-lock"></i> <?php echo $this->get('serverstats[shutdown]'); ?>
+                <i class="icon-lock"></i> {{ serverstats.shutdown }}
             </span>
         </td>
         <td>Shutdown</td>
@@ -18,7 +18,7 @@
     <tr>
         <td>
             <span class="label label-important">
-                <i class="icon-calendar"></i> <?php echo $this->get('serverstats[cur_uptime]'); ?>
+                <i class="icon-calendar"></i> {{ serverstats.cur_uptime }}
             </span>
         </td>
         <td>Uptime</td>
@@ -26,7 +26,7 @@
     <tr>
         <td>
             <span class="label label-info">
-                <i class="icon-bullhorn"></i> <?php echo $this->get('serverstats[playtime]'); ?>
+                <i class="icon-bullhorn"></i> {{ serverstats.playtime }}
             </span>
         </td>
         <td>Gameplay</td>
