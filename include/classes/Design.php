@@ -55,9 +55,9 @@ class Design {
 
         if($template_path != null) {
             if(is_array($template_path))
-                $tpls = array_merge($template_path, $tpls);
+                $tpls = $template_path;
             elseif(is_string($template_path))
-                $tpls[] = $template_path;
+                $tpls = array($template_path);
         }
 
 
