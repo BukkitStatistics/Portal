@@ -1,26 +1,21 @@
 <h2><i class="icon-magic icon-large" style="color: #ccc"></i> Processing</h2>
 <p>Database converting is in progress! Please be patient.</p>
 
-<div id="convertingAlert" class="alert alert-info" <?php echo
-$this->get('next_step') != '' ? 'style="display: none;"' : '' ?>>
+<div id="convertingAlert" class="alert alert-info" {% if next_step is not empty %} style="display: none;" {% endif %}>
     <i class="icon-refresh icon-spin"></i>
-    <strong>Converting</strong> <span class="current"><?php echo $this->get('current'); ?></span>
+    <strong>Converting</strong> <span class="current">{{ current }}</span>
 </div>
-<div id="finishedAlert" class="alert alert-success" <?php echo
-$this->get('next_step') == '' ? 'style="display: none;"' : '' ?>>
-    <strong>Step (<span class="current"><?php echo $this->get('current'); ?></span>) finished.</strong> Now press the
-    <em>Next Step</em> Button.
+<div id="finishedAlert" class="alert alert-success" {% if next_step is empty %} style="display: none;" {% endif %}>
+    <strong>Step (<span class="current">{{ current }}</span>) finished.</strong> Now press the <em>Next Step</em> Button.
 </div>
 
-<div class="progress <?php echo ($this->get('next_step') != '' ? 'progress-success' : 'progress-striped active') ?>">
-    <div id="progressbar" class="bar" style="width: <?php echo $this->get('perc'); ?>%;"></div>
+<div class="progress {% if next_step is not empty %} progress-success {% else %} progress-striped active {% endif %}">
+    <div id="progressbar" class="bar" style="width: {{ perc }}%;"></div>
 </div>
 <a href="?step=converter"
    class="btn btn-inverse">Stop</a>
-<a id="nextbutton" <?php if($this->get('next_step') != ''): ?>
-   href="<?php echo $this->get('next_step'); ?>"
-    <?php endif; ?>
-   class="btn <?php echo ($this->get('next_step') != '' ? 'btn-success' : 'disabled') ?>">Next Step</a>
+<a id="nextbutton" {% if next_step is not empty %} href="{{ next_step }}" {% endif %}
+   class="btn {% if next_step is not empty %} btn-success {% else %} disabled {% endif %}">Next Step</a>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -54,11 +49,11 @@ $this->get('next_step') == '' ? 'style="display: none;"' : '' ?>>
                                             current.html(data['current']);
                                             history.pushState(
                                                     {
-                                                        pageTitle: '<?php echo $this->get('title'); ?> -' + data['current']
+                                                        pageTitle: '{{ title }} -' + data['current']
                                                     },
                                                     '',
                                                     '?step=process&type=' + data['next']);
-                                            document.title = '<?php echo $this->get('title'); ?> -' + data['current'];
+                                            document.title = '{{ title }} -' + data['current'];
                                             process(data['next'])
                                         }, 1500);
                             }
@@ -74,6 +69,6 @@ $this->get('next_step') == '' ? 'style="display: none;"' : '' ?>>
                     }
             );
         }
-        process('<?php echo $this->get('type'); ?>');
+        process('{{ type }}');
     });
 </script>

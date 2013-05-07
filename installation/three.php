@@ -1,8 +1,8 @@
-<?php // @TODO more settings?!
+<?php
 if(fSession::get('maxStep') < 3)
     fURL::redirect('?step=two');
 
-$tpl = Util::newTpl($this, 'three');
+$tpl = $this->loadTemplate('three', 'tpl');
 
 
 if(fRequest::isPost() && fRequest::get('general_submit')) {

@@ -2,8 +2,8 @@
 if(fSession::get('maxStep') < 6)
     fURL::redirect('?step=converter');
 
-$tpl = Util::newTpl($this, 'process');
-$tpl->set('title', $this->get('title'));
+$tpl = $this->loadTemplate('process', 'tpl');
+$tpl->set('title', $this->getDesignTpl()->get('title'));
 
 function sendJson($perc, $next, $tpl) {
     fJSON::sendHeader();
@@ -22,8 +22,7 @@ if(is_null($type)) {
     $tpl->set('next_step', '');
     $tpl->set('current', fText::compose('players'));
     $tpl->set('type', 'players');
-    $this->add('header_additions',
-               '<noscript><meta http-equiv="REFRESH" content="0;url=?step=process&type=players"></noscript>');
+    $this->addHeaderAddition('<noscript><meta http-equiv="REFRESH" content="0;url=?step=process&type=players"></noscript>');
 }
 else {
     $perc = 0;
@@ -70,7 +69,6 @@ else {
             sendJson($perc, $type, $tpl);
         }
 
-        $this->add('header_additions',
-                   '<noscript><meta http-equiv="REFRESH" content="1;url=?step=process&type=' . $type . '"></noscript>');
+        $this->addHeaderAddition('<noscript><meta http-equiv="REFRESH" content="1;url=?step=process&type=' . $type . '"></noscript>');
     }
 }

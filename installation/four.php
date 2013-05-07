@@ -2,7 +2,7 @@
 if(fSession::get('maxStep') < 4)
     fURL::redirect('?step=three');
 
-$tpl = Util::newTpl($this, 'four');
+$tpl = $this->loadTemplate('four', 'tpl');
 
 fSession::delete('converterStats');
 fSession::delete('convertDB');
@@ -29,7 +29,7 @@ if(!fMessaging::check('*') && fRequest::isPost() && fRequest::get('convert_submi
 } else {
     // checking cache dir
     try {
-        $cache_dir = new fDirectory(__ROOT__ . 'cache');
+        $cache_dir = new fDirectory(__ROOT__ . 'cache/files');
         $tpl->set('cache_dir', $cache_dir->getPath(true));
         if($cache_dir->isWritable())
             $tpl->set('cache_write', true);

@@ -2,7 +2,7 @@
 if(fSession::get('maxStep') < 7)
     fURL::redirect('?step=converter');
 
-$tpl = Util::newTpl($this, 'five');
+$tpl = $this->loadTemplate('five', 'tpl');
 
 if(fRequest::isPost() && fRequest::get('finish')) {
     try {

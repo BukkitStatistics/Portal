@@ -1,4 +1,4 @@
 <?php
-$tpl = Util::newTpl($this, 'error');
+$tpl = $this->loadTemplate('error', 'tpl');
 
 $tpl->set('url', fRequest::get('step'));

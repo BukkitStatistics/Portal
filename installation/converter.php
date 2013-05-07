@@ -2,7 +2,7 @@
 if(fSession::get('maxStep') < 5)
     fURL::redirect('?step=four');
 
-$tpl = Util::newTpl($this, 'converter');
+$tpl = $this->loadTemplate('converter', 'tpl');
 
 fSession::delete('convert');
 fSession::delete('converter');
@@ -116,7 +116,7 @@ if($tpl->get('state') == 2) {
         ');
 
         $conv = new Converter($db, $newDB);
-        $tpl->set($conv->getOldStats());
+        $tpl->set($conv->getOldStats(), null);
     } catch(fSQLException $e) {
         fMessaging::create('resetDB', 'install/converter', $e->getMessage());
     }

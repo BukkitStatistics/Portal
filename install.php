@@ -11,9 +11,10 @@ $step .= '.php';
 if(!file_exists(__ROOT__ . 'installation/' . $step))
     $step = 'error.php';
 
-$design = new fTemplating(__ROOT__ . 'installation', './installation/index.php');
-$design->set('title', 'Statistics Portal - ' . strtoupper($s));
-$design->set('tplRoot', __ROOT__ . 'installation/views');
-$design->add('header_additions', '');
-$design->inject($step);
-$design->place();
+fMessaging::create('no-cache', '{cache}', true);
+
+$ar = array('one', 'two', 'three', 'four', 'converter', 'process', 'five');
+$design = new Design('default', __ROOT__ . 'installation/', __ROOT__ . 'installation/views/');
+$design->getIndex()->set('title', 'Statistics Portal - ' . strtoupper($s));
+$design->getIndex()->set('install_pos', array_search(fRequest::get('step', 'string', 'one'), $ar));
+$design->display($step);

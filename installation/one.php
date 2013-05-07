@@ -1,10 +1,12 @@
 <?php
-$tpl = Util::newTpl($this, 'one');
+$tpl = $this->loadTemplate('one', 'tpl');
 
 // resets the previous session if some one had to start from the beginning
 if(!fRequest::isPost())
     fSession::reset();
 
+// workaround because the session gets destroyed
+fMessaging::create('no-cache', '{cache}', true);
 /*
  * Gets the data from step one
  */

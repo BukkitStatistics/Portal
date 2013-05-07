@@ -1,9 +1,7 @@
 <form name="install" method="post">
 <h2><i class="icon-ok-circle icon-large"></i> Finishing</h2>
 
-<?php
-Util::showMessages('*', 'install/five', 'alert alert-error');
-?>
+{{ Util.showMessages('*', 'install/five', 'alert alert-error') }}
 
 <p>
     The installation of the web portal is completed. Now press the button to delete all files and directories which were

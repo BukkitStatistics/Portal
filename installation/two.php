@@ -2,7 +2,7 @@
 if(fSession::get('maxStep') < 2)
     fURL::redirect('?step=one');
 
-$tpl = Util::newTpl($this, 'two');
+$tpl = $this->loadTemplate('two', 'tpl');
 
 /*
  * Validates the database data
@@ -49,28 +49,13 @@ if(fRequest::isPost() && fRequest::get('db_submit')) {
         if($version < 2)
             throw new fSQLException();
         $db->close();
-    } catch(fValidationException $e) {
-        fMessaging::create('validation', 'install/two', $e->getMessage());
-    } catch(fConnectivityException $e) {
-        fMessaging::create('connectivity', 'install/two', $e->getMessage());
-    } catch(fAuthorizationException $e) {
-        fMessaging::create('auth', 'install/two', $e->getMessage());
-    } catch(fNotFoundException $e) {
-        fMessaging::create('notfound', 'install/two', $e->getMessage());
-    } catch(fEnvironmentException $e) {
-        fMessaging::create('env', 'install/two', $e->getMessage());
-    } catch(fProgrammerException $e) {
-        fMessaging::create('prog', 'install/two', $e->getMessage());
-    } catch(fSQLException $e) {
-        fMessaging::create('nodb', 'install/two', fText::compose('No Database found'));
-    }
 
-    try {
-        // checking db.php
-        $db_file = new fFile(__INC__ . 'config/db.php');
+        try {
+            // checking db.php
+            $db_file = new fFile(__INC__ . 'config/db.php');
 
-        if(!fMessaging::check('validation', 'install/two')) {
-            $contents = "<?php
+            if(!fMessaging::check('validation', 'install/two')) {
+                $contents = "<?php
 /*
 * Do not modify this unless you know what you are doing!
 */
@@ -85,13 +70,30 @@ if(fRequest::isPost() && fRequest::get('db_submit')) {
     'type'     => 'default'
 );";
 
-            $db_file->write($contents);
+                $db_file->write($contents);
+            }
+        } catch(fValidationException $e) {
+            fMessaging::create('db_file', 'install/two', $e->getMessage());
+        }
+        if(!fMessaging::check('*', 'install/two')) {
+            fSession::set('maxStep', 3);
+            fURL::redirect('?step=three');
         }
     } catch(fValidationException $e) {
-        fMessaging::create('db_file', 'install/two', $e->getMessage());
-    }
-    if(!fMessaging::check('*', 'install/two')) {
-        fSession::set('maxStep', 3);
-        fURL::redirect('?step=three');
+        fMessaging::create('validation', 'install/two', $e->getMessage());
+    } catch(fConnectivityException $e) {
+        fMessaging::create('connectivity', 'install/two', $e->getMessage());
+    } catch(fAuthorizationException $e) {
+        fMessaging::create('auth', 'install/two', $e->getMessage());
+    } catch(fNotFoundException $e) {
+        fMessaging::create('notfound', 'install/two', $e->getMessage());
+    } catch(fEnvironmentException $e) {
+        fMessaging::create('env', 'install/two', $e->getMessage());
+    } catch(fProgrammerException $e) {
+        fMessaging::create('prog', 'install/two', $e->getMessage());
+    } catch(fSQLException $e) {
+        fMessaging::create('nodb', 'install/two', fText::compose('No Database found'));
+    } catch(fNoRowsException $e) {
+        fMessaging::create('nodb', 'install/two', fText::compose('No Database found'));
     }
 }
