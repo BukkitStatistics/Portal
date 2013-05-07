@@ -356,7 +356,7 @@
 
             <p>
                 <strong>Last seen:</strong>
-                {% if player.getLoginTime is not null %}
+                {% if player.getLoginTime is not null and player.getLoginTime != 0 %}
                     {{ player.getLoginTime|date }}
                 {% else %}
                     <em>never</em>
@@ -365,7 +365,7 @@
 
             <p>
                 <strong>Playtime:</strong>
-                {{ Util.formatSeconds(fTimestamp(player.getPlaytime)) }}
+                {{ Util.formatSeconds(fTimestamp(player.getPlaytime), false) }}
             </p>
 
             <p>

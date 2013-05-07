@@ -111,7 +111,7 @@ class PlayerInventory extends fActiveRecord {
 
         return '<img src="' . fFilesystem::translateToWebPath($img) . '" alt="' . fText::compose('effect_' . $id) .
                '" title="' . fText::compose('effect_' . $id) . ' - ' .
-               Util::formatSeconds(new fTimestamp($effect['time']), true, true, true, false) .
+               Util::formatSeconds(new fTimestamp($effect['time']), false, true, true, true) .
                '" rel="tooltip" class="player-effect" />';
     }
 
