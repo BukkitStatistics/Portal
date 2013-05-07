@@ -11,7 +11,7 @@ class Module {
     /**
      * Reference to the main template of the module.
      *
-     * @var Template
+     * @var Statistics_Twig_Template
      */
     private $main_tpl;
 
@@ -37,7 +37,7 @@ class Module {
      * @param string $template
      * @param null   $name
      *
-     * @return Template
+     * @return Statistics_Twig_Template
      */
     public function loadTemplate($template, $name = null) {
         $tmp = $this->design->loadTemplate($template, $name);
@@ -115,7 +115,7 @@ class Module {
     /**
      * Returns the design template
      *
-     * @return Template
+     * @return Statistics_Twig_Template
      */
     public function getDesignTpl() {
         return $this->design->getIndex();
