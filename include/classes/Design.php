@@ -165,6 +165,15 @@ class Design {
     }
 
     /**
+     * Returns true of the template key 'tpl' is set.
+     *
+     * @return bool
+     */
+    public function isTplSet() {
+        return isset($this->templates['tpl']);
+    }
+
+    /**
      * If $content is cached the execution will stop immediately and the cached content will be echoed.
      *
      * @param $content

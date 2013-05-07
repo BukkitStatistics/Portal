@@ -2,7 +2,7 @@
 fMessaging::create('no-cache', '{cache}', true);
 fAuthorization::requireLoggedIn();
 
-$tpl = $this->loadTemplate('admin', 'tpl');
+$tpl = $this->loadTemplate('admin');
 
 if(fRequest::get('sub', 'string'))
     $this->loadSubModule('admin/' . fRequest::get('sub', 'string'));

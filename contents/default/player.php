@@ -1,5 +1,5 @@
 <?php
-$tpl = $this->loadTemplate('player', 'tpl');
+$tpl = $this->loadTemplate('player');
 $GLOBALS['lang']->load('causes');
 
 

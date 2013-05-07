@@ -1,6 +1,6 @@
 <?php
 /** @var Module $this */
-$tpl = $this->loadTemplate('overview', 'tpl');
+$tpl = $this->loadTemplate('overview');
 $this->addJs('media/js/jquery.bootpag.js');
 
 // sub templates
