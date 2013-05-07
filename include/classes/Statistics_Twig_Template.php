@@ -1,5 +1,5 @@
 <?php
-class Template extends Twig_Template {
+class Statistics_Twig_Template extends Twig_Template {
     /**
      * The context which will be rendered
      *
@@ -19,7 +19,7 @@ class Template extends Twig_Template {
      * @return string The template name
      */
     public function getTemplateName() {
-        return 'Template';
+        return 'Statistics';
     }
 
     /**
@@ -69,9 +69,9 @@ class Template extends Twig_Template {
      * @param $element
      * @param $value
      *
-     * @return Template $this
+     * @return Statistics_Twig_Template $this
      */
-    public function set($element, $value) {
+    public function set($element, $value = null) {
         // code borrowed from fTemplating
         if($value === NULL && is_array($element)) {
             foreach($element as $key => $value) {

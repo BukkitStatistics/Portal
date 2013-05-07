@@ -11,7 +11,7 @@ class Design {
     /**
      * Holds all loaded templates
      *
-     * @var Template[]
+     * @var Statistics_Twig_Template[]
      */
     private $templates;
 
@@ -32,7 +32,7 @@ class Design {
     /**
      * Reference to the main design template
      *
-     * @var Template
+     * @var Statistics_Twig_Template
      */
     private $index;
 
@@ -63,7 +63,7 @@ class Design {
 
         $twig_loader = new Twig_Loader_Filesystem($tpls);
         $this->twig = new Twig_Environment($twig_loader, array(
-                                                              'base_template_class' => 'Template',
+                                                              'base_template_class' => 'Statistics_Twig_Template',
                                                               'debug'               => DEBUG,
                                                               'cache'               => __ROOT__ . 'cache/twig'
                                                          ));
@@ -139,7 +139,7 @@ class Design {
      * @param string$template
      * @param null  $name
      *
-     * @return Template
+     * @return Statistics_Twig_Template
      */
     public function loadTemplate($template, $name = null) {
         if(strpos($template, '.tpl') === false)
@@ -158,7 +158,7 @@ class Design {
     /**
      * Returns the index template.
      *
-     * @return Template
+     * @return Statistics_Twig_Template
      */
     public function getIndex() {
         return $this->index;
