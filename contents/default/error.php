@@ -1,5 +1,6 @@
 <?php
-$tpl = $this->loadTemplate('error', 'tpl');
+fMessaging::create('no-cache', '{cache}', true);
+$tpl = $this->loadTemplate('error');
 $this->getDesignTpl()->set('title', 'Error occurred.');
 
 $type = fRequest::get('type', 'string');

@@ -32,14 +32,17 @@ class Module {
 
     /**
      * Loads an the given $template.<br>
-     * If it is the first it will be used as the main template for this module.
+     * If it is the first it will be used as the main template for this module and as 'tpl' for the design (regardless of the given $name).
      *
      * @param string $template
-     * @param null   $name
+     * @param string $name
      *
      * @return Statistics_Twig_Template
      */
     public function loadTemplate($template, $name = null) {
+        if(!$this->design->isTplSet())
+            $name = 'tpl';
+
         $tmp = $this->design->loadTemplate($template, $name);
 
         if($this->main_tpl != null && $name != null)

@@ -148,43 +148,47 @@ class Util {
     }
 
     /**
-     * Returns an nice formatted string of the seconds in this format: dd:hh:mm:ss
+     * Returns an nice formatted string of the seconds in this format: y d h m s
      *
      * @param fTimestamp $timestamp
-     * @param bool       $seconds
-     * @param bool       $minutes
-     * @param bool       $hours
+     * @param bool       $years
      * @param bool       $days
+     * @param bool       $hours
+     * @param bool       $minutes
+     * @param bool       $seconds
      *
-     * @return int|string
+     * @return string
      */
-    public static function formatSeconds(fTimestamp $timestamp, $seconds = true, $minutes = true, $hours = true,
-                                          $days = true) {
+    public static function formatSeconds(fTimestamp $timestamp, $years = true, $days = true, $hours = true,
+                                         $minutes = true, $seconds = true) {
 
         $timestamp = strtotime($timestamp->__toString());
 
-        $s = $timestamp % 60;
-        $m = floor(($timestamp % 3600) / 60);
-        $h = floor(($timestamp % 86400) / 3600);
-        $d = floor($timestamp / 86400);
+        $units = array(
+            'y' => 365 * 24 * 3600,
+            'd' => 24 * 3600,
+            'h' => 3600,
+            'm' => 60,
+            's' => 1,
+        );
 
-        if(strlen($s) == 1)
-            $s = 0 . $s;
-        if(strlen($m) == 1)
-            $m = 0 . $m;
-        if(strlen($h) == 1)
-            $h = 0 . $h;
+        // specifically handle zero
+        if($timestamp == 0)
+            return '0s';
 
-        if($days)
-            return $d . ' ' . $h . ':' . $m . ':' . $s;
-        elseif($hours)
-            return $h . ':' . $m . ':' . $s;
-        elseif($minutes)
-            return $m . ':' . $s;
-        elseif($seconds)
-            return $s;
-        else
-            return $d . ' ' . $h . ':' . $m . ':' . $s;
+        $s = '';
+
+        foreach($units as $name => $divisor) {
+            if($quot = intval($timestamp / $divisor)) {
+                if(strlen($quot) == 1)
+                    $quot = '0' . $quot;
+
+                $s .= $quot . $name . ' ';
+                $timestamp -= $quot * $divisor;
+            }
+        }
+
+        return substr($s, 0, -1);
     }
 
     /**

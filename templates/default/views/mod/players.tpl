@@ -38,7 +38,7 @@
                     {{ player.getFirstLogin|date }}
                 </td>
                 <td>
-                    {{ Util.formatSeconds(fTimestamp(player.getPlaytime)) }}
+                    {{ Util.formatSeconds(fTimestamp(player.getPlaytime), false) }}
                 </td>
             </tr>
         {% endfor %}
