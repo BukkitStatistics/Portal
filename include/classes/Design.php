@@ -71,7 +71,6 @@ class Design {
             $this->twig->addExtension(new Twig_Extension_Debug());
 
         $this->twig->addExtension(new Statistics_Twig_Extension());
-        $this->twig->getExtension('core')->setTimezone(Util::getOption('timezone', fTimestamp::getDefaultTimezone()));
 
         if(is_null($content_folder) || !is_string($content_folder))
             $this->content_folder = __ROOT__ . 'contents/' . $design . '/';
