@@ -369,6 +369,15 @@
             </p>
 
             <p>
+                <strong>Longest session:</strong>
+                {% if player.getLongestSession > 0 %}
+                    {{ Util.formatSeconds(fTimestamp(player.getLongestSession), false) }}
+                {% else %}
+                    <em>none</em>
+                {% endif %}
+            </p>
+
+            <p>
                 <strong>Logins:</strong>
                 {{ player.prepareLogins }}
             </p>
