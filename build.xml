@@ -5,6 +5,7 @@
     <target name="build" depends="init, clean, dist" description="Default target"/>
 
     <target name="init" depends="-load-properties, -setup-dirs" unless="project.initialised">
+        <exec command="composer install" passthru="true"/>
         <property name="project.initialised" value="true"/>
     </target>
 
@@ -64,15 +65,19 @@
                 <exclude name="*.markdown"/>
                 <exclude name=".idea/"/>
                 <exclude name=".git/"/>
-                <exclude name="build.properties"/>
+                <exclude name="composer.*/"/>
                 <exclude name="build.xml/"/>
                 <exclude name="version.xml/"/>
                 <exclude name="**/.DS_Store"/>
                 <exclude name="**/Thumbs.db"/>
                 <exclude name="cache/files/*"/>
                 <exclude name="cache/skins/*"/>
+                <exclude name="cache/twig/*"/>
                 <exclude name="cache/debug.txt"/>
                 <exclude name="cache/singlecache"/>
+                <exclude name="include/vendor/twig/twig/doc/"/>
+                <exclude name="include/vendor/twig/twig/ext/"/>
+                <exclude name="include/vendor/twig/twig/test/"/>
             </fileset>
         </copy>
 
