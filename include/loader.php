@@ -93,33 +93,3 @@ fAuthorization::setLoginPage('?page=login');
  * Handles for example api calls
  */
 include_once __INC__ . 'ajax.php';
-
-/**
- * Automatically includes classes
- *
- *
- * @param  string $class_name  Name of the class to load
- *
- * @throws fEnvironmentException
- * @return void
- */
-function __autoload($class_name) {
-    $flourish_file = __INC__ . 'flourish/' . $class_name . '.php';
-    if(file_exists($flourish_file))
-        return require $flourish_file;
-
-    $file = __INC__ . 'classes/' . $class_name . '.php';
-    if(file_exists($file))
-        return require $file;
-
-    $file = __INC__ . 'classes/orm/' . $class_name . '.php';
-    if(file_exists($file))
-        return require $file;
-
-    $file = __INC__ . str_replace(array('_', "\0"), array('/', ''), $class_name) . '.php';
-    if(is_file($file))
-        return require $file;
-
-
-    throw new fEnvironmentException('The class ' . $class_name . ' could not be loaded here: ' . $file);
-}

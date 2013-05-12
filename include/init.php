@@ -17,5 +17,6 @@ define('DEVELOPMENT', false);
  */
 define('DEBUG', true);
 
+require __INC__ . 'vendor/autoload.php';
 include_once __INC__ . 'config/version.php';
 include_once __INC__ . 'loader.php';
