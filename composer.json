@@ -1,0 +1,14 @@
+{
+    "name": "statistics/portal",
+    "description": "Standard portal for the bukkit statistics plugin",
+    "config": {
+        "vendor-dir": "include/vendor"
+    },
+    "autoload": {
+        "classmap": ["include/classes/"]
+    },
+    "require": {
+        "twig/twig": "1.*",
+        "flourish/flourish": "0.9.*@dev"
+    }
+}

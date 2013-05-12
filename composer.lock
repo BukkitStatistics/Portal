@@ -1,0 +1,118 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "a9aa8275eb5811a693ae25eaaf76bf57",
+    "packages": [
+        {
+            "name": "flourish/flourish",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/flourishlib/flourish-classes.git",
+                "reference": "6d300d01ac6bd8953277c95a63f2936cd96ba84c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/flourishlib/flourish-classes/zipball/6d300d01ac6bd8953277c95a63f2936cd96ba84c",
+                "reference": "6d300d01ac6bd8953277c95a63f2936cd96ba84c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.9.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "."
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Will Bond",
+                    "email": "will@wbond.net",
+                    "homepage": "http://wbond.net/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A collection of classes for general web development, with a particular focus on compatibility, portability and security",
+            "homepage": "http://flourishlib.com/",
+            "time": "2013-05-01 00:13:43"
+        },
+        {
+            "name": "twig/twig",
+            "version": "v1.13.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fabpot/Twig.git",
+                "reference": "v1.13.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/v1.13.0",
+                "reference": "v1.13.0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.13-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Twig_": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Armin Ronacher",
+                    "email": "armin.ronacher@active-4.com"
+                }
+            ],
+            "description": "Twig, the flexible, fast, and secure template language for PHP",
+            "homepage": "http://twig.sensiolabs.org",
+            "keywords": [
+                "templating"
+            ],
+            "time": "2013-05-10 15:12:43"
+        }
+    ],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "flourish/flourish": 20
+    },
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
+}

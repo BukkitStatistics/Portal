@@ -9,6 +9,10 @@ cache/singlecache
 cache/files/remapped
 
 
+#################
+## Composer
+#################
+include/vendor
 
 #################
 ## Eclipse
