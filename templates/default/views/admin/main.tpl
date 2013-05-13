@@ -16,10 +16,8 @@
                     </tr>
                     <tr>
                         <td><strong>Server IP:</strong></td>
-                        <td>{{ ServerStatistic.getValue('server_ip') }}
+                        <td colspan="4">{{ ServerStatistic.getValue('server_ip') }}
                             :{{ ServerStatistic.getValue('server_port') }}</td>
-                        <td><strong>Server time:</strong></td>
-                        <td>{{ ServerStatistic.getValue('server_time')|date }}</td>
                     </tr>
                     <tr>
                         <td><strong>First Startup:</strong></td>

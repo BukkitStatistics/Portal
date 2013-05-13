@@ -342,19 +342,19 @@ class Util {
 
         }
         elseif(($bytes >= $kilobyte) && ($bytes < $megabyte)) {
-            return round($bytes / $kilobyte, $precision) . ' KB';
+            return sprintf('%.2f', round($bytes / $kilobyte, $precision)) . ' KB';
 
         }
         elseif(($bytes >= $megabyte) && ($bytes < $gigabyte)) {
-            return round($bytes / $megabyte, $precision) . ' MB';
+            return sprintf('%.2f', round($bytes / $megabyte, $precision)) . ' MB';
 
         }
         elseif(($bytes >= $gigabyte) && ($bytes < $terabyte)) {
-            return round($bytes / $gigabyte, $precision) . ' GB';
+            return sprintf('%.2f', round($bytes / $gigabyte, $precision)) . ' GB';
 
         }
         elseif($bytes >= $terabyte) {
-            return round($bytes / $terabyte, $precision) . ' TB';
+            return sprintf('%.2f', round($bytes / $terabyte, $precision)) . ' TB';
         }
         else {
             return $bytes . ' B';
