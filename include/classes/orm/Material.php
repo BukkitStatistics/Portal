@@ -24,14 +24,13 @@ class Material extends fActiveRecord {
         if(is_string($material)) {
             try {
                 $material = new Material($material);
-                $tp_name = $material->getTpName();;
             } catch(fNotFoundException $e) {
                 fCore::debug($e);
-                $tp_name = 'none';
+                $material = new Material('-1:0');
             }
         }
-        else
-            $tp_name = $material->getTpName();
+
+        $tp_name = $material->getTpName();
 
         $path = 'media/img/materials/';
         $img = $path . $tp_name . '.png';
@@ -49,7 +48,7 @@ class Material extends fActiveRecord {
         else
             $tooltip = '';
 
-        $title = 'title="' . fText::compose($tp_name) . '"';
+        $title = 'title="' . $material->getName() . '"';
 
         $tooltip_data = '';
         if(is_object($material) && count($material->getEnchantments())) {
@@ -58,7 +57,7 @@ class Material extends fActiveRecord {
 
             $title = '';
             $tooltip_data = 'data-original-title="';
-            $tooltip_data .= $tp_name . '<br>';
+            $tooltip_data .= $material->getName() . '<br>';
 
             foreach($material->getEnchantments() as $enchant) {
                 $tooltip_data .= fText::compose('enchantment_' . $enchant['enchantment_id']);
@@ -197,6 +196,16 @@ class Material extends fActiveRecord {
      * @return string
      */
     public function getName() {
-        return fText::compose($this->getTpName());
+        $name = fText::compose($this->getTpName());
+
+        if($name != $this->getTpName())
+            return $name;
+
+        if(stripos($name, 'custom_') !== false)
+            $name = substr($name, 7); // remove custom_ from name
+
+        $name = fGrammar::humanize($name);
+
+        return $name;
     }
 }

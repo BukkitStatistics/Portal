@@ -8,14 +8,25 @@ class Entity extends fActiveRecord {
      * If no images was found it will return the default image.<br>
      * Set $tooltip to show the bootstrap tooltip instead of the browser alt tag.
      *
-     * @param String $tp_name
+     * @param String|Entity $entity
      * @param int    $size
      * @param String $classes
      * @param bool   $tooltip
      *
      * @return string
      */
-    public static function getEntityImg($tp_name, $size = 32, $classes = null, $tooltip = false) {
+    public static function getEntityImg($entity, $size = 32, $classes = null, $tooltip = false) {
+        if(is_string($entity)) {
+            try {
+                $entity = new Entity($entity);
+            } catch(fNotFoundException $e) {
+                fCore::debug($e);
+                $entity = new Entity();
+                $entity->setTpName('unknown');
+            }
+        }
+        $tp_name = $entity->getTpName();
+
         $path = 'media/img/entities/';
         $img = $path . $tp_name . '.png';
 
@@ -34,8 +45,8 @@ class Entity extends fActiveRecord {
 
         return
             '<img ' . $class . ' src="' . fFilesystem::translateToWebPath($img) . '" title="' .
-            fText::compose($tp_name) . '" alt="' .
-            fText::compose($tp_name) . '" style="width: ' . $size . 'px; height: ' . $size . 'px" ' . $tooltip . '>';
+            $entity->getName() . '" alt="' .
+            $entity->getName() . '" style="width: ' . $size . 'px; height: ' . $size . 'px" ' . $tooltip . '>';
     }
 
     /**
@@ -46,7 +57,7 @@ class Entity extends fActiveRecord {
      */
     public static function getMostDangerous() {
         $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
-                    SELECT SUM(pve.player_killed) AS total, e.tp_name
+                    SELECT SUM(pve.player_killed) AS total, e.entity_id
                     FROM "prefix_total_pve_kills" pve, "prefix_entities" e
                     WHERE pve.entity_id = e.entity_id
                     GROUP BY pve.entity_id
@@ -58,7 +69,7 @@ class Entity extends fActiveRecord {
             $row = $res->fetchRow();
             $num = new fNumber($row['total']);
 
-            return array($num->format(), $row['tp_name']);
+            return array($num->format(), $row['entity_id']);
         } catch(fNoRowsException $e) {
             return array(0, 'none');
         }
@@ -72,7 +83,7 @@ class Entity extends fActiveRecord {
      */
     public static function getMostKilled() {
         $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
-                    SELECT SUM(pve.creature_killed) AS total, e.tp_name
+                    SELECT SUM(pve.creature_killed) AS total, e.entity_id
                     FROM "prefix_total_pve_kills" pve, "prefix_entities" e
                     WHERE pve.entity_id = e.entity_id
                     GROUP BY pve.entity_id
@@ -84,7 +95,7 @@ class Entity extends fActiveRecord {
             $row = $res->fetchRow();
             $num = new fNumber($row['total']);
 
-            return array($num->format(), $row['tp_name']);
+            return array($num->format(), $row['entity_id']);
         } catch(fNoRowsException $e) {
             return array(0, 'none');
         }
@@ -113,7 +124,7 @@ class Entity extends fActiveRecord {
      * @return string
      */
     public function getImage($size = 32, $classes = null, $tooltip = false) {
-        return Entity::getEntityImg($this->getTpName(), $size, $classes, $tooltip);
+        return Entity::getEntityImg($this, $size, $classes, $tooltip);
     }
 
     /**
@@ -122,7 +133,17 @@ class Entity extends fActiveRecord {
      * @return string
      */
     public function getName() {
-        return fText::compose($this->getTpName());
+        $name = fText::compose($this->getTpName());
+
+        if($name != $this->getTpName())
+            return $name;
+
+        if(stripos($name, 'custom') !== false)
+            $name = substr($name, 7); // remove custom_ from name
+
+        $name = fGrammar::humanize($name);
+
+        return $name;
     }
 
     /**
