@@ -1,9 +1,5 @@
 <div class="row-fluid">
-    <div class="span2" style="text-align:center;">
-        <h2><i class="icon-cog icon-3x" style="color:#ccc;"></i></h2>
-        <h3>Database</h3>
-    </div>
-    <div class="span10 well">
+    <div class="span12 well">
         <div class="alert alert-danger alert-block">
             <p>
                 <span class="label label-important">Warning!</span> Be careful with these settings. When you fill in
@@ -63,7 +59,7 @@
                             <label for="db_prefix"><strong>Prefix</strong></label>
 
                             <div class="input-append span8">
-                                <input type="text" name="db_prefix" id="db_prefix" class="span10"
+                                <input type="text" name="db_prefix" id="db_prefix" class="span11"
                                        value="{{ db_prefix }}"/>
                                 <span class="add-on">_</span>
                             </div>

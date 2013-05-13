@@ -138,10 +138,29 @@ class ServerStatistic {
         return false;
     }
 
+    /**
+     * Calculates the uptime percentage base up on the total uptime divided by the time now minus the first startup
+     *
+     * @return float
+     */
     public static function getUptimePerc() {
         $perc = self::getValue('total_uptime') / (time() - self::getValue('first_startup')) * 100;
 
         return floor($perc);
+    }
+
+    /**
+     * Returns the real time of the server.
+     *
+     * @return string
+     */
+    public static function getRealServerTime() {
+        // taken from: http://forums.bukkit.org/threads/how-can-i-convert-minecraft-long-time-to-real-hours-and-minutes.122912/#post-1503545
+        $time = self::getValue('server_time');
+        $h = floor((($time / 1000) + 8) % 24); // 8 hours offset
+        $m = floor(($time % 1000) / 1000 * 60);
+
+        return sprintf('%02d:%02d', $h, $m);
     }
 
 }

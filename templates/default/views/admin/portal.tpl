@@ -1,9 +1,5 @@
 <div class="row-fluid">
-    <div class="span2" style="text-align:center;">
-        <h2><i class="icon-pencil icon-3x" style="color:#ccc;"></i></h2>
-        <h3>Portal</h3>
-    </div>
-    <div class="span10 well">
+    <div class="span12 well">
         <div class="row-fluid">
             <div class="span6">
                 <fieldset>

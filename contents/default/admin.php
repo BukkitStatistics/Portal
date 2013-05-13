@@ -3,9 +3,15 @@ fMessaging::create('no-cache', '{cache}', true);
 fAuthorization::requireLoggedIn();
 
 $tpl = $this->loadTemplate('admin');
-
-if(fRequest::get('sub', 'string'))
-    $this->loadSubModule('admin/' . fRequest::get('sub', 'string'));
+$sub = fRequest::get('sub', 'string');
+if($sub) {
+    $tpl->set($sub, 'active');
+    $this->loadSubModule('admin/' . $sub);
+}
+else {
+    $this->loadTemplate('admin/main', 'sub');
+    $tpl->set('main', true);
+}
 if(fRequest::isPost() && fRequest::get('logout')) {
     fAuthorization::destroyUserInfo();
     fURL::redirect('./');
