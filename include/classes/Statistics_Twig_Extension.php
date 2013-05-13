@@ -39,7 +39,6 @@ class Statistics_Twig_Extension extends Twig_Extension {
             'Material'     => new Twig_Function_Function(array($this, 'Material')),
             'showChecked'  => new Twig_Function_Function(array($this, 'showChecked')),
             'printOption'  => new Twig_Function_Function(array($this, 'printOption')),
-            'phpInclude'   => new Twig_Function_Function(array($this, 'phpInclude')),
             'checkMessage' => new Twig_Function_Function(array($this, 'checkMessage'))
         );
     }
