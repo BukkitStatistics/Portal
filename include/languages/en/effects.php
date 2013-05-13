@@ -1,0 +1,23 @@
+<?php
+$translations = array(
+    'effect_1'  => 'Speed',
+    'effect_2'  => 'Slowness',
+    'effect_3'  => 'Haste',
+    'effect_4'  => 'Mining Fatigue',
+    'effect_5'  => 'Strength',
+    'effect_6'  => 'Instant Health',
+    'effect_7'  => 'Instant Damage',
+    'effect_8'  => 'Jump Boost',
+    'effect_9'  => 'Nausea',
+    'effect_10' => 'Regeneration',
+    'effect_11' => 'Resistance',
+    'effect_12' => 'Fire Resistance',
+    'effect_13' => 'Water Breathing',
+    'effect_14' => 'Invisibility',
+    'effect_15' => 'Blindness',
+    'effect_16' => 'Night vision',
+    'effect_17' => 'Hunger',
+    'effect_18' => 'Weakness',
+    'effect_19' => 'Poison',
+    'effect_20' => 'Wither',
+);
