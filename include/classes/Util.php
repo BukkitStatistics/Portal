@@ -10,6 +10,8 @@ class Util {
     const handleDebug = "Util::handleDebug";
     const exceptionCallback = "Util::exceptionCallback";
     const getRomanNumber = "Util::getRomanNumber";
+    const convertBytes = "Util:;convertBytes";
+    const formatMinecraftString = "Util:;formatMinecraftString";
 
     /**
      * Returns the requested option out of the settings table.
@@ -161,6 +163,7 @@ class Util {
      */
     public static function formatSeconds(fTimestamp $timestamp, $years = true, $days = true, $hours = true,
                                          $minutes = true, $seconds = true) {
+        // TODO: improve function.. again...
 
         $timestamp = strtotime($timestamp->__toString());
 
@@ -180,8 +183,7 @@ class Util {
 
         foreach($units as $name => $divisor) {
             if($quot = intval($timestamp / $divisor)) {
-                if(strlen($quot) == 1)
-                    $quot = '0' . $quot;
+                    $quot = sprintf('%02d', $quot);
 
                 $s .= $quot . $name . ' ';
                 $timestamp -= $quot * $divisor;
@@ -289,6 +291,14 @@ class Util {
         return $result;
     }
 
+    /**
+     * Gets the file contents via curl.
+     *
+     * @param      $url
+     * @param bool $ajax
+     *
+     * @return mixed
+     */
     public static function getFileContents($url, $ajax = false) {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -304,7 +314,120 @@ class Util {
         return $data;
     }
 
+    /**
+     * Returns the execution time of the whole script.
+     *
+     * @return float
+     */
     public static function getExecTime() {
         return round((float)array_sum(explode(' ', microtime())) - STARTTIME, 4);
+    }
+
+    /**
+     * Convert bytes to human readable format
+     *
+     * @param     $bytes - size in bytes to convert
+     * @param int $precision
+     *
+     * @return string
+     */
+    public static function convertBytes($bytes, $precision = 2) {
+        $kilobyte = 1024;
+        $megabyte = $kilobyte * 1024;
+        $gigabyte = $megabyte * 1024;
+        $terabyte = $gigabyte * 1024;
+
+        if(($bytes >= 0) && ($bytes < $kilobyte)) {
+            return $bytes . ' B';
+
+        }
+        elseif(($bytes >= $kilobyte) && ($bytes < $megabyte)) {
+            return round($bytes / $kilobyte, $precision) . ' KB';
+
+        }
+        elseif(($bytes >= $megabyte) && ($bytes < $gigabyte)) {
+            return round($bytes / $megabyte, $precision) . ' MB';
+
+        }
+        elseif(($bytes >= $gigabyte) && ($bytes < $terabyte)) {
+            return round($bytes / $gigabyte, $precision) . ' GB';
+
+        }
+        elseif($bytes >= $terabyte) {
+            return round($bytes / $terabyte, $precision) . ' TB';
+        }
+        else {
+            return $bytes . ' B';
+        }
+    }
+
+    /**
+     * Returns an html equivalent to the minecraft formatting codes.
+     *
+     * @param $string
+     *
+     * @return string
+     */
+    public static function formatMinecraftString($string) {
+        $str = preg_replace_callback('%§([a-fk-or0-9])%i', 'self::motdReplaceCallback', $string);
+        $openspan = substr_count($str, '<span');
+        $closespan = substr_count($str, '</span>');
+
+        for($i = 0; $i < $openspan - $closespan; $i++)
+            $str .= '</span>';
+
+        return $str;
+    }
+
+    /**
+     * Helper function for formatMinecraftString.<br>
+     * Replaces all formatting codes with an appropriated span element
+     *
+     * @param $match
+     *
+     * @return string
+     */
+    private static function motdReplaceCallback($match) {
+        static $count = 0;
+
+        $codes = array(
+            '0' => 'color: #000000',
+            '1' => 'color: #0000AA',
+            '2' => 'color: #00AA00',
+            '3' => 'color: #00AAAA',
+            '4' => 'color: #AA0000',
+            '5' => 'color: #AA00AA',
+            '6' => 'color: #FFAA00',
+            '7' => 'color: #AAAAAA',
+            '8' => 'color: #555555',
+            '9' => 'color: #5555FF',
+            'a' => 'color: #55FF55',
+            'b' => 'color: #55FFFF',
+            'c' => 'color: #FF5555',
+            'd' => 'color: #FF55FF',
+            'e' => 'color: #FFFF55',
+            'f' => 'color: #FFFFFF',
+            'l' => 'font-weight: bold;',
+            'm' => 'text-decoration: line-through;',
+            'n' => 'text-decoration: underline;',
+            'o' => 'font-style: italic;'
+        );
+
+
+        if(isset($codes[$match[1]])) {
+            $count++;
+            return '<span style="' . $codes[$match[1]] . '">';
+        }
+        elseif($match[1] == 'r') {
+            $tmp = '';
+            for($i = 0; $i < $count; $i++)
+                $tmp .= '</span>';
+
+            $count = 0;
+
+            return $tmp;
+        }
+
+        return '';
     }
 }

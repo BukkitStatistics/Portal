@@ -1,10 +1,5 @@
 <div class="row-fluid">
-    <div class="span2" style="text-align:center;">
-        <h2><i class="icon-remove-circle icon-3x" style="color:#ccc;"></i></h2>
-
-        <h3>Dump data</h3>
-    </div>
-    <div class="span10 well">
+    <div class="span12 well">
         <div class="alert alert-danger alert-block">
             <p>
                 <span class="label label-important">Warning!</span> This operation cannot be undone!
