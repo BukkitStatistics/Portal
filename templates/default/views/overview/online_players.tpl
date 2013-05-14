@@ -5,5 +5,5 @@
         </a>
     </div>
 {% else %}
-    <div class='force-center'><em>No players online</em></div>
+    <div class='force-center'><em>{{ 'no_players_online'|trans }}</em></div>
 {% endfor %}

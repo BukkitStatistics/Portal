@@ -5,7 +5,7 @@
                 <i class="icon-globe"></i> {{ distance_stats.total }}
             </span>
         </td>
-        <td>Total</td>
+        <td>{{ 'total'|trans }}</td>
     </tr>
     <tr>
         <td>
@@ -13,7 +13,7 @@
                 <i class="icon-exchange"></i> {{ distance_stats.foot }}
             </span>
         </td>
-        <td>By foot</td>
+        <td>{{ 'by'|trans|capitalize }} {{ 'foot'|trans }}</td>
     </tr>
     <tr>
         <td>
@@ -21,7 +21,7 @@
                 <i class="icon-shopping-cart"></i> {{ distance_stats.minecart }}
             </span>
         </td>
-        <td>By minecart</td>
+        <td>{{ 'by'|trans|capitalize }} {{ 'minecart'|trans }}</td>
     </tr>
     <tr>
         <td>
@@ -29,7 +29,7 @@
                 <i class="icon-tablet"></i> {{ distance_stats.boat }}
             </span>
         </td>
-        <td>By boat</td>
+        <td>{{ 'by'|trans|capitalize }} {{ 'boat'|trans }}</td>
     </tr>
     <tr>
         <td>
@@ -37,7 +37,7 @@
                 <i class="icon-umbrella"></i> {{ distance_stats.swim }}
             </span>
         </td>
-        <td>Swum</td>
+        <td>{{ 'swum'|trans }}</td>
     </tr>
     <tr>
         <td>
@@ -45,6 +45,6 @@
                 <i class="icon-fighter-jet"></i> {{ distance_stats.flight }}
             </span>
         </td>
-        <td>Flight</td>
+        <td>{{ 'flight'|trans }}</td>
     </tr>
 </table>

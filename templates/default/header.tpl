@@ -54,9 +54,9 @@
                 <li>
                     <!-- Online status -->
                     {% if ServerStatistic.getStatus %}
-                        <span class="btn btn-success disabled">Online</span>
+                        <span class="btn btn-success disabled">{{ 'online'|trans|capitalize }}</span>
                     {% else %}
-                        <span class="btn btn-danger disabled">Offline</span>
+                        <span class="btn btn-danger disabled">{{ 'offline'|trans }}</span>
                     {% endif %}
                 </li>
                 <li class="divider-vertical"></li>
@@ -66,9 +66,9 @@
                         <input type="hidden" name="page" value="player">
 
                         <div class="input-append">
-                            <input type="text" name="name" class="" placeholder="Player" id="playerSearch"
+                            <input type="text" name="name" class="" placeholder="{{ 'player'|trans }}" id="playerSearch"
                                    autocomplete="off">
-                            <button class="btn" value="1" type="submit">Search</button>
+                            <button class="btn" value="1" type="submit">{{ 'search'|trans }}</button>
                         </div>
                     </form>
                 </li>

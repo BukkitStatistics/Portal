@@ -2,41 +2,41 @@
     <div class="span4">
         <span class="badge badge-success no-img">
             {{ death_stats.total }}
-        </span> Total Kills
+        </span> {{ 'total'|trans }} {{ 'kills'|trans }}
     </div>
     <div class="span4">
         <span class="badge badge-success no-img">
             {{ death_stats.deaths }}
-        </span> Total Deaths
+        </span> {{ 'total'|trans }} {{ 'deaths'|trans }}
     </div>
     <div class="span4">
         <span class="badge badge-success grid-img">
             {{ staticCall('Material', 'getMaterialImg', [death_stats.top_weapon[1], 32, null, true])|raw }}
-        </span> Best Weapon
+        </span> {{ 'best'|trans }} {{ 'weapon'|trans }}
     </div>
 </div>
 <div class="row-fluid grid">
     <div class="span4">
         <span class="badge badge-success no-img">
             {{ death_stats.pve }}
-        </span> PvE Kills
+        </span> {{ 'pve'|trans }} {{ 'kills'|trans }}
     </div>
     <div class="span4">
         <span class="badge badge-success grid-img">
             {{ staticCall('Entity', 'getEntityImg', [death_stats.most_dangerous[1], 32, null, true])|raw }}
-        </span> Most Dangerous
+        </span> {{ 'most'|trans }} {{ 'dangerous'|trans }}
     </div>
     <div class="span4">
         <span class="badge badge-success grid-img">
             {{ staticCall('Entity', 'getEntityImg', [death_stats.most_killed_mob[1], 32, null, true])|raw }}
-        </span> Most killed
+        </span> {{ 'most'|trans }} {{ 'killed'|trans }}
     </div>
 </div>
 <div class="row-fluid grid">
     <div class="span4">
         <span class="badge badge-success no-img">
             {{ death_stats.pvp }}
-        </span> PvP Kills
+        </span> {{ 'pvp'|trans }} {{ 'kills'|trans }}
     </div>
     <div class="span4">
         <span class="badge badge-important grid-img">
@@ -47,7 +47,7 @@
             {% else %}
                 {{ death_stats.top_killer[1].getPlayerHead|raw }}
             {% endif %}
-        </span> Most Kills
+        </span> {{ 'most'|trans }} {{ 'kills'|trans }}
     </div>
     <div class="span4">
         <span class="badge badge-important grid-img">
@@ -58,6 +58,6 @@
             {% else %}
                 {{ death_stats.most_killed_player[1].getPlayerHead|raw }}
             {% endif %}
-        </span> Most Deaths
+        </span> {{ 'most'|trans }} {{ 'deaths'|trans }}
     </div>
 </div>

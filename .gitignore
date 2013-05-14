@@ -12,7 +12,7 @@ cache/files/remapped
 #################
 ## Composer
 #################
-include/vendor
+include/vendor/
 
 #################
 ## Eclipse

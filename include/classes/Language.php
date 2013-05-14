@@ -109,6 +109,17 @@ class Language {
         return $string;
     }
 
+    /**
+     * Returns true if an given string was translated by translate().
+     *
+     * @param $string
+     *
+     * @return bool
+     */
+    public function wasTranslated($string) {
+        return !isset($this->err_strings[$string]);
+    }
+
     function __destruct() {
         fCore::debug(array('unset strings:', $this->err_strings));
         fCore::debug(array('loaded lang modules: ', $this->modules));

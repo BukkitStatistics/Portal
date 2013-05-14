@@ -22,7 +22,7 @@
                         {{ constant('VERSION') }}-db{{ Util.getOption('version') }}
                         <br>
                         <small id="execution_time">
-                            Execution time: {{ Util.getExecTime }} seconds.
+                            {{ 'exec_time'|trans(Util.getExecTime) }}
                         </small>
                     </p>
                 </div>
