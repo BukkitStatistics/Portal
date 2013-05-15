@@ -11,12 +11,12 @@
 
     <h2><i class="icon-globe"></i> Language</h2>
 
-    <p>Select an language for the installation process and the whole portal afterwards.
+    <p>Select an language for the installation process and the whole portal afterwards.</p>
+    <p><em>Only english is supported right now. More to come soon!</em></p>
 
     <p>
         <select name="lang" id="lang">
             <option value="en" selected="selected">English</option>
-            <option value="de">German</option>
         </select>
         <button type="submit" name="lang_submit" value="1" class="btn btn-primary">Submit</button>
     </p>
