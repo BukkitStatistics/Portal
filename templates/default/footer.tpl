@@ -5,7 +5,7 @@
             <div class="row-fluid">
                 <div class="span2">
                     <p>
-                        <a href="https://github.com/bitWolfy/Statistics">
+                        <a href="http://dev.bukkit.org/server-mods/statistics/">
                             <img src="media/img/plugin_logo.png" alt="Statistics"/>
                         </a>
                     </p>
@@ -30,5 +30,5 @@
         </div>
     </div>
 </footer>
-</body>
 <!-- </footer> -->
+</body>

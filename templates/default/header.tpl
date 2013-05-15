@@ -48,7 +48,7 @@
                  alt="logo"/>
 
             <!-- Project Name -->
-            <a class="brand" href="./">{{ title|e }}</a>
+            <a class="brand" href="./">{{ title }}</a>
 
             <ul class="nav pull-right">
                 <li>

@@ -101,16 +101,11 @@ class Entity extends fActiveRecord {
         }
     }
 
-    /**
-     * Calls the parent constructor and loads the entity language file.
-     *
-     * @param null $key
-     */
-    public function __construct($key = NULL) {
+    protected function configure() {
         global $lang;
-        parent::__construct($key);
 
         $lang->load('entities');
+        parent::configure();
     }
 
     /**
