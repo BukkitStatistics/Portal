@@ -75,7 +75,7 @@ if($action == 'add' || $action == 'edit') {
     $multi_form->set('db_pw', fRequest::encode('db_pw', 'string', $db['pw']));
 }
 else {
-    $servers = Util::getOption('servers');
+    $servers = Util::getOption('servers', serialize(array()));
     $servers = unserialize($servers);
 
     foreach($servers as $server) {
