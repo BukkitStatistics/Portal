@@ -120,6 +120,30 @@ class Language {
         return !isset($this->err_strings[$string]);
     }
 
+    /**
+     * Returns all installed languages in the include/languages/ folder.
+     *
+     * @return array
+     */
+    public function getInstalledLanguages() {
+        /* @var $lang_info array */
+        /* @var $dir fDirectory */
+
+        $lang_dir = new fDirectory(__INC__ . 'languages/');
+        $langs = array();
+
+        foreach($lang_dir->scan('*/') as $dir) {
+            @include $dir->getPath() . 'info.php';
+            $langs[$dir->getName()] = $lang_info['name'];
+        }
+
+
+        return $langs;
+    }
+
+    /**
+     * Prints debug info to the debug.txt
+      */
     function __destruct() {
         fCore::debug(array('unset strings:', $this->err_strings));
         fCore::debug(array('loaded lang modules: ', $this->modules));
