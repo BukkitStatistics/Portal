@@ -1,6 +1,8 @@
 <?php
+global $lang;
+
 $tpl = $this->loadTemplate('player');
-$GLOBALS['lang']->load('causes');
+$lang->load('causes');
 
 
 try {

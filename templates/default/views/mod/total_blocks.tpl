@@ -2,13 +2,13 @@
     <thead>
     <tr>
         <th class="sort-button {{ sort[1] }}" data-type="1" data-sort="asc">
-            Block Type
+            {{ 'block_type'|trans }}
         </th>
         <th class="sort-button {{ sort[2] }}" data-type="2" data-sort="asc">
-            Destroyed
+            {{ 'destroyed'|trans }}
         </th>
         <th class="sort-button {{ sort[3] }}" data-type="3" data-sort="asc">
-            Placed
+            {{ 'placed'|trans }}
         </th>
     </tr>
     </thead>

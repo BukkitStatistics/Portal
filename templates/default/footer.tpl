@@ -5,7 +5,7 @@
             <div class="row-fluid">
                 <div class="span2">
                     <p>
-                        <a href="https://github.com/bitWolfy/Statistics">
+                        <a href="http://dev.bukkit.org/server-mods/statistics/">
                             <img src="media/img/plugin_logo.png" alt="Statistics"/>
                         </a>
                     </p>
@@ -22,7 +22,7 @@
                         {{ constant('VERSION') }}-db{{ Util.getOption('version') }}
                         <br>
                         <small id="execution_time">
-                            Execution time: {{ Util.getExecTime }} seconds.
+                            {{ 'exec_time'|trans(Util.getExecTime) }}
                         </small>
                     </p>
                 </div>
@@ -30,5 +30,5 @@
         </div>
     </div>
 </footer>
-</body>
 <!-- </footer> -->
+</body>

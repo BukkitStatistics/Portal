@@ -51,8 +51,31 @@ class Statistics_Twig_Extension extends Twig_Extension {
     public function getFilters() {
         return array(
             new Twig_SimpleFilter('date', array($this, 'dateFilter')),
-            new Twig_SimpleFilter('ffNumber', array($this, 'formatFNumber'))
+            new Twig_SimpleFilter('ffNumber', array($this, 'formatFNumber')),
+            new Twig_SimpleFilter('trans', array($this, 'translate'))
         );
+    }
+
+    /**
+     * Called by |trans<br>
+     * Translates an text using the fText::compose function. If no translation could be found it will humanize the $message.
+     *
+     * @param  string  $message    A message to compose
+     *
+     * @internal param mixed $component A string or number to insert into the message
+     * @internal param $mixed $...
+     * @return string  The composed message
+     */
+    public function translate($message) {
+        global $lang;
+
+        $components = array_slice(func_get_args(), 1);
+        $trans = fText::compose($message, $components);
+
+        if(!$lang->wasTranslated($message))
+            $trans = fGrammar::humanize($message);
+
+        return $trans;
     }
 
     /**

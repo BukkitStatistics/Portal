@@ -1,10 +1,9 @@
 <?php
+global $lang;
+
 $tpl = $this->loadTemplate('admin/general', 'sub');
 
-$tpl->set('langs', array(
-                        'en' => 'English',
-                        'de' => 'German'
-                   ));
+$tpl->set('langs', $lang->getInstalledLanguages());
 
 /*
  * Store input vales

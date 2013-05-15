@@ -5,7 +5,7 @@
                 <i class="icon-bell"></i> {{ serverstats.startup }}
             </span>
         </td>
-        <td>Startup</td>
+        <td>{{ 'startup'|trans }}</td>
     </tr>
     <tr>
         <td>
@@ -13,7 +13,7 @@
                 <i class="icon-lock"></i> {{ serverstats.shutdown }}
             </span>
         </td>
-        <td>Shutdown</td>
+        <td>{{ 'shutdown'|trans }}</td>
     </tr>
     <tr>
         <td>
@@ -21,7 +21,7 @@
                 <i class="icon-calendar"></i> {{ serverstats.cur_uptime }}
             </span>
         </td>
-        <td>Uptime</td>
+        <td>{{ 'uptime'|trans|capitalize }}</td>
     </tr>
     <tr>
         <td>
@@ -29,6 +29,6 @@
                 <i class="icon-bullhorn"></i> {{ serverstats.playtime }}
             </span>
         </td>
-        <td>Gameplay</td>
+        <td>{{ 'gameplay'|trans }}</td>
     </tr>
 </table>

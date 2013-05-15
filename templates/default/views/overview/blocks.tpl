@@ -5,7 +5,7 @@
                 <i class="icon-plus"></i> {{ block_stats.placed }}
             </span>
         </td>
-        <td>Placed</td>
+        <td>{{ 'placed'|trans }}</td>
     </tr>
     <tr>
         <td>
@@ -14,7 +14,7 @@
                 {{ block_stats.most_placed[0] }}
             </span>
         </td>
-        <td>Top placed</td>
+        <td>{{ 'top'|trans }} {{ 'placed'|trans }}</td>
     </tr>
     <tr>
         <td>
@@ -22,7 +22,7 @@
                 <i class="icon-minus"></i> {{ block_stats.destroyed }}
             </span>
         </td>
-        <td>Broken</td>
+        <td>{{ 'broken'|trans }}</td>
     </tr>
     <tr>
         <td>
@@ -31,6 +31,6 @@
                 {{ block_stats.most_destroyed[0] }}
             </span>
         </td>
-        <td>Top broken</td>
+        <td>{{ 'top'|trans }} {{ 'broken'|trans }}</td>
     </tr>
 </table>

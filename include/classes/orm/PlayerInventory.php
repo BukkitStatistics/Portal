@@ -1,6 +1,13 @@
 <?php
 class PlayerInventory extends fActiveRecord {
 
+    protected function configure() {
+        global $lang;
+
+        $lang->load('effects');
+        parent::configure();
+    }
+
     /**
      * Prints the first inventory row.
      */
@@ -102,9 +109,6 @@ class PlayerInventory extends fActiveRecord {
      * @return bool|string
      */
     private function getEffect($effect) {
-        global $lang;
-        $lang->load('effects');
-
         $path = 'media/img/effects/';
         $id = strlen($effect['effect_id']) > 1 ? $effect['effect_id'] : 0 . $effect['effect_id'];
         $img = $path . 'effect_' . $id . '.png';

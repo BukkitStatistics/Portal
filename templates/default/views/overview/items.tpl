@@ -5,7 +5,7 @@
                 <i class="icon-plus"></i> {{ item_stats.picked }}
             </span>
         </td>
-        <td>Picked up</td>
+        <td>{{ 'picked_up'|trans }}</td>
     </tr>
     <tr>
         <td>
@@ -14,7 +14,7 @@
                 {{ item_stats.most_picked[0] }}
             </span>
         </td>
-        <td>Most picked up</td>
+        <td>{{ 'most'|trans }} {{ 'picked_up'|trans }}</td>
     </tr>
     <tr>
         <td>
@@ -22,7 +22,7 @@
                 <i class="icon-minus"></i> {{ item_stats.dropped }}
             </span>
         </td>
-        <td>Dropped</td>
+        <td>{{ 'dropped'|trans }}</td>
     </tr>
     <tr>
         <td>
@@ -31,6 +31,6 @@
                 {{ item_stats.most_dropped[0] }}
             </span>
         </td>
-        <td>Most dropped</td>
+        <td>{{ 'most'|trans }} {{ 'dropped'|trans }}</td>
     </tr>
 </table>

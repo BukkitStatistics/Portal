@@ -5,7 +5,7 @@
                 <i class="icon-group"></i> {{ player_stats.online }}
             </span>
         </td>
-        <td>Currently online</td>
+        <td>{{ 'cur_online'|trans }}</td>
     </tr>
     <tr>
         <td>
@@ -13,7 +13,7 @@
                 <i class="icon-star"></i> {{ player_stats.tracked }}
             </span>
         </td>
-        <td>Tracked</td>
+        <td>{{ 'tracked'|trans|capitalize }}</td>
     </tr>
     <tr>
         <td>
@@ -21,7 +21,7 @@
                 <i class="icon-signal"></i> {{ serverstats.max_players }}
             </span>
         </td>
-        <td>Maximum</td>
+        <td>{{ 'max'|trans }}</td>
     </tr>
     <tr>
         <td>
@@ -29,6 +29,6 @@
                 <i class="icon-fire"></i> {{ serverstats.total_logins }}
             </span>
         </td>
-        <td>Total logins</td>
+        <td>{{ 'total_logins'|trans }}</td>
     </tr>
 </table>

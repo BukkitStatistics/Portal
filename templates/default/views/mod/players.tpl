@@ -1,20 +1,20 @@
 {% if players|length == 0 %}
-    <div class='force-center'><em>No players tracked</em></div>
+    <div class='force-center'><em>{{ 'no_players_tracked'|trans }}</em></div>
 {% else %}
     <table class="table table-striped table-bordered table-hover table-vcenter" id="playersTable">
         <thead>
         <tr>
             <th class="sort-button {{ sort[1] }}" data-type="1" data-sort="desc">
-                Name
+                {{ 'name'|trans }}
             </th>
             <th class="sort-button {{ sort[2] }}" data-type="2" data-sort="desc">
-                Last Seen
+                {{ 'last_seen'|trans }}
             </th>
             <th class="sort-button {{ sort[3] }}" data-type="3" data-sort="desc">
-                Date Joined
+                {{ 'date_joined'|trans }}
             </th>
             <th class="sort-button {{ sort[4] }}" data-type="4" data-sort="desc">
-                Playtime
+                {{ 'playtime'|trans }}
             </th>
         </tr>
         </thead>
