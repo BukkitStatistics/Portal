@@ -39,11 +39,16 @@ if(defined('DB_DATABASE') && DB_DATABASE != '') {
             $remapped = '';
             foreach($schema->getTables() as $table) {
                 if(Util::getPrefix() != '' && stripos($table, Util::getPrefix()) !== false) {
-                    $class_name = fGrammar::singularize(fGrammar::camelize(str_replace(Util::getPrefix(), '', $table),
-                                                                           true));
-                    $remapped .= 'fORM::mapClassToTable("' . $class_name . '", "' . $table . '");';
-                    if(DB_TYPE != 'default')
-                        $remapped .= 'fORM::mapClassToDatabase("' . $class_name . '", "' . DB_TYPE . '");';
+                    try {
+                        $class_name = fGrammar::singularize(fGrammar::camelize(str_replace(Util::getPrefix(), '',
+                                                                                           $table),
+                                                                               true));
+                        $remapped .= 'fORM::mapClassToTable("' . $class_name . '", "' . $table . '");';
+                        if(DB_TYPE != 'default')
+                            $remapped .= 'fORM::mapClassToDatabase("' . $class_name . '", "' . DB_TYPE . '");';
+                    } catch(fProgrammerException $e) {
+                        fCore::debug($e);
+                    }
                 }
             }
             $cache->set('remapped_' . DB_TYPE, $remapped);
