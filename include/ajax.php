@@ -15,7 +15,7 @@ if($type == 'none') {
 
 
 if($type == 'search') {
-    if($cache->get('search-player'))
+    if($cache->get('search-player') && Util::getOption('cache.search', 60 * 60 * 1) > 0)
         die($cache->get('search-player'));
 
     try {

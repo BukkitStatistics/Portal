@@ -10,8 +10,8 @@ class Util {
     const handleDebug = "Util::handleDebug";
     const exceptionCallback = "Util::exceptionCallback";
     const getRomanNumber = "Util::getRomanNumber";
-    const convertBytes = "Util:;convertBytes";
-    const formatMinecraftString = "Util:;formatMinecraftString";
+    const convertBytes = "Util::convertBytes";
+    const formatMinecraftString = "Util::formatMinecraftString";
 
     /**
      * Returns the requested option out of the settings table.
@@ -30,7 +30,7 @@ class Util {
 
         $exclude_cache = array('cache.options', 'patched');
 
-        if(!DEVELOPMENT && $cacheSingle->get($option) != null)
+        if(!DEVELOPMENT && $cacheSingle->get($option) != null && Util::getOption('cache.options', 60 * 10) > 0)
             return $cacheSingle->get($option);
 
         try {

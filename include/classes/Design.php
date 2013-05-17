@@ -180,7 +180,7 @@ class Design {
     private function displayCached($content) {
         global $cache;
 
-        if(DEVELOPMENT || fMessaging::check('*', '{errors}'))
+        if(DEVELOPMENT || fMessaging::check('*', '{errors}') || Util::getOption('cache.pages', 60) == 0)
             return;
 
         if(fRequest::get('name', 'string') != '' && $content != 'error.php')
@@ -244,6 +244,7 @@ class Design {
            && !fMessaging::check('*', '{errors}')
            && !fMessaging::check('no-cache', '{cache}')
            && $content != 'error.php'
+           && Util::getOption('cache.pages', 60) > 0
         ) {
             if($cache->set($content . '.' . DB_TYPE . '.cache', $output, Util::getOption('cache.pages', 60)))
                 fCore::debug('cached for ' . Util::getOption('cache.pages', 60) . ' seconds: ' . $content);

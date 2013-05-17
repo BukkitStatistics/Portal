@@ -3,11 +3,11 @@
 <div class="left-menu hidden-phone" id="left-menu">
     <div class="nav nav-sidebar well">
         <ul class="nav nav-list" id="nav-menu">
-            <li><a href="#dashboard"><i class="icon-tasks"></i> {{ 'dashboard'|trans }}</a></li>
+            <li><a href="#dashboard"><i class="icon-tasks icon-fixed-width"></i> {{ 'dashboard'|trans }}</a></li>
             <li class="divider"></li>
-            <li><a href="#players"><i class="icon-group"></i> {{ 'players'|trans }}</a></li>
-            <li><a href="#world"><i class="icon-picture"></i> {{ 'world'|trans }}</a></li>
-            <li><a href="#deaths"><i class="icon-tint"></i> {{ 'death_log'|trans }}</a></li>
+            <li><a href="#players"><i class="icon-group icon-fixed-width"></i> {{ 'players'|trans }}</a></li>
+            <li><a href="#world"><i class="icon-picture icon-fixed-width"></i> {{ 'world'|trans }}</a></li>
+            <li><a href="#deaths"><i class="icon-tint icon-fixed-width"></i> {{ 'death_log'|trans }}</a></li>
         </ul>
     </div>
     {% if constant('DB_TYPE') == 'default' and multi %}
