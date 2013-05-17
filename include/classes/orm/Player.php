@@ -291,7 +291,7 @@ class Player extends fActiveRecord {
     public function getPlayerHead($size = 32, $classes = null, $tooltip = false) {
         $name = 'cache/skins/head-' . $size . '_' . $this->getUrlName() . '.png';
 
-        if(!file_exists($name)) {
+        if(!file_exists($name) || Util::getOption('cache.skins', 60 * 60 * 24) == 0) {
             $canvas = imagecreatetruecolor($size, $size);
             $image = imagecreatefromstring(file_get_contents($this->getSkin()));
             imagecopyresampled($canvas, $image, 0, 0, 8, 8, $size, $size, 8, 8);
