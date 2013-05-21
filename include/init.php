@@ -1,6 +1,12 @@
 <?php
 define('STARTTIME', (float)array_sum(explode(' ', microtime())));
 /*
+ * Check for minimum php version
+ */
+if(version_compare(PHP_VERSION, '5.3.2', '<'))
+    die('You need at least PHP 5.3.2!');
+
+/*
  * Define some global constants for better path handling.
  */
 define('__ROOT__', dirname(dirname(__FILE__)) . '/');
