@@ -2,6 +2,7 @@
 global $lang;
 
 $tpl = $this->loadTemplate('player');
+$this->addJs('media/js/jquery.bootpag.js');
 $lang->load('causes');
 
 
@@ -90,9 +91,10 @@ try {
     }
 
     $tpl->set('deaths', $deaths);
-    $tpl->set('total_blocks', $blocks->sort('getDestroyed', 'desc')->slice(0, 5));
-    $tpl->set('total_items', $items->sort('getPickedUp', 'desc')->slice(0, 5));
     $tpl->set('misc', $misc);
+
+    $this->loadSubModule('mod/player_blocks');
+    $this->loadSubModule('mod/player_items');
 
 } catch(fNotFoundException $e) {
     fMessaging::create('no-cache', '{cache}', 1);

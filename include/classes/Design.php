@@ -129,14 +129,14 @@ class Design {
                 fMessaging::create('critical', '{errors}', $e);
         }
 
-        return null;
+        return new Module('error.php', $this->content_folder, $this);
     }
 
     /**
      * Loads the given template and returns it.
      *
-     * @param string$template
-     * @param null  $name
+     * @param string $template
+     * @param null   $name
      *
      * @return Statistics_Twig_Template
      */
@@ -217,22 +217,19 @@ class Design {
         global $cache;
 
         $error = false;
-        $err = $tpl = $this->twig->loadTemplate('error.tpl');
-
-        if(fMessaging::check('*', '{errors}')) {
-            $error = true;
-            $tpl = $err;
-            $content = 'error';
-        }
 
         $this->displayCached($content);
 
         $this->loadModule($content);
 
-        if(isset($this->templates['tpl']))
-            $tpl = $this->templates['tpl'];
-
-        $output = $this->templates['__main__']->render(array('tpl' => $tpl));
+        try {
+            $output = $this->templates['__main__']->render(array('tpl' => $this->templates['tpl']));
+        } catch(Twig_Error_Runtime $e) {
+            fMessaging::create('critical', '{errors}', $e->getPrevious());
+            $error = true;
+            $this->loadModule('error');
+            $output = $this->templates['__main__']->render(array('tpl' => $this->templates['tpl']));
+        }
 
         if(fRequest::get('name', 'string') != '' && $content != 'error.php')
             $content = $content . '_' . fRequest::get('name', 'string');

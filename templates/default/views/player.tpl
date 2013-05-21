@@ -526,6 +526,26 @@
             {% endfor %}
         </div>
     </div>
+    <h2>Detailed Information</h2>
+
+    <div class="row-fluid">
+
+        <div class="span6 well well-small">
+            <h3>Blocks</h3>
+
+            <div class="paginator" data-mod="player_blocks">
+                {% include player_blocks %}
+            </div>
+        </div>
+
+        <div class="span6 well well-small">
+            <h3>Items</h3>
+
+            <div class="paginator" data-mod="total_items">
+                {% include player_items %}
+            </div>
+        </div>
+    </div>
 {% else %}
     <div class="alert alert-block alert-error">
         <h3>Player not found!</h3>
