@@ -30,7 +30,7 @@
     {% endfor %}
     </tbody>
 </table>
-<div id="block_listPagination" class="pagination-centered"></div>
+<div id="item_listPagination" class="pagination-centered"></div>
 
 <script type="text/javascript">
     $(document).ready(function () {
