@@ -129,7 +129,7 @@ class Design {
                 fMessaging::create('critical', '{errors}', $e);
         }
 
-        return null;
+        return new Module('error.php', $this->content_folder, $this);
     }
 
     /**
@@ -217,13 +217,6 @@ class Design {
         global $cache;
 
         $error = false;
-        $err = $tpl = $this->twig->loadTemplate('error.tpl');
-
-        if(fMessaging::check('*', '{errors}')) {
-            $error = true;
-            $tpl = $err;
-            $content = 'error.php';
-        }
 
         $this->displayCached($content);
 

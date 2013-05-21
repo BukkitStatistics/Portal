@@ -66,7 +66,7 @@ function callModule(type, sort, content, page) {
 
     $.ajax({
         type: "GET",
-        url: location,
+        url: location + window.location.search + '&',
         data: {
             'mod': content.data('mod'),
             'order_by': type,
