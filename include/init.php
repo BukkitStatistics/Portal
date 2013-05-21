@@ -16,7 +16,7 @@ define('__INC__', __ROOT__ . 'include' . '/');
  * Set development mode
  * Will slow down page load
  */
-define('DEVELOPMENT', true);
+define('DEVELOPMENT', false);
 
 /*
  * Will save debug messages in cache/debug.txt
