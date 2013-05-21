@@ -100,6 +100,8 @@ class Statistics_Twig_Template extends Twig_Template {
         }
 
         $tip[$element] = $value;
+
+        return $this;
     }
 
     /**
