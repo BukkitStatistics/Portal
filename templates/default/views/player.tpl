@@ -92,16 +92,16 @@
     <div class="row-fluid">
         <div class="span3 center">
             {% if pvp.most_killed_by is not null %}
-                {% set player = pvp.most_killed_by.createPlayer('player_id') %}
+                {% set pvp_player = pvp.most_killed_by.createPlayer('player_id') %}
             {% else %}
-                {% set player = Player().setName('none') %}
+                {% set pvp_player = Player().setName('none') %}
             {% endif %}
-            {{ player.getPlayerHead(64, 'img-polaroid')|raw }}
+            {{ pvp_player.getPlayerHead(64, 'img-polaroid')|raw }}
             <h4 class="well well-small center">
-                {% if player.getName != 'none' %}
-                    <a href="?page=player&name={{ player.getName|e('url') }}">{{ player.getName }}</a>
+                {% if pvp_player.getName != 'none' %}
+                    <a href="?page=player&name={{ pvp_player.getName|e('url') }}">{{ pvp_player.getName }}</a>
                 {% else %}
-                    {{ player.getName }}
+                    {{ pvp_player.getName }}
                 {% endif %}
                 <br>
                 <small>Arch Nemesis</small>
@@ -109,16 +109,16 @@
         </div>
         <div class="span3 center">
             {% if pvp.most_killed is not null %}
-                {% set player = pvp.most_killed.createPlayer('victim_id') %}
+                {% set pvp_player = pvp.most_killed.createPlayer('victim_id') %}
             {% else %}
-                {% set player = Player().setName('none') %}
+                {% set pvp_player = Player().setName('none') %}
             {% endif %}
-            {{ player.getPlayerHead(64, 'img-polaroid')|raw }}
+            {{ pvp_player.getPlayerHead(64, 'img-polaroid')|raw }}
             <h4 class="well well-small center">
-                {% if player.getName != 'none' %}
-                    <a href="?page=player&name={{ player.getName|e('url') }}">{{ player.getName }}</a>
+                {% if pvp_player.getName != 'none' %}
+                    <a href="?page=player&name={{ pvp_player.getName|e('url') }}">{{ pvp_player.getName }}</a>
                 {% else %}
-                    {{ player.getName }}
+                    {{ pvp_player.getName }}
                 {% endif %}
                 <br>
                 <small>Most killed</small>
@@ -524,6 +524,26 @@
             {% else %}
                 <p><strong>This player was not killed by outside influences.</strong></p>
             {% endfor %}
+        </div>
+    </div>
+    <h2>Detailed Information</h2>
+
+    <div class="row-fluid">
+
+        <div class="span6 well well-small">
+            <h3>Blocks</h3>
+
+            <div class="paginator" data-mod="player_blocks">
+                {% include player_blocks %}
+            </div>
+        </div>
+
+        <div class="span6 well well-small">
+            <h3>Items</h3>
+
+            <div class="paginator" data-mod="total_items">
+                {% include player_items %}
+            </div>
         </div>
     </div>
 {% else %}

@@ -34,6 +34,7 @@ class Statistics_Twig_Extension extends Twig_Extension {
         return array(
             'staticCall'   => new Twig_Function_Function(array($this, 'staticCall')),
             'fTimestamp'   => new Twig_Function_Function(array($this, 'fTimestamp')),
+            'fNumber'      => new Twig_Function_Function(array($this, 'fNumber')),
             'Player'       => new Twig_Function_Function(array($this, 'Player')),
             'Entity'       => new Twig_Function_Function(array($this, 'Entity')),
             'Material'     => new Twig_Function_Function(array($this, 'Material')),
@@ -173,6 +174,19 @@ class Statistics_Twig_Extension extends Twig_Extension {
      */
     public function fTimestamp($ts, $timezone = null) {
         return new fTimestamp($ts, $timezone);
+    }
+
+    /**
+     * Called by fNumber()<br>
+     * Returns an new fTimestamp object
+     *
+     * @param      $number
+     * @param null $scale
+     *
+     * @return fNumber
+     */
+    public function fNumber($number, $scale = null) {
+        return new fNumber($number, $scale);
     }
 
     /**

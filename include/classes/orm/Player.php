@@ -28,7 +28,7 @@ class Player extends fActiveRecord {
         return Util::formatSeconds(new fTimestamp(0));
     }
 
-    public static function getPlayerId($name) {
+    public static function getId($name) {
         $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
             SELECT player_id
             FROM "prefix_players"
