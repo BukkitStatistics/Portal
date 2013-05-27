@@ -1,5 +1,5 @@
 <build>
-    <version>1.1a</version>
+    <version>1.1b</version>
     <plugin>1.0.91</plugin>
-    <type>DEVELOPMENT</type>
+    <type>BETA</type>
 </build>
