@@ -6,18 +6,17 @@
             <fieldset>
                 <div class="input-prepend">
                     <span class="add-on"><i class="icon-envelope"></i></span>
-                    <input type="email" class="input-block-level" placeholder="E-Mail" name="email"
-                           value="{{ email }}" style="width: 90%;"/>
+                    <input type="email" placeholder="E-Mail" name="email" value="{{ email }}"/>
                 </div>
                 <div class="input-prepend">
                     <span class="add-on"><i class="icon-key"></i></span>
-                    <input type="password" class="input-block-level" placeholder="Password" name="pw"
-                           style="width: 90%;"/>
+                    <input type="password" placeholder="Password" name="pw"/>
                 </div>
                 <label class="checkbox" for="keep_login">
                     <input type="hidden" name="keep_login" value="0"/>
                     <input type="checkbox" value="1" name="keep_login" id="keep_login"> Remember me
                 </label>
+                <a href="?page=reset">Reset password</a>
             </fieldset>
             <div class="form-actions">
                 <button class="btn btn-large btn-primary" name="signin" value="true" id="signin">
