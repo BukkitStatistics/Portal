@@ -152,7 +152,7 @@ class Util {
     /**
      * Returns an nice formatted string of the seconds in this format: y d h m s
      *
-     * @param fTimestamp $timestamp
+     * @param fTimestamp $ftimestamp
      * @param bool       $years
      * @param bool       $days
      * @param bool       $hours
@@ -161,11 +161,14 @@ class Util {
      *
      * @return string
      */
-    public static function formatSeconds(fTimestamp $timestamp, $years = true, $days = true, $hours = true,
+    public static function formatSeconds(fTimestamp $ftimestamp, $years = true, $days = true, $hours = true,
                                          $minutes = true, $seconds = true) {
         // TODO: improve function.. again...
 
-        $timestamp = strtotime($timestamp->__toString());
+        $timestamp = strtotime($ftimestamp->__toString());
+
+        if($ftimestamp->eq(new fTimestamp()))
+            $timestamp = 0;
 
         $units = array(
             'y' => 365 * 24 * 3600,
