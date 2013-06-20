@@ -4,9 +4,9 @@ class Design {
     /**
      * Path to the content folder
      *
-     * @var string
+     * @var array
      */
-    private $content_folder;
+    private $content_folders = array();
 
     /**
      * Holds all loaded templates
@@ -53,15 +53,18 @@ class Design {
             __ROOT__ . 'templates/' . $design
         );
 
+        $twig_loader = new Twig_Loader_Filesystem($tpls);
+
         if($template_path != null) {
-            if(is_array($template_path))
-                $tpls = $template_path;
-            elseif(is_string($template_path))
-                $tpls = array($template_path);
+            if(is_array($template_path)) {
+                foreach($template_path as $t)
+                    $twig_loader->prependPath($t);
+            }
+            else
+                $twig_loader->prependPath($template_path);
         }
 
 
-        $twig_loader = new Twig_Loader_Filesystem($tpls);
         $this->twig = new Twig_Environment($twig_loader, array(
                                                               'base_template_class' => 'Statistics_Twig_Template',
                                                               'debug'               => DEBUG,
@@ -73,9 +76,9 @@ class Design {
         $this->twig->addExtension(new Statistics_Twig_Extension());
 
         if(is_null($content_folder) || !is_string($content_folder))
-            $this->content_folder = __ROOT__ . 'contents/' . $design . '/';
+            $this->content_folders[] = __ROOT__ . 'contents/' . $design . '/';
         else
-            $this->content_folder = $content_folder;
+            array_unshift($this->content_folders, $content_folder);
 
         $this->templates = array();
         $this->modules = array();
@@ -96,8 +99,14 @@ class Design {
         if(strpos($content, '.php') === false)
             $content .= '.php';
 
-        $path = $this->content_folder . $content;
+        $path = '';
 
+        foreach($this->content_folders as $folder) {
+            if(file_exists($folder . $content)) {
+                $path = $folder . $content;
+                break;
+            }
+        }
 
         if(!file_exists($path)) {
             throw new fProgrammerException(
@@ -118,7 +127,7 @@ class Design {
         $this->modules[] = $content;
 
         try {
-            return new Module($content, $this->content_folder, $this);
+            return new Module($content, $this->content_folders, $this);
         } catch(fException $e) {
             fCore::debug(array('design error: ', $e));
 
@@ -129,7 +138,7 @@ class Design {
                 fMessaging::create('critical', '{errors}', $e);
         }
 
-        return new Module('error.php', $this->content_folder, $this);
+        return new Module('error.php', $this->content_folders, $this);
     }
 
     /**
