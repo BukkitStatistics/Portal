@@ -53,7 +53,7 @@
                             <input type="hidden" name="{{ hook.key }}" value="0"/>
                             <input type="checkbox" value="1" name="{{ hook.key }}" id="{{ hook.key }}"
                                     {{ showChecked(1, hook.value) }}>
-                            Hook into {{ hook.key|slice(5)|capitalize }}
+                            Hook into {{ hook.key|slice(5)|replace({'.': '_'})|humanize }}
                         </label>
                     {% else %}
                         {{ 'No hooks in your database.'|trans }}
