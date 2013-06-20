@@ -53,8 +53,17 @@ if(file_exists($db_file)) {
     define('DB_TYPE', $db_values['type']);
 }
 else {
-    echo fText::compose('It seems the database config file is missing. Be sure the installation process was executed.');
-    exit();
+    define('DB_HOST', '');
+    define('DB_PORT', '');
+    define('DB_USER', '');
+    define('DB_PW', '');
+    define('DB_DATABASE', '');
+    define('DB_PREFIX', '');
+    define('DB_TYPE', '');
+
+    if(!file_exists(__ROOT__ . 'install.php'))
+        echo fText::compose('It seems the database config file is missing. Be sure the installation process was executed.');
+        exit();
 }
 
 
