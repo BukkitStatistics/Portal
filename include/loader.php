@@ -61,9 +61,10 @@ else {
     define('DB_PREFIX', '');
     define('DB_TYPE', '');
 
-    if(!file_exists(__ROOT__ . 'install.php'))
+    if(!file_exists(__ROOT__ . 'install.php')) {
         echo fText::compose('It seems the database config file is missing. Be sure the installation process was executed.');
         exit();
+    }
 }
 
 
