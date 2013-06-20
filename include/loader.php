@@ -44,6 +44,8 @@ if(!file_exists($db_file))
 
 if(file_exists($db_file)) {
     include $db_file;
+
+    fCore::startErrorCapture(E_NOTICE);
     define('DB_HOST', $db_values['host']);
     define('DB_PORT', $db_values['port']);
     define('DB_USER', $db_values['user']);
@@ -51,6 +53,7 @@ if(file_exists($db_file)) {
     define('DB_DATABASE', $db_values['database']);
     define('DB_PREFIX', $db_values['prefix']);
     define('DB_TYPE', $db_values['type']);
+    fCore::stopErrorCapture();
 }
 else {
     define('DB_HOST', '');

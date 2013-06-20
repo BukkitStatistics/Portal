@@ -18,16 +18,25 @@ class Module {
     /**
      * Path to the content folder.
      *
-     * @var string
+     * @var array
      */
-    private $content_folder;
+    private $content_folders;
 
-    function __construct($content, $content_folder, $design) {
+    function __construct($content, $content_folders, $design) {
         $this->design = $design;
-        $this->content_folder = $content_folder;
+        $this->content_folders = $content_folders;
         $this->main_tpl = null;
 
-        include $this->content_folder . $content;
+        $path = '';
+
+        foreach($this->content_folders as $folder) {
+            if(file_exists($folder . $content)) {
+                $path = $folder . $content;
+                break;
+            }
+        }
+
+        include $path;
     }
 
     /**
@@ -93,7 +102,14 @@ class Module {
         if(strpos($sub, '.php') === false)
             $sub .= '.php';
 
-        $path = $this->content_folder . $sub;
+        $path = '';
+
+        foreach($this->content_folders as $folder) {
+            if(file_exists($folder . $sub)) {
+                $path = $folder . $sub;
+                break;
+            }
+        }
 
         if(!file_exists($path)) {
             throw new fProgrammerException(
