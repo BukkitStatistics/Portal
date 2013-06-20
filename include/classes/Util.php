@@ -217,6 +217,15 @@ class Util {
         }
     }
 
+    public static function exceptionCallback($exception) {
+        global $cache;
+
+        if($exception instanceof fProgrammerException) {
+            if($cache->get('remapped_' . DB_TYPE))
+                $cache->delete('remapped_' . DB_TYPE);
+        }
+    }
+
     /**
      * Saves all debug messages except query times in cache/debug.txt<br>
      * If $msg is an array only the first two elements will be displayed

@@ -16,6 +16,11 @@ if(DEBUG) {
 }
 
 /*
+ * Register an ExceptionCallback
+ */
+fException::registerCallback(Util::exceptionCallback);
+
+/*
  * Open session
  */
 fSession::setLength('1day', '1week');
