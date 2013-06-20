@@ -53,7 +53,8 @@ class Statistics_Twig_Extension extends Twig_Extension {
         return array(
             new Twig_SimpleFilter('date', array($this, 'dateFilter')),
             new Twig_SimpleFilter('ffNumber', array($this, 'formatFNumber')),
-            new Twig_SimpleFilter('trans', array($this, 'translate'))
+            new Twig_SimpleFilter('trans', array($this, 'translate')),
+            new Twig_SimpleFilter('humanize', fGrammar::humanize)
         );
     }
 
