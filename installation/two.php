@@ -5,6 +5,19 @@ if(fSession::get('maxStep') < 2)
 $tpl = $this->loadTemplate('two', 'tpl');
 
 /*
+ * create database file
+ */
+try {
+    $path = __INC__ . 'config/db.php';
+    if(!file_exists($path))
+        fFile::create($path, '');
+} catch(fException $e) {
+    fMessaging::create('db_file', 'install/two',
+                       fText::compose('The database config file could not be created. Be sure the config dir got at least 755 rights.<br>You can manually create the file here: %s',
+                                      $path));
+}
+
+/*
  * Validates the database data
  */
 if(fRequest::isPost() && fRequest::get('db_submit')) {
@@ -28,7 +41,7 @@ if(fRequest::isPost() && fRequest::get('db_submit')) {
                                  ));
 
         $vali->setMessageOrder('host', 'port', 'user', 'pw', 'database')
-            ->validate();
+        ->validate();
 
         $tpl->set('prefix', preg_replace('/_$/', '', $tpl->get('prefix')));
 
@@ -45,7 +58,7 @@ if(fRequest::isPost() && fRequest::get('db_submit')) {
         );
         $db->connect();
         $version = $db->translatedQuery(
-            'SELECT `value` FROM "' . $prefix . 'settings" WHERE `key` = %s', 'version')->fetchScalar();
+                       'SELECT `value` FROM "' . $prefix . 'settings" WHERE `key` = %s', 'version')->fetchScalar();
         if($version < 2)
             throw new fSQLException();
         $db->close();
