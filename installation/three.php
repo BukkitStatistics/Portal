@@ -22,6 +22,7 @@ if(fRequest::isPost() && fRequest::get('general_submit')) {
 
         $vali->addRequiredFields(array(
                                       'adminpw',
+                                      'adminpw2',
                                       'adminemail',
                                       'title',
                                       'ping'
@@ -32,6 +33,9 @@ if(fRequest::isPost() && fRequest::get('general_submit')) {
             ->overrideFieldName('adminemail', 'Admin Email')
             ->overrideFieldName('ping', 'Database sync')
             ->validate();
+
+        if(fRequest::encode('adminpw') != fRequest::encode('adminpw2'))
+            throw new fValidationException('Passwords does not match.');
 
         Util::setOption('adminpw', fCryptography::hashPassword(fRequest::encode('adminpw')));
         Util::setOption('adminemail', fSession::get('settings[adminemail]'));
@@ -54,6 +58,7 @@ if(fRequest::isPost() && fRequest::get('general_submit')) {
 }
 
 $tpl->set('adminpw', fRequest::encode('adminpw'));
+$tpl->set('adminpw2', fRequest::encode('adminpw2'));
 $tpl->set('title', fSession::get('settings[title]'));
 $tpl->set('adminemail', fSession::get('settings[adminemail]'));
 $tpl->set('timezones', array(

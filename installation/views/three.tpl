@@ -13,6 +13,16 @@
                 <div class="controls"><input type="password" name="adminpw" id="adminpw"
                                              value="{{ adminpw }}"></div>
             </div>
+
+            <div class="control-group">
+                <label class="control-label" for="adminpw2">Retype password:</label>
+
+                <div class="controls"><input type="password" name="adminpw2" id="adminpw2"
+                                             value="{{ adminpw2 }}"></div>
+            </div>
+
+            <hr>
+
             <div class="control-group">
                 <label class="control-label" for="adminemail">Admin E-Mail:</label>
 
