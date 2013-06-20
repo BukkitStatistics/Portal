@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/flourishlib/flourish-classes.git",
-                "reference": "6d300d01ac6bd8953277c95a63f2936cd96ba84c"
+                "reference": "ff89fc686f8f05e9e397db60033ed4d4e882ee4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/flourishlib/flourish-classes/zipball/6d300d01ac6bd8953277c95a63f2936cd96ba84c",
-                "reference": "6d300d01ac6bd8953277c95a63f2936cd96ba84c",
+                "url": "https://api.github.com/repos/flourishlib/flourish-classes/zipball/ff89fc686f8f05e9e397db60033ed4d4e882ee4d",
+                "reference": "ff89fc686f8f05e9e397db60033ed4d4e882ee4d",
                 "shasum": ""
             },
             "require": {
@@ -47,20 +47,20 @@
             ],
             "description": "A collection of classes for general web development, with a particular focus on compatibility, portability and security",
             "homepage": "http://flourishlib.com/",
-            "time": "2013-05-01 00:13:43"
+            "time": "2013-06-10 17:01:27"
         },
         {
             "name": "twig/twig",
-            "version": "v1.13.0",
+            "version": "v1.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "v1.13.0"
+                "reference": "v1.13.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/v1.13.0",
-                "reference": "v1.13.0",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/v1.13.1",
+                "reference": "v1.13.1",
                 "shasum": ""
             },
             "require": {
@@ -96,7 +96,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2013-05-10 15:12:43"
+            "time": "2013-06-06 06:06:01"
         }
     ],
     "packages-dev": [
