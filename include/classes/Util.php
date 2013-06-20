@@ -28,7 +28,7 @@ class Util {
         if($option == '')
             return false;
 
-        $exclude_cache = array('cache.options', 'patched');
+        $exclude_cache = array('cache.options', 'patched', 'adminpw', 'adminemail');
 
         if(!DEVELOPMENT && $cacheSingle->get($option) != null && Util::getOption('cache.options', 60 * 10) > 0)
             return $cacheSingle->get($option);
