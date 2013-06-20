@@ -220,7 +220,10 @@ class Design {
 
         $this->displayCached($content);
 
-        $this->loadModule($content);
+        if(!fMessaging::check('*', '{errors}'))
+            $this->loadModule($content);
+        else
+            $this->loadModule('error');
 
         try {
             $output = $this->templates['__main__']->render(array('tpl' => $this->templates['tpl']));
