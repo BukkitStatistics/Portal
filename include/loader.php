@@ -1,13 +1,7 @@
 <?php
-/*
- * Handles the conflict between xdebug
- * and the flourish debug system
- */
-if(!extension_loaded('xdebug')) {
-    if(DEVELOPMENT) {
-        fCore::enableErrorHandling('html');
-        fCore::enableExceptionHandling('html');
-    }
+if(DEVELOPMENT) {
+    fCore::enableErrorHandling('html');
+    fCore::enableExceptionHandling('html');
 }
 
 if(DEBUG) {
