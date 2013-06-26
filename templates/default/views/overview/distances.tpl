@@ -13,7 +13,7 @@
                 <i class="icon-exchange"></i> {{ distance_stats.foot }}
             </span>
         </td>
-        <td>{{ 'by'|trans|capitalize }} {{ 'foot'|trans }}</td>
+        <td>{{ 'by_foot'|trans|capitalize }}</td>
     </tr>
     <tr>
         <td>
@@ -21,7 +21,7 @@
                 <i class="icon-shopping-cart"></i> {{ distance_stats.minecart }}
             </span>
         </td>
-        <td>{{ 'by'|trans|capitalize }} {{ 'minecart'|trans }}</td>
+        <td>{{ 'by_minecart'|trans|capitalize }}</td>
     </tr>
     <tr>
         <td>
@@ -29,7 +29,7 @@
                 <i class="icon-tablet"></i> {{ distance_stats.boat }}
             </span>
         </td>
-        <td>{{ 'by'|trans|capitalize }} {{ 'boat'|trans }}</td>
+        <td>{{ 'by_boat'|trans|capitalize }}</td>
     </tr>
     <tr>
         <td>

@@ -14,7 +14,7 @@
                 {{ item_stats.most_picked[0] }}
             </span>
         </td>
-        <td>{{ 'most'|trans }} {{ 'picked_up'|trans }}</td>
+        <td>{{ 'most_picked_up'|trans }}</td>
     </tr>
     <tr>
         <td>
@@ -31,6 +31,6 @@
                 {{ item_stats.most_dropped[0] }}
             </span>
         </td>
-        <td>{{ 'most'|trans }} {{ 'dropped'|trans }}</td>
+        <td>{{ 'most_dropped'|trans }}</td>
     </tr>
 </table>

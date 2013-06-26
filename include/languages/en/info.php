@@ -2,5 +2,5 @@
 $lang_info = array(
     'name'       => 'English',
     'translator' => '',
-    'date'       => '15.05.2013'
+    'date'       => '26.06.2013'
 );

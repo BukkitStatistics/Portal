@@ -14,7 +14,7 @@
                 {{ block_stats.most_placed[0] }}
             </span>
         </td>
-        <td>{{ 'top'|trans }} {{ 'placed'|trans }}</td>
+        <td>{{ 'top_placed'|trans }}</td>
     </tr>
     <tr>
         <td>
@@ -31,6 +31,6 @@
                 {{ block_stats.most_destroyed[0] }}
             </span>
         </td>
-        <td>{{ 'top'|trans }} {{ 'broken'|trans }}</td>
+        <td>{{ 'top_broken'|trans }}</td>
     </tr>
 </table>

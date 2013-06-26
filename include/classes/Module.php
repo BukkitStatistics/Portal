@@ -91,6 +91,17 @@ class Module {
     }
 
     /**
+     * Loads an new module to the language class
+     *
+     * @param string $module
+     */
+    public function loadLangModule($module) {
+        global $lang;
+
+        $lang->load($module);
+    }
+
+    /**
      * Loads an sub module which could use all the functionality of the parent module.
      *
      * @param string $sub

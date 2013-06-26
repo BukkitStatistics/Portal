@@ -2,17 +2,17 @@
     <div class="span4">
         <span class="badge badge-success no-img">
             {{ death_stats.total }}
-        </span> {{ 'total'|trans }} {{ 'kills'|trans }}
+        </span> {{ 'total_kills'|trans }}
     </div>
     <div class="span4">
         <span class="badge badge-success no-img">
             {{ death_stats.deaths }}
-        </span> {{ 'total'|trans }} {{ 'deaths'|trans }}
+        </span> {{ 'total_deaths'|trans }}
     </div>
     <div class="span4">
         <span class="badge badge-success grid-img">
             {{ staticCall('Material', 'getMaterialImg', [death_stats.top_weapon[1], 32, null, true])|raw }}
-        </span> {{ 'best'|trans }} {{ 'weapon'|trans }}
+        </span> {{ 'best_weapon'|trans }}
     </div>
 </div>
 <div class="row-fluid grid">
@@ -24,12 +24,12 @@
     <div class="span4">
         <span class="badge badge-success grid-img">
             {{ staticCall('Entity', 'getEntityImg', [death_stats.most_dangerous[1], 32, null, true])|raw }}
-        </span> {{ 'most'|trans }} {{ 'dangerous'|trans }}
+        </span> {{ 'most_dangerous'|trans }}
     </div>
     <div class="span4">
         <span class="badge badge-success grid-img">
             {{ staticCall('Entity', 'getEntityImg', [death_stats.most_killed_mob[1], 32, null, true])|raw }}
-        </span> {{ 'most'|trans }} {{ 'killed'|trans }}
+        </span> {{ 'most_killed'|trans }}
     </div>
 </div>
 <div class="row-fluid grid">
@@ -47,7 +47,7 @@
             {% else %}
                 {{ death_stats.top_killer[1].getPlayerHead|raw }}
             {% endif %}
-        </span> {{ 'most'|trans }} {{ 'kills'|trans }}
+        </span> {{ 'most_kills'|trans }}
     </div>
     <div class="span4">
         <span class="badge badge-important grid-img">
@@ -58,6 +58,6 @@
             {% else %}
                 {{ death_stats.most_killed_player[1].getPlayerHead|raw }}
             {% endif %}
-        </span> {{ 'most'|trans }} {{ 'deaths'|trans }}
+        </span> {{ 'most_deaths'|trans }}
     </div>
 </div>
