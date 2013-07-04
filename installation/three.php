@@ -47,6 +47,12 @@ if(fRequest::isPost() && fRequest::get('general_submit')) {
         Util::setOption('show_first_join_message', fSession::get('settings[welcome_first_msg]'));
         Util::setOption('ping', fSession::get('settings[ping]'));
 
+        // some default values
+        Util::setOption('cache.skins', 60 * 60 * 24); // one day
+        Util::setOption('cache.options', 60 * 60); // one hour
+        Util::setOption('cache.pages', 60 * 15); // fifteen minutes
+        Util::setOption('cache.search', 60 * 60); // one hour
+
     } catch(fValidationException $e) {
         fMessaging::create('validation', 'install/three', $e->getMessage());
     }
