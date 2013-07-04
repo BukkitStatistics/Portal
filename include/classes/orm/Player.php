@@ -200,6 +200,9 @@ class Player extends fActiveRecord {
      * Counts all blocks
      */
     private function countBlocks() {
+        $des = 0;
+        $pld = 0;
+
         try {
             $row = Util::getDatabase()->translatedQuery(
                        'SELECT SUM(destroyed) AS des, SUM(placed) AS pld
@@ -208,11 +211,9 @@ class Player extends fActiveRecord {
                        $this->getPlayerId()
                    )->fetchRow();
 
-            $des = $row['des'];
-            $pld = $row['pld'];
+            $des = is_null($row['des']) ? 0 : $row['des'];
+            $pld = is_null($row['pld']) ? 0 : $row['pld'];
         } catch(fSQLException $e) {
-            $des = 0;
-            $pld = 0;
         }
 
         $this->blocks['destroyed'] = new fNumber($des);
@@ -223,6 +224,9 @@ class Player extends fActiveRecord {
      * Counts all items
      */
     private function countItems() {
+        $pic = 0;
+        $drp = 0;
+
         try {
             $row = Util::getDatabase()->translatedQuery(
                        'SELECT SUM(dropped) AS drp, SUM(picked_up) AS pic
@@ -231,11 +235,9 @@ class Player extends fActiveRecord {
                        $this->getPlayerId()
                    )->fetchRow();
 
-            $pic = $row['pic'];
-            $drp = $row['drp'];
+            $pic = is_null($row['pic']) ? 0 : $row['pic'];
+            $drp = is_null($row['drp']) ? 0 : $row['drp'];
         } catch(fSQLException $e) {
-            $pic = 0;
-            $drp = 0;
         }
 
         $this->items['picked'] = new fNumber($pic);
@@ -246,6 +248,9 @@ class Player extends fActiveRecord {
      * Counts all pve kills
      */
     private function countPve() {
+        $kills = 0;
+        $deaths = 0;
+
         try {
             $row = Util::getDatabase()->translatedQuery(
                        'SELECT SUM(player_killed) AS deaths, SUM(creature_killed) AS kills
@@ -254,11 +259,9 @@ class Player extends fActiveRecord {
                        $this->getPlayerId()
                    )->fetchRow();
 
-            $kills = $row['kills'];
-            $deaths = $row['deaths'];
+            $kills = is_null($row['kills']) ? 0 : $row['kills'];
+            $deaths = is_null($row['deaths']) ? 0 : $row['deaths'];
         } catch(fSQLException $e) {
-            $kills = 0;
-            $deaths = 0;
         }
 
         $this->pve['kills'] = new fNumber($kills);
@@ -269,6 +272,9 @@ class Player extends fActiveRecord {
      * Counts all pvp kills
      */
     private function countPvp() {
+        $kills = 0;
+        $deaths = 0;
+
         try {
             $row = Util::getDatabase()->translatedQuery(
                        'SELECT (
@@ -285,11 +291,9 @@ class Player extends fActiveRecord {
                        $this->getPlayerId()
                    )->fetchRow();
 
-            $kills = $row['kills'];
-            $deaths = $row['deaths'];
+            $kills = is_null($row['kills']) ? 0 : $row['kills'];
+            $deaths = is_null($row['deaths']) ? 0 : $row['deaths'];
         } catch(fSQLException $e) {
-            $kills = 0;
-            $deaths = 0;
         }
 
         $this->pvp['kills'] = new fNumber($kills);
