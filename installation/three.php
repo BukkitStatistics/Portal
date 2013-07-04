@@ -22,6 +22,7 @@ if(fRequest::isPost() && fRequest::get('general_submit')) {
 
         $vali->addRequiredFields(array(
                                       'adminpw',
+                                      'adminpw2',
                                       'adminemail',
                                       'title',
                                       'ping'
@@ -33,6 +34,9 @@ if(fRequest::isPost() && fRequest::get('general_submit')) {
             ->overrideFieldName('ping', 'Database sync')
             ->validate();
 
+        if(fRequest::encode('adminpw') != fRequest::encode('adminpw2'))
+            throw new fValidationException('Passwords does not match.');
+
         Util::setOption('adminpw', fCryptography::hashPassword(fRequest::encode('adminpw')));
         Util::setOption('adminemail', fSession::get('settings[adminemail]'));
         Util::setOption('portal_title', fSession::get('settings[title]'));
@@ -42,6 +46,12 @@ if(fRequest::isPost() && fRequest::get('general_submit')) {
         Util::setOption('show_welcome_messages', fSession::get('settings[welcome_msg]'));
         Util::setOption('show_first_join_message', fSession::get('settings[welcome_first_msg]'));
         Util::setOption('ping', fSession::get('settings[ping]'));
+
+        // some default values
+        Util::setOption('cache.skins', 60 * 60 * 24); // one day
+        Util::setOption('cache.options', 60 * 60); // one hour
+        Util::setOption('cache.pages', 60 * 15); // fifteen minutes
+        Util::setOption('cache.search', 60 * 60); // one hour
 
     } catch(fValidationException $e) {
         fMessaging::create('validation', 'install/three', $e->getMessage());
@@ -54,6 +64,7 @@ if(fRequest::isPost() && fRequest::get('general_submit')) {
 }
 
 $tpl->set('adminpw', fRequest::encode('adminpw'));
+$tpl->set('adminpw2', fRequest::encode('adminpw2'));
 $tpl->set('title', fSession::get('settings[title]'));
 $tpl->set('adminemail', fSession::get('settings[adminemail]'));
 $tpl->set('timezones', array(

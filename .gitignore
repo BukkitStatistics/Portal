@@ -7,7 +7,8 @@ cache/files/*.cache
 cache/skins/*.png
 cache/singlecache
 cache/files/remapped
-
+include/config/db_*.php
+include/config/db.php
 
 #################
 ## Composer

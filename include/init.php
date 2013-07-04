@@ -6,6 +6,8 @@ define('STARTTIME', (float)array_sum(explode(' ', microtime())));
 if(version_compare(PHP_VERSION, '5.3.2', '<'))
     die('You need at least PHP 5.3.2!');
 
+date_default_timezone_set('UTC');
+
 /*
  * Define some global constants for better path handling.
  */

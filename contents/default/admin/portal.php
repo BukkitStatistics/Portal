@@ -1,4 +1,5 @@
 <?php
+global $cache;
 $tpl = $this->loadTemplate('admin/portal', 'sub');
 
 $tpl->set('times', array(
@@ -219,7 +220,7 @@ if(fRequest::isPost() && fRequest::check('save')) {
         }
 
         if(fRequest::get('delete_pages'))
-            $this->get('cache')->clear();
+            $cache->clear();
 
     } catch(fValidationException $e) {
         fMessaging::create('input', 'admin', $e->getMessage());

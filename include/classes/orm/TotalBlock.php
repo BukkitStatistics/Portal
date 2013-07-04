@@ -19,12 +19,12 @@ class TotalBlock extends fActiveRecord {
     public static function countAllOfType($type, $material = null) {
         try {
             if($material == null)
-                $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
+                $res = Util::getDatabase()->translatedQuery('
                         SELECT SUM(%r)
                         FROM "prefix_total_blocks"
                 ', $type);
             else
-                $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
+                $res = Util::getDatabase()->translatedQuery('
                         SELECT SUM(%r)
                         FROM "prefix_total_blocks"
                         WHERE material_id = %s
@@ -52,7 +52,7 @@ class TotalBlock extends fActiveRecord {
      */
     public static function getMostOfType($type) {
         try {
-            $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
+            $res = Util::getDatabase()->translatedQuery('
                         SELECT SUM(b.%r) AS total, m.material_id
                         FROM "prefix_total_blocks" b, "prefix_materials" m
                         WHERE b.material_id = m.material_id

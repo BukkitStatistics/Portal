@@ -10,7 +10,7 @@ class Player extends fActiveRecord {
      * @return int
      */
     public static function countTotalPlaytime() {
-        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
+        $res = Util::getDatabase()->translatedQuery('
                         SELECT SUM(playtime)
                         FROM "prefix_players"
         ');
@@ -29,7 +29,7 @@ class Player extends fActiveRecord {
     }
 
     public static function getId($name) {
-        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
+        $res = Util::getDatabase()->translatedQuery('
             SELECT player_id
             FROM "prefix_players"
             WHERE name = %s
@@ -37,7 +37,7 @@ class Player extends fActiveRecord {
 
         try {
             return $res->fetchScalar();
-        } catch (fNoRowsException $e) {
+        } catch(fNoRowsException $e) {
             return 0;
         }
     }
@@ -82,7 +82,7 @@ class Player extends fActiveRecord {
                       )
             ';
 
-        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery($sql);
+        $res = Util::getDatabase()->translatedQuery($sql);
 
         try {
             return new fNumber($res->fetchScalar());
@@ -99,7 +99,7 @@ class Player extends fActiveRecord {
      * @return fNumber
      */
     public static function countAllLogins() {
-        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
+        $res = Util::getDatabase()->translatedQuery('
                         SELECT SUM(logins)
                         FROM "prefix_players"
         ');
@@ -120,7 +120,7 @@ class Player extends fActiveRecord {
      * @return array
      */
     public static function getMostDangerous() {
-        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
+        $res = Util::getDatabase()->translatedQuery('
                     SELECT SUM(pvp.times) AS total, pvp.player_id FROM "prefix_total_pvp_kills" pvp
                     GROUP BY pvp.player_id
                     ORDER BY SUM(pvp.times) DESC
@@ -148,7 +148,7 @@ class Player extends fActiveRecord {
      * @return array
      */
     public static function getMostKilled() {
-        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
+        $res = Util::getDatabase()->translatedQuery('
                     SELECT SUM(pvp.times) AS total, pvp.victim_id FROM "prefix_total_pvp_kills" pvp
                     GROUP BY pvp.victim_id
                     ORDER BY SUM(pvp.times) DESC
@@ -200,58 +200,100 @@ class Player extends fActiveRecord {
      * Counts all blocks
      */
     private function countBlocks() {
-        $blocks = $this->buildTotalBlocks();
+        try {
+            $row = Util::getDatabase()->translatedQuery(
+                       'SELECT SUM(destroyed) AS des, SUM(placed) AS pld
+                       FROM prefix_total_blocks
+                       WHERE player_id = %i',
+                       $this->getPlayerId()
+                   )->fetchRow();
 
-        $this->blocks['destroyed'] = new fNumber(0);
-        $this->blocks['placed'] = new fNumber(0);
-        foreach($blocks as $block) {
-            $this->blocks['destroyed'] = $this->blocks['destroyed']->add($block->getDestroyed());
-            $this->blocks['placed'] = $this->blocks['placed']->add($block->getPlaced());
+            $des = $row['des'];
+            $pld = $row['pld'];
+        } catch(fSQLException $e) {
+            $des = 0;
+            $pld = 0;
         }
+
+        $this->blocks['destroyed'] = new fNumber($des);
+        $this->blocks['placed'] = new fNumber($pld);
     }
 
     /**
      * Counts all items
      */
     private function countItems() {
-        $items = $this->buildTotalItems();
+        try {
+            $row = Util::getDatabase()->translatedQuery(
+                       'SELECT SUM(dropped) AS drp, SUM(picked_up) AS pic
+                       FROM prefix_total_items
+                       WHERE player_id = %i',
+                       $this->getPlayerId()
+                   )->fetchRow();
 
-        $this->items['picked'] = new fNumber(0);
-        $this->items['dropped'] = new fNumber(0);
-        foreach($items as $item) {
-            $this->items['picked'] = $this->items['picked']->add($item->getPickedUp());
-            $this->items['dropped'] = $this->items['dropped']->add($item->getDropped());
+            $pic = $row['pic'];
+            $drp = $row['drp'];
+        } catch(fSQLException $e) {
+            $pic = 0;
+            $drp = 0;
         }
+
+        $this->items['picked'] = new fNumber($pic);
+        $this->items['dropped'] = new fNumber($drp);
     }
 
     /**
      * Counts all pve kills
      */
     private function countPve() {
-        $pve = $this->buildTotalPveKills();
+        try {
+            $row = Util::getDatabase()->translatedQuery(
+                       'SELECT SUM(player_killed) AS deaths, SUM(creature_killed) AS kills
+                       FROM prefix_total_pve_kills
+                       WHERE player_id = %i',
+                       $this->getPlayerId()
+                   )->fetchRow();
 
-        $this->pve['kills'] = new fNumber(0);
-        $this->pve['deaths'] = new fNumber(0);
-        foreach($pve as $pve_kill) {
-            $this->pve['kills'] = $this->pve['kills']->add($pve_kill->getCreatureKilled());
-            $this->pve['deaths'] = $this->pve['deaths']->add($pve_kill->getPlayerKilled());
+            $kills = $row['kills'];
+            $deaths = $row['deaths'];
+        } catch(fSQLException $e) {
+            $kills = 0;
+            $deaths = 0;
         }
+
+        $this->pve['kills'] = new fNumber($kills);
+        $this->pve['deaths'] = new fNumber($deaths);
     }
 
     /**
      * Counts all pvp kills
      */
     private function countPvp() {
-        $pvp_killer = $this->buildTotalPvpKills('player_id');
-        $pvp_victim = $this->buildTotalPvpKills('victim_id');
+        try {
+            $row = Util::getDatabase()->translatedQuery(
+                       'SELECT (
+                       SELECT SUM(times)
+                       FROM prefix_total_pvp_kills
+                       WHERE victim_id = %i
+                       ) AS deaths,
+                       (
+                       SELECT SUM(times)
+                       FROM prefix_total_pvp_kills
+                       WHERE player_id = %i
+                       ) AS kills',
+                       $this->getPlayerId(),
+                       $this->getPlayerId()
+                   )->fetchRow();
 
-        $this->pvp['kills'] = new fNumber(0);
-        foreach($pvp_killer as $kill)
-            $this->pvp['kills'] = $this->pvp['kills']->add($kill->getTimes());
+            $kills = $row['kills'];
+            $deaths = $row['deaths'];
+        } catch(fSQLException $e) {
+            $kills = 0;
+            $deaths = 0;
+        }
 
-        $this->pvp['deaths'] = new fNumber(0);
-        foreach($pvp_victim as $death)
-            $this->pvp['deaths'] = $this->pvp['deaths']->add($death->getTimes());
+        $this->pvp['kills'] = new fNumber($kills);
+        $this->pvp['deaths'] = new fNumber($deaths);
     }
 
     private function getSkin() {

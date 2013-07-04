@@ -75,7 +75,6 @@ class Converter {
                         WHERE last_logout IS NOT NULL
                         AND last_login IS NOT NULL
                         GROUP BY player_name
-                        HAVING COUNT(1) = 1
                         LIMIT %i,%i
                         ', $this->start, $this->itemsPerRun);
 

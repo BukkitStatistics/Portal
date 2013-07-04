@@ -3,6 +3,13 @@
 $tpl = $this->loadTemplate('overview');
 $this->addJs('media/js/jquery.bootpag.js');
 
+$this->loadLangModule('overview');
+$this->loadLangModule('blocks');
+$this->loadLangModule('items');
+$this->loadLangModule('killing');
+$this->loadLangModule('distances');
+
+
 // sub templates
 $this->loadTemplate('overview/headbar', 'headbar');
 $this->loadTemplate('overview/sidebar', 'sidebar');

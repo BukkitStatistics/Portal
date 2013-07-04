@@ -21,7 +21,7 @@
                 <i class="icon-signal"></i> {{ serverstats.max_players }}
             </span>
         </td>
-        <td>{{ 'max'|trans }}</td>
+        <td>{{ 'max_online'|trans }}</td>
     </tr>
     <tr>
         <td>

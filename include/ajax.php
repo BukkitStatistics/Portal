@@ -19,7 +19,7 @@ if($type == 'search') {
         die($cache->get('search-player'));
 
     try {
-        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
+        $res = Util::getDatabase()->translatedQuery('
                     SELECT name FROM "prefix_players"
                     ORDER BY name ASC
         ');

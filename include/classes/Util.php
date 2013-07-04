@@ -12,6 +12,7 @@ class Util {
     const getRomanNumber = "Util::getRomanNumber";
     const convertBytes = "Util::convertBytes";
     const formatMinecraftString = "Util::formatMinecraftString";
+    const getDatabase = "Util::getDatabase";
 
     /**
      * Returns the requested option out of the settings table.
@@ -28,13 +29,13 @@ class Util {
         if($option == '')
             return false;
 
-        $exclude_cache = array('cache.options', 'patched');
+        $exclude_cache = array('cache.options', 'patched', 'adminpw', 'adminemail');
 
         if(!DEVELOPMENT && $cacheSingle->get($option) != null && Util::getOption('cache.options', 60 * 10) > 0)
             return $cacheSingle->get($option);
 
         try {
-            $db = fORMDatabase::retrieve('name:' . DB_TYPE);
+            $db = self::getDatabase();
             $res = $db->translatedQuery('SELECT `value` FROM "prefix_settings" WHERE `key` = %s',
                                         $option)->fetchScalar();
 
@@ -79,7 +80,7 @@ class Util {
             return false;
 
         try {
-            $db = fORMDatabase::retrieve('name:' . DB_TYPE);
+            $db = self::getDatabase();
             $updated = $db->translatedQuery('UPDATE "prefix_settings" SET "value"=%s WHERE "key"=%s', $value,
                                             $option)->countAffectedRows();
             if($updated <= 0)
@@ -152,7 +153,7 @@ class Util {
     /**
      * Returns an nice formatted string of the seconds in this format: y d h m s
      *
-     * @param fTimestamp $timestamp
+     * @param fTimestamp $ftimestamp
      * @param bool       $years
      * @param bool       $days
      * @param bool       $hours
@@ -161,11 +162,14 @@ class Util {
      *
      * @return string
      */
-    public static function formatSeconds(fTimestamp $timestamp, $years = true, $days = true, $hours = true,
+    public static function formatSeconds(fTimestamp $ftimestamp, $years = true, $days = true, $hours = true,
                                          $minutes = true, $seconds = true) {
         // TODO: improve function.. again...
 
-        $timestamp = strtotime($timestamp->__toString());
+        $timestamp = strtotime($ftimestamp->__toString());
+
+        if($ftimestamp->eq(new fTimestamp()))
+            $timestamp = 0;
 
         $units = array(
             'y' => 365 * 24 * 3600,
@@ -211,6 +215,15 @@ class Util {
             }
 
             fCore::debug('cleared skins');
+        }
+    }
+
+    public static function exceptionCallback($exception) {
+        global $cache;
+
+        if($exception instanceof fProgrammerException) {
+            if($cache->get('remapped_' . DB_TYPE))
+                $cache->delete('remapped_' . DB_TYPE);
         }
     }
 
@@ -321,6 +334,17 @@ class Util {
      */
     public static function getExecTime() {
         return round((float)array_sum(explode(' ', microtime())) - STARTTIME, 4);
+    }
+
+    /**
+     * Returns the active database
+     *
+     * @param string $type defaults to DB_TYPE
+     *
+     * @return fDatabase
+     */
+    public static function getDatabase($type = DB_TYPE) {
+        return fORMDatabase::retrieve('name:' . $type);
     }
 
     /**

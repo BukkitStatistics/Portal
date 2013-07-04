@@ -1,19 +1,18 @@
 <?php
-/*
- * Handles the conflict between xdebug
- * and the flourish debug system
- */
-if(!extension_loaded('xdebug')) {
-    if(DEVELOPMENT) {
-        fCore::enableErrorHandling('html');
-        fCore::enableExceptionHandling('html');
-    }
+if(DEVELOPMENT) {
+    fCore::enableErrorHandling('html');
+    fCore::enableExceptionHandling('html');
 }
 
 if(DEBUG) {
     fCore::enableDebugging(true);
     fCore::registerDebugCallback(Util::handleDebug);
 }
+
+/*
+ * Register an ExceptionCallback
+ */
+fException::registerCallback(Util::exceptionCallback);
 
 /*
  * Open session
@@ -30,21 +29,41 @@ if(fRequest::check('server'))
 /*
  * Define db values
  */
-$db_file = 'none';
+$db_file = '';
 if(fSession::get('server'))
     $db_file = __INC__ . 'config/db_' . fSession::get('server', 'string') .'.php';
 
 if(!file_exists($db_file))
     $db_file =  __INC__ . 'config/db.php';
 
-include $db_file;
-define('DB_HOST', $db_values['host']);
-define('DB_PORT', $db_values['port']);
-define('DB_USER', $db_values['user']);
-define('DB_PW', $db_values['pw']);
-define('DB_DATABASE', $db_values['database']);
-define('DB_PREFIX', $db_values['prefix']);
-define('DB_TYPE', $db_values['type']);
+if(file_exists($db_file)) {
+    include $db_file;
+
+    fCore::startErrorCapture(E_NOTICE);
+    define('DB_HOST', $db_values['host']);
+    define('DB_PORT', $db_values['port']);
+    define('DB_USER', $db_values['user']);
+    define('DB_PW', $db_values['pw']);
+    define('DB_DATABASE', $db_values['database']);
+    define('DB_PREFIX', $db_values['prefix']);
+    define('DB_TYPE', $db_values['type']);
+    fCore::stopErrorCapture();
+}
+else {
+    define('DB_HOST', '');
+    define('DB_PORT', '');
+    define('DB_USER', '');
+    define('DB_PW', '');
+    define('DB_DATABASE', '');
+    define('DB_PREFIX', '');
+    define('DB_TYPE', '');
+
+    if(!file_exists(__ROOT__ . 'install.php')) {
+        echo fText::compose('It seems the database config file is missing. Be sure the installation process was executed.');
+        exit();
+    }
+}
+
 
 /*
  * Initialize cache
