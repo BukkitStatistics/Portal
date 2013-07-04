@@ -1,3 +1,3 @@
 <?php
-define('VERSION', 'beta');
+define('VERSION', 'development');
 
