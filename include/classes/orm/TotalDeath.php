@@ -7,7 +7,7 @@ class TotalDeath extends fActiveRecord {
      * @return fNumber
      */
     public static function countAllDeaths() {
-        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
+        $res = Util::getDatabase()->translatedQuery('
                         SELECT SUM(times)
                         FROM "prefix_total_deaths"
         ');

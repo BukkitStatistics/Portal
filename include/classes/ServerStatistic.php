@@ -23,7 +23,7 @@ class ServerStatistic {
             return;
 
         try {
-            self::$db = fORMDatabase::retrieve('name:' . DB_TYPE);
+            self::$db = Util::getDatabase();
 
             $res = self::$db->translatedQuery('
                         SELECT * FROM "prefix_server_statistics"

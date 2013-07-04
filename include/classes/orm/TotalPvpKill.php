@@ -13,7 +13,7 @@ class TotalPvpKill extends fActiveRecord {
      * @return array
      */
     public static function getMostDangerousWeapon() {
-        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
+        $res = Util::getDatabase()->translatedQuery('
                     SELECT SUM(pvp.times) AS total,
                         m.material_id
                     FROM "prefix_total_pvp_kills" pvp, "prefix_materials" m

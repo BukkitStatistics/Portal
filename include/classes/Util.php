@@ -12,6 +12,7 @@ class Util {
     const getRomanNumber = "Util::getRomanNumber";
     const convertBytes = "Util::convertBytes";
     const formatMinecraftString = "Util::formatMinecraftString";
+    const getDatabase = "Util::getDatabase";
 
     /**
      * Returns the requested option out of the settings table.
@@ -34,7 +35,7 @@ class Util {
             return $cacheSingle->get($option);
 
         try {
-            $db = fORMDatabase::retrieve('name:' . DB_TYPE);
+            $db = self::getDatabase();
             $res = $db->translatedQuery('SELECT `value` FROM "prefix_settings" WHERE `key` = %s',
                                         $option)->fetchScalar();
 
@@ -79,7 +80,7 @@ class Util {
             return false;
 
         try {
-            $db = fORMDatabase::retrieve('name:' . DB_TYPE);
+            $db = self::getDatabase();
             $updated = $db->translatedQuery('UPDATE "prefix_settings" SET "value"=%s WHERE "key"=%s', $value,
                                             $option)->countAffectedRows();
             if($updated <= 0)
@@ -333,6 +334,17 @@ class Util {
      */
     public static function getExecTime() {
         return round((float)array_sum(explode(' ', microtime())) - STARTTIME, 4);
+    }
+
+    /**
+     * Returns the active database
+     *
+     * @param string $type defaults to DB_TYPE
+     *
+     * @return fDatabase
+     */
+    public static function getDatabase($type = DB_TYPE) {
+        return fORMDatabase::retrieve('name:' . $type);
     }
 
     /**

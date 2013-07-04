@@ -56,7 +56,7 @@ class Entity extends fActiveRecord {
      * @return array
      */
     public static function getMostDangerous() {
-        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
+        $res = Util::getDatabase()->translatedQuery('
                     SELECT SUM(pve.player_killed) AS total, e.entity_id
                     FROM "prefix_total_pve_kills" pve, "prefix_entities" e
                     WHERE pve.entity_id = e.entity_id
@@ -82,7 +82,7 @@ class Entity extends fActiveRecord {
      * @return array
      */
     public static function getMostKilled() {
-        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
+        $res = Util::getDatabase()->translatedQuery('
                     SELECT SUM(pve.creature_killed) AS total, e.entity_id
                     FROM "prefix_total_pve_kills" pve, "prefix_entities" e
                     WHERE pve.entity_id = e.entity_id
