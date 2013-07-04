@@ -244,8 +244,8 @@
             </p>
 
             <p>
-                <strong>Piggybacked:</strong>
-                {{ distance.preparePig }} meters
+                <strong>Ridden:</strong>
+                {{ distance.prepareRide }} meters
             </p>
 
             <p>
