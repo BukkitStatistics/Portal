@@ -112,7 +112,7 @@ class Material extends fActiveRecord {
      */
     public static function getMostDangerous() {
         // TODO need to be optimized
-        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
+        $res = Util::getDatabase()->translatedQuery('
                     SELECT SUM(pve.creature_killed) + SUM(pvp.times) AS total,
                         m.material_id
                     FROM "prefix_total_pve_kills" pve

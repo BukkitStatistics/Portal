@@ -14,7 +14,7 @@ $tpl->set('module_inventory', fRequest::encode('module_inventory', 'int', Util::
  */
 $hooks = null;
 try {
-    $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery(
+    $res = Util::getDatabase()->translatedQuery(
         '
         SELECT *
         FROM prefix_settings

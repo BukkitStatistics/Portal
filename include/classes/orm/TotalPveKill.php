@@ -13,7 +13,7 @@ class TotalPveKill extends fActiveRecord {
      * @return array
      */
     public static function getMostDangerousWeapon() {
-        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
+        $res = Util::getDatabase()->translatedQuery('
                     SELECT SUM(pve.creature_killed) AS total,
                         m.material_id
                     FROM "prefix_total_pve_kills" pve, "prefix_materials" m

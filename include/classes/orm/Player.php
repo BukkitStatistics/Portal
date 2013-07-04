@@ -10,7 +10,7 @@ class Player extends fActiveRecord {
      * @return int
      */
     public static function countTotalPlaytime() {
-        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
+        $res = Util::getDatabase()->translatedQuery('
                         SELECT SUM(playtime)
                         FROM "prefix_players"
         ');
@@ -29,7 +29,7 @@ class Player extends fActiveRecord {
     }
 
     public static function getId($name) {
-        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
+        $res = Util::getDatabase()->translatedQuery('
             SELECT player_id
             FROM "prefix_players"
             WHERE name = %s
@@ -82,7 +82,7 @@ class Player extends fActiveRecord {
                       )
             ';
 
-        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery($sql);
+        $res = Util::getDatabase()->translatedQuery($sql);
 
         try {
             return new fNumber($res->fetchScalar());
@@ -99,7 +99,7 @@ class Player extends fActiveRecord {
      * @return fNumber
      */
     public static function countAllLogins() {
-        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
+        $res = Util::getDatabase()->translatedQuery('
                         SELECT SUM(logins)
                         FROM "prefix_players"
         ');
@@ -120,7 +120,7 @@ class Player extends fActiveRecord {
      * @return array
      */
     public static function getMostDangerous() {
-        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
+        $res = Util::getDatabase()->translatedQuery('
                     SELECT SUM(pvp.times) AS total, pvp.player_id FROM "prefix_total_pvp_kills" pvp
                     GROUP BY pvp.player_id
                     ORDER BY SUM(pvp.times) DESC
@@ -148,7 +148,7 @@ class Player extends fActiveRecord {
      * @return array
      */
     public static function getMostKilled() {
-        $res = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery('
+        $res = Util::getDatabase()->translatedQuery('
                     SELECT SUM(pvp.times) AS total, pvp.victim_id FROM "prefix_total_pvp_kills" pvp
                     GROUP BY pvp.victim_id
                     ORDER BY SUM(pvp.times) DESC
@@ -201,7 +201,7 @@ class Player extends fActiveRecord {
      */
     private function countBlocks() {
         try {
-            $row = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery(
+            $row = Util::getDatabase()->translatedQuery(
                        'SELECT SUM(destroyed) AS des, SUM(placed) AS pld
                        FROM prefix_total_blocks
                        WHERE player_id = %i',
@@ -224,7 +224,7 @@ class Player extends fActiveRecord {
      */
     private function countItems() {
         try {
-            $row = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery(
+            $row = Util::getDatabase()->translatedQuery(
                        'SELECT SUM(dropped) AS drp, SUM(picked_up) AS pic
                        FROM prefix_total_items
                        WHERE player_id = %i',
@@ -247,7 +247,7 @@ class Player extends fActiveRecord {
      */
     private function countPve() {
         try {
-            $row = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery(
+            $row = Util::getDatabase()->translatedQuery(
                        'SELECT SUM(player_killed) AS deaths, SUM(creature_killed) AS kills
                        FROM prefix_total_pve_kills
                        WHERE player_id = %i',
@@ -270,7 +270,7 @@ class Player extends fActiveRecord {
      */
     private function countPvp() {
         try {
-            $row = fORMDatabase::retrieve('name:' . DB_TYPE)->translatedQuery(
+            $row = Util::getDatabase()->translatedQuery(
                        'SELECT (
                        SELECT SUM(times)
                        FROM prefix_total_pvp_kills
