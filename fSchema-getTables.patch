@@ -1,0 +1,27 @@
+Index: fSchema.php
+<+>UTF-8
+===================================================================
+--- fSchema.php	(revision )
++++ fSchema.php	(revision )
+@@ -2832,9 +2832,9 @@
+ 
+ 			foreach ($result as $row) {
+ 				if ($row['schema'] == $default_schema) {
+-					$this->tables[] = strtolower($row['table']);
++					$this->tables[] = $row['table'];
+ 				} else {
+-					$this->tables[] = strtolower($row['schema'] . '.' . $row['table']);
++					$this->tables[] = $row['schema'] . '.' . $row['table'];
+ 				}
+ 			}
+ 
+@@ -2842,7 +2842,7 @@
+ 		} else {
+ 			foreach ($result as $row) {
+ 				$keys = array_keys($row);
+-				$this->tables[] = strtolower($row[$keys[0]]);
++				$this->tables[] = $row[$keys[0]];
+ 			}
+ 		}
+ 
+\ No newline at end of file
