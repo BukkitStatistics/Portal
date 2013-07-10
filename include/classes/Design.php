@@ -46,8 +46,6 @@ class Design {
      * @param string|array $template_path
      */
     function __construct($design, $content_folder = null, $template_path = null) {
-        global $lang;
-
         $tpls = array(
             __ROOT__ . 'templates/' . $design . '/views',
             __ROOT__ . 'templates/' . $design
@@ -172,6 +170,16 @@ class Design {
         return $this->index;
     }
 
+
+    /**
+     * Returns the used Twig Environment
+     *
+     * @return Twig_Environment
+     */
+    public function getEnvironment() {
+        return $this->twig;
+    }
+
     /**
      * Returns true of the template key 'tpl' is set.
      *
@@ -189,7 +197,7 @@ class Design {
     private function displayCached($content) {
         global $cache;
 
-        if(DEVELOPMENT || fMessaging::check('*', '{errors}') || Util::getOption('cache.pages', 60) == 0)
+        if(DEVELOPMENT || fMessaging::check('*', '{errors}') || fMessaging::check('no-cache', '{cache}') || Util::getOption('cache.pages', 60) == 0)
             return;
 
         if(fRequest::get('name', 'string') != '' && $content != 'error.php')
