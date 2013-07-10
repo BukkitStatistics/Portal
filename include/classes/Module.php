@@ -52,6 +52,9 @@ class Module {
         if($name == null || !$this->design->isTplSet())
             $name = 'tpl';
 
+        if(DEVELOPMENT || fMessaging::check('no-cache', '{cache}') || fMessaging::check('*', '{errors}'))
+            $this->design->getEnvironment()->setCache(false);
+
         $tmp = $this->design->loadTemplate($template, $name);
 
         if($this->main_tpl != null && $name != null)
