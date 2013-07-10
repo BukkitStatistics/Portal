@@ -1,0 +1,77 @@
+Index: fSchema.php
+<+>UTF-8
+===================================================================
+--- fSchema.php	(revision )
++++ fSchema.php	(revision )
+@@ -2417,7 +2417,7 @@
+ 	 */
+ 	public function getColumnInfo($table, $column=NULL, $element=NULL)
+ 	{
+-		$table = strtolower($table);
++		//$table = strtolower($table);
+ 		if ($column !== NULL) {
+ 			$column = strtolower($column);
+ 		}
+
+@@ -2561,7 +2561,7 @@
+ 	 */
+ 	public function getKeys($table, $key_type=NULL)
+ 	{
+-		$table           = strtolower($table);
++		//$table           = strtolower($table);
+ 		$valid_key_types = array('primary', 'foreign', 'unique');
+ 		if ($key_type !== NULL && !in_array($key_type, $valid_key_types)) {
+ 			throw new fProgrammerException(
+
+@@ -2659,7 +2659,7 @@
+ 	 */
+ 	public function getRelationships($table, $relationship_type=NULL)
+ 	{
+-		$table = strtolower($table);
++		//$table = strtolower($table);
+
+ 		$valid_relationship_types = array('one-to-one', 'many-to-one', 'one-to-many', 'many-to-many');
+ 		if ($relationship_type !== NULL && !in_array($relationship_type, $valid_relationship_types)) {
+
+@@ -2832,9 +2832,9 @@
+ 
+ 			foreach ($result as $row) {
+ 				if ($row['schema'] == $default_schema) {
+-					$this->tables[] = strtolower($row['table']);
++					$this->tables[] = $row['table'];
+ 				} else {
+-					$this->tables[] = strtolower($row['schema'] . '.' . $row['table']);
++					$this->tables[] = $row['schema'] . '.' . $row['table'];
+ 				}
+ 			}
+ 
+@@ -2842,7 +2842,7 @@
+ 		} else {
+ 			foreach ($result as $row) {
+ 				$keys = array_keys($row);
+-				$this->tables[] = strtolower($row[$keys[0]]);
++				$this->tables[] = $row[$keys[0]];
+ 			}
+ 		}
+
+@@ -3076,7 +3076,7 @@
+ 	 */
+ 	public function setColumnInfoOverride($column_info, $table, $column=NULL)
+ 	{
+-		$table = strotlower($table);
++		//$table = strotlower($table);
+ 		if ($column !== NULL) {
+ 			$column = strtolower($column);
+ 		}
+
+@@ -3106,7 +3106,7 @@
+ 	 */
+ 	public function setKeysOverride($keys, $table, $key_type=NULL)
+ 	{
+-		$table = strtolower($table);
++		//$table = strtolower($table);
+
+ 		$valid_key_types = array('primary', 'foreign', 'unique');
+ 		if (!in_array($key_type, $valid_key_types)) {
+ 
+\ No newline at end of file
