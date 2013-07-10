@@ -1,6 +1,8 @@
 <?php
 class Design {
 
+    const TWIG_CACHE = 'cache/twig';
+
     /**
      * Path to the content folder
      *
@@ -66,7 +68,7 @@ class Design {
         $this->twig = new Twig_Environment($twig_loader, array(
                                                               'base_template_class' => 'Statistics_Twig_Template',
                                                               'debug'               => DEBUG,
-                                                              'cache'               => __ROOT__ . 'cache/twig'
+                                                              'cache'               => __ROOT__ . self::TWIG_CACHE
                                                          ));
         if(DEBUG)
             $this->twig->addExtension(new Twig_Extension_Debug());

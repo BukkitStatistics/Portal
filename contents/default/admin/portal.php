@@ -1,5 +1,5 @@
 <?php
-global $cache;
+global $cache, $design;
 $tpl = $this->loadTemplate('admin/portal', 'sub');
 
 $tpl->set('times', array(
@@ -219,8 +219,17 @@ if(fRequest::isPost() && fRequest::check('save')) {
                 $file->delete();
         }
 
-        if(fRequest::get('delete_pages'))
+        if(fRequest::get('delete_pages')) {
             $cache->clear();
+
+            $old = $design->getEnvironment()->getCache();
+            if($old === false)
+                $design->getEnvironment()->setCache(__ROOT__ . Design::TWIG_CACHE);
+
+            $design->getEnvironment()->clearCacheFiles();
+
+            $design->getEnvironment()->setCache($old);
+        }
 
     } catch(fValidationException $e) {
         fMessaging::create('input', 'admin', $e->getMessage());
