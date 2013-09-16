@@ -92,7 +92,7 @@ class Converter {
                             "foot",
                             "boat",
                             "minecart",
-                            "pig")
+                            "ride")
                             VALUES (%i, %i, %i, %i, %i)
                             ');
 
