@@ -340,7 +340,10 @@ class Player extends fActiveRecord {
         if(!file_exists($name) || Util::getOption('cache.skins', 60 * 60 * 24) == 0) {
             $canvas = imagecreatetruecolor($size, $size);
             $image = imagecreatefromstring(file_get_contents($this->getSkin()));
-            imagecopyresampled($canvas, $image, 0, 0, 8, 8, $size, $size, 8, 8);
+            imagecopyresampled($canvas, $image, 0, 0, ImageSX($image) / 8, ImageSX($image) / 8, $size, $size,
+                               ImageSX($image) / 8, ImageSX($image) / 8);
+            imagecopyresampled($canvas, $image, 0, 0, (ImageSX($image) / 8) * 5, ImageSX($image) / 8, $size, $size,
+                               ImageSX($image) / 8, ImageSX($image) / 8); //support of hair
 
             imagepng($canvas, $name);
 

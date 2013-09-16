@@ -1,6 +1,8 @@
 <?php
 class Design {
 
+    const TWIG_CACHE = 'cache/twig';
+
     /**
      * Path to the content folder
      *
@@ -46,8 +48,6 @@ class Design {
      * @param string|array $template_path
      */
     function __construct($design, $content_folder = null, $template_path = null) {
-        global $lang;
-
         $tpls = array(
             __ROOT__ . 'templates/' . $design . '/views',
             __ROOT__ . 'templates/' . $design
@@ -68,7 +68,7 @@ class Design {
         $this->twig = new Twig_Environment($twig_loader, array(
                                                               'base_template_class' => 'Statistics_Twig_Template',
                                                               'debug'               => DEBUG,
-                                                              'cache'               => __ROOT__ . 'cache/twig'
+                                                              'cache'               => __ROOT__ . self::TWIG_CACHE
                                                          ));
         if(DEBUG)
             $this->twig->addExtension(new Twig_Extension_Debug());
@@ -172,6 +172,16 @@ class Design {
         return $this->index;
     }
 
+
+    /**
+     * Returns the used Twig Environment
+     *
+     * @return Twig_Environment
+     */
+    public function getEnvironment() {
+        return $this->twig;
+    }
+
     /**
      * Returns true of the template key 'tpl' is set.
      *
@@ -189,7 +199,7 @@ class Design {
     private function displayCached($content) {
         global $cache;
 
-        if(DEVELOPMENT || fMessaging::check('*', '{errors}') || Util::getOption('cache.pages', 60) == 0)
+        if(DEVELOPMENT || fMessaging::check('*', '{errors}') || fMessaging::check('no-cache', '{cache}') || Util::getOption('cache.pages', 60) == 0)
             return;
 
         if(fRequest::get('name', 'string') != '' && $content != 'error.php')
