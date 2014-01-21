@@ -541,7 +541,7 @@
         <div class="span6 well well-small">
             <h3>Items</h3>
 
-            <div class="paginator" data-mod="total_items">
+            <div class="paginator" data-mod="player_items">
                 {% include player_items %}
             </div>
         </div>
