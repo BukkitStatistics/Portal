@@ -1,6 +1,11 @@
 <?php
 include_once 'include/init.php';
 
+if(!is_writable('cache/')){
+    fRequest::set('type', 500);
+    $content = 'error.php';   
+}
+
 if(file_exists('install.php'))
     fURL::redirect('install.php');
 
