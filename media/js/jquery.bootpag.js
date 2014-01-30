@@ -10,7 +10,7 @@
  * Project home:
  *   http://botmonster.com/jquery-bootpag/
  *
- * Version:  1.0.3
+ * Version:  1.0.5
  *
  */
 (function($, window) {
@@ -34,7 +34,7 @@
         if(settings.total <= 0)
             return this;
 
-        if(!settings.maxVisible){
+          if(!$.isNumeric(settings.maxVisible) && !settings.maxVisible){
             settings.maxVisible = settings.total;
         }
 
@@ -42,23 +42,28 @@
 
         function renderPage($bootpag, page){
         
-            var lp,
-                vis = Math.floor(page / settings.maxVisible) * settings.maxVisible,
+            var lp, 
+                maxV = settings.maxVisible == 0 ? 1 : settings.maxVisible,
+                step = settings.maxVisible == 1 ? 0 : 1,
+                vis = Math.floor((page - 1) / maxV) * maxV,
                 $page = $bootpag.find('li');
             settings.page = page = page < 0 ? 0 : page > settings.total ? settings.total : page;
-
             $page.removeClass('disabled');
             lp = page - 1 < 1 ? 1 : 
-                    settings.leaps && page - 1 > settings.maxVisible ? 
-                        Math.floor((page - 1) / settings.maxVisible) * settings.maxVisible : page - 1;
+                    settings.leaps && page - 1 >= settings.maxVisible ? 
+                        Math.floor((page - 1) / maxV) * maxV : page - 1;
             $page
                 .first()
                 .toggleClass('disabled', page === 1)
                 .attr('data-lp', lp)
                 .find('a').attr('href', href(lp));
+            
+            var step = settings.maxVisible == 1 ? 0 : 1;
+            
             lp = page + 1 > settings.total ? settings.total : 
                     settings.leaps && page + 1 < settings.total - settings.maxVisible ? 
-                        vis + settings.maxVisible + 1: page + 1;
+                        vis + settings.maxVisible + step: page + 1;
+       
             $page
                 .last()
                 .toggleClass('disabled', page === settings.total)
@@ -78,7 +83,6 @@
                 $currPage = $page.filter('[data-lp='+page+']');
             }
             $currPage.addClass('disabled');
-            $owner.trigger('page', page);
             $owner.data('settings', settings);
         }
 
@@ -88,9 +92,9 @@
         }
 
         return this.each(function(){
-
+            
             var $bootpag, lp, me = $(this),
-                p = ['<ul class="bootpag">'];
+                p = ['<ul class="pagination bootpag">'];
 
             if(settings.prev){
                 p.push('<li data-lp="1" class="prev"><a href="'+href(1)+'">'+settings.prev+'</a></li>');
@@ -113,7 +117,9 @@
                 if(me.hasClass('disabled')){
                     return;
                 }
-                renderPage($bootpag, parseInt(me.attr('data-lp'), 10));
+                var page = parseInt(me.attr('data-lp'), 10);
+                renderPage($bootpag, page);
+                $owner.trigger('page', page);
             });
             renderPage($bootpag, settings.page);
         });
