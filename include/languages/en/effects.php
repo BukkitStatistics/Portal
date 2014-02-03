@@ -20,4 +20,7 @@ $translations = array(
     'effect_18' => 'Weakness',
     'effect_19' => 'Poison',
     'effect_20' => 'Wither',
+    'effect_21' => 'Health Boost',
+    'effect_22' => 'Absorption',
+    'effect_23' => 'Saturation',
 );
