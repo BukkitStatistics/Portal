@@ -6,7 +6,8 @@ if(!is_writable('cache/')){
     $content = 'error.php';   
 }
 
-if(file_exists('install.php'))
+// only redirect if in production mode
+if(!DEVELOPMENT && file_exists('install.php'))
     fURL::redirect('install.php');
 
 /*
