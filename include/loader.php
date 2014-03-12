@@ -1,8 +1,15 @@
 <?php
 if(DEVELOPMENT) {
+    error_reporting(E_ALL ^ E_NOTICE);
     fCore::enableErrorHandling('html');
     fCore::enableExceptionHandling('html');
 }
+else {
+    error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
+    ini_set('display_errors', 0);
+    fCore::enableErrorHandling(__ROOT__ . 'cache/error.txt');
+}
+
 
 if(DEBUG) {
     fCore::enableDebugging(true);
