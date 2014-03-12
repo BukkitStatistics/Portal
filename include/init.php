@@ -1,5 +1,12 @@
 <?php
 define('STARTTIME', (float)array_sum(explode(' ', microtime())));
+
+/*
+ * Check cache folder
+ */
+if(!is_writable('cache/'))
+    die('Folder "cache" is not writable by the script. Please check the permissions.');
+
 /*
  * Check for minimum php version
  */

@@ -1,11 +1,6 @@
 <?php
 include_once 'include/init.php';
 
-if(!is_writable('cache/')){
-    fRequest::set('type', 500);
-    $content = 'error.php';   
-}
-
 // only redirect if in production mode
 if(!DEVELOPMENT && file_exists('install.php'))
     fURL::redirect('install.php');
