@@ -1,3 +1,3 @@
 <?php
-define('VERSION', 'recommended');
+define('VERSION', 'development');
 

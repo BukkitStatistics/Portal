@@ -18,12 +18,12 @@ define('__INC__', __ROOT__ . 'include' . '/');
  * Set development mode
  * Will slow down page load
  */
-define('DEVELOPMENT', false);
+define('DEVELOPMENT', true);
 
 /*
  * Will save debug messages in cache/debug.txt
  */
-define('DEBUG', false);
+define('DEBUG', true);
 
 require __INC__ . 'vendor/autoload.php';
 include_once __INC__ . 'config/version.php';
