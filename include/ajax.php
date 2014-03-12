@@ -20,14 +20,17 @@ if($type == 'search') {
 
     try {
         $res = Util::getDatabase()->translatedQuery('
-                    SELECT name FROM "prefix_players"
+                    SELECT player_id, name FROM "prefix_players"
                     ORDER BY name ASC
         ');
 
         $ar = array();
 
-        foreach($res as $row)
-            $ar[] = $row['name'];
+        foreach($res as $row) {
+            $ar['names'][] = $row['name'];
+            $ar['ids'][$row['name']] = $row['player_id'];
+        }
+
 
         $json = fJSON::encode($ar);
 

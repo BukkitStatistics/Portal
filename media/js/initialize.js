@@ -25,6 +25,7 @@ $(document).ready(function () {
      thanks to: @mrgcohen (http://gist.github.com/mrgcohen)
      */
     window.query_cache = {};
+    window.ids_cache = {};
     $('#playerSearch').typeahead({
         source: function (query, process) {
             if (query_cache[query]) {
@@ -43,11 +44,17 @@ $(document).ready(function () {
                         if (data['error'] == 'no_data')
                             return;
 
-                        query_cache[query] = data;
-                        return process(data);
+                        query_cache[query] = data['names'];
+                        ids_cache = data['ids'];
+                        return process(data['names']);
                     }
                 );
             }, 200);
+        },
+        updater: function (item) {
+            $('#playerSearchID').val(ids_cache[item]);
+
+            return item;
         }
     });
 

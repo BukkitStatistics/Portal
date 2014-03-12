@@ -22,7 +22,7 @@
         {% for player in players %}
             <tr>
                 <td>
-                    <a href="?page=player&name={{ player.getName|e('url') }}">
+                    <a href="?page=player&id={{ player.getPlayerId }}">
                         {{ player.getPlayerHead(32, 'img-polaroid')|raw }}
                         {{ player.getName }}
                     </a>

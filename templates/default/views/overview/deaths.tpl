@@ -41,7 +41,7 @@
     <div class="span4">
         <span class="badge badge-important grid-img">
             {% if death_stats.top_killer[1].getName != 'none' %}
-                <a href="?page=player&name={{ death_stats.top_killer[1].getName|e('url') }}">
+                <a href="?page=player&id={{ death_stats.top_killer[1].getPlayerId }}">
                     {{ death_stats.top_killer[1].getPlayerHead(32, null, true)|raw }}
                 </a>
             {% else %}
@@ -52,7 +52,7 @@
     <div class="span4">
         <span class="badge badge-important grid-img">
             {% if death_stats.most_killed_player[1].getName != 'none' %}
-                <a href="?page=player&name={{ death_stats.most_killed_player[1].getName|e('url') }}">
+                <a href="?page=player&id={{ death_stats.most_killed_player[1].getPlayerId }}">
                     {{ death_stats.most_killed_player[1].getPlayerHead(32, null, true)|raw }}
                 </a>
             {% else %}

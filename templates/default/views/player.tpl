@@ -99,7 +99,7 @@
             {{ pvp_player.getPlayerHead(64, 'img-polaroid')|raw }}
             <h4 class="well well-small center">
                 {% if pvp_player.getName != 'none' %}
-                    <a href="?page=player&name={{ pvp_player.getName|e('url') }}">{{ pvp_player.getName }}</a>
+                    <a href="?page=player&id={{ pvp_player.getPlayerID }}">{{ pvp_player.getName }}</a>
                 {% else %}
                     {{ pvp_player.getName }}
                 {% endif %}
@@ -116,7 +116,7 @@
             {{ pvp_player.getPlayerHead(64, 'img-polaroid')|raw }}
             <h4 class="well well-small center">
                 {% if pvp_player.getName != 'none' %}
-                    <a href="?page=player&name={{ pvp_player.getName|e('url') }}">{{ pvp_player.getName }}</a>
+                    <a href="?page=player&id={{ pvp_player.getPlayerId }}">{{ pvp_player.getName }}</a>
                 {% else %}
                     {{ pvp_player.getName }}
                 {% endif %}
@@ -413,7 +413,7 @@
 
                 <p>
                     {% set victim = pvp.most_killed.createPlayer('victim_id') %}
-                    <a href="?page=player&name={{ victim.getName|e('url') }}">
+                    <a href="?page=player&id={{ victim.getPlayerId }}">
                         {{ victim.getPlayerHead|raw }}
                         {{ victim.getName }}
                     </a>
@@ -437,7 +437,7 @@
 
                 <p>
                     {% set killer = pvp.most_killed_by.createPlayer('player_id') %}
-                    <a href="?page=player&name={{ killer.getName|e('url') }}">
+                    <a href="?page=player&id={{ killer.getPlayerId }}">
                         {{ killer.getPlayerHead|raw }}
                         {{ killer.getName }}
                     </a>

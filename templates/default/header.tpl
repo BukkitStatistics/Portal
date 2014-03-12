@@ -68,6 +68,7 @@
                         <div class="input-append">
                             <input type="text" name="name" class="" placeholder="{{ 'player'|trans }}" id="playerSearch"
                                    autocomplete="off">
+                            <input type="hidden" value="0" name="id" id="playerSearchID"/>
                             <button class="btn" value="1" type="submit">{{ 'search'|trans }}</button>
                         </div>
                     </form>

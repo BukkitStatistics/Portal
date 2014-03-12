@@ -9,7 +9,7 @@ $lang->load('causes');
 try {
     $player = new Player(
         array(
-             'name' => fRequest::get('name', 'string')
+             'player_id' => fRequest::get('id', 'int')
         )
     );
 
