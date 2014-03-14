@@ -99,7 +99,7 @@
             {{ pvp_player.getPlayerHead(64, 'img-polaroid')|raw }}
             <h4 class="well well-small center">
                 {% if pvp_player.getName != 'none' %}
-                    <a href="?page=player&id={{ pvp_player.getPlayerID }}">{{ pvp_player.getName }}</a>
+                    <a href="?page=player&id={{ pvp_player.getPlayerId }}">{{ pvp_player.getName }}</a>
                 {% else %}
                     {{ pvp_player.getName }}
                 {% endif %}
