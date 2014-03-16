@@ -15,17 +15,9 @@ $tpl->set('ping', fSession::get('settings[ping]'));
 $tpl->set('welcome_msg', fSession::get('settings[welcome_msg]'));
 $tpl->set('welcome_first_msg', fSession::get('settings[welcome_first_msg]'));
 
-if(!fMessaging::check('*') && fRequest::isPost() && fRequest::get('convert_submit')) {
-
-    if(fRequest::get('old_data', 'boolean')) {
-        fSession::set('maxStep', 5);
-        fURL::redirect('?step=converter');
-    }
-    else {
-        fSession::set('maxStep', 7);
-        fURL::redirect('?step=five');
-    }
-
+if(!fMessaging::check('*') && fRequest::isPost()) {
+    fSession::set('maxStep', 7);
+    fURL::redirect('?step=five');
 } else {
     // checking cache dir
     try {

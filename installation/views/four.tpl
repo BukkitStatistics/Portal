@@ -54,30 +54,11 @@
             <p><strong>Database sync:</strong> every {{ ping }} seconds</p>
         </div>
     </div>
-    <br><br>
-
-    <h2>
-        <i class="icon-book icon-large" style="color: #ccc;"></i>
-        Old Data
-    </h2>
-
-    <p>Do you have an older installation of statistician and want to transfer the statistics?</p>
-
-    <div class="alert">
-        <span class="label label-warning">Warning</span> Every new data will be deleted!
-    </div>
-    <label class="radio">
-        <input type="radio" name="old_data" id="old_data_y" value="yes">
-        Yes. Please transfer my old data!</label>
-    <label class="radio">
-        <input type="radio" name="old_data" id="old_data_n" value="no" checked="checked">
-        No. I want to start with fresh statistics!
-    </label>
 
     <div class="form-actions">
         <a href="?step=three" class="btn btn-inverse">Back</a>
         <button type="submit" name="convert_submit" value="1" class="btn btn-primary">
-            Submit
+            Next
         </button>
     </div>
 </form>
