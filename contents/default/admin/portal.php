@@ -149,21 +149,6 @@ $tpl->set('cache_skins[s]', fRequest::encode('cache_skins[s]', 'int', Util::getO
                                                                       $tpl->get('cache_skins[h]') * 60 * 60 -
                                                                       $tpl->get('cache_skins[m]') * 60));
 
-$tpl->set('cache_options[d]',
-          fRequest::encode('cache_options[d]', 'int', Util::getOption('cache.options') / 60 / 60 / 24));
-$tpl->set('cache_options[h]', fRequest::encode('cache_options[h]', 'int', (Util::getOption('cache.options') -
-                                                                           $tpl->get('cache_options[d]') * 60 * 60 *
-                                                                           24) /
-                                                                          60 / 60));
-$tpl->set('cache_options[m]', fRequest::encode('cache_options[m]', 'int', (Util::getOption('cache.options') -
-                                                                           $tpl->get('cache_options[d]') * 60 * 60 *
-                                                                           24 -
-                                                                           $tpl->get('cache_options[h]') * 60 * 60) /
-                                                                          60));
-$tpl->set('cache_options[s]', fRequest::encode('cache_options[s]', 'int', Util::getOption('cache.options') -
-                                                                          $tpl->get('cache_options[d]') * 60 * 60 * 24 -
-                                                                          $tpl->get('cache_options[h]') * 60 * 60 -
-                                                                          $tpl->get('cache_options[m]') * 60));
 
 $tpl->set('cache_search[d]', fRequest::encode('cache_search[d]', 'int', Util::getOption('cache.search') / 60 / 60 / 24));
 $tpl->set('cache_search[h]', fRequest::encode('cache_search[h]', 'int', (Util::getOption('cache.search') -
@@ -200,11 +185,6 @@ if(fRequest::isPost() && fRequest::check('save')) {
         $sec = $tpl->get('cache_skins[s]') + $tpl->get('cache_skins[m]') * 60 + $tpl->get('cache_skins[h]') * 60 * 60 +
                $tpl->get('cache_skins[d]') * 60 * 60 * 24;
         Util::setOption('cache.skins', $sec);
-
-        $sec = $tpl->get('cache_options[s]') + $tpl->get('cache_options[m]') * 60 +
-               $tpl->get('cache_options[h]') * 60 * 60 +
-               $tpl->get('cache_options[d]') * 60 * 60 * 24;
-        Util::setOption('cache.options', $sec);
 
         $sec = $tpl->get('cache_search[s]') + $tpl->get('cache_search[m]') * 60 +
                $tpl->get('cache_search[h]') * 60 * 60 +

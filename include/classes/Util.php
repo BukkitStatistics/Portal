@@ -14,6 +14,8 @@ class Util {
     const formatMinecraftString = "Util::formatMinecraftString";
     const getDatabase = "Util::getDatabase";
 
+
+
     /**
      * Returns the requested option out of the settings table.
      * If the option does not exist it returns false or the default value.
@@ -25,22 +27,20 @@ class Util {
      * @return string|boolean
      */
     public static function getOption($option, $default = null) {
-        global $cacheSingle;
+        static $runtime_cache = array();
+
         if($option == '')
             return false;
 
-        $exclude_cache = array('cache.options', 'patched', 'adminpw', 'adminemail');
-
-        if(!DEVELOPMENT && $cacheSingle->get($option) != null && Util::getOption('cache.options', 60 * 10) > 0)
-            return $cacheSingle->get($option);
+        if(isset($runtime_cache[$option]))
+            return $runtime_cache[$option];
 
         try {
             $db = self::getDatabase();
             $res = $db->translatedQuery('SELECT `value` FROM "prefix_settings" WHERE `key` = %s',
                                         $option)->fetchScalar();
 
-            if(!DEVELOPMENT && !in_array($option, $exclude_cache))
-                $cacheSingle->set($option, $res, Util::getOption('cache.options', 60 * 10));
+            $runtime_cache[$option] = $res;
         } catch(fNoRowsException $e) {
             fCore::debug($e);
         } catch(fProgrammerException $e) {
@@ -75,7 +75,6 @@ class Util {
      * @return bool
      */
     public static function setOption($option, $value) {
-        global $cacheSingle;
         if($option == '')
             return false;
 
@@ -86,9 +85,6 @@ class Util {
             if($updated <= 0)
                 $db->translatedExecute('INSERT INTO "prefix_settings" ("key", "value") VALUES (%s, %s)', $option,
                                        $value);
-
-            if(!DEVELOPMENT)
-                $cacheSingle->delete($option);
 
             return true;
         } catch(fException $e) {

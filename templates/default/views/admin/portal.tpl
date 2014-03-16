@@ -77,43 +77,30 @@
                 </div>
                 <div class="row-fluid">
                     <div class="span4">
-                        <h4>Options</h4>
+                        <h4>Player search</h4>
                     </div>
                     <div class="span2">
-                        <label for="cache_options[d]">days</label>
-                        <input type="text" class="input-block-level" id="cache_options[d]" name="cache_options[d]"
-                               value="{{ cache_options.d }}"/>
+                        <label for="cache_search[d]">days</label>
+                        <input type="text" class="input-block-level" id="cache_search[d]" name="cache_search[d]"
+                               value="{{ cache_search.d }}"/>
                     </div>
                     <div class="span2">
-                        <label for="cache_options[h]">hours</label>
-                        <input type="text" class="input-block-level" id="cache_options[h]" name="cache_options[h]"
-                               value="{{ cache_options.h }}"/>
+                        <label for="cache_search[h]">hours</label>
+                        <input type="text" class="input-block-level" id="cache_search[h]" name="cache_search[h]"
+                               value="{{ cache_search.h }}"/>
                     </div>
                     <div class="span2">
-                        <label for="cache_options[m]">minutes</label>
-                        <input type="text" class="input-block-level" id="cache_options[m]" name="cache_options[m]"
-                               value="{{ cache_options.m }}"/>
+                        <label for="cache_search[m]">minutes</label>
+                        <input type="text" class="input-block-level" id="cache_search[m]" name="cache_search[m]"
+                               value="{{ cache_search.m }}"/>
                     </div>
                     <div class="span2">
-                        <label for="cache_options[s]">seconds</label>
-                        <input type="text" class="input-block-level" id="cache_options[s]" name="cache_options[s]"
-                               value="{{ cache_options.s }}"/>
+                        <label for="cache_search[s]">seconds</label>
+                        <input type="text" class="input-block-level" id="cache_search[s]" name="cache_search[s]"
+                               value="{{ cache_search.s }}"/>
                     </div>
                 </div>
-                <div class="row-fluid">
-                    <div class="span12">
-                        <label for="delete_pages" class="checkbox">
-                            <input type="hidden" name="delete_pages" value="0"/>
-                            <input type="checkbox" value="1" name="delete_pages" id="delete_pages" />
-                            Delete all cached pages.
-                        </label>
-                        <label for="delete_skins" class="checkbox">
-                            <input type="hidden" name="delete_skins" value="0"/>
-                            <input type="checkbox" value="1" name="delete_skins" id="delete_skins" />
-                            Delete all cached skins.
-                        </label>
-                    </div>
-                </div>
+
             </div>
             <div class="span6">
                 <div class="row-fluid">
@@ -142,28 +129,17 @@
                     </div>
                 </div>
                 <div class="row-fluid">
-                    <div class="span4">
-                        <h4>Player search</h4>
-                    </div>
-                    <div class="span2">
-                        <label for="cache_search[d]">days</label>
-                        <input type="text" class="input-block-level" id="cache_search[d]" name="cache_search[d]"
-                               value="{{ cache_search.d }}"/>
-                    </div>
-                    <div class="span2">
-                        <label for="cache_search[h]">hours</label>
-                        <input type="text" class="input-block-level" id="cache_search[h]" name="cache_search[h]"
-                               value="{{ cache_search.h }}"/>
-                    </div>
-                    <div class="span2">
-                        <label for="cache_search[m]">minutes</label>
-                        <input type="text" class="input-block-level" id="cache_search[m]" name="cache_search[m]"
-                               value="{{ cache_search.m }}"/>
-                    </div>
-                    <div class="span2">
-                        <label for="cache_search[s]">seconds</label>
-                        <input type="text" class="input-block-level" id="cache_search[s]" name="cache_search[s]"
-                               value="{{ cache_search.s }}"/>
+                    <div class="span12">
+                        <label for="delete_pages" class="checkbox">
+                            <input type="hidden" name="delete_pages" value="0"/>
+                            <input type="checkbox" value="1" name="delete_pages" id="delete_pages" />
+                            Delete all cached pages.
+                        </label>
+                        <label for="delete_skins" class="checkbox">
+                            <input type="hidden" name="delete_skins" value="0"/>
+                            <input type="checkbox" value="1" name="delete_skins" id="delete_skins" />
+                            Delete all cached skins.
+                        </label>
                     </div>
                 </div>
             </div>
