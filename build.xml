@@ -67,7 +67,7 @@
                 <exclude name=".git/"/>
                 <exclude name="composer.*/"/>
                 <exclude name="build.xml/"/>
-                <exclude name="fSchema-getTables.patch/"/>
+                <exclude name="fSchema-lower_tables_names.patch/"/>
                 <exclude name="version.xml/"/>
                 <exclude name="**/.DS_Store"/>
                 <exclude name="**/Thumbs.db"/>
