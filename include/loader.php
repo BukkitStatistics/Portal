@@ -85,6 +85,18 @@ try {
     exit();
 }
 
+/**
+ * Check if newer portal version is installed and clear cache.
+ */
+if($cacheSingle->get('old_version') == null)
+    $cacheSingle->set('old_version', VERSION);
+elseif($cacheSingle->get('old_version') != VERSION) {
+    $cache->clear();
+    $cacheSingle->clear();
+    Design::setClearCache();
+    fCore::debug('New version detected. Cache cleared');
+}
+
 /*
  * Initializes ORM
  */

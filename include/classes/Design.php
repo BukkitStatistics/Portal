@@ -4,6 +4,13 @@ class Design {
     const TWIG_CACHE = 'cache/twig';
 
     /**
+     * Whether clear the cache on next run or not
+     *
+     * @var boolean
+     */
+    private static $clearCache = false;
+
+    /**
      * Path to the content folder
      *
      * @var array
@@ -70,6 +77,13 @@ class Design {
                                                               'debug'               => DEBUG,
                                                               'cache'               => __ROOT__ . self::TWIG_CACHE
                                                          ));
+        // clear cache
+        if(Design::$clearCache) {
+            Design::$clearCache = false;
+            $this->twig->clearTemplateCache();
+            $this->twig->clearCacheFiles();
+        }
+
         if(DEBUG)
             $this->twig->addExtension(new Twig_Extension_Debug());
 
@@ -272,5 +286,12 @@ class Design {
         fMessaging::retrieve('no-cache', '{cache}');
 
         echo $output;
+    }
+
+    /**
+     * Clears the template cache on the next run.
+     */
+    public static function setClearCache() {
+        Design::$clearCache = true;
     }
 }
