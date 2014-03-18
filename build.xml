@@ -67,7 +67,7 @@
                 <exclude name=".git/"/>
                 <exclude name="composer.*/"/>
                 <exclude name="build.xml/"/>
-                <exclude name="fSchema-lower_tables_names.patch/"/>
+                <exclude name="_patches/"/>
                 <exclude name="version.xml/"/>
                 <exclude name="**/.DS_Store"/>
                 <exclude name="**/Thumbs.db"/>
@@ -83,7 +83,9 @@
         </copy>
 
         <!-- temporary patching fSchema because of case-insensitive table names -->
-        <patch patchfile="${src.dir}/fSchema-lower_tables_names.patch" originalfile="${build.dist.temp.dir}/include/vendor/flourish/flourish/fSchema.php"/>
+        <patch patchfile="${src.dir}/_patches/fSchema-lower_tables_names.patch" originalfile="${build.dist.temp.dir}/include/vendor/flourish/flourish/fSchema.php"/>
+        <patch patchfile="${src.dir}/_patches/fORMDatabase-fix_case_insensitive_tables.patch"
+               originalfile="${build.dist.temp.dir}/include/vendor/flourish/flourish/fORMDatabase.php"/>
 
         <echo file="${build.dist.temp.dir}/include/config/version.php">&lt;?php&#13;&#10;&#9;define('VERSION', '${project.type}');</echo>
 

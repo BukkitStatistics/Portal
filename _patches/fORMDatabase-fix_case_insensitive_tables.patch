@@ -1,0 +1,16 @@
+Index: fORMDatabase.php
+<+>UTF-8
+===================================================================
+--- fORMDatabase.php	(revision )
++++ fORMDatabase.php	(revision )
+@@ -760,7 +760,8 @@
+ 				$table = $short_table;
+ 			}
+ 		}
+-		return strtolower($table);
++		//return strtolower($table);
++        return $table;
+ 	}
+ 
+ 
+\ No newline at end of file
