@@ -4,7 +4,7 @@ define('STARTTIME', (float)array_sum(explode(' ', microtime())));
 /*
  * Check cache folder
  */
-if(!is_writable('cache/'))
+if(!is_writable(__ROOT__ . 'cache/'))
     die('Folder "cache" is not writable by the script. Please check the permissions.');
 
 /*
