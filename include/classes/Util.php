@@ -217,6 +217,9 @@ class Util {
     public static function exceptionCallback($exception) {
         global $cache;
 
+        if($cache == null)
+            return;
+
         if($exception instanceof fProgrammerException) {
             if($cache->get('remapped_' . DB_TYPE))
                 $cache->delete('remapped_' . DB_TYPE);
