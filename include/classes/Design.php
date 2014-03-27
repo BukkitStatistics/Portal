@@ -267,8 +267,9 @@ class Design {
             $output = $this->templates['__main__']->render(array('tpl' => $this->templates['tpl']));
         }
 
-        if(fRequest::get('name', 'string') != '' && $content != 'error.php')
-            $content = $content . '_' . fRequest::get('name', 'string');
+        // TODO make names more general
+        if(fRequest::get('id', 'int') != '' && $content != 'error.php')
+            $content = $content . '_' . fRequest::get('id', 'int');
 
         if(!DEVELOPMENT
            && !is_null($cache)
