@@ -216,8 +216,8 @@ class Design {
         if(DEVELOPMENT || fMessaging::check('*', '{errors}') || fMessaging::check('no-cache', '{cache}') || Util::getOption('cache.pages', 60) == 0)
             return;
 
-        if(fRequest::get('name', 'string') != '' && $content != 'error.php')
-            $content = $content . '_' . fRequest::get('name', 'string');
+        if(fRequest::get('id', 'int') != '' && $content != 'error.php')
+            $content = $content . '_' . fRequest::get('id', 'int');
 
         $cached = $cache->get($content . '.' . DB_TYPE . '.cache');
 
