@@ -10,6 +10,10 @@ if($sub) {
 }
 else {
     $this->loadTemplate('admin/main', 'sub');
+
+    if(file_exists(__ROOT__ . 'install.php'))
+        $tpl->set('install', true);
+
     $tpl->set('main', true);
 }
 if(fRequest::isPost() && fRequest::get('logout')) {

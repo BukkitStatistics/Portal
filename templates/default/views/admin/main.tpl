@@ -6,6 +6,12 @@
             Caching is disabled in this mode. Errors will be displayed on the page if they occur.
         </div>
         {% endif %}
+        {% if install %}
+            <div class="alert alert-danger">
+                <span class="badge badge-important">Warning!</span>
+                Installation files still available! Please delete the 'install.php' file and the 'installation/' folder!
+            </div>
+        {% endif %}
         <div class="row-fluid">
             <div class="span12">
                 <p>
