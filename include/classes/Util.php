@@ -32,8 +32,12 @@ class Util {
         if($option == '')
             return false;
 
-        if(isset($runtime_cache[$option]))
-            return $runtime_cache[$option];
+        if(isset($runtime_cache[$option])) {
+            if($runtime_cache[$option] == '' && $default != null)
+                return $default;
+            else
+                return $runtime_cache[$option];
+        }
 
         try {
             $db = self::getDatabase();
