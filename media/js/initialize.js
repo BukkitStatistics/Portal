@@ -1,16 +1,4 @@
 $(document).ready(function () {
-    // sidebar
-    setTimeout(function () {
-        $('body').scrollspy({
-            target: '.nav-sidebar',
-            offset: 66
-        });
-    }, 100);
-
-    $('#left-menu').affix(
-        {offset: 240}
-    );
-
     // sortable tables
     $(document).on('click', 'div[data-mod] .sort-button', function () {
         var button = $(this);

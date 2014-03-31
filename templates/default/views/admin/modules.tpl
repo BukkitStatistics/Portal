@@ -1,13 +1,13 @@
-<div class="row-fluid">
-    <div class="span12 well">
+<div class="row">
+    <div class="col-md-12 well">
         <div class="alert alert-info alert-block">
             <p>
                 <span class="label label-info">Info!</span> Here you can specify which data should be logged.<br>
                 Due to architectural limitations, you only can disable major types.
             </p>
         </div>
-        <div class="row-fluid">
-            <div class="span12">
+        <div class="row">
+            <div class="col-md-12">
                 <fieldset>
                     <h4>General modules</h4>
 

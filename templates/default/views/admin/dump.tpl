@@ -1,12 +1,12 @@
-<div class="row-fluid">
-    <div class="span12 well">
+<div class="row">
+    <div class="col-md-12 well">
         <div class="alert alert-danger alert-block">
             <p>
-                <span class="label label-important">Warning!</span> This operation cannot be undone!
+                <span class="label label-danger">Warning!</span> This operation cannot be undone!
             </p>
         </div>
-        <div class="row-fluid">
-            <div class="span6">
+        <div class="row">
+            <div class="col-md-6">
                 <h4>Dump players</h4>
                 <fieldset>
                     <label for="dump_players" class="checkbox">
@@ -17,7 +17,7 @@
                     </label>
                 </fieldset>
             </div>
-            <div class="span6">
+            <div class="col-md-6">
                 <h4>Dump statistical data</h4>
                 <fieldset>
                     <label for="dump_data" class="checkbox">

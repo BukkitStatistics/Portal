@@ -1,8 +1,7 @@
-<!-- TODO: test multiserver -->
 <!-- <navigation> -->
-<div class="left-menu hidden-phone" id="left-menu">
+<div id="left-menu">
     <div class="nav nav-sidebar well">
-        <ul class="nav nav-list" id="nav-menu">
+        <ul class="nav nav-list">
             <li><a href="#dashboard"><i class="icon-tasks icon-fixed-width"></i> {{ 'dashboard'|trans }}</a></li>
             <li class="divider"></li>
             <li><a href="#players"><i class="icon-group icon-fixed-width"></i> {{ 'players'|trans }}</a></li>
@@ -22,7 +21,7 @@
             {% if info.current_uptime > 0 %}
                 <i class="icon-circle text-success"></i>
             {% else %}
-                <i class="icon-circle text-error"></i>
+                <i class="icon-circle text-danger"></i>
             {% endif %}
             <a href="?server={{ server.slug }}">
                 {{ server.name }} {{ info.online_players }}/{{ info.players_allowed }}

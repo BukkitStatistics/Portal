@@ -1,10 +1,10 @@
-<div class="row-fluid">
-    <div class="span12 well">
-        <div class="row-fluid">
-            <div class="span6">
+<div class="row">
+    <div class="col-md-12 well">
+        <div class="row">
+            <div class="col-md-6">
                 <fieldset>
                     <label for="portal_title"><strong>Server name</strong></label>
-                    <input type="text" name="portal_title" id="portal_title" class="input-block-level"
+                    <input type="text" name="portal_title" id="portal_title" class="form-control"
                            value="{{ portal_title }}"/>
 
                     <label for="time_format1"><strong>Time Format</strong></label>
@@ -20,14 +20,14 @@
                     </label>
                 </fieldset>
             </div>
-            <div class="span6">
+            <div class="col-md-6">
                 <fieldset>
                     <label for="logo_url"><strong>Logo URL</strong></label>
-                    <input type="text" name="logo_url" id="logo_url" class="input-block-level"
+                    <input type="text" name="logo_url" id="logo_url" class="form-control"
                            value="{{ logo_url }}"/>
 
                     <label for="timezone"><strong>Timezone</strong></label>
-                    <select id="timezone" name="timezone" class="input-block-level">
+                    <select id="timezone" name="timezone" class="form-control">
                         {% for key, value in times %}
                             {{ printOption(value, key, timezone) }}
                         {% endfor %}
@@ -35,8 +35,8 @@
                 </fieldset>
             </div>
         </div>
-        <div class="row-fluid">
-            <div class="span12">
+        <div class="row">
+            <div class="col-md-12">
                 <h3>Caching</h3>
                 <div class="alert alert-info">
                     <p>
@@ -48,88 +48,88 @@
                 </div>
             </div>
         </div>
-        <div class="row-fluid">
-            <div class="span6">
-                <div class="row-fluid">
-                    <div class="span4">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4">
                         <h4>Pages</h4>
                     </div>
-                    <div class="span2">
+                    <div class="col-md-2">
                         <label for="cache_pages[d]">days</label>
-                        <input type="text" class="input-block-level" id="cache_pages[d]" name="cache_pages[d]"
+                        <input type="text" class="form-control" id="cache_pages[d]" name="cache_pages[d]"
                                 value="{{ cache_pages.d }}"/>
                     </div>
-                    <div class="span2">
+                    <div class="col-md-2">
                         <label for="cache_pages[h]">hours</label>
-                        <input type="text" class="input-block-level" id="cache_pages[h]" name="cache_pages[h]"
+                        <input type="text" class="form-control" id="cache_pages[h]" name="cache_pages[h]"
                                value="{{ cache_pages.h }}"/>
                     </div>
-                    <div class="span2">
+                    <div class="col-md-2">
                         <label for="cache_pages[m]">minutes</label>
-                        <input type="text" class="input-block-level" id="cache_pages[m]" name="cache_pages[m]"
+                        <input type="text" class="form-control" id="cache_pages[m]" name="cache_pages[m]"
                                value="{{ cache_pages.m }}"/>
                     </div>
-                    <div class="span2">
+                    <div class="col-md-2">
                         <label for="cache_pages[s]">seconds</label>
-                        <input type="text" class="input-block-level" id="cache_pages[s]" name="cache_pages[s]"
+                        <input type="text" class="form-control" id="cache_pages[s]" name="cache_pages[s]"
                                value="{{ cache_pages.s }}"/>
                     </div>
                 </div>
-                <div class="row-fluid">
-                    <div class="span4">
+                <div class="row">
+                    <div class="col-md-4">
                         <h4>Player search</h4>
                     </div>
-                    <div class="span2">
+                    <div class="col-md-2">
                         <label for="cache_search[d]">days</label>
-                        <input type="text" class="input-block-level" id="cache_search[d]" name="cache_search[d]"
+                        <input type="text" class="form-control" id="cache_search[d]" name="cache_search[d]"
                                value="{{ cache_search.d }}"/>
                     </div>
-                    <div class="span2">
+                    <div class="col-md-2">
                         <label for="cache_search[h]">hours</label>
-                        <input type="text" class="input-block-level" id="cache_search[h]" name="cache_search[h]"
+                        <input type="text" class="form-control" id="cache_search[h]" name="cache_search[h]"
                                value="{{ cache_search.h }}"/>
                     </div>
-                    <div class="span2">
+                    <div class="col-md-2">
                         <label for="cache_search[m]">minutes</label>
-                        <input type="text" class="input-block-level" id="cache_search[m]" name="cache_search[m]"
+                        <input type="text" class="form-control" id="cache_search[m]" name="cache_search[m]"
                                value="{{ cache_search.m }}"/>
                     </div>
-                    <div class="span2">
+                    <div class="col-md-2">
                         <label for="cache_search[s]">seconds</label>
-                        <input type="text" class="input-block-level" id="cache_search[s]" name="cache_search[s]"
+                        <input type="text" class="form-control" id="cache_search[s]" name="cache_search[s]"
                                value="{{ cache_search.s }}"/>
                     </div>
                 </div>
 
             </div>
-            <div class="span6">
-                <div class="row-fluid">
-                    <div class="span4">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4">
                         <h4>Skins</h4>
                     </div>
-                    <div class="span2">
+                    <div class="col-md-2">
                         <label for="cache_skins[d]">days</label>
-                        <input type="text" class="input-block-level" id="cache_skins[d]" name="cache_skins[d]"
+                        <input type="text" class="form-control" id="cache_skins[d]" name="cache_skins[d]"
                                value="{{ cache_skins.d }}"/>
                     </div>
-                    <div class="span2">
+                    <div class="col-md-2">
                         <label for="cache_skins[h]">hours</label>
-                        <input type="text" class="input-block-level" id="cache_skins[h]" name="cache_skins[h]"
+                        <input type="text" class="form-control" id="cache_skins[h]" name="cache_skins[h]"
                                value="{{ cache_skins.h }}"/>
                     </div>
-                    <div class="span2">
+                    <div class="col-md-2">
                         <label for="cache_skins[m]">minutes</label>
-                        <input type="text" class="input-block-level" id="cache_skins[m]" name="cache_skins[m]"
+                        <input type="text" class="form-control" id="cache_skins[m]" name="cache_skins[m]"
                                value="{{ cache_skins.m }}"/>
                     </div>
-                    <div class="span2">
+                    <div class="col-md-2">
                         <label for="cache_skins[s]">seconds</label>
-                        <input type="text" class="input-block-level" id="cache_skins[s]" name="cache_skins[s]"
+                        <input type="text" class="form-control" id="cache_skins[s]" name="cache_skins[s]"
                                value="{{ cache_skins.s }}"/>
                     </div>
                 </div>
-                <div class="row-fluid">
-                    <div class="span12">
+                <div class="row">
+                    <div class="col-md-12">
                         <label for="delete_pages" class="checkbox">
                             <input type="hidden" name="delete_pages" value="0"/>
                             <input type="checkbox" value="1" name="delete_pages" id="delete_pages" />

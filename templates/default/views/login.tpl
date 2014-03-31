@@ -1,15 +1,15 @@
-<div class="row-fluid">
-    <div class="span5 offset4 well">
+<div class="row">
+    <div class="col-md-5 offset4 well">
         <h1 class="form-signin-heading">Secure Area</h1>
         {{ Util.showMessages('*', 'login', 'alert alert-danger') }}
         <form action="" method="post" name="login" id="login" class="form-login">
             <fieldset>
-                <div class="input-prepend">
-                    <span class="add-on"><i class="icon-envelope"></i></span>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-envelope"></i></span>
                     <input type="email" placeholder="E-Mail" name="email" value="{{ email }}"/>
                 </div>
-                <div class="input-prepend">
-                    <span class="add-on"><i class="icon-key"></i></span>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-key"></i></span>
                     <input type="password" placeholder="Password" name="pw"/>
                 </div>
                 <label class="checkbox" for="keep_login">
@@ -19,7 +19,7 @@
                 <a href="?page=reset">Reset password</a>
             </fieldset>
             <div class="form-actions">
-                <button class="btn btn-large btn-primary" name="signin" value="true" id="signin">
+                <button class="btn btn-lg btn-primary" name="signin" value="true" id="signin">
                     <i class="icon-signin"></i> Sign in
                 </button>
             </div>

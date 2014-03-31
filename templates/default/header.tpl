@@ -22,8 +22,8 @@
     {% endfor %}
 
     <link href="media/css/bootstrap.min.css" rel="stylesheet">
+    <link href="media/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="media/css/style.css" rel="stylesheet">
-    <link href="media/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="media/css/font-awesome.min.css" rel="stylesheet">
 
     {% for ele in css %}
@@ -35,49 +35,44 @@
     <![endif]-->
 </head>
 <body>
+<div class="container">
 <!-- <navbar> -->
 
-<div class="navbar navbar-fixed-top" style="position: static !important;">
-    <div class="navbar-inner">
-        <div class="container page-width">
-
-            <!-- Icon -->
-
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
             <img class="pull-left header-icon"
                  src="{{ Util.getOption('logo_url', 'media/img/icon-default.png') }}"
                  alt="logo"/>
-
-            <!-- Project Name -->
-            <a class="brand" href="./">{{ title }}</a>
-
-            <ul class="nav pull-right">
-                <li>
-                    <!-- Online status -->
-                    {% if ServerStatistic.getStatus %}
-                        <span class="btn btn-success disabled">{{ 'online'|trans|capitalize }}</span>
-                    {% else %}
-                        <span class="btn btn-danger disabled">{{ 'offline'|trans }}</span>
-                    {% endif %}
-                </li>
-                <li class="divider-vertical"></li>
-                <li>
-                    <!-- Search form -->
-                    <form class="navbar-form" method="get">
-                        <input type="hidden" name="page" value="player">
-
-                        <div class="input-append">
-                            <input type="text" name="name" class="" placeholder="{{ 'player'|trans }}" id="playerSearch"
-                                   autocomplete="off">
-                            <input type="hidden" value="0" name="id" id="playerSearchID"/>
-                            <button class="btn" value="1" type="submit">{{ 'search'|trans }}</button>
-                        </div>
-                    </form>
-                </li>
-            </ul>
-
+            <a class="navbar-brand" href="./">{{ title }}</a>
         </div>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <!-- Online status -->
+                {% if ServerStatistic.getStatus %}
+                    <span class="btn btn-success disabled navbar-btn">{{ 'online'|trans|capitalize }}</span>
+                {% else %}
+                    <span class="btn btn-danger disabled navbar-btn">{{ 'offline'|trans }}</span>
+                {% endif %}
+            </li>
+            <li class="divider-vertical"></li>
+            <li>
+                <!-- Search form -->
+                <form class="navbar-form" method="get">
+                    <input type="hidden" name="page" value="player">
+
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control" placeholder="{{ 'player'|trans }}" id="playerSearch"
+                               autocomplete="off">
+                        <input type="hidden" value="0" name="id" id="playerSearchID"/>
+                        <button class="btn btn-default" value="1" type="submit">{{ 'search'|trans }}</button>
+                    </div>
+                </form>
+            </li>
+        </ul>
     </div>
-</div>
+</nav>
 
 <!-- </navbar> -->
 

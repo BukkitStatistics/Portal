@@ -17,7 +17,7 @@
     </tr>
     <tr>
         <td>
-            <span class="label label-important">
+            <span class="label label-danger">
                 <i class="icon-calendar"></i> {{ serverstats.cur_uptime }}
             </span>
         </td>

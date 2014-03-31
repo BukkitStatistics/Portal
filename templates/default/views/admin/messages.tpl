@@ -1,7 +1,7 @@
-<div class="row-fluid">
-    <div class="span12 well">
-        <div class="row-fluid">
-            <div class="span6">
+<div class="row">
+    <div class="col-md-12 well">
+        <div class="row">
+            <div class="col-md-6">
                 <fieldset>
                     <label for="first_join_msg"><strong>First join message</strong></label>
                     <label for="show_first_join_msg" class="checkbox">
@@ -11,14 +11,14 @@
                         Show
                     </label>
                     <input type="text" name="first_join_msg" id="first_join_msg"
-                           class="input-block-level"
+                           class="form-control"
                            value="{{ first_join_msg }}"/>
                 </fieldset>
                     <span class="help-block">
                         Use <span class="label label-info">&lt;PLAYER&gt;</span> to display the name of the player.
                     </span>
             </div>
-            <div class="span6">
+            <div class="col-md-6">
                 <fieldset>
                     <label for="welcome_msg"><strong>Welcome message</strong></label>
                     <label for="show_welcome_msg" class="checkbox">
@@ -28,7 +28,7 @@
                         Show
                     </label>
                     <input type="text" name="welcome_msg" id="welcome_msg"
-                           class="input-block-level"
+                           class="form-control"
                            value="{{ welcome_msg }}"/>
                 </fieldset>
             </div>

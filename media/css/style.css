@@ -33,15 +33,11 @@ section {
 .header-icon {
 	height: 25px;
 	margin-right: 15px;
-	margin-top: 7px;
+	margin-top: 11px;
 }
 
 /* Left menu styles
 /* ============================== */
-
-.left-menu {
-	width: 235px;
-}
 
 .left-menu.affix,
 .left-menu.affix-bottom {
@@ -53,22 +49,20 @@ section {
 /* ============================== */
 
 .quick-info {
-	padding-top: 25px;
-	margin: 0 auto;
+	padding-top: 15px;
 }
 
-.quick-info div {
+.quick-info div.well {
 	height: 175px;
 	background: #FFE0C2;
 }
 
+.quick-info div h3, .quick-info div h1 {
+    text-align: center;
+}
+
 /* Page body styles
 /* ============================== */
-
-.page-body {
-	padding-top: 15px;
-	margin: 0 auto;
-}
 
 .ajax-loader {
     position: absolute;
@@ -127,7 +121,7 @@ section {
 /* Custom module styles
 /* ============================== */
 
-.table-vcenter tr td {
+table.table-vcenter tr td {
 	vertical-align: middle;
 }
 
@@ -156,22 +150,22 @@ section {
 
 .grid {
     min-height: 30px;
-    margin-top: 10px;
-    margin-bottom: 18px;
-    margin-left: 10px;
+    margin-top: 35px;
+    margin-left: 5px;
 }
 
 /* Miscellaneous styles
 /* ============================== */
 
 .no-img, .grid-img {
-    padding: 15px 8px;
+    padding: 11px 10px;
     min-width: 28px;
     text-align: center;
+    margin-right: 5px;
 }
  
 .grid-img {
-	padding: 6px;
+	padding: 11px 0 12px 5px;
 }
 
 .col-wrap-320 div {

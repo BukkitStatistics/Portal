@@ -1,8 +1,8 @@
-<div class="row-fluid">
-    <div class="span12 well">
+<div class="row">
+    <div class="col-md-12 well">
         {% if main %}
-            <div class="row-fluid">
-                <div class="span12">
+            <div class="row">
+                <div class="col-md-12">
                     <div class="alert alert-block alert-info">
                         <p>
                             <span class="label label-info"><strong>Info</strong></span> Here you can set up multiple
@@ -16,8 +16,8 @@
                     </div>
                 </div>
             </div>
-            <div class="row-fluid">
-                <div class="span12">
+            <div class="row">
+                <div class="col-md-12">
                     {% if servers %}
                         <table class="table">
                             <thead>
@@ -50,7 +50,7 @@
                             </tbody>
                         </table>
                     {% else %}
-                        <p class="muted">No servers specified.</p>
+                        <p class="text-muted">No servers specified.</p>
                     {% endif %}
                     <div class="form-actions">
                         <a href="?page=admin&sub=multi&action=add" class="btn btn-primary">Add Server</a>
@@ -58,11 +58,11 @@
                 </div>
             </div>
         {% else %}
-            <div class="row-fluid">
-                <div class="span12">
+            <div class="row">
+                <div class="col-md-12">
                     {% include multi_form %}
                     <div class="form-actions">
-                        <a href="?page=admin&sub=multi" class="btn">Back to servers</a>
+                        <a href="?page=admin&sub=multi" class="btn btn-default">Back to servers</a>
                     </div>
                 </div>
             </div>

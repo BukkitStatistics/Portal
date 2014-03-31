@@ -17,7 +17,7 @@
         {% set block = tb.createMaterial() %}
         <tr>
             <td>
-                {{ block.getImage(32, 'img-polaroid')|raw }}
+                {{ block.getImage(32, 'img-thumbnail')|raw }}
                 {{ block.getName }}
             </td>
             <td>

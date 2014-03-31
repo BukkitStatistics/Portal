@@ -16,7 +16,7 @@
     {% for item in item_list %}
         <tr>
             <td>
-                {{ item.getImage(32, 'img-polaroid')|raw }}
+                {{ item.getImage(32, 'img-thumbnail')|raw }}
                 {{ item.getName }}
             </td>
             <td>

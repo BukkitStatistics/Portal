@@ -1,5 +1,5 @@
-<div class="row-fluid">
-    <div class="span12 well">
+<div class="row">
+    <div class="col-md-12 well">
         {% if constant('DEVELOPMENT') %}
         <div class="alert">
             <span class="badge badge-warning"><strong>Development Mode</strong></span>
@@ -12,8 +12,8 @@
                 Installation files still available! Please delete the 'install.php' file and the 'installation/' folder!
             </div>
         {% endif %}
-        <div class="row-fluid">
-            <div class="span12">
+        <div class="row">
+            <div class="col-md-12">
                 <p>
                 <h4>{{ title }}
                     <small>Admin Panel</small>
@@ -28,7 +28,7 @@
                     </tr>
                     <tr>
                         <td><strong>Server IP:</strong></td>
-                        <td colspan="4">{{ ServerStatistic.getValue('server_ip') }}
+                        <td colcol-md-="4">{{ ServerStatistic.getValue('server_ip') }}
                             :{{ ServerStatistic.getValue('server_port') }}</td>
                     </tr>
                     <tr>
@@ -65,7 +65,7 @@
                     </tr>
                     <tr>
                         <td><strong>MOTD:</strong></td>
-                        <td colspan="4">{{ Util.formatMinecraftString(ServerStatistic.getValue('server_motd'))|raw }}</td>
+                        <td colcol-md-="4">{{ Util.formatMinecraftString(ServerStatistic.getValue('server_motd'))|raw }}</td>
                     </tr>
                 </table>
             </div>

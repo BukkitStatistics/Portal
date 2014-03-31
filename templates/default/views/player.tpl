@@ -1,21 +1,21 @@
 {% if player is not null %}
-    <div class="row-fluid">
-        <div class="well well-small span6 {% if misc.getIsBanned %} alert-danger {% endif %}"
+    <div class="row">
+        <div class="well well-small col-md-6 {% if misc.getIsBanned %} alert-danger {% endif %}"
              style="position: relative;">
             <h1 style="position: relative">
-                {{ player.getPlayerHead(64, 'img-polaroid')|raw }}
+                {{ player.getPlayerHead(64, 'img-thumbnail')|raw }}
                 {{ player.getName }}
                 {% if player.getOnline %}
                     <span class='label label-success player-status'>In-Game</span>
                 {% else %}
-                    <span class='label label-important player-status'>Offline</span>
+                    <span class='label label-danger player-status'>Offline</span>
                 {% endif %}
                 {% if misc.getIsOp %}
                     <span class="label label-info player-op">OP</span>
                 {% endif %}
                 <div class="player-top-right-info">
                     {% if misc.getIsBanned %}
-                        <span class="label label-important player-top-right-info-label">
+                        <span class="label label-danger player-top-right-info-label">
                             <strong>banned</strong>
                         </span>
                     {% endif %}
@@ -35,21 +35,21 @@
                 <div class="xpbar-cur">
                     <strong>{{ misc.getExpLevel }}</strong>
                 </div>
-                <div class="row-fluid">
-                    <div class="span12">
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="armor-bar">
                             {{ misc.getArmorBar|raw }}
                         </div>
                     </div>
                 </div>
-                <div class="row-fluid" id="playerhead-bars">
-                    <div class="span6">
+                <div class="row" id="playerhead-bars">
+                    <div class="col-md-6">
                         <div class="heart-bar clearfix">
                             {{ misc.getHealthBar|raw }}
                         </div>
                     </div>
 
-                    <div class="span6">
+                    <div class="col-md-6">
                         <div class="hunger-bar">
                             {{ misc.getFoodBar|raw }}
                         </div>
@@ -67,9 +67,9 @@
                 {% endif %}
             </div>
         </div>
-        <div class="span6">
+        <div class="col-md-6">
             {% if inv %}
-                <div class="player-inv pull-right hidden-phone">
+                <div class="player-inv pull-right hidden-xs">
                     <div class="player-inv-row clearfix">
                         {{ inv.printRowOne|raw }}
                     </div>
@@ -83,20 +83,20 @@
                         {{ inv.printHotbar|raw }}
                     </div>
                 </div>
-                <div class="player-armor pull-right hidden-phone">
+                <div class="player-armor pull-right hidden-xs">
                     {{ inv.printArmor|raw }}
                 </div>
             {% endif %}
         </div>
     </div>
-    <div class="row-fluid">
-        <div class="span3 center">
+    <div class="row">
+        <div class="col-md-3 center">
             {% if pvp.most_killed_by is not null %}
                 {% set pvp_player = pvp.most_killed_by.createPlayer('player_id') %}
             {% else %}
                 {% set pvp_player = Player().setName('none') %}
             {% endif %}
-            {{ pvp_player.getPlayerHead(64, 'img-polaroid')|raw }}
+            {{ pvp_player.getPlayerHead(64, 'img-thumbnail')|raw }}
             <h4 class="well well-small center">
                 {% if pvp_player.getName != 'none' %}
                     <a href="?page=player&id={{ pvp_player.getPlayerId }}">{{ pvp_player.getName }}</a>
@@ -107,13 +107,13 @@
                 <small>Arch Nemesis</small>
             </h4>
         </div>
-        <div class="span3 center">
+        <div class="col-md-3 center">
             {% if pvp.most_killed is not null %}
                 {% set pvp_player = pvp.most_killed.createPlayer('victim_id') %}
             {% else %}
                 {% set pvp_player = Player().setName('none') %}
             {% endif %}
-            {{ pvp_player.getPlayerHead(64, 'img-polaroid')|raw }}
+            {{ pvp_player.getPlayerHead(64, 'img-thumbnail')|raw }}
             <h4 class="well well-small center">
                 {% if pvp_player.getName != 'none' %}
                     <a href="?page=player&id={{ pvp_player.getPlayerId }}">{{ pvp_player.getName }}</a>
@@ -124,26 +124,26 @@
                 <small>Most killed</small>
             </h4>
         </div>
-        <div class="span3 center">
+        <div class="col-md-3 center">
             {% if blocks.most_destroyed %}
                 {% set block = blocks.most_destroyed.createMaterial %}
             {% else %}
                 {% set block = Material('-1:0') %}
             {% endif %}
-            {{ block.getImage(64, 'img-polaroid')|raw }}
+            {{ block.getImage(64, 'img-thumbnail')|raw }}
             <h4 class="well well-small center">
                 {{ block.getName }}
                 <br>
                 <small>Most broken</small>
             </h4>
         </div>
-        <div class="span3 center">
+        <div class="col-md-3 center">
             {% if blocks.most_placed %}
                 {% set block = blocks.most_placed.createMaterial %}
             {% else %}
                 {% set block = Material('-1:0') %}
             {% endif %}
-            {{ block.getImage(64, 'img-polaroid')|raw }}
+            {{ block.getImage(64, 'img-thumbnail')|raw }}
             <h4 class="well well-small center">
                 {{ block.getName }}
                 <br>
@@ -153,8 +153,8 @@
     </div>
     <h2>General Statistics</h2>
 
-    <div class="row-fluid col-wrap-320">
-        <div class="span4 well well-small">
+    <div class="row col-wrap-320">
+        <div class="col-md-4 well well-small">
             <h3>Blocks</h3>
 
             <p>
@@ -187,7 +187,7 @@
                 {% endif %}
             </p>
         </div>
-        <div class="span4 well well-small">
+        <div class="col-md-4 well well-small">
             <h3>Items</h3>
 
             <p>
@@ -220,7 +220,7 @@
                 {% endif %}
             </p>
         </div>
-        <div class="span4 well well-small">
+        <div class="col-md-4 well well-small">
             <h3>Distances</h3>
 
             <p>
@@ -259,9 +259,9 @@
             </p>
         </div>
     </div>
-    <div class="row-fluid col-wrap-220">
+    <div class="row col-wrap-220">
 
-        <div class="span8 well well-small">
+        <div class="col-md-8 well well-small">
             <h3>Miscellaneous</h3>
             <table class="table table-condensed no-border">
                 <tr>
@@ -346,7 +346,7 @@
                 </tr>
             </table>
         </div>
-        <div class="span4 well well-small">
+        <div class="col-md-4 well well-small">
             <h3>Login statistics</h3>
 
             <p>
@@ -383,9 +383,9 @@
             </p>
         </div>
     </div>
-    <div class="row-fluid">
+    <div class="row">
 
-        <div class="span4 well well-small">
+        <div class="col-md-4 well well-small">
             <h3>PvP</h3>
 
             <p>
@@ -457,7 +457,7 @@
             {% endif %}
         </div>
 
-        <div class="span4 well well-small">
+        <div class="col-md-4 well well-small">
             <h3>PvE</h3>
 
             <p>
@@ -514,7 +514,7 @@
             {% endif %}
         </div>
 
-        <div class="span4 well well-small">
+        <div class="col-md-4 well well-small">
             <h3>Other</h3>
             {% for death in deaths %}
                 <p>
@@ -528,9 +528,9 @@
     </div>
     <h2>Detailed Information</h2>
 
-    <div class="row-fluid">
+    <div class="row">
 
-        <div class="span6 well well-small">
+        <div class="col-md-6 well well-small">
             <h3>Blocks</h3>
 
             <div class="paginator" data-mod="player_blocks">
@@ -538,7 +538,7 @@
             </div>
         </div>
 
-        <div class="span6 well well-small">
+        <div class="col-md-6 well well-small">
             <h3>Items</h3>
 
             <div class="paginator" data-mod="player_items">
@@ -547,7 +547,7 @@
         </div>
     </div>
 {% else %}
-    <div class="alert alert-block alert-error">
+    <div class="alert alert-block alert-danger">
         <h3>Player not found!</h3>
     </div>
 {% endif %}

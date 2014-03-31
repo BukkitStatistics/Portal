@@ -9,7 +9,7 @@
     </tr>
     <tr>
         <td>
-            <span class="label label-important">
+            <span class="label label-danger">
                 <i class="icon-star"></i> {{ player_stats.tracked }}
             </span>
         </td>

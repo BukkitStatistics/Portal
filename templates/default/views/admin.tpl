@@ -1,5 +1,5 @@
-<div class="row-fluid">
-    <div class="span12">
+<div class="row">
+    <div class="col-md-12">
         <div class="page-header">
             <h1>
                 <i class="icon-cogs icon-large"></i> Admin Panel
@@ -17,29 +17,29 @@
     </div>
 </div>
 <form method="post" name="settings" id="settings" class="form-setup">
-    <div class="row-fluid">
-        <div class="span3">
+    <div class="row">
+        <div class="col-md-3">
             {% include 'admin/navi.tpl' %}
         </div>
-        <div class="span9">
+        <div class="col-md-9">
             {% include sub ignore missing %}
         </div>
     </div>
-    <div class="row-fluid">
-        <div class="span12">
+    <div class="row">
+        <div class="col-md-12">
             <div class="form-actions">
                 <div class="pull-left">
                     {% if sub and not main %}
-                        <button class="btn btn-large btn-primary" name="save" value="true" id="Save">
+                        <button class="btn btn-lg btn-primary" name="save" value="true" id="Save">
                             <i class="icon-save"></i> Save
                         </button>
                     {% endif %}
                 </div>
                 <div class="pull-right">
-                    <button class="btn btn-large btn-danger" name="logout" value="true">
+                    <button class="btn btn-lg btn-danger" name="logout" value="true">
                         <i class="icon-signout"></i> Logout
                     </button>
-                    <a href="./" class="btn btn-large">
+                    <a href="./" class="btn btn-lg">
                         <i class="icon-home"></i> Home
                     </a>
                 </div>

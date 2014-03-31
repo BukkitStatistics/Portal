@@ -1,50 +1,64 @@
 <!-- <overview> -->
-<div class="row-fluid quick-info">
+<div class="row quick-info">
     {% include headbar %}
 </div>
-<div class="row-fluid">
-    <div class="container span3">
+<div class="row">
+    <div class="container col-md-3">
         {% include sidebar %}
     </div>
 
-    <div class="span9" id="page-body">
+    <div class="col-md-9" id="page-body">
         <!-- <dashboard> -->
         <section id="dashboard">
-            <div class="row-fluid">
-                <div class="span8 well well-small module module-big" id="module-online-players">
-                    <h3>{{ 'online_players'|trans }}</h3>
+            <div class="row">
+                <div class="col-md-8" id="module-online-players">
+                    <div class="well well-small module module-big">
+                        <h3>{{ 'online_players'|trans }}</h3>
 
-                    <div class="online-players">
-                        {% include online_players %}
+                        <div class="online-players">
+                            {% include online_players %}
+                        </div>
                     </div>
                 </div>
-                <div class="span4 well well-small module module-small">
-                    <h3>{{ 'server'|trans }}</h3>
-                    {% include server_stats %}
+                <div class="col-md-4">
+                    <div class="well well-small module module-small">
+                        <h3>{{ 'server'|trans }}</h3>
+                        {% include server_stats %}
+                    </div>
                 </div>
             </div>
-            <div class="row-fluid">
-                <div class="span4 well well-small module module-small">
-                    <h3>{{ 'players'|trans }}</h3>
-                    {% include players %}
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="well well-small module module-small">
+                        <h3>{{ 'players'|trans }}</h3>
+                        {% include players %}
+                    </div>
                 </div>
-                <div class="span4 well well-small module module-small">
-                    <h3>{{ 'blocks'|trans }}</h3>
-                    {% include blocks %}
+                <div class="col-md-4">
+                    <div class="well well-small module module-small">
+                        <h3>{{ 'blocks'|trans }}</h3>
+                        {% include blocks %}
+                    </div>
                 </div>
-                <div class="span4 well well-small module module-small">
-                    <h3>{{ 'items'|trans }}</h3>
-                    {% include items %}
+                <div class="col-md-4">
+                    <div class="well well-small module module-small">
+                        <h3>{{ 'items'|trans }}</h3>
+                        {% include items %}
+                    </div>
                 </div>
             </div>
-            <div class="row-fluid">
-                <div class="span4 well well-small module module-small">
-                    <h3>{{ 'distances'|trans }}</h3>
-                    {% include distances %}
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="well well-small module module-small">
+                        <h3>{{ 'distances'|trans }}</h3>
+                        {% include distances %}
+                    </div>
                 </div>
-                <div class="span8 well well-small module module-big">
-                    <h3>{{ 'deaths'|trans }}</h3>
-                    {% include deaths %}
+                <div class="col-md-8">
+                    <div class="well well-small module module-big">
+                        <h3>{{ 'deaths'|trans }}</h3>
+                        {% include deaths %}
+                    </div>
                 </div>
             </div>
         </section>
@@ -64,15 +78,15 @@
 
         <!-- <world> -->
         <section id="world">
-            <div class="row-fluid">
-                <div class="span6">
+            <div class="row">
+                <div class="col-md-6">
                     <h1><i class="icon-picture icon-large"></i> {{ 'blocks'|trans }}</h1>
 
                     <div class="well custom-well paginator" data-mod="total_blocks" id="worldBlocks">
                         {% include total_blocks %}
                     </div>
                 </div>
-                <div class="span6">
+                <div class="col-md-6">
                     <h1><i class="icon-legal icon-large"></i> {{ 'items'|trans }}</h1>
 
                     <div class="well custom-well" data-mod="total_items" id="worldItems">
