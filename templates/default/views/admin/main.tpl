@@ -1,5 +1,11 @@
 <div class="row-fluid">
     <div class="span12 well">
+        {% if constant('DEVELOPMENT') %}
+        <div class="alert">
+            <span class="badge badge-warning"><strong>Development Mode</strong></span>
+            Caching is disabled in this mode. Errors will be displayed on the page if they occur.
+        </div>
+        {% endif %}
         <div class="row-fluid">
             <div class="span12">
                 <p>
