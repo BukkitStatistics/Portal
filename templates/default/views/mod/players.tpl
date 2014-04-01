@@ -41,7 +41,7 @@
             </tr>
         {% endfor %}
     </table>
-    <div id="playersPagination" class="pagination-centered"></div>
+    <div id="playersPagination" class="force-center"></div>
 
     <script type="text/javascript">
         $(document).ready(function () {

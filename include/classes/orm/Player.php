@@ -362,7 +362,7 @@ class Player extends fActiveRecord {
             $tooltip = '';
 
         return '<img ' . $class . ' src="' . fFilesystem::translateToWebPath($name) . '" alt="' . $this->getName() .
-               '" title="' . $this->getName() . '" ' . $tooltip . '>';
+               '" title="' . $this->getName() . '" ' . $tooltip . ' style="width: ' . $size . 'px; height: ' . $size . 'px">';
     }
 
     /**

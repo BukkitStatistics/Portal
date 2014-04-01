@@ -4,24 +4,24 @@
             {% if log.player_killed is null %}
                 {% set killer = Player(log.id1) %}
                 {% set victim = Player(log.id2) %}
-                {% set killer_img = killer.getPlayerHead(16, 'img-thumb img-thumbnail', true) %}
-                {% set victim_img = victim.getPlayerHead(16, 'img-thumb img-thumbnail', true) %}
+                {% set killer_img = killer.getPlayerHead(32, 'img-thumbnail', true) %}
+                {% set victim_img = victim.getPlayerHead(32, 'img-thumbnail', true) %}
             {% else %}
                 {% if log.player_killed %}
                     {% set killer = Entity(log.id1) %}
                     {% set victim = Player(log.id2) %}
-                    {% set killer_img = killer.getImage(16, 'img-thumb img-thumbnail', true) %}
-                    {% set victim_img = victim.getPlayerHead(16, 'img-thumb img-thumbnail', true) %}
+                    {% set killer_img = killer.getImage(32, 'img-thumbnail', true) %}
+                    {% set victim_img = victim.getPlayerHead(32, 'img-thumbnail', true) %}
                 {% else %}
                     {% set killer = Player(log.id2) %}
                     {% set victim = Entity(log.id1) %}
-                    {% set killer_img = killer.getPlayerHead(16, 'img-thumb img-thumbnail', true) %}
-                    {% set victim_img = victim.getImage(16, 'img-thumb img-thumbnail', true) %}
+                    {% set killer_img = killer.getPlayerHead(32, 'img-thumbnail', true) %}
+                    {% set victim_img = victim.getImage(32, 'img-thumbnail', true) %}
                 {% endif %}
             {% endif %}
             {% set material = Material(log.material_id) %}
             {% set time = fTimestamp(log.time) %}
-            <div class="well well-small">
+            <div class="well well-sm">
                 <div class="row">
                     <div class="col-md-3">
                         {{ time|date }}
@@ -44,7 +44,7 @@
                 </div>
             </div>
         {% endfor %}
-        <div id="death_logPagination" class="pagination-centered"></div>
+        <div id="death_logPagination" class="force-center"></div>
 
         <script type="text/javascript">
             $(document).ready(function () {

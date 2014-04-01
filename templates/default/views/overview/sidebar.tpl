@@ -5,7 +5,8 @@
             <li><a href="#dashboard"><i class="icon-tasks icon-fixed-width"></i> {{ 'dashboard'|trans }}</a></li>
             <li class="divider"></li>
             <li><a href="#players"><i class="icon-group icon-fixed-width"></i> {{ 'players'|trans }}</a></li>
-            <li><a href="#world"><i class="icon-picture icon-fixed-width"></i> {{ 'world'|trans }}</a></li>
+            <li><a href="#blocks"><i class="icon-picture icon-fixed-width"></i> {{ 'blocks'|trans }}</a></li>
+            <li><a href="#items"><i class="icon-legal icon-fixed-width"></i> {{ 'items'|trans }}</a></li>
             <li><a href="#deaths"><i class="icon-tint icon-fixed-width"></i> {{ 'death_log'|trans }}</a></li>
         </ul>
     </div>
