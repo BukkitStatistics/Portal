@@ -2,7 +2,7 @@
     <tr>
         <td>
             <span class="label label-info">
-                <i class="icon-globe"></i> {{ distance_stats.total }}
+                <i class="fa fa-globe"></i> {{ distance_stats.total }}
             </span>
         </td>
         <td>{{ 'total'|trans }}</td>
@@ -10,7 +10,7 @@
     <tr>
         <td>
             <span class="label label-info">
-                <i class="icon-exchange"></i> {{ distance_stats.foot }}
+                <i class="fa fa-exchange"></i> {{ distance_stats.foot }}
             </span>
         </td>
         <td>{{ 'by_foot'|trans|capitalize }}</td>
@@ -18,7 +18,7 @@
     <tr>
         <td>
             <span class="label label-info">
-                <i class="icon-shopping-cart"></i> {{ distance_stats.minecart }}
+                <i class="fa fa-shopping-cart"></i> {{ distance_stats.minecart }}
             </span>
         </td>
         <td>{{ 'by_minecart'|trans|capitalize }}</td>
@@ -26,7 +26,7 @@
     <tr>
         <td>
             <span class="label label-info">
-                <i class="icon-tablet"></i> {{ distance_stats.boat }}
+                <i class="fa fa-tablet"></i> {{ distance_stats.boat }}
             </span>
         </td>
         <td>{{ 'by_boat'|trans|capitalize }}</td>
@@ -34,7 +34,7 @@
     <tr>
         <td>
             <span class="label label-info">
-                <i class="icon-umbrella"></i> {{ distance_stats.swim }}
+                <i class="fa fa-umbrella"></i> {{ distance_stats.swim }}
             </span>
         </td>
         <td>{{ 'swum'|trans }}</td>
@@ -42,7 +42,7 @@
     <tr>
         <td>
             <span class="label label-info">
-                <i class="icon-fighter-jet"></i> {{ distance_stats.flight }}
+                <i class="fa fa-fighter-jet"></i> {{ distance_stats.flight }}
             </span>
         </td>
         <td>{{ 'flight'|trans }}</td>

@@ -38,11 +38,11 @@
                                     <td>{{ server.db_values.host }}:{{ server.db_values.port }}</td>
                                     <td>
                                         <a href="?page=admin&sub=multi&action=edit&slug={{ server.slug }}">
-                                            <i class="icon-wrench"></i>
+                                            <i class="fa fa-wrench"></i>
                                         </a>
                                         &nbsp;
                                         <a href="?page=admin&sub=multi&action=delete&slug={{ server.slug }}">
-                                            <i class="icon-trash"></i>
+                                            <i class="fa fa-trash"></i>
                                         </a>
                                     </td>
                                 </tr>

@@ -2,7 +2,7 @@
     <tr>
         <td>
             <span class="label label-info">
-                <i class="icon-plus"></i> {{ item_stats.picked }}
+                <i class="fa fa-plus"></i> {{ item_stats.picked }}
             </span>
         </td>
         <td>{{ 'picked_up'|trans }}</td>
@@ -19,7 +19,7 @@
     <tr>
         <td>
             <span class="label label-info">
-                <i class="icon-minus"></i> {{ item_stats.dropped }}
+                <i class="fa fa-minus"></i> {{ item_stats.dropped }}
             </span>
         </td>
         <td>{{ 'dropped'|trans }}</td>

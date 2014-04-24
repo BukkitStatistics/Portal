@@ -66,7 +66,7 @@
 
         <!-- <players> -->
         <section id="players">
-            <h1><i class="icon-group"></i> {{ 'players'|trans }}
+            <h1><i class="fa fa-group"></i> {{ 'players'|trans }}
                 <small>{{ 'tracked_on_server'|trans }}</small>
             </h1>
 
@@ -80,7 +80,7 @@
         <section id="world">
             <div class="row" id="blocks">
                 <div class="col-md-12">
-                    <h1><i class="icon-picture icon-large"></i> {{ 'blocks'|trans }}</h1>
+                    <h1><i class="fa fa-picture-o fa-lg"></i> {{ 'blocks'|trans }}</h1>
 
                     <div class="well custom-well paginator table-responsive" data-mod="total_blocks" id="worldBlocks">
                         {% include total_blocks %}
@@ -89,7 +89,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12" id="items">
-                    <h1><i class="icon-legal icon-large"></i> {{ 'items'|trans }}</h1>
+                    <h1><i class="fa fa-legal fa-lg"></i> {{ 'items'|trans }}</h1>
 
                     <div class="well custom-well table-responsive" data-mod="total_items" id="worldItems">
                         {% include total_items %}
@@ -101,7 +101,7 @@
 
         <!-- <deaths> -->
         <section id="deaths">
-            <h1><i class="icon-tint icon-large"></i> {{ 'death_log'|trans }}
+            <h1><i class="fa fa-tint fa-lg"></i> {{ 'death_log'|trans }}
                 <small>{{ 'pvp'|trans }}, {{ 'pve'|trans }} and {{ 'evp'|trans }} kills</small>
             </h1>
             <div class="well custom-well" style="padding: 10px;" id="deathsBlock">

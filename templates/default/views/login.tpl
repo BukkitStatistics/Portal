@@ -29,7 +29,7 @@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button class="btn btn-lg btn-primary" name="signin" value="true" id="signin">
-                        <i class="icon-signin"></i> Sign in
+                        <i class="fa fa-signin"></i> Sign in
                     </button>
                 </div>
             </div>
