@@ -16,7 +16,7 @@ $tpl->set('welcome_msg', fSession::get('settings[welcome_msg]'));
 $tpl->set('welcome_first_msg', fSession::get('settings[welcome_first_msg]'));
 
 if(!fMessaging::check('*') && fRequest::isPost()) {
-    fSession::set('maxStep', 7);
+    fSession::set('maxStep', 5);
     fURL::redirect('?step=five');
 } else {
     // checking cache dir
