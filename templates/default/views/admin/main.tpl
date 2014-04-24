@@ -14,11 +14,9 @@
         {% endif %}
         <div class="row">
             <div class="col-md-12">
-                <p>
                 <h4>{{ title }}
                     <small>Admin Panel</small>
                 </h4>
-                </p>
                 <table class="table">
                     <tr>
                         <td><strong>Bukkit Version:</strong></td>
@@ -28,7 +26,7 @@
                     </tr>
                     <tr>
                         <td><strong>Server IP:</strong></td>
-                        <td colcol-md-="4">{{ ServerStatistic.getValue('server_ip') }}
+                        <td colspan="4">{{ ServerStatistic.getValue('server_ip') }}
                             :{{ ServerStatistic.getValue('server_port') }}</td>
                     </tr>
                     <tr>
@@ -65,7 +63,7 @@
                     </tr>
                     <tr>
                         <td><strong>MOTD:</strong></td>
-                        <td colcol-md-="4">{{ Util.formatMinecraftString(ServerStatistic.getValue('server_motd'))|raw }}</td>
+                        <td colspan="4">{{ Util.formatMinecraftString(ServerStatistic.getValue('server_motd'))|raw }}</td>
                     </tr>
                 </table>
             </div>

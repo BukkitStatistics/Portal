@@ -9,7 +9,7 @@
                    value="{{ server_name }}"/>
         </div>
         <div class="col-md-6">
-            <strong>Server slug:</strong>
+            <label for="server_slug"><strong>Server slug:</strong></label>
             <input type="text" name="server_slug" id="server_slug" class="form-control"
                    value="{{ server_slug }}"
                     {% if action == 'edit' %} disabled="disabled" {% endif %}/>
