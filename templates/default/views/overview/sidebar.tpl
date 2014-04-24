@@ -14,10 +14,7 @@
         <div class="well">
             <h4>{{ 'other_servers'|trans }}</h4>
         {% for server in multi %}
-            {% set domain = staticCall('fUrl', 'getDomain') %}
-            {% set url = staticCall('fUrl', 'get') %}
-            {% set info = Util.getFileContents(domain ~ url ~ '?server=' ~ server.slug ~ '&api=true&type=server_stats', true) %}
-            {% set info = staticCall('fJSON', 'decode', [info, true]) %}
+            {% set info = staticCall('fJSON', 'decode', [Util.getFileContents(domain ~ url ~ '?server=' ~ server.slug ~ '&api=true&type=server_stats', true), true]) %}
 
             {% if info.current_uptime > 0 %}
                 <i class="fa fa-circle text-success"></i>

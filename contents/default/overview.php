@@ -92,8 +92,12 @@ $item_stats['most_picked'] = TotalItem::getMostOfType('picked_up');
 
 // setting vars
 // multi server
-if(DB_TYPE == 'default')
+if(DB_TYPE == 'default') {
     $tpl->set('multi', unserialize(Util::getOption('servers')));
+    $tpl->set('domain', fURL::getDomain());
+    $tpl->set('url', fURL::get());
+}
+
 
 $tpl->set('player_stats', $player_stats);
 $tpl->set('serverstats', $server_stats);
