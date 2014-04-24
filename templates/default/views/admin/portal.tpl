@@ -7,17 +7,21 @@
                     <input type="text" name="portal_title" id="portal_title" class="form-control"
                            value="{{ portal_title }}"/>
 
-                    <label for="time_format1"><strong>Time Format</strong></label>
-                    <label class="radio">
-                        <input type="radio" name="time_format" id="time_format1"
-                               value="24" {{ showChecked(24, time_format) }}>
-                        24 hour format: {{ 'now'|date('H:i - d.m.Y') }}
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="time_format" id="time_format0"
-                               value="12" {{ showChecked(12, time_format) }}>
-                        12 hour format: {{ 'now'|date('g:i a - d.m.Y') }}
-                    </label>
+                    <strong>Time Format</strong>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="time_format" id="time_format1"
+                                   value="24" {{ showChecked(24, time_format) }}>
+                            24 hour format: {{ 'now'|date('H:i - d.m.Y') }}
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="time_format" id="time_format0"
+                                   value="12" {{ showChecked(12, time_format) }}>
+                            12 hour format: {{ 'now'|date('g:i a - d.m.Y') }}
+                        </label>
+                    </div>
                 </fieldset>
             </div>
             <div class="col-md-6">
@@ -41,7 +45,7 @@
                 <div class="alert alert-info">
                     <p>
                         <span class="label label-info"><strong>Info!</strong></span>
-                        Set the time how long the specific module should be stored in the cache.
+                        Set the time how long the specific module should be stored in the cache.<br>
                         This will drastically increase the performance on large servers.<br>
                         Set the specific caching to <strong>0</strong> to disable it.
                     </p>
@@ -130,16 +134,20 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <label for="delete_pages" class="checkbox">
-                            <input type="hidden" name="delete_pages" value="0"/>
-                            <input type="checkbox" value="1" name="delete_pages" id="delete_pages" />
-                            Delete all cached pages.
-                        </label>
-                        <label for="delete_skins" class="checkbox">
-                            <input type="hidden" name="delete_skins" value="0"/>
-                            <input type="checkbox" value="1" name="delete_skins" id="delete_skins" />
-                            Delete all cached skins.
-                        </label>
+                        <div class="checkbox">
+                            <label>
+                                <input type="hidden" name="delete_pages" value="0"/>
+                                <input type="checkbox" value="1" name="delete_pages" id="delete_pages" />
+                                Delete all cached pages.
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="hidden" name="delete_skins" value="0"/>
+                                <input type="checkbox" value="1" name="delete_skins" id="delete_skins" />
+                                Delete all cached skins.
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>

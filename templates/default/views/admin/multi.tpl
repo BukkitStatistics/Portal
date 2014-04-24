@@ -3,7 +3,7 @@
         {% if main %}
             <div class="row">
                 <div class="col-md-12">
-                    <div class="alert alert-block alert-info">
+                    <div class="alert alert-info">
                         <p>
                             <span class="label label-info"><strong>Info</strong></span> Here you can set up multiple
                             config
@@ -58,14 +58,9 @@
                 </div>
             </div>
         {% else %}
-            <div class="row">
-                <div class="col-md-12">
-                    {% include multi_form %}
-                    <div class="form-actions">
-                        <a href="?page=admin&sub=multi" class="btn btn-default">Back to servers</a>
-                    </div>
-                </div>
-            </div>
+            {% include multi_form %}
+            <br>
+            <a href="?page=admin&sub=multi" class="btn btn-default btn-block">Back to servers</a>
         {% endif %}
     </div>
 </div>

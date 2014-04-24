@@ -54,8 +54,8 @@
                     <fieldset>
                         <label for="db_prefix"><strong>Prefix</strong></label>
 
-                        <div class="input-group col-md-8">
-                            <input type="text" name="db_prefix" id="db_prefix" class="col-md-10"
+                        <div class="input-group">
+                            <input type="text" name="db_prefix" id="db_prefix" class="form-control"
                                    value="{{ db_prefix }}"/>
                             <span class="input-group-addon">_</span>
                         </div>

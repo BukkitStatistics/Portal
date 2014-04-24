@@ -1,10 +1,9 @@
 <div class="row">
     <div class="col-md-12 well">
-        <div class="alert alert-danger alert-block">
+        <div class="alert alert-danger">
             <p>
                 <span class="label label-danger">Warning!</span> Be careful with these settings. When you fill in
-                wrong
-                values the portal will not be reachable anymore.<br>
+                wrong values the portal will not be reachable anymore.<br>
                 If this happens try to fill in the db.php manually. It is located here: <em>include/config/db.php</em>.
             </p>
         </div>
@@ -57,8 +56,8 @@
                         <fieldset>
                             <label for="db_prefix"><strong>Prefix</strong></label>
 
-                            <div class="input-group col-md-8">
-                                <input type="text" name="db_prefix" id="db_prefix" class="col-md-11"
+                            <div class="input-group">
+                                <input type="text" name="db_prefix" id="db_prefix" class="form-control"
                                        value="{{ db_prefix }}"/>
                                 <span class="input-group-addon">_</span>
                             </div>

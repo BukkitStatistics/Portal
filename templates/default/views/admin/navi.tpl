@@ -1,7 +1,5 @@
 <div class="well well-sm">
-    <ul class="nav nav-list">
-        <li class="nav-header">Admin Navigation</li>
-
+    <ul class="nav nav-pills nav-stacked">
         <li class="{{ general }}">
             <a href="?page=admin&sub=general">
                 <i class="icon-user icon-fixed-width"></i> General
