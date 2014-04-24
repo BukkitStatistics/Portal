@@ -8,9 +8,11 @@ $(document).ready(function () {
         callModule(bdata['type'], bdata['sort'], content);
     });
 
-    /*
+
+     /*
      Player search
-     thanks to: @mrgcohen (http://gist.github.com/mrgcohen)
+      thanks to: @mrgcohen (http://gist.github.com/mrgcohen)
+      */
 
     window.query_cache = {};
     window.ids_cache = {};
@@ -45,6 +47,6 @@ $(document).ready(function () {
             return item;
         }
     });
-     */
+
     init();
 });
