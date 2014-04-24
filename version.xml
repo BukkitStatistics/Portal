@@ -1,5 +1,5 @@
 <build>
-    <version>1.3.3</version>
+    <version>1.3.2</version>
     <plugin>1.2.2.150</plugin>
-    <type>DEVELOPMENT</type>
+    <type>RECOMMENDED</type>
 </build>
