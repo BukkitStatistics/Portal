@@ -1,8 +1,5 @@
-![YASP](http://dl.wolvencraft.com/src/img/bdev/statistics.png)
+![YASP](http://dev.bukkit.org/media/images/56/243/dbo-1.png)
 
-**Statisitcs** (previously known as the YASP project) is a ground-up rewrite of a popular Minecraft plugin called **[Statistician](http://dev.bukkit.org/server-mods/statisticianv2/)**, first made by ChaseHQ and continued by Coryf88, Crimsonfoxy, and Dazzel_. Starting up as an unofficial fork of the original project, Statistics grew to the point where it contains almost no traces of the original code, both in Bukkit plugin and in web portal.
-
-Statistician did a decent job of logging some player and server statistics, however, Statistics takes it a step further and completely overhauls the stats tracking, bringing the amount of information collected to a staggering amount, in addition to featuring a brand new modern web portal. This plugin was made to be highly customizable; it will do only what you tell it to do.
 ## Requirements ##
 In order to track statistics, you will need a web-server that fulfills the following requirements:
 
