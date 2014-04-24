@@ -1,9 +1,9 @@
-<div class="row-fluid">
-    <div class="span12 well">
+<div class="row">
+    <div class="col-md-12 well">
         {% if main %}
-            <div class="row-fluid">
-                <div class="span12">
-                    <div class="alert alert-block alert-info">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-info">
                         <p>
                             <span class="label label-info"><strong>Info</strong></span> Here you can set up multiple
                             config
@@ -16,8 +16,8 @@
                     </div>
                 </div>
             </div>
-            <div class="row-fluid">
-                <div class="span12">
+            <div class="row">
+                <div class="col-md-12">
                     {% if servers %}
                         <table class="table">
                             <thead>
@@ -38,11 +38,11 @@
                                     <td>{{ server.db_values.host }}:{{ server.db_values.port }}</td>
                                     <td>
                                         <a href="?page=admin&sub=multi&action=edit&slug={{ server.slug }}">
-                                            <i class="icon-wrench"></i>
+                                            <i class="fa fa-wrench"></i>
                                         </a>
                                         &nbsp;
                                         <a href="?page=admin&sub=multi&action=delete&slug={{ server.slug }}">
-                                            <i class="icon-trash"></i>
+                                            <i class="fa fa-trash"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -50,7 +50,7 @@
                             </tbody>
                         </table>
                     {% else %}
-                        <p class="muted">No servers specified.</p>
+                        <p class="text-muted">No servers specified.</p>
                     {% endif %}
                     <div class="form-actions">
                         <a href="?page=admin&sub=multi&action=add" class="btn btn-primary">Add Server</a>
@@ -58,14 +58,9 @@
                 </div>
             </div>
         {% else %}
-            <div class="row-fluid">
-                <div class="span12">
-                    {% include multi_form %}
-                    <div class="form-actions">
-                        <a href="?page=admin&sub=multi" class="btn">Back to servers</a>
-                    </div>
-                </div>
-            </div>
+            {% include multi_form %}
+            <br>
+            <a href="?page=admin&sub=multi" class="btn btn-default btn-block">Back to servers</a>
         {% endif %}
     </div>
 </div>

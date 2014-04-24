@@ -2,7 +2,7 @@
 include_once 'include/init.php';
 
 // only redirect if in production mode
-if(!DEVELOPMENT && file_exists('install.php'))
+if(!file_exists(__INC__ . 'config/db.php') && file_exists('install.php'))
     fURL::redirect('install.php');
 
 /*

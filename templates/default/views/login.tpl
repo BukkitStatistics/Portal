@@ -1,27 +1,37 @@
-<div class="row-fluid">
-    <div class="span5 offset4 well">
+<div class="row">
+    <div class="col-md-5 col-md-offset-4 well">
         <h1 class="form-signin-heading">Secure Area</h1>
         {{ Util.showMessages('*', 'login', 'alert alert-danger') }}
-        <form action="" method="post" name="login" id="login" class="form-login">
-            <fieldset>
-                <div class="input-prepend">
-                    <span class="add-on"><i class="icon-envelope"></i></span>
-                    <input type="email" placeholder="E-Mail" name="email" value="{{ email }}"/>
+        <form action="" method="post" class="form-horizontal" role="form" name="login" id="login">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">E-Mail</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="E-Mail" value="{{ email }}">
                 </div>
-                <div class="input-prepend">
-                    <span class="add-on"><i class="icon-key"></i></span>
-                    <input type="password" placeholder="Password" name="pw"/>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="password" name="pw" placeholder="Password">
                 </div>
-                <label class="checkbox" for="keep_login">
-                    <input type="hidden" name="keep_login" value="0"/>
-                    <input type="checkbox" value="1" name="keep_login" id="keep_login"> Remember me
-                </label>
-                <a href="?page=reset">Reset password</a>
-            </fieldset>
-            <div class="form-actions">
-                <button class="btn btn-large btn-primary" name="signin" value="true" id="signin">
-                    <i class="icon-signin"></i> Sign in
-                </button>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="hidden" name="keep_login" value="0"/>
+                            <input type="checkbox" value="1" name="keep_login" id="keep_login"> Remember me
+                        </label>
+                    </div>
+                    <a href="?page=reset">Reset password</a>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button class="btn btn-lg btn-primary" name="signin" value="true" id="signin">
+                        <i class="fa fa-signin"></i> Sign in
+                    </button>
+                </div>
             </div>
         </form>
     </div>

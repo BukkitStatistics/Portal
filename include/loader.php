@@ -24,7 +24,11 @@ fException::registerCallback(Util::exceptionCallback);
 /*
  * Open session
  */
-fSession::setLength('1day', '1week');
+try {
+    fSession::setLength('1day', '1week');
+}
+catch (fProgrammerException $e) {
+}
 fSession::open();
 
 /*

@@ -16,7 +16,7 @@
     {% for block in block_list %}
         <tr>
             <td>
-                {{ block.getImage(32, 'img-polaroid')|raw }}
+                {{ block.getImage(32, 'img-thumbnail')|raw }}
                 {{ block.getName }}
             </td>
             <td>
@@ -29,7 +29,7 @@
     {% endfor %}
     </tbody>
 </table>
-<div id="block_listPagination" class="pagination-centered"></div>
+<div id="block_listPagination" class="force-center"></div>
 
 <script type="text/javascript">
     $(document).ready(function () {

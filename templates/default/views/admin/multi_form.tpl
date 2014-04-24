@@ -1,71 +1,71 @@
 {% if checkMessage('slug', 'admin/multi') %}
-    {{ Util.showMessages('slug', 'admin/multi', 'alert alert-error') }}
+    {{ Util.showMessages('slug', 'admin/multi', 'alert alert-danger') }}
 {% else %}
-    {{ Util.showMessages('file', 'admin/multi', 'alert alert-error') }}
-    <div class="row-fluid">
-        <div class="span6">
+    {{ Util.showMessages('file', 'admin/multi', 'alert alert-danger') }}
+    <div class="row">
+        <div class="col-md-6">
             <label for="server_name"><strong>Server name</strong></label>
-            <input type="text" name="server_name" id="server_name" class="input-block-level"
+            <input type="text" name="server_name" id="server_name" class="form-control"
                    value="{{ server_name }}"/>
         </div>
-        <div class="span6">
-            <strong>Server slug:</strong>
-            <input type="text" name="server_slug" id="server_slug" class="input-block-level"
+        <div class="col-md-6">
+            <label for="server_slug"><strong>Server slug:</strong></label>
+            <input type="text" name="server_slug" id="server_slug" class="form-control"
                    value="{{ server_slug }}"
                     {% if action == 'edit' %} disabled="disabled" {% endif %}/>
         </div>
     </div>
-    <div class="row-fluid">
-        <div class="span6">
-            <div class="row-fluid">
-                <div class="span8">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-8">
                     <fieldset>
                         <label for="db_host"><strong>Database Host</strong></label>
-                        <input type="text" name="db_host" id="db_host" class="input-block-level"
+                        <input type="text" name="db_host" id="db_host" class="form-control"
                                value="{{ db_host }}"/>
                     </fieldset>
                 </div>
-                <div class="span4">
+                <div class="col-md-4">
                     <fieldset>
                         <label for="db_port"><strong>Port</strong></label>
-                        <input type="text" name="db_port" id="db_port" class="input-block-level"
+                        <input type="text" name="db_port" id="db_port" class="form-control"
                                value="{{ db_port }}"/>
                     </fieldset>
                 </div>
             </div>
-            <div class="row-fluid">
-                <div class="span12">
+            <div class="row">
+                <div class="col-md-12">
                     <label for="db_user"><strong>Database Username</strong></label>
-                    <input type="text" name="db_user" id="db_user" class="input-block-level"
+                    <input type="text" name="db_user" id="db_user" class="form-control"
                            value="{{ db_user }}"/>
                 </div>
             </div>
         </div>
-        <div class="span6">
-            <div class="row-fluid">
-                <div class="span8">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-8">
                     <fieldset>
                         <label for="db_name"><strong>Database Name</strong></label>
-                        <input type="text" name="db_name" id="db_name" class="input-block-level"
+                        <input type="text" name="db_name" id="db_name" class="form-control"
                                value="{{ db_name }}"/>
                     </fieldset>
                 </div>
-                <div class="span4">
+                <div class="col-md-4">
                     <fieldset>
                         <label for="db_prefix"><strong>Prefix</strong></label>
 
-                        <div class="input-append span8">
-                            <input type="text" name="db_prefix" id="db_prefix" class="span10"
+                        <div class="input-group">
+                            <input type="text" name="db_prefix" id="db_prefix" class="form-control"
                                    value="{{ db_prefix }}"/>
-                            <span class="add-on">_</span>
+                            <span class="input-group-addon">_</span>
                         </div>
                     </fieldset>
                 </div>
             </div>
-            <div class="row-fluid">
-                <div class="span12">
+            <div class="row">
+                <div class="col-md-12">
                     <label for="db_pw"><strong>Database Password</strong></label>
-                    <input type="text" name="db_pw" id="db_pw" class="input-block-level"
+                    <input type="text" name="db_pw" id="db_pw" class="form-control"
                            value="{{ db_pw }}"/>
                 </div>
             </div>

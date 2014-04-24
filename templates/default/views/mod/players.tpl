@@ -17,13 +17,11 @@
                 {{ 'playtime'|trans }}
             </th>
         </tr>
-        </thead>
-        <tbody class="content">
         {% for player in players %}
             <tr>
                 <td>
                     <a href="?page=player&id={{ player.getPlayerId }}">
-                        {{ player.getPlayerHead(32, 'img-polaroid')|raw }}
+                        {{ player.getPlayerHead(32, 'img-thumbnail')|raw }}
                         {{ player.getName }}
                     </a>
                 </td>
@@ -42,9 +40,8 @@
                 </td>
             </tr>
         {% endfor %}
-        </tbody>
     </table>
-    <div id="playersPagination" class="pagination-centered"></div>
+    <div id="playersPagination" class="force-center"></div>
 
     <script type="text/javascript">
         $(document).ready(function () {

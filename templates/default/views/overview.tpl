@@ -1,50 +1,64 @@
 <!-- <overview> -->
-<div class="row-fluid quick-info">
+<div class="row quick-info">
     {% include headbar %}
 </div>
-<div class="row-fluid">
-    <div class="container span3">
+<div class="row">
+    <div class="container col-md-3">
         {% include sidebar %}
     </div>
 
-    <div class="span9" id="page-body">
+    <div class="col-md-9" id="page-body">
         <!-- <dashboard> -->
         <section id="dashboard">
-            <div class="row-fluid">
-                <div class="span8 well well-small module module-big" id="module-online-players">
-                    <h3>{{ 'online_players'|trans }}</h3>
+            <div class="row">
+                <div class="col-md-8" id="module-online-players">
+                    <div class="well well-sm module module-big">
+                        <h3>{{ 'online_players'|trans }}</h3>
 
-                    <div class="online-players">
-                        {% include online_players %}
+                        <div class="online-players">
+                            {% include online_players %}
+                        </div>
                     </div>
                 </div>
-                <div class="span4 well well-small module module-small">
-                    <h3>{{ 'server'|trans }}</h3>
-                    {% include server_stats %}
+                <div class="col-md-4">
+                    <div class="well well-sm module module-small">
+                        <h3>{{ 'server'|trans }}</h3>
+                        {% include server_stats %}
+                    </div>
                 </div>
             </div>
-            <div class="row-fluid">
-                <div class="span4 well well-small module module-small">
-                    <h3>{{ 'players'|trans }}</h3>
-                    {% include players %}
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="well well-sm module module-small">
+                        <h3>{{ 'players'|trans }}</h3>
+                        {% include players %}
+                    </div>
                 </div>
-                <div class="span4 well well-small module module-small">
-                    <h3>{{ 'blocks'|trans }}</h3>
-                    {% include blocks %}
+                <div class="col-md-4">
+                    <div class="well well-sm module module-small">
+                        <h3>{{ 'blocks'|trans }}</h3>
+                        {% include blocks %}
+                    </div>
                 </div>
-                <div class="span4 well well-small module module-small">
-                    <h3>{{ 'items'|trans }}</h3>
-                    {% include items %}
+                <div class="col-md-4">
+                    <div class="well well-sm module module-small">
+                        <h3>{{ 'items'|trans }}</h3>
+                        {% include items %}
+                    </div>
                 </div>
             </div>
-            <div class="row-fluid">
-                <div class="span4 well well-small module module-small">
-                    <h3>{{ 'distances'|trans }}</h3>
-                    {% include distances %}
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="well well-sm module module-small">
+                        <h3>{{ 'distances'|trans }}</h3>
+                        {% include distances %}
+                    </div>
                 </div>
-                <div class="span8 well well-small module module-big">
-                    <h3>{{ 'deaths'|trans }}</h3>
-                    {% include deaths %}
+                <div class="col-md-8">
+                    <div class="well well-sm module module-big">
+                        <h3>{{ 'deaths'|trans }}</h3>
+                        {% include deaths %}
+                    </div>
                 </div>
             </div>
         </section>
@@ -52,11 +66,11 @@
 
         <!-- <players> -->
         <section id="players">
-            <h1><i class="icon-group"></i> {{ 'players'|trans }}
+            <h1><i class="fa fa-group"></i> {{ 'players'|trans }}
                 <small>{{ 'tracked_on_server'|trans }}</small>
             </h1>
 
-            <div data-mod="players" id="playersBlock">
+            <div data-mod="players" id="playersBlock" class="table-responsive">
                 {% include total_players %}
             </div>
         </section>
@@ -64,18 +78,20 @@
 
         <!-- <world> -->
         <section id="world">
-            <div class="row-fluid">
-                <div class="span6">
-                    <h1><i class="icon-picture icon-large"></i> {{ 'blocks'|trans }}</h1>
+            <div class="row" id="blocks">
+                <div class="col-md-12">
+                    <h1><i class="fa fa-picture-o fa-lg"></i> {{ 'blocks'|trans }}</h1>
 
-                    <div class="well custom-well paginator" data-mod="total_blocks" id="worldBlocks">
+                    <div class="well custom-well paginator table-responsive" data-mod="total_blocks" id="worldBlocks">
                         {% include total_blocks %}
                     </div>
                 </div>
-                <div class="span6">
-                    <h1><i class="icon-legal icon-large"></i> {{ 'items'|trans }}</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-12" id="items">
+                    <h1><i class="fa fa-legal fa-lg"></i> {{ 'items'|trans }}</h1>
 
-                    <div class="well custom-well" data-mod="total_items" id="worldItems">
+                    <div class="well custom-well table-responsive" data-mod="total_items" id="worldItems">
                         {% include total_items %}
                     </div>
                 </div>
@@ -85,7 +101,7 @@
 
         <!-- <deaths> -->
         <section id="deaths">
-            <h1><i class="icon-tint icon-large"></i> {{ 'death_log'|trans }}
+            <h1><i class="fa fa-tint fa-lg"></i> {{ 'death_log'|trans }}
                 <small>{{ 'pvp'|trans }}, {{ 'pve'|trans }} and {{ 'evp'|trans }} kills</small>
             </h1>
             <div class="well custom-well" style="padding: 10px;" id="deathsBlock">

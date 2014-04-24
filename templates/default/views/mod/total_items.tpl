@@ -16,7 +16,7 @@
     {% for item in item_list %}
         <tr>
             <td>
-                {{ item.getImage(32, 'img-polaroid')|raw }}
+                {{ item.getImage(32, 'img-thumbnail')|raw }}
                 {{ item.getName }}
             </td>
             <td>
@@ -29,7 +29,7 @@
     {% endfor %}
     </tbody>
 </table>
-<div id="item_listPagination" class="pagination-centered"></div>
+<div id="item_listPagination" class="force-center"></div>
 
 <script type="text/javascript">
     $(document).ready(function () {

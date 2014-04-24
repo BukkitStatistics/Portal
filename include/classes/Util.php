@@ -32,8 +32,12 @@ class Util {
         if($option == '')
             return false;
 
-        if(isset($runtime_cache[$option]))
-            return $runtime_cache[$option];
+        if(isset($runtime_cache[$option])) {
+            if($runtime_cache[$option] == '' && $default != null)
+                return $default;
+            else
+                return $runtime_cache[$option];
+        }
 
         try {
             $db = self::getDatabase();
@@ -216,6 +220,9 @@ class Util {
 
     public static function exceptionCallback($exception) {
         global $cache;
+
+        if($cache == null)
+            return;
 
         if($exception instanceof fProgrammerException) {
             if($cache->get('remapped_' . DB_TYPE))

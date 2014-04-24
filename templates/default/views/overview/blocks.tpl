@@ -2,7 +2,7 @@
     <tr>
         <td>
             <span class="label label-info">
-                <i class="icon-plus"></i> {{ block_stats.placed }}
+                <i class="fa fa-plus"></i> {{ block_stats.placed }}
             </span>
         </td>
         <td>{{ 'placed'|trans }}</td>
@@ -19,7 +19,7 @@
     <tr>
         <td>
             <span class="label label-info">
-                <i class="icon-minus"></i> {{ block_stats.destroyed }}
+                <i class="fa fa-minus"></i> {{ block_stats.destroyed }}
             </span>
         </td>
         <td>{{ 'broken'|trans }}</td>

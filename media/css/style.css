@@ -33,15 +33,11 @@ section {
 .header-icon {
 	height: 25px;
 	margin-right: 15px;
-	margin-top: 7px;
+	margin-top: 11px;
 }
 
 /* Left menu styles
 /* ============================== */
-
-.left-menu {
-	width: 235px;
-}
 
 .left-menu.affix,
 .left-menu.affix-bottom {
@@ -53,22 +49,20 @@ section {
 /* ============================== */
 
 .quick-info {
-	padding-top: 25px;
-	margin: 0 auto;
+	padding-top: 15px;
 }
 
-.quick-info div {
+.quick-info div.well {
 	height: 175px;
 	background: #FFE0C2;
 }
 
+.quick-info div h3, .quick-info div h1 {
+    text-align: center;
+}
+
 /* Page body styles
 /* ============================== */
-
-.page-body {
-	padding-top: 15px;
-	margin: 0 auto;
-}
 
 .ajax-loader {
     position: absolute;
@@ -127,7 +121,7 @@ section {
 /* Custom module styles
 /* ============================== */
 
-.table-vcenter tr td {
+table.table-vcenter tr td {
 	vertical-align: middle;
 }
 
@@ -156,29 +150,33 @@ section {
 
 .grid {
     min-height: 30px;
-    margin-top: 10px;
-    margin-bottom: 18px;
-    margin-left: 10px;
+    margin-top: 35px;
+    margin-left: 5px;
+}
+
+.pagination {
+    margin: 10px 0;
 }
 
 /* Miscellaneous styles
 /* ============================== */
 
 .no-img, .grid-img {
-    padding: 15px 8px;
+    padding: 11px 10px;
     min-width: 28px;
     text-align: center;
+    margin-right: 5px;
 }
  
 .grid-img {
-	padding: 6px;
+	padding: 11px 0 12px 5px;
 }
 
-.col-wrap-320 div {
+.col-wrap-320 div.well {
     height: 320px;
 }
 
-.col-wrap-220 div {
+.col-wrap-220 div.well {
     height: 220px;
 }
 
@@ -191,8 +189,8 @@ section {
 }
 
 .player-armor {
-    width: 37px;
-    height: 158px;
+    width: 44px;
+    height: 170px;
     padding-top: 12px;
     padding-left: 7px;
     margin: 5px 0;
@@ -202,7 +200,7 @@ section {
 
 .player-inv {
     width: 348px;
-    height: 164px;
+    height: 170px;
     padding-top: 6px;
     margin: 5px 0;
     background-image: url("../img/misc/inv-bg.png");
@@ -280,11 +278,11 @@ section {
     position: absolute;
     bottom: 5px;
     right: 0;
-    width: 100px;
+    width: 230px;
 }
 
 .player-effect {
-    margin: 2px;
+    margin-right: 1px;
 }
 
 .heart-bar img, .hunger-bar img, .armor-bar img {
@@ -299,15 +297,14 @@ section {
 }
 
 .armor-bar {
-    position: relative;
-    bottom: -10px;
-    left: 0;
+    margin-bottom: 5px;
 }
  
 .xpbar-container {
 	position: relative;
 	height: 10px;
 	width: 100%;
+    margin-top: 10px;
 	background-image: url("../img/misc/xpbar-bg.png");
 	background-position: top left;
 	background-repeat: no-repeat;
@@ -315,7 +312,7 @@ section {
  
 .xpbar-cur {
 	position: absolute;
-	bottom: 22px;
+	bottom: 17px;
 	text-align: center;
 	width: 100%;
 	font-weight: bold;
@@ -328,27 +325,29 @@ section {
 	background-repeat: no-repeat;
 	background-position: top left;
 }
- 
-.player-status {
-	position: absolute;
-	top: -10px;
-	left: 40px;
+
+.player-top-left-info-label {
+    float: left;
+    margin: 0 0 0 5px;
 }
 
-.player-op {
-	position: absolute;
-	top: -10px;
-	left: -8px;
+.player-top-left-info {
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    z-index: 1;
 }
+
 .player-top-right-info-label {
     float: left;
-    margin-left: 5px;
+    margin: 0 0 0 5px;
 }
 
 .player-top-right-info {
     position: absolute;
-    top: -10px;
-    right: 0;
+    top: 10px;
+    right: 5px;
+    z-index: 1;
 }
 
 .player-trophy {

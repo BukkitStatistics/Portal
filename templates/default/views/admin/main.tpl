@@ -1,12 +1,22 @@
-<div class="row-fluid">
-    <div class="span12 well">
-        <div class="row-fluid">
-            <div class="span12">
-                <p>
+<div class="row">
+    <div class="col-md-12 well">
+        {% if constant('DEVELOPMENT') %}
+        <div class="alert alert-warning">
+            <span class="label label-warning"><strong>Development Mode</strong></span>
+            Caching is disabled in this mode. Errors will be displayed on the page if they occur.
+        </div>
+        {% endif %}
+        {% if install %}
+            <div class="alert alert-danger">
+                <span class="label label-danger">Warning!</span>
+                Installation files still available! Please delete the 'install.php' file and the 'installation/' folder!
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-md-12">
                 <h4>{{ title }}
                     <small>Admin Panel</small>
                 </h4>
-                </p>
                 <table class="table">
                     <tr>
                         <td><strong>Bukkit Version:</strong></td>
@@ -32,17 +42,17 @@
                         <td><strong>Ticks per Second:</strong></td>
                         {% set ticks = ServerStatistic.getValue('ticks_per_second') %}
                         {% if ticks == 20 %}
-                            {% set lable = 'badge-success' %}
+                            {% set label = 'label-success' %}
                         {% elseif ticks >= 18 and ticks <= 22 %}
-                            {% set lable = '' %}
-                        {% elseif ticks <= 17 and ticks <= 12 %}
-                            {% set lable = 'badge-warning' %}
-                        {% elseif ticks <= 11 and ticks >= 5 %}
-                            {% set lable = 'badge-important' %}
+                            {% set label = 'label-primary' %}
+                        {% elseif ticks >= 12 and ticks <= 17 %}
+                            {% set label = 'label-warning' %}
+                        {% elseif ticks >= 5 and ticks <= 11 %}
+                            {% set label = 'label-danger' %}
                         {% else %}
-                            {% set lable = 'badge-inverse' %}
+                            {% set label = 'label-default' %}
                         {% endif %}
-                        <td><span class="badge {{ label }}">{{ ticks }}</span></td>
+                        <td><span class="label {{ label }}">{{ ticks }}</span></td>
                     </tr>
                     <tr>
                         <td><strong>Players:</strong></td>

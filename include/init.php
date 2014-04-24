@@ -2,9 +2,15 @@
 define('STARTTIME', (float)array_sum(explode(' ', microtime())));
 
 /*
+ * Define some global constants for better path handling.
+ */
+define('__ROOT__', dirname(dirname(__FILE__)) . '/');
+define('__INC__', __ROOT__ . 'include' . '/');
+
+/*
  * Check cache folder
  */
-if(!is_writable('cache/'))
+if(!is_writable(__ROOT__ . 'cache/'))
     die('Folder "cache" is not writable by the script. Please check the permissions.');
 
 /*
@@ -14,12 +20,6 @@ if(version_compare(PHP_VERSION, '5.3.2', '<'))
     die('You need at least PHP 5.3.2!');
 
 date_default_timezone_set('UTC');
-
-/*
- * Define some global constants for better path handling.
- */
-define('__ROOT__', dirname(dirname(__FILE__)) . '/');
-define('__INC__', __ROOT__ . 'include' . '/');
 
 /*
  * Set development mode

@@ -1,13 +1,13 @@
-<div class="row-fluid">
-    <div class="span12">
+<div class="row">
+    <div class="col-md-12">
         <div class="page-header">
             <h1>
-                <i class="icon-cogs icon-large"></i> Admin Panel
+                <i class="fa fa-cogs fa-lg"></i> Admin Panel
                 <small>Configuration for the web portal and plugin.</small>
             </h1>
         </div>
         {% if staticCall('fRequest', 'isPost') and not checkMessage('input', 'admin') %}
-            <div class="alert alert-block alert-success">
+            <div class="alert alert-success">
                 <p>
                     <strong>Success!</strong> Operation successfully executed.
                 </p>
@@ -17,30 +17,30 @@
     </div>
 </div>
 <form method="post" name="settings" id="settings" class="form-setup">
-    <div class="row-fluid">
-        <div class="span3">
+    <div class="row">
+        <div class="col-md-3">
             {% include 'admin/navi.tpl' %}
         </div>
-        <div class="span9">
+        <div class="col-md-9">
             {% include sub ignore missing %}
         </div>
     </div>
-    <div class="row-fluid">
-        <div class="span12">
+    <div class="row">
+        <div class="col-md-12">
             <div class="form-actions">
                 <div class="pull-left">
                     {% if sub and not main %}
-                        <button class="btn btn-large btn-primary" name="save" value="true" id="Save">
-                            <i class="icon-save"></i> Save
+                        <button class="btn btn-lg btn-primary" name="save" value="true" id="Save">
+                            <i class="fa fa-save"></i> Save
                         </button>
                     {% endif %}
                 </div>
                 <div class="pull-right">
-                    <button class="btn btn-large btn-danger" name="logout" value="true">
-                        <i class="icon-signout"></i> Logout
+                    <button class="btn btn-lg btn-danger" name="logout" value="true">
+                        <i class="fa fa-sign-out"></i> Logout
                     </button>
-                    <a href="./" class="btn btn-large">
-                        <i class="icon-home"></i> Home
+                    <a href="./" class="btn btn-lg">
+                        <i class="fa fa-home"></i> Home
                     </a>
                 </div>
             </div>

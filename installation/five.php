@@ -1,6 +1,6 @@
 <?php
-if(fSession::get('maxStep') < 7)
-    fURL::redirect('?step=converter');
+if(fSession::get('maxStep') < 5)
+    fURL::redirect('?step=four');
 
 $tpl = $this->loadTemplate('five', 'tpl');
 

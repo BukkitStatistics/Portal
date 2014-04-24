@@ -24,7 +24,7 @@ $limit = 6;
 
 $blocks = fRecordSet::build(
     'TotalBlock',
-    array('player_id=' => Player::getId(fRequest::get('name', 'string'))),
+    array('player_id=' => fRequest::get('id', 'int')),
     array($type => $sort),
     $limit,
     $page
