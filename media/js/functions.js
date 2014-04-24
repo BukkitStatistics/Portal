@@ -56,7 +56,7 @@ function callModule(type, sort, content, page) {
     if (page == undefined)
         page = 1;
 
-    var loader = $('<div style="display: none;" class="alert alert-info ajax-loader"><h5><i class="icon-spinner icon-spin"></i> Loading..</h5></div>');
+    var loader = $('<div style="display: none;" class="alert alert-info ajax-loader"><h5><i class="fa fa-spinner fa-spin"></i> Loading..</h5></div>');
     loader.appendTo('body').fadeIn();
 
     loader.offset({
@@ -94,8 +94,8 @@ function callModule(type, sort, content, page) {
                 }
             } else {
                 loader.removeClass('alert-info')
-                    .addClass('alert-error')
-                    .html('<h3><i class="icon-exclamation-sign"></i> Error.</h3>')
+                    .addClass('alert-danger')
+                    .html('<h3><i class="fa fa-exclamation-circle"></i> Error.</h3>')
                     .delay(1000)
                     .fadeOut('slow', function () {
                         $(this).remove();
