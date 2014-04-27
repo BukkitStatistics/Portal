@@ -9,6 +9,8 @@ if(!file_exists(__INC__ . 'config/db.php') && file_exists('install.php'))
  * Gets the requested page and checks if the page exists or not
  */
 $content = fRequest::get('page', NULL, 'overview');
+$cex = preg_split('%(/|\\\)%', $content);
+$content = isset($cex[0]) ? $cex[0] : $content;
 $content .= '.php';
 
 if(!is_null(fRequest::get('mod')))
