@@ -14,7 +14,7 @@
         <div class="well">
             <h4>{{ 'other_servers'|trans }}</h4>
         {% for server in multi %}
-            {% set info = staticCall('fJSON', 'decode', [Util.getFileContents(domain ~ url ~ '?server=' ~ server.slug ~ '&api=true&type=server_stats', true), true]) %}
+            {% set info = info_ar[server.slug] %}
 
             {% if info.current_uptime > 0 %}
                 <i class="fa fa-circle text-success"></i>

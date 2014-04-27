@@ -6,7 +6,7 @@ $tpl = $this->loadTemplate('admin');
 $sub = fRequest::get('sub', 'string');
 if($sub) {
     $tpl->set($sub, 'active');
-    $this->loadSubModule('admin/' . $sub);
+    $this->loadSubPage($sub, 'admin');
 }
 else {
     $this->loadTemplate('admin/main', 'sub');

@@ -29,13 +29,13 @@ $this->loadSubModule('mod/death_log');
 
 // online players
 $op = fRecordSet::build(
-    'Player',
-    array(
-         'online=' => true
-    ),
-    array(
-         'login_time' => 'desc'
-    )
+                'Player',
+                array(
+                    'online=' => true
+                ),
+                array(
+                    'login_time' => 'desc'
+                )
 );
 
 $tpl->set('players_online', $op);
@@ -94,8 +94,20 @@ $item_stats['most_picked'] = TotalItem::getMostOfType('picked_up');
 // multi server
 if(DB_TYPE == 'default') {
     $tpl->set('multi', unserialize(Util::getOption('servers')));
-    $tpl->set('domain', fURL::getDomain());
-    $tpl->set('url', fURL::get());
+    $info_ar = '';
+
+    foreach($tpl->get('multi') as $server) {
+        if($cache->get('server_info_' . $server['slug']) != null)
+            $json = $cache->get('server_info_' . $server['slug']);
+        else {
+            $json = Util::getFileContents(fURL::getDomain() . fURL::get() . '?server=' . $server['slug'] .
+                                          '&api=true&type=server_stats', true);
+            $cache->set('server_info_' . $server['slug'], $json, 60 * 60 * 12); // cache for 12 hours
+        }
+        $info_ar[$server['slug']] = fJSON::decode($json, true);
+    }
+
+    $tpl->set('info_ar', $info_ar);
 }
 
 
