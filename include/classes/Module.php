@@ -105,22 +105,35 @@ class Module {
     }
 
     /**
-     * Loads an sub module which could use all the functionality of the parent module.
+     * Loads $sub pages for the given $page from the sub folder.
      *
      * @param string $sub
+     * @param string $page the loaded page, e.g.: admin
      *
      * @throws fEnvironmentException
      * @throws fProgrammerException
      */
-    public function loadSubModule($sub) {
-        if(strpos($sub, '.php') === false)
-            $sub .= '.php';
+    public function loadSubPage($sub, $page) {
+        $this->loadSubModule('sub/' . $page . '/' . $sub);
+    }
+
+    /**
+     * Loads an sub module which could use all the functionality of the parent module.
+     *
+     * @param string $mod
+     *
+     * @throws fEnvironmentException
+     * @throws fProgrammerException
+     */
+    public function loadSubModule($mod) {
+        if(strpos($mod, '.php') === false)
+            $mod .= '.php';
 
         $path = '';
 
         foreach($this->content_folders as $folder) {
-            if(file_exists($folder . $sub)) {
-                $path = $folder . $sub;
+            if(file_exists($folder . $mod)) {
+                $path = $folder . $mod;
                 break;
             }
         }
@@ -128,7 +141,7 @@ class Module {
         if(!file_exists($path)) {
             throw new fProgrammerException(
                 'The path specified for %1$s, %2$s, does not exist on the filesystem',
-                $sub,
+                $mod,
                 $path
             );
         }
@@ -136,7 +149,7 @@ class Module {
         if(!is_readable($path)) {
             throw new fEnvironmentException(
                 'The path specified for %1$s, %2$s, is not readable',
-                $sub,
+                $mod,
                 $path
             );
         }
