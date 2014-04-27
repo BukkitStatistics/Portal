@@ -23,6 +23,8 @@ class Module {
     private $content_folders;
 
     function __construct($content, $content_folders, $design) {
+        global $cache;
+
         $this->design = $design;
         $this->content_folders = $content_folders;
         $this->main_tpl = null;
@@ -126,6 +128,8 @@ class Module {
      * @throws fProgrammerException
      */
     public function loadSubModule($mod) {
+        global $cache;
+
         if(strpos($mod, '.php') === false)
             $mod .= '.php';
 
