@@ -13,8 +13,11 @@ $cex = preg_split('%(/|\\\)%', $content);
 $content = isset($cex[0]) ? $cex[0] : $content;
 $content .= '.php';
 
-if(!is_null(fRequest::get('mod')))
-    $content = 'mod/' . fRequest::get('mod') . '.php';
+if(!is_null(fRequest::get('mod'))) {
+    $mex = preg_split('%(/|\\\)%', fRequest::get('mod'));
+    $mod = isset($mex[0]) ? $mex[0] : fRequest::get('mod');
+    $content = 'mod/' . $mod . '.php';
+}
 
 if(!file_exists(__ROOT__ . 'contents/default/' . $content) && is_null(fRequest::get('mod'))) {
     fRequest::set('type', 404);
