@@ -25,7 +25,7 @@ date_default_timezone_set('UTC');
  * Set development mode
  * Will slow down page load
  */
-define('DEVELOPMENT', true);
+define('DEVELOPMENT', false);
 
 /*
  * Will save debug messages in cache/debug.txt
