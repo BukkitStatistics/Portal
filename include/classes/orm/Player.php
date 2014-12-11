@@ -301,11 +301,10 @@ class Player extends fActiveRecord {
     }
 
     private function getSkin() {
-        $headers = get_headers('http://s3.amazonaws.com/MinecraftSkins/' . $this->getName() . '.png');
-        if(isset($headers[7]) &&
-           ($headers[7] == 'Content-Type: image/png' || $headers[7] == 'Content-Type: application/octet-stream')
-        ) {
-            $path = 'http://s3.amazonaws.com/MinecraftSkins/' . $this->getName() . '.png';
+    	$skinUrl = 'http://skins.minecraft.net/MinecraftSkins/' . $this->getName() . '.png';
+        $headers = get_headers($skinUrl, 1);
+        if(isset($headers[1]) && isset($headers['Content-Type'][1]) && $headers['Content-Type'][1] == 'image/png') {
+            $path = $skinUrl;
         }
         else {
             $path = __ROOT__ . 'media/img/misc/char.png';
