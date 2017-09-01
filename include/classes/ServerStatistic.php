@@ -144,9 +144,10 @@ class ServerStatistic {
      * @return float
      */
     public static function getUptimePerc() {
-        $perc = self::getValue('total_uptime') / (time() - self::getValue('first_startup')) * 100;
+		$rawperc = (self::getValue('total_uptime') / (time() - self::getValue('first_startup'));
+		$perc = number_format( $rawperc * 100, 2 );
 
-        return floor($perc);
+        return ($perc);
     }
 
     /**
